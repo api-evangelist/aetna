@@ -1,7 +1,12 @@
 aid: aetna
-url: https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/apis.yml
 modified: '2026-03-23'
 apis: []
 common:
   - type: Website
     url: https://www.aetna.com
+description: >-
+  Aetna offers health insurance, as well as dental, vision and other plans, to meet
+  the needs of individuals and families, employers, health care providers and insurance
+  agents/brokers. The path to healthy starts here.
