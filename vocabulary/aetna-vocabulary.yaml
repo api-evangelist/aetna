@@ -1,0 +1,173 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/vocabulary/aetna-vocabulary.yaml
+title: Aetna Vocabulary
+description: Controlled vocabulary and taxonomy for Aetna health insurance APIs and data concepts.
+version: '1.0.0'
+provider: Aetna
+domains:
+  - Health Insurance
+  - Healthcare Interoperability
+  - Patient Data Access
+  - Provider Administration
+
+concepts:
+  - name: ExplanationOfBenefit
+    abbreviation: EOB
+    definition: >-
+      A FHIR resource representing a claim submission or adjudication result including
+      services provided, amounts billed, and insurance payment details.
+    standard: HL7 FHIR R4
+    related:
+      - Claim
+      - Coverage
+      - Patient
+
+  - name: Coverage
+    definition: >-
+      A FHIR resource describing health insurance coverage including subscriber information,
+      plan details, network, and benefit period.
+    standard: HL7 FHIR R4
+    related:
+      - Patient
+      - ExplanationOfBenefit
+
+  - name: Patient
+    definition: >-
+      A FHIR resource representing an individual receiving healthcare services. In the
+      payer context, refers to a health plan member.
+    standard: HL7 FHIR R4
+
+  - name: Practitioner
+    definition: >-
+      A FHIR resource representing a healthcare provider including physicians, nurses,
+      and other licensed professionals.
+    standard: HL7 FHIR R4
+    related:
+      - PractitionerRole
+      - Organization
+      - Location
+
+  - name: PractitionerRole
+    definition: >-
+      A FHIR resource representing the roles a practitioner plays at an organization
+      including specialty, network status, and contact details.
+    standard: HL7 FHIR R4
+
+  - name: MedicationKnowledge
+    definition: >-
+      A FHIR resource representing formulary drug information including drug tier,
+      cost-sharing requirements, and coverage limitations.
+    standard: HL7 FHIR R4 / DaVinci PDEX Drug Formulary
+
+  - name: InsurancePlan
+    definition: >-
+      A FHIR resource describing a health insurance product including plan type,
+      coverage area, networks, and contact information.
+    standard: HL7 FHIR R4 / DaVinci Plan-Net
+
+  - name: SMART on FHIR
+    definition: >-
+      An open, standards-based technology platform enabling applications to access
+      healthcare data securely using OAuth 2.0 and FHIR APIs.
+    standard: SMART App Launch Framework
+
+  - name: CMS-9115-F
+    label: CMS Interoperability and Patient Access Final Rule
+    definition: >-
+      A CMS regulation requiring health insurers to implement FHIR-based APIs for
+      patient data access, provider directory, drug formulary, and payer-to-payer
+      data exchange.
+    effective: '2021-01-01'
+
+  - name: EDI 837
+    definition: >-
+      HIPAA standard electronic transaction for submitting healthcare claims and
+      encounter information from providers to payers.
+    standard: ASC X12 837
+
+  - name: EDI 270/271
+    definition: >-
+      HIPAA standard electronic transactions for healthcare eligibility benefit
+      inquiry (270) and response (271).
+    standard: ASC X12 270/271
+
+  - name: EDI 276/277
+    definition: >-
+      HIPAA standard electronic transactions for healthcare claim status request
+      (276) and response (277).
+    standard: ASC X12 276/277
+
+  - name: EDI 835
+    definition: >-
+      HIPAA standard electronic transaction for healthcare payment and remittance
+      advice from payer to provider.
+    standard: ASC X12 835
+
+  - name: Drug Formulary
+    definition: >-
+      A list of prescription drugs covered by a health plan, organized by tier
+      with associated cost-sharing requirements and coverage restrictions.
+
+  - name: Prior Authorization
+    abbreviation: PA
+    definition: >-
+      A requirement that a provider obtain approval from the health plan before
+      delivering specific services or prescribing certain medications.
+
+  - name: Network
+    definition: >-
+      The group of doctors, hospitals, pharmacies, and other healthcare providers
+      that have contracted with a health plan to provide services at negotiated rates.
+
+  - name: Deductible
+    definition: >-
+      The amount a member must pay for covered health care services before the
+      insurance plan starts to pay.
+
+  - name: Copayment
+    abbreviation: Copay
+    definition: >-
+      A fixed amount a member pays for a covered health care service, usually at
+      the time of service.
+
+  - name: Coinsurance
+    definition: >-
+      The member's share of costs for a covered health care service, calculated as
+      a percentage of the allowed amount for the service.
+
+workflows:
+  - name: Patient Data Access
+    description: Member authorizes third-party app via SMART on FHIR to access health records through FHIR R4 Patient Access API.
+    steps:
+      - Member registers or logs in to the third-party application
+      - App redirects member to Aetna authorization server
+      - Member grants consent for data access scopes
+      - App receives authorization code and exchanges for access token
+      - App queries FHIR Patient Access API with bearer token
+      - Member health data returned as FHIR resources
+
+  - name: Provider Eligibility Verification
+    description: Provider verifies member eligibility and benefits before delivering care using EDI 270/271.
+    steps:
+      - Provider submits EDI 270 eligibility inquiry via Availity
+      - Aetna processes inquiry and returns EDI 271 response
+      - Response includes coverage details, deductible status, and copay information
+      - Provider confirms in-network status and expected member cost-sharing
+
+  - name: Electronic Claims Submission
+    description: Provider submits claims electronically via EDI 837 and receives remittance via EDI 835.
+    steps:
+      - Provider prepares EDI 837 claim file with service details
+      - Claim submitted to Aetna via Availity EDI gateway
+      - Aetna adjudicates claim and issues EDI 835 remittance advice
+      - Provider applies payment and posts explanation of benefits
+
+personas:
+  - name: Health Plan Member
+    description: Individual covered by Aetna health insurance seeking access to personal health data.
+  - name: Healthcare Provider
+    description: Physician, hospital, or clinic submitting claims and verifying eligibility via EDI.
+  - name: Health App Developer
+    description: Third-party developer building SMART on FHIR applications for member health data access.
+  - name: Benefits Administrator
+    description: Employer or broker managing group health plan enrollments and coverage.
