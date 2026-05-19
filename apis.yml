@@ -90,6 +90,10 @@ apis:
         url: https://www.availity.com
 
 common:
+  - type: GitHubOrganization
+    url: https://github.com/aetnahealth
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/aetna
   - type: Website
     url: https://www.aetna.com
   - type: Portal
