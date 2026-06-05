@@ -15,6 +15,7 @@ tags:
   - FHIR
   - Patient Access
   - Provider Directory
+  - Fortune 100
 apis:
   - aid: aetna-patient-access-fhir-api
     name: Aetna Patient Access FHIR API
