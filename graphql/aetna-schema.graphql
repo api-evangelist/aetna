@@ -1,0 +1,884 @@
+# Aetna Conceptual GraphQL Schema
+# Derived from Aetna/CVS Health public developer documentation, FHIR R4 APIs,
+# DaVinci Implementation Guides, and CMS Interoperability Final Rule (CMS-9115-F).
+# https://developer.aetna.com/
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar Date
+scalar DateTime
+scalar Decimal
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum PlanType {
+  COMMERCIAL
+  MEDICARE_ADVANTAGE
+  MEDICAID
+  CHIP
+  MARKETPLACE
+}
+
+enum NetworkType {
+  HMO
+  PPO
+  EPO
+  POS
+  HDHP
+  PFFS
+}
+
+enum ClaimStatus {
+  RECEIVED
+  IN_PROCESS
+  APPROVED
+  PARTIALLY_APPROVED
+  DENIED
+  PAID
+  VOIDED
+}
+
+enum AuthStatus {
+  PENDING
+  APPROVED
+  DENIED
+  CANCELLED
+  EXPIRED
+  IN_REVIEW
+}
+
+enum ProviderType {
+  PCP
+  SPECIALIST
+  HOSPITAL
+  URGENT_CARE
+  LAB
+  IMAGING
+  MENTAL_HEALTH
+  PHARMACY
+  TELEHEALTH
+}
+
+enum DrugTierLevel {
+  TIER_1_GENERIC
+  TIER_2_PREFERRED_BRAND
+  TIER_3_NON_PREFERRED_BRAND
+  TIER_4_SPECIALTY
+  TIER_5_HIGH_COST_SPECIALTY
+}
+
+enum CoverageStatus {
+  ACTIVE
+  TERMINATED
+  PENDING
+  COBRA
+  SUSPENDED
+}
+
+enum AppealStatus {
+  SUBMITTED
+  IN_REVIEW
+  UPHELD
+  OVERTURNED
+  WITHDRAWN
+}
+
+# ---------------------------------------------------------------------------
+# Member and Identity
+# ---------------------------------------------------------------------------
+
+type MemberId {
+  subscriberId: String!
+  memberId: String!
+  groupNumber: String
+  planId: String!
+  suffix: String
+}
+
+type MemberProfile {
+  preferredLanguage: String
+  communicationPreferences: [String]
+  email: String
+  phone: String
+  alternatePhone: String
+  paperless: Boolean
+}
+
+type MemberServices {
+  memberServicesPhone: String
+  nurseLinePhone: String
+  mentalHealthPhone: String
+  pharmacyPhone: String
+  websiteUrl: String
+  hoursOfOperation: String
+}
+
+type Member {
+  id: ID!
+  memberId: MemberId!
+  firstName: String!
+  lastName: String!
+  middleName: String
+  dateOfBirth: Date!
+  gender: String
+  address: Address
+  profile: MemberProfile
+  coverage: [Coverage]
+  services: MemberServices
+  pcp: PCP
+  wellness: Wellness
+  hra: HRA
+  healthCoach: HealthCoach
+}
+
+type Address {
+  line1: String!
+  line2: String
+  city: String!
+  state: String!
+  postalCode: String!
+  country: String
+}
+
+# ---------------------------------------------------------------------------
+# Plan and Coverage
+# ---------------------------------------------------------------------------
+
+type Deductible {
+  individualAmount: Decimal!
+  familyAmount: Decimal
+  individualMet: Decimal!
+  familyMet: Decimal
+  inNetworkIndividual: Decimal
+  inNetworkFamily: Decimal
+  outOfNetworkIndividual: Decimal
+  outOfNetworkFamily: Decimal
+  benefitYear: Int!
+}
+
+type OutOfPocket {
+  individualMax: Decimal!
+  familyMax: Decimal
+  individualMet: Decimal!
+  familyMet: Decimal
+  inNetworkIndividual: Decimal
+  inNetworkFamily: Decimal
+  outOfNetworkIndividual: Decimal
+  outOfNetworkFamily: Decimal
+  benefitYear: Int!
+}
+
+type Copay {
+  serviceType: String!
+  inNetworkAmount: Decimal
+  outOfNetworkAmount: Decimal
+  appliesAfterDeductible: Boolean
+  notes: String
+}
+
+type Coinsurance {
+  serviceType: String!
+  inNetworkPercent: Decimal
+  outOfNetworkPercent: Decimal
+  appliesAfterDeductible: Boolean
+}
+
+type PlanMaximum {
+  category: String!
+  maxAmount: Decimal
+  maxVisits: Int
+  maxDays: Int
+  period: String
+}
+
+type WellnessBenefit {
+  programName: String!
+  eligible: Boolean!
+  incentiveAmount: Decimal
+  completedActivities: Int
+  totalActivities: Int
+  enrollmentUrl: String
+}
+
+type Teladoc {
+  enrolled: Boolean!
+  primaryCareAvailable: Boolean
+  mentalHealthAvailable: Boolean
+  dermatologyAvailable: Boolean
+  copayAmount: Decimal
+  enrollmentUrl: String
+  appUrl: String
+}
+
+type Telehealth {
+  teladoc: Teladoc
+  minuteClinicVirtual: Boolean
+  otherPrograms: [String]
+}
+
+type PlanDetails {
+  planName: String!
+  planCode: String!
+  metalTier: String
+  benefitYear: Int!
+  market: String
+  state: String
+  networkType: NetworkType!
+  planType: PlanType!
+  effectiveDate: Date!
+  terminationDate: Date
+  sbcUrl: String
+  evidenceOfCoverageUrl: String
+}
+
+type CommercialPlan {
+  id: ID!
+  details: PlanDetails!
+  employer: String
+  groupNumber: String
+  deductible: Deductible
+  outOfPocket: OutOfPocket
+  copays: [Copay]
+  coinsurance: [Coinsurance]
+  maximums: [PlanMaximum]
+  wellnessBenefits: [WellnessBenefit]
+  telehealth: Telehealth
+  formulary: Formulary
+  pharmacy: PharmacyNetwork
+  eap: EAP
+}
+
+type MedicarePlan {
+  id: ID!
+  details: PlanDetails!
+  contractId: String
+  pbpNumber: String
+  partCCoverage: Coverage
+  partDCoverage: DrugBenefit
+  deductible: Deductible
+  outOfPocket: OutOfPocket
+  copays: [Copay]
+  formulary: Formulary
+  extraBenefits: [WellnessBenefit]
+  snpType: String
+}
+
+type MedicaidPlan {
+  id: ID!
+  details: PlanDetails!
+  stateProgramName: String
+  eligibilityCategory: String
+  deductible: Deductible
+  outOfPocket: OutOfPocket
+  copays: [Copay]
+  formulary: Formulary
+  ltssIncluded: Boolean
+  behavioralHealth: BehavioralHealth
+}
+
+type InsurancePlan {
+  id: ID!
+  details: PlanDetails!
+  commercial: CommercialPlan
+  medicare: MedicarePlan
+  medicaid: MedicaidPlan
+}
+
+type Coverage {
+  id: ID!
+  member: Member!
+  plan: InsurancePlan!
+  status: CoverageStatus!
+  effectiveDate: Date!
+  terminationDate: Date
+  subscriberRelationship: String
+  deductible: Deductible
+  outOfPocket: OutOfPocket
+  fhirCoverageId: String
+}
+
+# ---------------------------------------------------------------------------
+# Provider Directory
+# ---------------------------------------------------------------------------
+
+type ProviderLocation {
+  address: Address!
+  phone: String
+  fax: String
+  latitude: Decimal
+  longitude: Decimal
+  accessibilityFeatures: [String]
+}
+
+type Provider {
+  id: ID!
+  npi: String!
+  firstName: String
+  lastName: String
+  organizationName: String
+  providerType: ProviderType!
+  specialties: [String]
+  taxonomyCodes: [String]
+  locations: [ProviderLocation]
+  acceptingNewPatients: Boolean
+  languages: [String]
+  boardCertifications: [String]
+  hospitalAffiliations: [String]
+  fhirPractitionerId: String
+}
+
+type InNetworkProvider {
+  provider: Provider!
+  plan: InsurancePlan!
+  networkEffectiveDate: Date
+  networkTerminationDate: Date
+  tierLevel: String
+  requiresReferral: Boolean
+}
+
+type OutOfNetworkProvider {
+  provider: Provider!
+  estimatedCostMultiplier: Decimal
+  reimbursementBasis: String
+}
+
+type ProviderDirectory {
+  planId: ID!
+  lastUpdated: DateTime!
+  providers: [InNetworkProvider]
+  totalCount: Int
+}
+
+type PCP {
+  provider: Provider!
+  panelOpen: Boolean!
+  acceptingNewPatients: Boolean!
+  acceptingMedicaid: Boolean
+  pcpId: String
+  assignedMembers: Int
+}
+
+type OB {
+  provider: Provider!
+  acceptingNewOBPatients: Boolean
+  deliveryHospitals: [Hospital]
+  maternityProgram: String
+}
+
+type Specialist {
+  provider: Provider!
+  specialty: String!
+  taxonomyCode: String
+  referralRequired: Boolean
+  priorAuthRequired: Boolean
+}
+
+type Hospital {
+  id: ID!
+  npi: String!
+  name: String!
+  hospitalType: String
+  location: ProviderLocation!
+  accreditations: [String]
+  services: [String]
+  traumaLevel: String
+  teachingStatus: Boolean
+  emergencyServices: Boolean
+  inNetworkPlans: [InsurancePlan]
+}
+
+type LabNetwork {
+  id: ID!
+  networkName: String!
+  preferredLabs: [Provider]
+  questDiagnostics: Boolean
+  labcorp: Boolean
+  requiresOrder: Boolean
+}
+
+type ImageCenter {
+  provider: Provider!
+  imagingTypes: [String]
+  priorAuthRequired: Boolean
+  schedulingPhone: String
+}
+
+# ---------------------------------------------------------------------------
+# Behavioral and Mental Health
+# ---------------------------------------------------------------------------
+
+type MentalHealth {
+  inNetworkProviders: [Provider]
+  inpatientDaysAllowed: Int
+  outpatientVisitsAllowed: Int
+  copay: Copay
+  priorAuthRequired: Boolean
+  crisisLine: String
+}
+
+type BehavioralHealth {
+  mentalHealth: MentalHealth
+  substanceUse: SubstanceUse
+  eap: EAP
+  managedBy: String
+  contactPhone: String
+}
+
+type SubstanceUse {
+  detoxCovered: Boolean
+  residentialTreatmentCovered: Boolean
+  outpatientCovered: Boolean
+  medicationAssistedTreatment: Boolean
+  priorAuthRequired: Boolean
+  copay: Copay
+}
+
+type EAP {
+  included: Boolean!
+  sessionsPerYear: Int
+  servicesIncluded: [String]
+  contactPhone: String
+  onlineAccessUrl: String
+  managedBy: String
+}
+
+type UrbanHealth {
+  programName: String
+  eligibleZipCodes: [String]
+  communityHealthCenters: [Provider]
+  transportationBenefit: Boolean
+  foodBenefit: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Pharmacy and Formulary
+# ---------------------------------------------------------------------------
+
+type Pharmacy {
+  id: ID!
+  npi: String!
+  name: String!
+  location: ProviderLocation!
+  is24Hour: Boolean
+  driveThroughAvailable: Boolean
+  mailOrderAvailable: Boolean
+  preferredNetwork: Boolean
+  specialtyPharmacy: Boolean
+}
+
+type PharmacyNetwork {
+  planId: ID!
+  preferredRetail: [Pharmacy]
+  standardRetail: [Pharmacy]
+  mailOrder: MailOrder
+  specialtyPharmacy: [Pharmacy]
+  outOfNetworkAllowed: Boolean
+}
+
+type MailOrder {
+  vendor: String!
+  dispenseSupply: String
+  copayDiscount: Boolean
+  enrollmentUrl: String
+  phone: String
+  autoRefillAvailable: Boolean
+}
+
+type MinuteClinic {
+  id: ID!
+  locationId: String!
+  address: Address!
+  phone: String
+  hours: String
+  servicesOffered: [String]
+  appointmentRequired: Boolean
+  walkInsAccepted: Boolean
+  virtualVisitAvailable: Boolean
+}
+
+type CVSLocation {
+  id: ID!
+  storeNumber: String!
+  address: Address!
+  pharmacy: Pharmacy
+  minuteClinic: MinuteClinic
+  hours: String
+  driveThrough: Boolean
+}
+
+type DrugTier {
+  tierLevel: DrugTierLevel!
+  tierName: String!
+  retailCopay30Day: Decimal
+  retailCopay90Day: Decimal
+  mailOrderCopay90Day: Decimal
+  priorAuthRequired: Boolean
+  quantityLimits: String
+  stepTherapyRequired: Boolean
+}
+
+type SpecialtyDrug {
+  rxcui: String!
+  brandName: String
+  genericName: String!
+  tier: DrugTier!
+  priorAuthRequired: Boolean!
+  specialtyPharmacyRequired: Boolean
+  rems: Boolean
+  ldoProgram: String
+}
+
+type DrugBenefit {
+  planId: ID!
+  benefitYear: Int!
+  deductibleApplies: Boolean
+  icLtcCoverage: Boolean
+  catastrophicCoverage: Boolean
+  coverageGap: Boolean
+  tiers: [DrugTier]
+}
+
+type MedNecessity {
+  criteriaName: String!
+  criteriaVersion: String
+  applicableServices: [String]
+  criteriaUrl: String
+  reviewRequired: Boolean
+}
+
+type Formulary {
+  id: ID!
+  planId: ID!
+  benefitYear: Int!
+  lastUpdated: DateTime!
+  tiers: [DrugTier]
+  drugs: [FormularyDrug]
+  fhirFormularyId: String
+}
+
+type FormularyDrug {
+  rxcui: String!
+  ndc: [String]
+  brandName: String
+  genericName: String!
+  tier: DrugTier!
+  specialty: SpecialtyDrug
+  alternatives: [FormularyDrug]
+  priorAuthRequired: Boolean
+  quantityLimit: String
+  stepTherapyRequired: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Claims and EOB
+# ---------------------------------------------------------------------------
+
+type ClaimLine {
+  lineNumber: Int!
+  serviceDate: Date!
+  procedureCode: String
+  diagnosisCodes: [String]
+  description: String
+  billedAmount: Decimal!
+  allowedAmount: Decimal
+  planPaidAmount: Decimal
+  memberResponsibility: Decimal
+  adjustmentReasonCodes: [String]
+}
+
+type ClaimPayment {
+  paymentDate: Date
+  paymentAmount: Decimal
+  paymentMethod: String
+  checkNumber: String
+  payeeName: String
+  eftConfirmation: String
+}
+
+type Denial {
+  denialCode: String!
+  denialReason: String!
+  denialDate: Date!
+  appealDeadline: Date
+  appealInstructions: String
+}
+
+type Appeal {
+  id: ID!
+  claimId: ID!
+  submittedDate: Date!
+  status: AppealStatus!
+  decisionDate: Date
+  decisionReason: String
+  level: String
+  contactPhone: String
+}
+
+type Claim {
+  id: ID!
+  memberId: ID!
+  claimNumber: String!
+  serviceDate: Date!
+  receivedDate: Date!
+  processedDate: Date
+  status: ClaimStatus!
+  provider: Provider
+  facilityName: String
+  billedAmount: Decimal!
+  allowedAmount: Decimal
+  planPaidAmount: Decimal
+  memberResponsibility: Decimal
+  claimLines: [ClaimLine]
+  payment: ClaimPayment
+  denial: Denial
+  appeals: [Appeal]
+  fhirClaimId: String
+}
+
+type EOBLine {
+  lineNumber: Int!
+  serviceDate: Date!
+  procedureCode: String
+  description: String
+  billedAmount: Decimal!
+  notCoveredAmount: Decimal
+  discountAmount: Decimal
+  deductibleAmount: Decimal
+  copayAmount: Decimal
+  coinsuranceAmount: Decimal
+  planPaidAmount: Decimal
+  memberResponsibility: Decimal
+  adjustmentReasonCodes: [String]
+  remarkCodes: [String]
+}
+
+type ExplanationOfBenefits {
+  id: ID!
+  claim: Claim!
+  member: Member!
+  provider: Provider
+  eobDate: Date!
+  eobLines: [EOBLine]
+  totalBilled: Decimal!
+  totalAllowed: Decimal
+  totalPlanPaid: Decimal
+  totalMemberResponsibility: Decimal
+  deductibleApplied: Decimal
+  outOfPocketApplied: Decimal
+  fhirEobId: String
+}
+
+# ---------------------------------------------------------------------------
+# Prior Authorization
+# ---------------------------------------------------------------------------
+
+type AuthRequest {
+  id: ID!
+  memberId: ID!
+  providerId: ID
+  requestedServices: [String]
+  diagnosisCodes: [String]
+  requestedStartDate: Date
+  requestedEndDate: Date
+  urgency: String
+  clinicalNotes: String
+  attachments: [String]
+  submittedDate: DateTime
+  submittedBy: String
+}
+
+type ClinicalReview {
+  id: ID!
+  authRequestId: ID!
+  reviewType: String!
+  reviewedBy: String
+  reviewDate: Date
+  clinicalCriteria: MedNecessity
+  decision: String
+  decisionReason: String
+  additionalInfoRequired: Boolean
+  additionalInfoDueDate: Date
+}
+
+type PreAuthorization {
+  id: ID!
+  authNumber: String!
+  member: Member!
+  status: AuthStatus!
+  request: AuthRequest!
+  clinicalReview: ClinicalReview
+  approvedServices: [String]
+  approvedUnits: Int
+  effectiveDate: Date
+  expirationDate: Date
+  notes: String
+}
+
+# ---------------------------------------------------------------------------
+# Wellness and Health Management
+# ---------------------------------------------------------------------------
+
+type HRA {
+  id: ID!
+  memberId: ID!
+  completionDate: Date
+  completed: Boolean!
+  riskScore: String
+  recommendations: [String]
+  incentiveEarned: Decimal
+  nextHraDueDate: Date
+}
+
+type HealthCoach {
+  coachName: String
+  coachPhone: String
+  specialization: String
+  nextAppointment: DateTime
+  programName: String
+  sessionsCompleted: Int
+  sessionsAllowed: Int
+}
+
+type Wellness {
+  memberId: ID!
+  programsEnrolled: [WellnessBenefit]
+  totalIncentiveEarned: Decimal
+  totalIncentiveAvailable: Decimal
+  hra: HRA
+  healthCoach: HealthCoach
+  fitnessReimbursement: Decimal
+  fitnessReimbursementUsed: Decimal
+}
+
+# ---------------------------------------------------------------------------
+# API Access
+# ---------------------------------------------------------------------------
+
+type APIKey {
+  keyId: ID!
+  name: String!
+  createdDate: DateTime!
+  lastUsed: DateTime
+  scopes: [String]
+  status: String!
+  rateLimit: Int
+}
+
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int!
+  scope: String
+  patientId: String
+  issuedAt: DateTime!
+}
+
+type Webhook {
+  id: ID!
+  url: String!
+  events: [String]!
+  status: String!
+  secret: String
+  createdDate: DateTime!
+  lastTriggered: DateTime
+  failureCount: Int
+}
+
+# ---------------------------------------------------------------------------
+# Input Types
+# ---------------------------------------------------------------------------
+
+input ProviderSearchInput {
+  planId: ID
+  specialty: String
+  providerType: ProviderType
+  zip: String
+  city: String
+  state: String
+  radius: Int
+  acceptingNewPatients: Boolean
+  language: String
+}
+
+input AuthRequestInput {
+  memberId: ID!
+  providerId: ID!
+  requestedServices: [String]!
+  diagnosisCodes: [String]!
+  requestedStartDate: Date!
+  requestedEndDate: Date
+  urgency: String
+  clinicalNotes: String
+}
+
+input MemberProfileInput {
+  preferredLanguage: String
+  communicationPreferences: [String]
+  email: String
+  phone: String
+  paperless: Boolean
+}
+
+input WebhookInput {
+  url: String!
+  events: [String]!
+  secret: String
+}
+
+input ClaimSearchInput {
+  memberId: ID!
+  dateFrom: Date
+  dateTo: Date
+  status: ClaimStatus
+  providerId: ID
+  minAmount: Decimal
+  maxAmount: Decimal
+}
+
+# ---------------------------------------------------------------------------
+# Root Types
+# ---------------------------------------------------------------------------
+
+type Query {
+  member(memberId: ID!): Member
+  memberCoverage(memberId: ID!, planYear: Int): [Coverage]
+  searchProviders(input: ProviderSearchInput!): ProviderDirectory
+  provider(npi: String!): Provider
+  pcp(pcpId: String!): PCP
+  hospital(npi: String!): Hospital
+  formulary(planId: ID!, benefitYear: Int): Formulary
+  drug(rxcui: String!): FormularyDrug
+  searchDrugs(name: String!, planId: ID): [FormularyDrug]
+  claims(input: ClaimSearchInput!): [Claim]
+  claim(claimId: ID!): Claim
+  eob(claimId: ID!): ExplanationOfBenefits
+  preAuthorization(authId: ID!): PreAuthorization
+  memberAuthorizations(memberId: ID!, status: AuthStatus): [PreAuthorization]
+  cvsLocations(zip: String!, radius: Int): [CVSLocation]
+  minuteClinics(zip: String!, radius: Int): [MinuteClinic]
+  insurancePlan(planId: ID!): InsurancePlan
+  wellness(memberId: ID!): Wellness
+  apiKeys: [APIKey]
+  webhooks: [Webhook]
+}
+
+type Mutation {
+  submitAuthRequest(input: AuthRequestInput!): PreAuthorization
+  createWebhook(input: WebhookInput!): Webhook
+  deleteWebhook(webhookId: ID!): Boolean
+  updateMemberProfile(memberId: ID!, input: MemberProfileInput!): MemberProfile
+  enrollWellnessProgram(memberId: ID!, programId: ID!): WellnessBenefit
+  submitAppeal(claimId: ID!, reason: String!, notes: String): Appeal
+  createAPIKey(name: String!, scopes: [String]): APIKey
+  revokeAPIKey(keyId: ID!): Boolean
+}
+
+type Subscription {
+  claimStatusUpdated(memberId: ID!): Claim
+  authorizationDecision(memberId: ID!): PreAuthorization
+  eobReady(memberId: ID!): ExplanationOfBenefits
+}
