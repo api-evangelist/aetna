@@ -87,6 +87,8 @@ apis:
   - type: Portal
     url: https://www.availity.com
 common:
+- type: DomainSecurity
+  url: security/aetna-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/aetnahealth
 - type: LinkedIn
