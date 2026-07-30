@@ -1,4 +1,17 @@
 aid: aetna
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aetna.png
 url: https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/apis.yml
 modified: '2026-04-19'
 name: Aetna
