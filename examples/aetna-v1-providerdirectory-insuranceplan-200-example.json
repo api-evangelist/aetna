@@ -1,0 +1,127 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_InsurancePlan",
+    "path": "/v1/providerdirectory/InsurancePlan",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "use": "official",
+              "assigner": {
+                "display": "Aetna Better Health of New Jersey"
+              },
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "XV",
+                    "display": "Health Plan Identifier"
+                  }
+                ]
+              },
+              "value": "Aetna Better Health of New Jersey - NJ"
+            }
+          ],
+          "period": {
+            "start": "2020-01-01T00:00:00Z",
+            "end": "2020-12-31T23:59:59Z"
+          },
+          "language": "en",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS",
+                  "code": "medihmo",
+                  "display": "Medicaid HMO"
+                }
+              ]
+            }
+          ],
+          "administeredBy": {
+            "display": "Aetna Better Health of New Jersey"
+          },
+          "network": [
+            {
+              "reference": "Organization/0000000000000212937",
+              "display": "Aetna Better Health of New Jersey"
+            },
+            {
+              "reference": "Organization/0000000000000212938",
+              "display": "Aetna Assure Premier Plus (HMO D-SNP)"
+            },
+            {
+              "reference": "Organization/0000000000000212939",
+              "display": "Aetna Assure Premier Plus (HMO D-SNP)"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2020-10-23T00:00:00.000+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan"
+            ]
+          },
+          "contact": [
+            {
+              "address": {
+                "city": "Princeton",
+                "line": [
+                  "3 Independence Way",
+                  "Suite 400"
+                ],
+                "postalCode": "08540-6626",
+                "state": "NJ"
+              },
+              "name": {
+                "use": "official",
+                "text": "ABH New Jersey"
+              },
+              "telecom": [
+                {
+                  "system": "phone",
+                  "use": "work",
+                  "value": "1-855-232-3596"
+                }
+              ]
+            }
+          ],
+          "name": "Aetna Better Health of New Jersey",
+          "id": "0000000000000212936",
+          "ownedBy": {
+            "display": "Aetna Better Health of New Jersey"
+          },
+          "resourceType": "InsurancePlan",
+          "status": "active",
+          "coverageArea": [
+            {
+              "display": "NJ"
+            }
+          ]
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/InsurancePlan/0000000000000212936"
+      }
+    ],
+    "total": 1,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/InsurancePlan?address-state=nj&page=1",
+        "relation": "self"
+      }
+    ],
+    "id": "32ed03f463dd540f05fbb9f1",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

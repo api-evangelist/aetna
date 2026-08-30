@@ -1,0 +1,103 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_OrganizationAffiliation",
+    "path": "/v1/providerdirectory/OrganizationAffiliation",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "use": "official"
+            }
+          ],
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "code": "251E00000X",
+                  "display": "Other"
+                }
+              ],
+              "text": "Specialty"
+            }
+          ],
+          "period": {
+            "start": "2020-01-01",
+            "end": "2020-12-31"
+          },
+          "code": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrganizationAffiliationRoleCS",
+                  "code": "home",
+                  "display": "Home Health Provider"
+                }
+              ],
+              "text": "Home Health Provider"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2020-07-28T05:00:54.485+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-OrganizationAffiliation"
+            ]
+          },
+          "active": true,
+          "participatingOrganization": {
+            "reference": "Organization/0000000000001719695",
+            "display": "Coram Specialty Infusion Services"
+          },
+          "language": "en",
+          "location": [
+            {
+              "reference": "Location/0000000000001719712",
+              "display": "4310 E Cotton Center Blvd Ste 110, Phoenix, AZ 85040"
+            }
+          ],
+          "id": "0000000000001719678",
+          "resourceType": "OrganizationAffiliation",
+          "network": [
+            {
+              "display": "Aetna Better Health of West Virginia"
+            }
+          ]
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation/0000000000001719678"
+      }
+    ],
+    "total": 1,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1",
+        "relation": "self"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1",
+        "relation": "next"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1",
+        "relation": "last"
+      }
+    ],
+    "id": "8daec58a-a3f4-11ed-9960-9d7971050000",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

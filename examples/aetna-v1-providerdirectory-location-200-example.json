@@ -1,0 +1,292 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_Location",
+    "path": "/v1/providerdirectory/Location",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS",
+                        "code": "newpt",
+                        "display": "Accepting"
+                      }
+                    ],
+                    "text": "Accepting patients"
+                  },
+                  "url": "acceptingPatients"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+            }
+          ],
+          "address": {
+            "country": "US",
+            "city": "Bradley Beach",
+            "use": "work",
+            "line": [
+              "13 Main St Ste 1"
+            ],
+            "district": "MONMOUTH",
+            "postalCode": "07720",
+            "text": "13 Main St Ste 1, Bradley Beach, NJ 07720",
+            "state": "NJ",
+            "type": "physical"
+          },
+          "meta": {
+            "lastUpdated": "2020-11-19T05:00:54.485+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location"
+            ]
+          },
+          "name": "Ryan, Amy, MSW",
+          "language": "en",
+          "telecom": [
+            {
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueCode": "mon",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "wed",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueTime": "10:00:00",
+                      "url": "availableStartTime"
+                    },
+                    {
+                      "valueTime": "15:00:00",
+                      "url": "availableEndTime"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+                }
+              ],
+              "system": "phone",
+              "use": "work",
+              "value": "(732) 795-0918"
+            }
+          ],
+          "hoursOfOperation": [
+            {
+              "closingTime": "15:00:00",
+              "openingTime": "10:00:00",
+              "daysOfWeek": [
+                "mon",
+                "wed"
+              ]
+            }
+          ],
+          "id": "0000000000001971501",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                  "code": "WORK",
+                  "display": "work site"
+                }
+              ]
+            }
+          ],
+          "resourceType": "Location",
+          "status": "active"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/Location/0000000000001971501"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "extension": [
+            {
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AccessibilityCS",
+                    "code": "cultcomp",
+                    "display": "Cultural competence"
+                  },
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AccessibilityCS",
+                    "code": "handiaccess",
+                    "display": "handicap accessible"
+                  }
+                ],
+                "text": "Offers a variety of accessibility services"
+              },
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/accessibility"
+            }
+          ],
+          "address": {
+            "country": "USA",
+            "city": "BRADLEY BEACH",
+            "use": "work",
+            "line": [
+              "128 MAIN ST"
+            ],
+            "district": "MONMOUTH COUNTY",
+            "postalCode": "07720",
+            "text": "128 MAIN ST, BRADLEY BEACH, NJ 07720",
+            "state": "NJ",
+            "type": "physical"
+          },
+          "meta": {
+            "lastUpdated": "2020-11-19T05:00:54.485+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location"
+            ]
+          },
+          "name": "BRADLEY BEACH PHARMACY",
+          "language": "en",
+          "telecom": [
+            {
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueCode": "sun",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueTime": "09:00:00",
+                      "url": "availableStartTime"
+                    },
+                    {
+                      "valueTime": "14:00:00",
+                      "url": "availableEndTime"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+                },
+                {
+                  "extension": [
+                    {
+                      "valueCode": "mon",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "tue",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "wed",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "thu",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "fri",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "sat",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueTime": "09:00:00",
+                      "url": "availableStartTime"
+                    },
+                    {
+                      "valueTime": "19:00:00",
+                      "url": "availableEndTime"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+                }
+              ],
+              "system": "phone",
+              "use": "work",
+              "value": "732-774-7174"
+            }
+          ],
+          "hoursOfOperation": [
+            {
+              "closingTime": "14:00:00",
+              "openingTime": "09:00:00",
+              "daysOfWeek": [
+                "sun"
+              ]
+            },
+            {
+              "closingTime": "19:00:00",
+              "openingTime": "09:00:00",
+              "daysOfWeek": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat"
+              ]
+            }
+          ],
+          "id": "0000000000001830496",
+          "position": {
+            "latitude": 40.199858,
+            "longitude": -74.018929
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                  "code": "PHARM",
+                  "display": "Pharmacy"
+                }
+              ]
+            }
+          ],
+          "resourceType": "Location",
+          "status": "active"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/Location/0000000000001830496"
+      }
+    ],
+    "total": 67,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=1",
+        "relation": "self"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=1",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=2",
+        "relation": "next"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=34",
+        "relation": "last"
+      }
+    ],
+    "id": "295e2008-a3f4-11ed-abb4-9d7971040000",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

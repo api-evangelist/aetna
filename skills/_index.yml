@@ -1,0 +1,23 @@
+generated: '2026-08-30'
+method: generated
+source: >-
+  Grounded in the operationIds of openapi/aetna-patient-access-api-openapi.yml and
+  openapi/aetna-provider-directory-api-openapi.yml, which are assembled from the 95 Swagger 2.0
+  documents Aetna publishes itself. Every operationId referenced by a skill was verified to exist in
+  the named spec. Cross-cutting rules come from conventions/aetna-conventions.yml and
+  errors/aetna-problem-types.yml.
+search_note: >-
+  Aetna publishes no AGENTS.md, no skill files and no agent guidance of any kind. These are generated.
+skills:
+  - file: aetna-retrieve-member-claims.md
+    name: Retrieve an Aetna member's claims and coverage
+    api: openapi/aetna-patient-access-api-openapi.yml
+    operations: [get_v2_patientaccess_Patient, get_v2_patientaccess_Coverage, get_v2_patientaccess_ExplanationOfBenefit, get_v2_patientaccess_ExplanationOfBenefit_id]
+  - file: aetna-find-in-network-provider.md
+    name: Find an in-network Aetna provider
+    api: openapi/aetna-provider-directory-api-openapi.yml
+    operations: [get_v1_providerdirectory_Practitioner, get_v1_providerdirectory_PractitionerRole, get_v1_providerdirectory_Organization, get_v1_providerdirectory_Location, get_v1_providerdirectory_InsurancePlan]
+  - file: aetna-check-drug-coverage.md
+    name: Check Aetna drug coverage and formulary tier
+    api: openapi/aetna-patient-access-api-openapi.yml
+    operations: [get_v2_patientaccess_MedicationKnowledge, get_v2_patientaccess_MedicationKnowledge_id, get_v2_patientaccess_MedicationRequest, get_v2_patientaccess_Medication_id]

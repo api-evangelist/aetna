@@ -1,0 +1,153 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_OrganizationAffiliation",
+    "path": "/v1/providerdirectorydata/OrganizationAffiliation",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "use": "official"
+            }
+          ],
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCode": "active",
+                  "url": "status"
+                },
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "code": "IL",
+                        "display": "Illinois"
+                      }
+                    ]
+                  },
+                  "url": "whereValid"
+                },
+                {
+                  "valueCode": 54019391,
+                  "url": "identifier"
+                },
+                {
+                  "valueCode": "3336C0003X",
+                  "url": "code"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/qualification"
+            }
+          ],
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "code": "3336C0003X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Community/Retail Pharmacy"
+                }
+              ]
+            }
+          ],
+          "code": [
+            {
+              "coding": [
+                {
+                  "code": "pharmacy",
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrganizationAffiliationRoleCS",
+                  "display": "Pharmacy"
+                }
+              ]
+            }
+          ],
+          "active": true,
+          "network": [
+            {
+              "reference": "Organization/plannet-network-f0f9ad3daa83d94f7080386074e010c3",
+              "display": "(Custom Program)\u2013 Broad National with preferred pharmacies ADD Stop and Shop and Price Chopper"
+            },
+            {
+              "reference": "Organization/plannet-network-f0f9ad3daa83d94f7080386074e010c7",
+              "display": "(Custom Program)\u2013 Broad National with preferred pharmacies ADD RiteAid as preferred"
+            },
+            {
+              "reference": "Organization/plannet-network-f0f9ad3d9b83d94f7080386074dffe13",
+              "display": "Broad National with preferred pharmacies"
+            },
+            {
+              "reference": "Organization/plannet-network-f0f9ad3d9a83d94f7080386074dffcd5",
+              "display": "Broad National pharmacies"
+            }
+          ],
+          "healthcareService": [
+            {
+              "reference": "HealthcareService/plannet-healthcareservice-6141de78848baa5738bc7ecd55939c7c",
+              "display": "FIRST FAMILY PHARMACY PLUS"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2023-02-08T14:06:29.019475+00:00",
+            "versionId": "MTY3NTg2NTE4OTAxOTQ3NTAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-OrganizationAffiliation"
+            ]
+          },
+          "participatingOrganization": {
+            "reference": "Organization/plannet-organization-6141de78848baa5738bc7ecd55939c7c",
+            "display": "FIRST FAMILY PHARMACY PLUS"
+          },
+          "location": [
+            {
+              "reference": "Location/plannet-location-6141de78848baa5738bc7ecd55939c7c",
+              "display": "2140 W DEVON AVE, CHICAGO, Illinois, 60659, USA"
+            }
+          ],
+          "telecom": [
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "(773) 338-7000"
+            },
+            {
+              "system": "fax",
+              "use": "work",
+              "value": "7733387111"
+            },
+            {
+              "system": "email",
+              "use": "work",
+              "value": "FAMILYPHARMACY667@GMAIL.COM"
+            }
+          ],
+          "id": "plannet-organizationaffiliation-9c339ff5776dd2e652d482fab35090e6",
+          "resourceType": "OrganizationAffiliation"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/OrganizationAffiliation/plannet-organizationaffiliation-9c339ff5776dd2e652d482fab35090e6"
+      }
+    ],
+    "total": 1,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/OrganizationAffiliation/?_count=1",
+        "relation": "search"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/OrganizationAffiliation/?_count=1&_page_token=Cjj3YIkZBf%2F%2F%2F%2F%2BABcED8gvxnQD%2FAf%2F%2BZmM2NzYxYzI3ZmVmYjE1NDM5ZWJiMTBjOWZmNGE1ZTYAARABIRdZYDGqWfwzOQAAAAD65nafSAFQAFoLCXUfe0nnpZ5iEANg8IyVnAU%3D",
+        "relation": "next"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

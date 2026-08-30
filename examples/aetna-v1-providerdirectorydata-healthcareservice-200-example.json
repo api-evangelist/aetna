@@ -1,0 +1,163 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_HealthcareService",
+    "path": "/v1/providerdirectorydata/HealthcareService",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "code": "newpt",
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS",
+                        "display": "Accepting"
+                      }
+                    ]
+                  },
+                  "url": "acceptingPatients"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+            },
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "code": "physical",
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/DeliveryMethodCS",
+                        "display": "Physical"
+                      }
+                    ]
+                  },
+                  "url": "type"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/delivery-method"
+            }
+          ],
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "code": "207L00000X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Anesthesiology Physician"
+                }
+              ]
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2023-02-08T14:19:29.341867+00:00",
+            "versionId": "MTY3NTg2NTk2OTM0MTg2NzAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-HealthcareService"
+            ]
+          },
+          "name": "Parker, Jason Darrel, MD",
+          "active": true,
+          "language": "en",
+          "location": [
+            {
+              "reference": "Location/plannet-location-bcdff9f2818baa5738a8626fcfac03cf",
+              "display": "2600 East Pflugerville Pkwy., Suite 100, Pflugerville, Travis, TX 78660, USA"
+            }
+          ],
+          "telecom": [
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "5126546100"
+            },
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "2545267523"
+            },
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "5123527611"
+            },
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "2547242111"
+            },
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "5125090100"
+            },
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "5125090200"
+            },
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "2542022000"
+            },
+            {
+              "system": "phone",
+              "use": "work",
+              "value": "5126546500"
+            },
+            {
+              "system": "fax",
+              "use": "work",
+              "value": "5126546101"
+            },
+            {
+              "system": "fax",
+              "use": "work",
+              "value": "5126546501"
+            }
+          ],
+          "id": "plannet-healthcareservice-8a2e5c0980863a9e93abc1d28b436db4",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "prov",
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/HealthcareServiceCategoryCS",
+                  "display": "Medical Provider"
+                }
+              ]
+            }
+          ],
+          "resourceType": "HealthcareService"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/HealthcareService/plannet-healthcareservice-7c78a7a1c66dc7e420a502c14ad7e3d2"
+      }
+    ],
+    "total": 1,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/HealthcareService/?_count=1",
+        "relation": "search"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/HealthcareService/?_count=1&_page_token=Cjj3YIZ5FP%2F%2F%2F%2F%2BABcDb5QtnVAD%2FAf%2F%2BZTlhNmNlODU0NzkxNTNhOWViNWNiNThjY2JjZjYzZjgAARABIRdZYDGqWfwzOQAAAADrhnmfSAFQAFoLCcFJ9d%2F6K7wvEANgrZzo6wE%3D",
+        "relation": "next"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Encounter_id",
+    "path": "/v2/patientaccess/Encounter/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/encounter/identifier/memberenctid/50063",
+        "value": "42~ME402739+unknown+unknown+99255+2016-03-29+2016-04-03"
+      }
+    ],
+    "period": {
+      "start": "2016-03-29",
+      "end": "2016-04-03"
+    },
+    "meta": {
+      "lastUpdated": "2021-03-22T03:38:50.952189-04:00",
+      "versionId": "1",
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter"
+      ]
+    },
+    "subject": {
+      "reference": "Patient/0000000000000030603"
+    },
+    "id": "0000000000000033348",
+    "type": {
+      "coding": [
+        {
+          "system": "http://www.ama-assn.org/go/cpt",
+          "code": "99255",
+          "display": "INPATIENT CONSULTATION"
+        }
+      ]
+    },
+    "class": {
+      "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+      "code": "unknown",
+      "display": "Unknown"
+    },
+    "resourceType": "Encounter",
+    "status": "unknown"
+  }
+}

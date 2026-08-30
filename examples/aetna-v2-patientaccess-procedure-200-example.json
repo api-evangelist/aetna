@@ -1,0 +1,120 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Procedure",
+    "path": "/v2/patientaccess/Procedure",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "code": {
+            "coding": [
+              {
+                "code": "265764009",
+                "system": "http://snomed.info/sct",
+                "display": "Renal dialysis (procedure)"
+              }
+            ],
+            "text": "Renal dialysis (procedure)"
+          },
+          "meta": {
+            "lastUpdated": "2021-02-23T14:51:13.143749+00:00",
+            "versionId": "MTYxNDA5MTg3MzE0Mzc0OTAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+            ]
+          },
+          "subject": {
+            "reference": "Patient/43fe2aa6-d942-a50f-0944-3ddbfc3ce1f6"
+          },
+          "location": {
+            "reference": "Location/47759994-69f9-3b01-9d77-19566f9f528d",
+            "display": "Haverhill Community Based Outpatient Clinic (CBOC)"
+          },
+          "encounter": {
+            "reference": "Encounter/430a8a5f-157d-2822-be8e-d0431147fcec"
+          },
+          "id": "14644221-face-20cf-1370-c46eeed5fc07",
+          "performedPeriod": {
+            "start": "2009-04-06T15:25:24+00:00",
+            "end": "2009-04-06T18:38:24+00:00"
+          },
+          "resourceType": "Procedure",
+          "status": "completed"
+        },
+        "fullUrl": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Procedure/14644221-face-20cf-1370-c46eeed5fc07"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "code": {
+            "coding": [
+              {
+                "code": "265764009",
+                "system": "http://snomed.info/sct",
+                "display": "Renal dialysis (procedure)"
+              }
+            ],
+            "text": "Renal dialysis (procedure)"
+          },
+          "meta": {
+            "lastUpdated": "2021-02-23T14:51:12.241367+00:00",
+            "versionId": "MTYxNDA5MTg3MjI0MTM2NzAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure"
+            ]
+          },
+          "subject": {
+            "reference": "Patient/43fe2aa6-d942-a50f-0944-3ddbfc3ce1f6"
+          },
+          "location": {
+            "reference": "Location/47759994-69f9-3b01-9d77-19566f9f528d",
+            "display": "Haverhill Community Based Outpatient Clinic (CBOC)"
+          },
+          "encounter": {
+            "reference": "Encounter/74ba4cd8-ed7b-6064-585e-57a1cf45cbb1"
+          },
+          "id": "521bd4df-96a6-3f24-0145-a4738847f96a",
+          "performedPeriod": {
+            "start": "2009-03-15T19:24:24+00:00",
+            "end": "2009-03-15T22:40:24+00:00"
+          },
+          "resourceType": "Procedure",
+          "status": "completed"
+        },
+        "fullUrl": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Procedure/521bd4df-96a6-3f24-0145-a4738847f96a"
+      }
+    ],
+    "total": 2,
+    "link": [
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Procedure/?_count=2",
+        "relation": "search"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Procedure/?_count=2&_page_token=Cjj3YDUWYP%2F%2F%2F%2F%2BABbwCDK4G1wD%2FAf%2F%2BZTk1NTY3ODAzODFiMWI3ZTg5YzcyNDA1ZjRmNzU1MDIAARACIRdZYDGqWfwzOQAAAACf6cqfSAFQAFoLCanG%2FU4Tl%2BjvEANg4faa9wc%3D",
+        "relation": "next"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Procedure/?_count=2",
+        "relation": "first"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Procedure/?_count=2",
+        "relation": "self"
+      }
+    ],
+    "id": "a7bca4215fbc6e68b01b0801",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

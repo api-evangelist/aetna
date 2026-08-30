@@ -1,13 +1,22 @@
-generated: '2026-07-11'
+generated: '2026-08-30'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.aetna.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Feb 20 23:59:59 2027 GMT
-  hsts: true
-  hsts_max_age: 31536000
+  cert_expires: Mar  6 23:59:59 2027 GMT
+  hsts: null
+- host: apif1.aetna.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Mar  6 23:59:59 2027 GMT
+  hsts: null
+- host: vteapif1.aetna.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Mar 11 23:59:59 2027 GMT
+  hsts: null
 domains:
 - domain: aetna.com
   dnssec: false

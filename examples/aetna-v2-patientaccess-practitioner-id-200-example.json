@@ -1,0 +1,31 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Practitioner_id",
+    "path": "/v2/patientaccess/Practitioner/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "identifier": [
+      {
+        "system": "http://clinfhir.com/fhir/NamingSystem/practitioner",
+        "value": "e2U2Cmslb4UBXvRca0jZZHxeS6W2"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2021-04-10T14:26:14.261+00:00",
+      "versionId": "1",
+      "source": "#barddsTkWAB5VstC"
+    },
+    "telecom": [
+      {
+        "system": "email",
+        "value": "daniel.muppidi@bcbsa.com"
+      }
+    ],
+    "id": "clinFhire2U2Cmslb4UBXvRca0jZZHxeS6W2",
+    "resourceType": "Practitioner"
+  }
+}

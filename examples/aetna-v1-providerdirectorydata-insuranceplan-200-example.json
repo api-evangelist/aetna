@@ -1,0 +1,336 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_InsurancePlan",
+    "path": "/v1/providerdirectorydata/InsurancePlan",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "use": "official",
+              "assigner": {
+                "display": "Aetna Medicare"
+              },
+              "type": {
+                "coding": [
+                  {
+                    "code": "XV",
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "display": "Health Plan Identifier"
+                  }
+                ]
+              },
+              "value": "H5521122"
+            },
+            {
+              "use": "official",
+              "assigner": {
+                "display": "Aetna Medicare"
+              },
+              "type": {
+                "coding": [
+                  {
+                    "code": "XV",
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "display": "Health Plan Identifier"
+                  }
+                ]
+              },
+              "value": "H5521263"
+            },
+            {
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "code": "XX",
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "display": "Organization Identifier"
+                  }
+                ]
+              },
+              "value": "I"
+            }
+          ],
+          "period": {
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          "language": "en",
+          "administeredBy": {
+            "display": "AetnaMedicare"
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "code": "mediadvppo",
+                  "system": "http://aetna.com/InsuranceProductType"
+                }
+              ],
+              "text": "Medicare Advantage PPO"
+            }
+          ],
+          "network": [
+            {
+              "reference": "Organization/plannet-network-f0f9ad3d9b83d94f7080386074dffe13",
+              "display": "Broad National with preferred pharmacies"
+            },
+            {
+              "reference": "Organization/plannet-network-85c2a896a433b4104b0de39ce06bda77",
+              "display": "National ANC Medicare PPO - Medicare Advantage AHP 12236"
+            },
+            {
+              "reference": "Organization/plannet-network-2346ae7d8cf4d8749a549cf255531a70",
+              "display": "myNEXUS HHC Natl MEPPO 12283"
+            },
+            {
+              "reference": "Organization/plannet-network-eee5e087511188b15c1418485963fbf9",
+              "display": "Central PA Medicare PPO 3399"
+            },
+            {
+              "reference": "Organization/plannet-network-d22427a4ccefd7edccfbcfa2ad6afc19",
+              "display": "Western PA Medicare PPO 3400"
+            },
+            {
+              "reference": "Organization/plannet-network-0e6d91af1cd85da5cb71beddece9e9e2",
+              "display": "SEPA Medicare PPO 3401"
+            },
+            {
+              "reference": "Organization/plannet-network-077aa75bbc91d501cae87815968182f2",
+              "display": "PA BrksCnty Medicare PPO 3402"
+            },
+            {
+              "reference": "Organization/plannet-network-2d51199967fa2eaddd4c44cb42b4e276",
+              "display": "NEPA Medicare PPO 3404"
+            },
+            {
+              "reference": "Organization/plannet-network-ea38bf5f73a8c66d3013a7827a09fda9",
+              "display": "Walk In Clinic - Medicare PPO"
+            },
+            {
+              "reference": "Organization/plannet-network-bb3a0ffe2328fd9a462aae509f1b8707",
+              "display": "Aetna Health Plans - DPPO"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2023-02-08T13:51:18.825873+00:00",
+            "versionId": "MTY3NTg2NDI3ODgyNTg3MzAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan"
+            ]
+          },
+          "contact": [
+            {
+              "name": {
+                "text": "AetnaMedicare"
+              },
+              "telecom": [
+                {
+                  "system": "phone",
+                  "use": "work",
+                  "rank": 1,
+                  "value": "1-833-570-6670"
+                }
+              ]
+            }
+          ],
+          "name": "Aetna Medicare Gold Plan (PPO)",
+          "alias": [
+            "Aetna Medicare Value (PPO)"
+          ],
+          "id": "plannet-insuranceplan-b905bacf4dbba560e758d719e97d003a",
+          "ownedBy": {
+            "display": "Aetna"
+          },
+          "resourceType": "InsurancePlan",
+          "status": "active"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan/plannet-insuranceplan-b905bacf4dbba560e758d719e97d003a"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "use": "official",
+              "assigner": {
+                "display": "Aetna Medicare"
+              },
+              "type": {
+                "coding": [
+                  {
+                    "code": "XX",
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "display": "Organization Identifier"
+                  }
+                ]
+              },
+              "value": "G"
+            }
+          ],
+          "period": {
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          "language": "en",
+          "administeredBy": {
+            "display": "AetnaRetireePlans"
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "code": "mediadvppo",
+                  "system": "http://aetna.com/InsuranceProductType"
+                }
+              ],
+              "text": "Medicare Advantage PPO"
+            }
+          ],
+          "network": [
+            {
+              "reference": "Organization/plannet-network-f0f9ad3d9b83d94f7080386074dffe13",
+              "display": "Broad National with preferred pharmacies"
+            },
+            {
+              "reference": "Organization/plannet-network-b0c122e633d57dda4ed5dae528bcc787",
+              "display": "Medicare PPO Group Plans 11558"
+            },
+            {
+              "reference": "Organization/plannet-network-85c2a896a433b4104b0de39ce06bda77",
+              "display": "National ANC Medicare PPO - Medicare Advantage AHP 12236"
+            },
+            {
+              "reference": "Organization/plannet-network-2346ae7d8cf4d8749a549cf255531a70",
+              "display": "myNEXUS HHC Natl MEPPO 12283"
+            },
+            {
+              "reference": "Organization/plannet-network-64511dfe1a9dad1715b1c102ac693f97",
+              "display": "AmericanSpecHlthNatlMEPPO 12744"
+            },
+            {
+              "reference": "Organization/plannet-network-c469c0d967656b617b513b277b194d5e",
+              "display": "Dallas TX Medicare PPO 3395"
+            },
+            {
+              "reference": "Organization/plannet-network-41515d34f21ab4a417e532fb9ad91b9b",
+              "display": "San Antonio TX Medicare PPO 3406"
+            },
+            {
+              "reference": "Organization/plannet-network-1df06d19fff9dc5d5d5a871ffbf9db22",
+              "display": "Austin TX Medicare PPO 3407"
+            },
+            {
+              "reference": "Organization/plannet-network-591ef6a733f42575543bb3b8ba7e80ab",
+              "display": "Houston TX Medicare PPO 3414"
+            },
+            {
+              "reference": "Organization/plannet-network-224973ff8ec174cd683bdeb67f995926",
+              "display": "Corpus Christi TX Medicare PPO 3510"
+            },
+            {
+              "reference": "Organization/plannet-network-de7835377a9459101c526968f5684e3f",
+              "display": "El Paso Medicare PPO 3516"
+            },
+            {
+              "reference": "Organization/plannet-network-ea38bf5f73a8c66d3013a7827a09fda9",
+              "display": "Walk In Clinic - Medicare PPO"
+            },
+            {
+              "reference": "Organization/plannet-network-3fc9811a23adda89508a49b7a3b86556",
+              "display": "Rio Grande Valley TX Medicare PPO 4069"
+            },
+            {
+              "reference": "Organization/plannet-network-d8ea6a48e90c55cba4a3d6681e551c92",
+              "display": "Hill Country TX Medicare PPO 4232"
+            },
+            {
+              "reference": "Organization/plannet-network-7fae8280ca667594ed9c223ef2754ba1",
+              "display": "Lubbock TX Medicare PPO 4243"
+            },
+            {
+              "reference": "Organization/plannet-network-56d4d90dfcf4029bd8d96188236f29e4",
+              "display": "E. TX Medicare PPO 4245"
+            },
+            {
+              "reference": "Organization/plannet-network-e0806de79227b8d11df2d7fa3d46a6d8",
+              "display": "Amarillo TX Medicare PPO 4247"
+            },
+            {
+              "reference": "Organization/plannet-network-bb3a0ffe2528fd9a462aae509f1b899b",
+              "display": "Aetna Health Plans - DPPO"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2023-02-17T08:48:45.812139+00:00",
+            "versionId": "MTY3NjYyMzcyNTgxMjEzOTAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan"
+            ]
+          },
+          "contact": [
+            {
+              "name": {
+                "text": "AetnaRetireePlans"
+              },
+              "telecom": [
+                {
+                  "system": "phone",
+                  "use": "work",
+                  "rank": 1,
+                  "value": "1-888-267-2637"
+                }
+              ]
+            }
+          ],
+          "name": "Aetna Medicare Plan (PPO)",
+          "id": "plannet-insuranceplan-55ea4421f0aac570fb46ec06adf08f61",
+          "ownedBy": {
+            "display": "Aetna"
+          },
+          "coverageArea": [
+            {
+              "display": "TX-Anderson; TX-Aransas; TX-Archer; TX-Armstrong; TX-Atascosa; TX-Austin; TX-Bailey; TX-Bandera; TX-Bastrop; TX-Baylor; TX-Bee; TX-Bexar; TX-Blanco; TX-Borden; TX-Bosque; TX-Brazoria; TX-Brazos; TX-Briscoe; TX-Brooks; TX-Burleson; TX-Burnet; TX-Caldwell; TX-Callahan; TX-Cameron; TX-Camp; TX-Carson; TX-Cass; TX-Castro; TX-Chambers; TX-Cherokee; TX-Clay; TX-Cochran; TX-Coke; TX-Coleman; TX-Collin; TX-Comal; TX-Concho; TX-Cooke; TX-Coryell; TX-Crosby; TX-Dallas; TX-Dawson; TX-Deaf Smith; TX-Delta; TX-Denton; TX-DeWitt; TX-Dickens; TX-Dimmit; TX-Donley; TX-Duval; TX-Ector; TX-El Paso; TX-Ellis; TX-Falls; TX-Fannin; TX-Fayette; TX-Fisher; TX-Floyd; TX-Fort Bend; TX-Franklin; TX-Freestone; TX-Galveston; TX-Garza; TX-Gillespie; TX-Glasscock; TX-Goliad; TX-Gonzales; TX-Gray; TX-Grayson; TX-Gregg; TX-Grimes; TX-Guadalupe; TX-Hale; TX-Hall; TX-Hamilton; TX-Hardin; TX-Harris; TX-Harrison; TX-Hartley; TX-Haskell; TX-Hays; TX-Henderson; TX-Hidalgo; TX-Hill; TX-Hockley; TX-Hood; TX-Hopkins; TX-Houston; TX-Hunt; TX-Hutchinson; TX-Irion; TX-Jack; TX-Jefferson; TX-Jim Hogg; TX-Jim Wells; TX-Johnson; TX-Jones; TX-Karnes; TX-Kaufman; TX-Kendall; TX-Kenedy; TX-Kent; TX-Kerr; TX-Kimble; TX-Kleberg; TX-Knox; TX-La Salle; TX-Lamb; TX-Lampasas; TX-Lavaca; TX-Lee; TX-Leon; TX-Liberty; TX-Limestone; TX-Llano; TX-Lubbock; TX-Lynn; TX-Madison; TX-Marion; TX-Martin; TX-Mason; TX-Matagorda; TX-McCulloch; TX-McLennan; TX-McMullen; TX-Medina; TX-Menard; TX-Midland; TX-Milam; TX-Mills; TX-Montague; TX-Montgomery; TX-Moore; TX-Morris; TX-Motley; TX-Nacogdoches; TX-Navarro; TX-Nolan; TX-Nueces; TX-Oldham; TX-Orange; TX-Palo Pinto; TX-Panola; TX-Parker; TX-Polk; TX-Potter; TX-Rains; TX-Randall; TX-Reagan; TX-Real; TX-Red River; TX-Refugio; TX-Roberts; TX-Robertson; TX-Rockwall; TX-Runnels; TX-Rusk; TX-San Jacinto; TX-San Patricio; TX-San Saba; TX-Schleicher; TX-Shackelford; TX-Shelby; TX-Smith; TX-Somervell; TX-Starr; TX-Sterling; TX-Stonewall; TX-Sutton; TX-Swisher; TX-Tarrant; TX-Taylor; TX-Terry; TX-Throckmorton; TX-Travis; TX-Trinity; TX-Tyler; TX-Upshur; TX-Van Zandt; TX-Walker; TX-Waller; TX-Washington; TX-Webb; TX-Wharton; TX-Wheeler; TX-Willacy; TX-Williamson; TX-Wilson; TX-Wise; TX-Wood; TX-Young; TX-Zavala"
+            }
+          ],
+          "resourceType": "InsurancePlan",
+          "status": "active"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/InsurancePlan/plannet-insuranceplan-55ea4421f0aac570fb46ec06adf08f61"
+      }
+    ],
+    "total": 4,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2",
+        "relation": "search"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2&_page_token=Cjj3YIGJFv%2F%2F%2F%2F%2BABcCQjgd%2BagD%2FAf%2F%2BY2YxNjhhNTcxYzI3ZDQwYTExNzRiMjBjOWZjOWVkM2EAARACIRdZYDGqWfwzOQAAAADpdn6fSAJQAFoLCbGK4RJnYbokEANgxMKh8gM%3D",
+        "relation": "next"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2",
+        "relation": "self"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

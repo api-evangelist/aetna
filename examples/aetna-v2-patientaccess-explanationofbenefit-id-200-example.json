@@ -1,0 +1,172 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_ExplanationOfBenefit_id",
+    "path": "/v2/patientaccess/ExplanationOfBenefit/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "insurance": [
+      {
+        "coverage": {
+          "reference": "Coverage/0000000000000100327"
+        },
+        "focal": true
+      }
+    ],
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/EOB/identifier/claimid/62",
+        "type": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBIdentifierType",
+              "code": "uc",
+              "display": "Unique Claim ID"
+            }
+          ]
+        },
+        "value": "EPAB10914D87A"
+      }
+    ],
+    "use": "claim",
+    "created": "2021-02-25",
+    "diagnosis": [
+      {
+        "sequence": 1,
+        "onAdmission": {
+          "coding": [
+            {
+              "system": "https://www.nubc.org/CodeSystem/PresentOnAdmissionIndicator",
+              "code": "u",
+              "display": "Unknown"
+            }
+          ]
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/ex-diagnosistype",
+                "code": "principal",
+                "display": "Principal Diagnosis"
+              }
+            ]
+          }
+        ],
+        "diagnosisCodeableConcept": {
+          "coding": [
+            {
+              "code": "K92.2"
+            }
+          ]
+        }
+      }
+    ],
+    "type": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+          "code": "institutional",
+          "display": "Institutional"
+        }
+      ]
+    },
+    "payee": {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/payeetype",
+            "code": "provider",
+            "display": "Provider"
+          }
+        ]
+      },
+      "party": {
+        "reference": "Organization/0000000000000100319"
+      }
+    },
+    "disposition": "Completed",
+    "total": [
+      {
+        "amount": {
+          "value": 7559.2
+        },
+        "category": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBPayerAdjudicationStatus",
+              "code": "other",
+              "display": "Other"
+            }
+          ]
+        }
+      }
+    ],
+    "supportingInfo": [
+      {
+        "sequence": 1,
+        "valueString": "35052599711",
+        "category": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+              "code": "patientaccountnumber"
+            }
+          ]
+        }
+      }
+    ],
+    "provider": {
+      "reference": "Organization/0000000000000100319"
+    },
+    "meta": {
+      "lastUpdated": "2021-02-25T12:04:59.714+00:00",
+      "profile": [
+        "http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Inpatient-Institutional"
+      ]
+    },
+    "patient": {
+      "reference": "Patient/0000000000000100267"
+    },
+    "insurer": {
+      "display": "Aetna or it's Affiliates (collectively, 'Aetna')"
+    },
+    "billablePeriod": {
+      "start": "2021-06-01",
+      "end": "3000-01-01"
+    },
+    "subType": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/ex-claimsubtype"
+        }
+      ],
+      "text": "Inpatient"
+    },
+    "id": "02d44f7e-2b88-11ec-a2d4-9d79182d0000",
+    "outcome": "complete",
+    "careTeam": [
+      {
+        "sequence": 1,
+        "role": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBClaimCareTeamRole",
+              "code": "attending",
+              "display": "Attending"
+            }
+          ]
+        },
+        "provider": {
+          "reference": "Practitioner/0000000000000100318"
+        },
+        "responsible": true
+      }
+    ],
+    "resourceType": "ExplanationOfBenefit",
+    "status": "active"
+  }
+}

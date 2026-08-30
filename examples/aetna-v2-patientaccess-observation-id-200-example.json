@@ -1,0 +1,70 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Observation_id",
+    "path": "/v2/patientaccess/Observation/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "result": [
+      {
+        "reference": "Observation/2222010000000181509"
+      }
+    ],
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/observation/identifier/memberdrid/50062",
+        "value": "42~MEDHKVFR+2020-03-08+1001-7"
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "1001-7",
+          "display": "DBG Ab [Presence] in Serum or Plasma from Donor"
+        }
+      ]
+    },
+    "performer": [
+      {
+        "display": "Practitioner/0000001234567890211"
+      }
+    ],
+    "effectiveDateTime": "2020-03-08",
+    "meta": {
+      "lastUpdated": "2020-03-08T11:18:15-05:00",
+      "versionId": "1",
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"
+      ]
+    },
+    "subject": {
+      "reference": "Patient/1234567890211000000"
+    },
+    "id": "222333444555111000888333",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+            "code": "LAB",
+            "display": "Laboratory"
+          }
+        ]
+      }
+    ],
+    "_issued": {
+      "extension": [
+        {
+          "valueCode": "not-asked",
+          "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason"
+        }
+      ]
+    },
+    "resourceType": "Observation",
+    "status": "unknown"
+  }
+}

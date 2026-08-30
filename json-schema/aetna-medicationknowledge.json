@@ -1,0 +1,12 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/json-schema/aetna-medicationknowledge.json",
+ "title": "Aetna FHIR R4 MedicationKnowledge",
+ "description": "See the appropriate Implementation Guide for proper documentation to use\n\nThis is the HL7 FHIR Release 4.0.1 MedicationKnowledge resource.\nFull Documentation is available at: http://hl7.org/fhir/medicationknowledge.html\n\nFor the DaVinci Payer Data Exchange (PDex) US Drug Formulary 1.0.0 FormularyDrug for MedicationKnowledge resource documentation is available at:\nhttp://hl7.org/fhir/us/davinci-drug-formulary/STU1/StructureDefinition-usdf-FormularyDrug.html\n\nFor the DaVinci Payer Data Exchange (PDex) US Drug Formulary 2.0.0 FormularyDrug for MedicationKnowledge resource documentation is available at:\nhttp://hl7.org/fhir/us/davinci-drug-formulary/STU2/StructureDefinition-usdf-FormularyDrug.html",
+ "x-provenance": {
+  "generated": "2026-08-30",
+  "method": "derived",
+  "source": "openapi/aetna-patient-access-api-openapi.yml"
+ },
+ "type": "object"
+}

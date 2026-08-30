@@ -1,0 +1,233 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_PractitionerRole",
+    "path": "/v1/providerdirectory/PractitionerRole",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS",
+                        "code": "newpt"
+                      }
+                    ]
+                  },
+                  "url": "acceptingPatients"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+            },
+            {
+              "valueReference": {
+                "display": "Mercy Care DCS CHP"
+              },
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference"
+            }
+          ],
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "code": "207L00000X",
+                  "display": "Anesthesiology Physician"
+                }
+              ],
+              "text": "Specialty"
+            }
+          ],
+          "availableTime": [
+            {
+              "availableEndTime": "17:00:00",
+              "daysOfWeek": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri"
+              ],
+              "availableStartTime": "08:00:00"
+            }
+          ],
+          "code": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/ProviderRoleCS",
+                  "code": "ph",
+                  "display": "Physician"
+                }
+              ],
+              "text": "Physician"
+            }
+          ],
+          "practitioner": {
+            "reference": "Practitioner/0000000000000150099",
+            "display": "CRAWLEY-BERTOLO, THERESA"
+          },
+          "meta": {
+            "lastUpdated": "2020-07-28T05:00:54.485+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole"
+            ]
+          },
+          "active": true,
+          "language": "en",
+          "location": [
+            {
+              "reference": "Location/0000000000000150110",
+              "display": "4800 N 22ND ST, Phoenix, AZ 85016"
+            }
+          ],
+          "telecom": [
+            {
+              "extension": [
+                {
+                  "valueReference": {
+                    "display": "4800 N 22ND ST, Phoenix, AZ 85016"
+                  },
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary"
+                }
+              ],
+              "system": "phone",
+              "use": "work",
+              "value": "(602) 955-1000"
+            }
+          ],
+          "id": "0000000000000150087",
+          "resourceType": "PractitionerRole"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole/0000000000000150087"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS",
+                        "code": "nopt"
+                      }
+                    ]
+                  },
+                  "url": "acceptingPatients"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+            },
+            {
+              "valueReference": {
+                "display": "Mercy Care DCS CHP"
+              },
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference"
+            }
+          ],
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "code": "207L00000X",
+                  "display": "Anesthesiology Physician"
+                }
+              ],
+              "text": "Specialty"
+            }
+          ],
+          "code": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/ProviderRoleCS",
+                  "code": "ph",
+                  "display": "Physician"
+                }
+              ],
+              "text": "Physician"
+            }
+          ],
+          "practitioner": {
+            "reference": "Practitioner/0000000000000150000",
+            "display": "FROMMERT, ALLAN"
+          },
+          "meta": {
+            "lastUpdated": "2020-07-28T05:00:54.485+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole"
+            ]
+          },
+          "active": true,
+          "language": "en",
+          "location": [
+            {
+              "reference": "Location/0000000000000150111",
+              "display": "4800 N 22ND ST, Phoenix, AZ 85016"
+            }
+          ],
+          "telecom": [
+            {
+              "extension": [
+                {
+                  "valueReference": {
+                    "display": "4800 N 22ND ST, Phoenix, AZ 85016"
+                  },
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary"
+                }
+              ],
+              "system": "phone",
+              "use": "work",
+              "value": "(602) 955-1000"
+            }
+          ],
+          "id": "0000000000000150088",
+          "resourceType": "PractitionerRole"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole/0000000000000150088"
+      }
+    ],
+    "total": 25,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=1",
+        "relation": "self"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=1",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=2",
+        "relation": "next"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=13",
+        "relation": "last"
+      }
+    ],
+    "id": "ca26f1e8-a7d4-11ed-b57d-9d7918350000",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

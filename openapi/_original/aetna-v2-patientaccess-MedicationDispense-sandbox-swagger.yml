@@ -1,0 +1,271 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qaehapi.aetna.com/fhirdemo/qapath1
+  type:
+  - production
+  - development
+- endpointUrl: https://qahapi.aetna.com/fhirdemo/qapath1
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_Patient_MedicationDispense_Read_AccessCode_Oauth:
+  - patient/MedicationDispense.read
+- FHIR_Patient_MedicationDispense_Read_AccessCode_Oauth:
+  - patient/MedicationDispense.*
+- FHIR_Patient_MedicationDispense_Read_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_Patient_MedicationDispense_Read_AccessCode_Oauth:
+  - patient/*.*
+basePath: "/v2"
+paths:
+  "/patientaccess/MedicationDispense":
+    get:
+      summary: This operation retrieves all MedicationDispense records associated
+        with an Authenticated User based on the search criteria
+      description: Retrieves all MedicationDispense records associated with an Authenticated
+        User based on the search criteria
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Bundle"
+          examples:
+            application/json:
+              entry:
+              - search:
+                  mode: match
+                resource:
+                  extension:
+                  - url: http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/DispenseRefill
+                    valueQuantity:
+                      value: 1
+                  performer:
+                  - actor:
+                      reference: Practitioner/3a04f8b63dc01272aaa44138fca457e
+                  quantity:
+                    value: 60
+                  substitution:
+                    wasSubstituted: false
+                  whenPrepared: '2020-03-10'
+                  subject:
+                    reference: Patient/1ad04f8b63dc90172bda33138fca7f
+                  daysSupply:
+                    value: 30
+                  whenHandedOver: '2020-03-10'
+                  medicationCodeableConcept:
+                    coding:
+                    - system: http://hl7.org/fhir/sid/ndc
+                      code: 54458-872-10
+                  type:
+                    coding:
+                    - system: http://terminology.hl7.org/CodeSystem/v3-ActCode
+                      code: RF
+                      display: Refill
+                  dosageInstruction:
+                  - sequence: 1
+                    route:
+                      coding:
+                      - system: http://snomed.info/sct
+                        code: '394899003'
+                        display: oral administration of treatment
+                    timing:
+                      repeat:
+                        period: 30
+                        periodUnit: d
+                        frequency: 1
+                    doseAndRate:
+                    - doseQuantity:
+                        unit: mg
+                        system: http://unitsofmeasure.org
+                        code: mg
+                        value: 10
+                  meta:
+                    lastUpdated: '2020-07-09T15:26:23.217+00:00'
+                    versionId: '1'
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/pdex-medicationdispense
+                  location:
+                    reference: Location/39ac04f8d2adc1702bda22138fca123e
+                  id: 3dc04f8b63dc14172bda44138fca123e
+                  category:
+                    coding:
+                    - system: http://terminology.hl7.org/fhir/CodeSystem/medicationdispense-category
+                      code: outpatient
+                      display: Outpatient
+                  resourceType: MedicationDispense
+                  status: completed
+                fullUrl: http://apif1.aetna.com/v2/fhir/patientaccess/MedicationDispense/3dc04f8b63dc14172bda44138fca123e
+              total: 1
+              meta:
+                lastUpdated: '2021-07-29T20:42:17.992+00:00'
+              link:
+              - url: http://apif1.aetna.com/v2/fhir/patientaccess/MedicationDispense?patient=1ad04f8b63dc90172bda33138fca7f
+                relation: self
+              - url: http://apif1.aetna.com/v2/fhir/patientaccess/MedicationDispense?patient=1ad04f8b63dc90172bda33138fca7f
+                relation: first
+              id: fa82d20-f3180-4f945f5d0100
+              type: searchset
+              resourceType: Bundle
+          description: This response returns a list of patient's MedicationDispense
+            records.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      parameters:
+      - in: query
+        name: patient
+        description: |-
+          This is the FHIR Logical Id of a Patient (Patient.id)
+
+          Ex. GET [base]/MedicationDispense?patient=zbdf8e23-7c16-5ad4-s310
+        type: string
+        required: false
+      - in: query
+        name: status
+        description: Returns dispenses with a specified dispense status
+        type: string
+        required: false
+      - in: query
+        name: _revinclude
+        description: |-
+          Adds support for searching for all the Provenance records for this resource using the _revinclude search parameter:
+
+          GET [base]/[MedicationDispense]?_revinclude=Provenance:target
+        type: string
+        required: false
+      - in: query
+        name: _count
+        description: Used to specify the number of records returned per page
+        type: number
+        required: false
+      - in: query
+        name: _page_token
+        description: |-
+          This value will be provided by the Server. Used to retrieve the next page of results
+
+          If a search returns more resources than fit on one page, the response includes a pagination URL in the Bundle.link field. The value with Bundle.link.relation = next indicates that you can use the corresponding Bundle.link.url to retrieve the next page. ex. [base]/MedicationDispense?_count=10&_page_token=Cjj3YQP%2Bdf%2F%2F%2F%2F%2BABchXMXghfgD%2FAf%2F%2BZTA5NWM4YmI0YWNlYWQ4Yjc5NDhjYTk2M2RhMDA5N2QAARAKIeRmIPX4MlS1OQAAAACKAfyeSAFQAFoLCfRXKWB76f3NEANgg8Tc2gc%3D
+        type: string
+        required: false
+host: vteapif1.aetna.com/fhirdemo
+produces:
+- application/json
+externalDocs:
+  description: HTTPS Common Error Codes
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_Patient_MedicationDispense_Read_AccessCode_Oauth:
+    tokenUrl: ''
+    authorizationUrl: ''
+    description: |-
+      {
+      "BuildEieHeader" : "Header 3.2",
+      "SecurityTemplate" : "FHIRPatientMedicationDispenseRead",
+      "Backend" : "IIB",
+      "Errorhandlingpolicy": "Transparent"
+      "Consumer":"External",
+      "Mutual Auth between Consumer and APIC" : "Not Required"
+      }
+    scopes:
+      patient/MedicationDispense.*: ''
+      patient/*.read: ''
+      patient/MedicationDispense.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+definitions:
+  Entry:
+    description: An entry in a bundle resource - will contain a resource(s) returned
+      in the bundle
+    type: object
+    properties:
+      resource:
+        "$ref": "#/definitions/MedicationDispense"
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          "$ref": "#/definitions/Entry"
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+  MedicationDispense:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 MedicationDispense resource.
+      Full Documentation is available at: http://hl7.org/fhir/medicationdispense.html
+
+      The Da Vinci Payer Data Exchange 1.0.0 MedicationDispense resource documentation is located at:
+      http://hl7.org/fhir/us/davinci-pdex/STU1/StructureDefinition-pdex-medicationdispense.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: interoperabilitydevelopersupport@aetna.com
+  description: |-
+    The Aetna Patient Access API is an enterprise API that implements the HL7 FHIR standard to meet the CMS requirements for Interoperability. The API provides the ability for Aetna members to access their Clinical data using Third-party client applications supporting those standards. The Patient Access API supports the FHIR MedicationDispense resource that conforms to the DaVinci Payer Data Exchange Implementation Guide STU1 Release v1.0.0 and supports PDEX MedicationDispense profile. The API follows the User token security model.
+
+    The MedicationDispense SEARCH API supports the following operations:
+
+    1. Launch MedicationDispense with no parameters by calling GET [base]/MedicationDispense which will request all MedicationDispenses associated with an Authenticated user. For example, GET [base]/MedicationDispense
+
+    2. Launch MedicationDispense with patient by calling GET [base]/MedicationDispense?patient=reference which will request all MedicationDispenses associated with an Authenticated user. For example, GET [base]/MedicationDispense?patient=zbdf8e23-7c16-5ad4-s310. Search with no parameters and search with patient perform the same search functionality.
+
+    If a search returns more resources than fit on one page, the response includes a pagination URL in the Bundle.link field. The value with Bundle.link.relation = next indicates that you can use the corresponding Bundle.link.url to retrieve the next page. ex. [base]/MedicationDispense?_count=10&_page_token=Cjj3YQP%2Bdf%2F%2F%2F%2F%2BABchXMXghfgD%2FAf%2F%2BZTA5NWM4YmI0YWNlYWQ4Yjc5NDhjYTk2M2RhMDA5N2QAARAKIeRmIPX4MlS1OQAAAACKAfyeSAFQAFoLCfRXKWB76f3NEANgg8Tc2gc%3D
+
+
+    _revinclude=Provenance:target is supported
+     - GET [base]/MedicationDispense?_revinclude=Provenance:target
+  x-ibm-name: v2patientaccessmedicationdispense
+  title: "/v2/patientaccess/MedicationDispense"
+  version: 2.0.0

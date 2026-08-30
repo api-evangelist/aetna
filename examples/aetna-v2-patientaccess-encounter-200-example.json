@@ -1,0 +1,142 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Encounter",
+    "path": "/v2/patientaccess/Encounter",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "period": {
+            "start": "2020-06-12T15:33:20.491Z"
+          },
+          "meta": {
+            "lastUpdated": "2020-07-20T15:33:20.655+00:00",
+            "versionId": "1",
+            "source": "#efLbbnTvaQIcuScI"
+          },
+          "subject": {
+            "reference": "Patient/1412434"
+          },
+          "diagnosis": [
+            {
+              "condition": {
+                "reference": "Condition/1412443"
+              }
+            },
+            {
+              "condition": {
+                "reference": "Condition/1412436"
+              }
+            },
+            {
+              "condition": {
+                "reference": "Condition/1412444"
+              }
+            }
+          ],
+          "id": "0000000000000033348",
+          "text": {
+            "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Jun 12th 2020 for sore throat</div>",
+            "status": "generated"
+          },
+          "type": [
+            {
+              "text": "GP"
+            }
+          ],
+          "participant": [
+            {
+              "individual": {
+                "reference": "Practitioner/30166",
+                "display": "Dr Annette Jones"
+              }
+            }
+          ],
+          "resourceType": "Encounter",
+          "status": "finished"
+        },
+        "fullUrl": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Encounter/0000000000000033348"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "period": {
+            "start": "2020-06-23T15:33:20.491Z"
+          },
+          "meta": {
+            "lastUpdated": "2020-07-20T15:33:20.655+00:00",
+            "versionId": "1",
+            "source": "#efLbbnTvaQIcuScI"
+          },
+          "subject": {
+            "reference": "Patient/1412434"
+          },
+          "diagnosis": [
+            {
+              "condition": {
+                "reference": "Condition/1412442"
+              }
+            },
+            {
+              "condition": {
+                "reference": "Condition/1412437"
+              }
+            },
+            {
+              "condition": {
+                "reference": "Condition/1412440"
+              }
+            }
+          ],
+          "id": "0000000000000033349",
+          "text": {
+            "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Jun 23rd 2020 for headache</div>",
+            "status": "generated"
+          },
+          "type": [
+            {
+              "text": "GP"
+            }
+          ],
+          "participant": [
+            {
+              "individual": {
+                "reference": "Practitioner/30164",
+                "display": "Dr John Doe"
+              }
+            }
+          ],
+          "resourceType": "Encounter",
+          "status": "finished"
+        },
+        "fullUrl": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Encounter/0000000000000033349"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2021-04-09T16:07:18.543+00:00"
+    },
+    "link": [
+      {
+        "url": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Encounter?_count=3",
+        "relation": "self"
+      },
+      {
+        "url": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Encounter?_count=3&_page_token=Cjj3YQP%2Bdf%2F%2F%2F%2F%2BABchXMXghfgD%2FAf%2F%2BZTA5NWM4YmI0YWNlYWQ4Yjc5NDhjYTk2M2RhMDA5N2QAARAKIeRmIPX4MlS1OQAAAACKAfyeSAFQAFoLCfRXKWB76f3NEANgg8Tc2gc%3D",
+        "relation": "next"
+      }
+    ],
+    "id": "36c7053f-43f9-46fa-a6c1-22d00ed23b67",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

@@ -1,0 +1,352 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qahapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qaehapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.*
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.*
+- FHIR_Application_Oauth:
+  - NonPII
+- FHIR_Application_Oauth:
+  - Public
+basePath: "/v1/providerdirectory"
+paths:
+  "/Practitioner/{id}":
+    get:
+      summary: Retrieves details of individual Practitioner(s) by Logical ID.
+      description: Retrieve Practitioner resource based on Identifier.
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Practitioner"
+          examples:
+            application/json:
+              identifier:
+              - system: http://hl7.org/fhir/sid/us-npi
+                use: official
+                id: NPI
+                type:
+                  coding:
+                  - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                    code: NPI
+                    display: National provider identifier
+                  text: NPI
+                value: '1962505826'
+              qualification:
+              - extension:
+                - extension:
+                  - valueCode: active
+                    url: status
+                  - valueCodeableConcept:
+                      coding:
+                      - system: https://www.usps.com/
+                        code: AZ
+                    url: whereValid
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/practitioner-qualification
+                code:
+                  coding:
+                  - system: http://nucc.org/provider-taxonomy
+                    code: 207RI0200X
+                    display: Infectious Disease Physician
+                  text: Specialty
+              address:
+              - country: US
+                city: Phoenix
+                line:
+                - 3330 N 2nd St Ste 300
+                district: Maricopa
+                postalCode: '85012'
+                text: 3330 N 2nd St Ste 300, Phoenix, AZ 85012
+                state: AZ
+              - country: US
+                city: Phoenix
+                line:
+                - 500 W Thomas Rd Ste 900
+                district: Maricopa
+                postalCode: '85013'
+                text: 500 W Thomas Rd Ste 900, Phoenix, AZ 85013
+                state: AZ
+              - country: US
+                city: PHOENIX
+                line:
+                - 500 W Thomas Rd Ste 950
+                district: Maricopa
+                postalCode: '85013'
+                text: 500 W Thomas Rd Ste 950, PHOENIX, AZ 85013
+                state: AZ
+              gender: male
+              meta:
+                lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                versionId: 4.0.1
+                profile:
+                - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner
+              name:
+              - given:
+                - JONES
+                use: official
+                text: KUMI, JONES
+                family: KUMI
+              active: true
+              language: en
+              id: '0000000000000010942'
+              communication:
+              - coding:
+                - system: urn:ietf:bcp:47
+                  code: en
+                  display: English
+                extension:
+                - valueCodeableConcept:
+                    coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/LanguageProficiencyCS
+                      code: '30'
+                      display: General professional proficiency
+                    text: General professional proficiency
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/communication-proficiency
+                text: English
+              - coding:
+                - system: urn:ietf:bcp:47
+                  code: zxx
+                  display: Not Applicable
+                extension:
+                - valueCodeableConcept:
+                    coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/LanguageProficiencyCS
+                      code: '30'
+                      display: General professional proficiency
+                    text: General professional proficiency
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/communication-proficiency
+                text: Interpreter Service
+              resourceType: Practitioner
+          description: This response returns a Practitioner resource based on the
+            unique logical ID passed.
+        '203':
+          schema:
+            "$ref": "#/definitions/Practitioner"
+          examples:
+            application/json:
+              identifier:
+              - system: http://hl7.org/fhir/sid/us-npi
+                use: official
+                id: NPI
+                type:
+                  coding:
+                  - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                    code: NPI
+                    display: National provider identifier
+                  text: NPI
+                value: '1962505826'
+              qualification:
+              - extension:
+                - extension:
+                  - valueCode: active
+                    url: status
+                  - valueCodeableConcept:
+                      coding:
+                      - system: https://www.usps.com/
+                        code: AZ
+                    url: whereValid
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/practitioner-qualification
+                code:
+                  coding:
+                  - system: http://nucc.org/provider-taxonomy
+                    code: 207RI0200X
+                    display: Infectious Disease Physician
+                  text: Specialty
+              address:
+              - country: US
+                city: Phoenix
+                line:
+                - 3330 N 2nd St Ste 300
+                district: Maricopa
+                postalCode: '85012'
+                text: 3330 N 2nd St Ste 300, Phoenix, AZ 85012
+                state: AZ
+              - country: US
+                city: Phoenix
+                line:
+                - 500 W Thomas Rd Ste 900
+                district: Maricopa
+                postalCode: '85013'
+                text: 500 W Thomas Rd Ste 900, Phoenix, AZ 85013
+                state: AZ
+              - country: US
+                city: PHOENIX
+                line:
+                - 500 W Thomas Rd Ste 950
+                district: Maricopa
+                postalCode: '85013'
+                text: 500 W Thomas Rd Ste 950, PHOENIX, AZ 85013
+                state: AZ
+              gender: male
+              meta:
+                lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                versionId: 4.0.1
+                profile:
+                - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner
+              name:
+              - given:
+                - JONES
+                use: official
+                text: KUMI, JONES
+                family: KUMI
+              active: true
+              language: en
+              id: '0000000000000010942'
+              resourceType: Practitioner
+          description: This response returns a Practitioner resource may be incomplete.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided
+        '404':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: not-found
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_NO_MATCH
+                    display: No Resource found
+              id: 687401f85fd3fefb43182c22
+              resourceType: OperationOutcome
+          description: The specified id doesn’t identify an existing Resource.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      parameters:
+      - in: path
+        name: id
+        description: This is the logical ID for a Practitioner
+        type: string
+        required: true
+host: apif1.aetna.com/fhir
+produces:
+- application/json
+externalDocs:
+  description: HTTP Errors
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: "/Token"
+    authorizationUrl: "/Authorize"
+    description: |-
+      {
+      "BuildEieHeader" : "Header v3.1",
+      "SecurityTemplate" : "FHIRProviderDirectory",
+      "Backend" : "IIB",
+      "Errorhandlingpolicy": "Transparent",
+      "Consumer":"External",
+      "Mutual Auth between Consumer and APIC" : "Not Required"
+      }
+    scopes:
+      patient/Patient.*: ''
+      patient/Patient.read: ''
+      patient/*.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: "/Token"
+    description: |-
+      {
+      "BuildEieHeader" : "Header v3.1",
+      "SecurityTemplate" : "FHIRProviderDirectory",
+      "Backend" : "IIB",
+      "Errorhandlingpolicy": "Transparent",
+      "Consumer":"External",
+      "Mutual Auth between Consumer and APIC" : "Not Required"
+      }
+    scopes:
+      NonPII: ''
+      Public: ''
+    type: oauth2
+    flow: application
+definitions:
+  Practitioner:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Practitioner resource.
+      Full Documentation is available at: http://hl7.org/fhir/practitioner.html
+
+      US Core 3.1.1 Documentation is available at:
+      http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-practitioner.html
+
+      For the CARIN-BB 1.0.0 Practitioner resource full documentation is available at:
+      http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Practitioner.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 Practitioner resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Practitioner.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 Practitioner resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Practitioner.html
+    type: object
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: InteroperabilityDeveloperSupport@aetna.com
+    url: http://
+  description: This interface will retrieve the Practitioner resource from a logical
+    Id.
+  x-ibm-name: v1providerdirectorypractitionerid
+  termsOfService: "\r\n"
+  title: "/v1/providerdirectory/Practitioner/{id}"
+  version: 1.0.0

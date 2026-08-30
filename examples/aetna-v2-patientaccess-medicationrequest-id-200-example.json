@@ -1,0 +1,50 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_MedicationRequest_id",
+    "path": "/v2/patientaccess/MedicationRequest/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "requester": {
+      "display": "External Data Provider: 4434567890"
+    },
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/diagnosticreport/identifier/memberdrid/50069",
+        "value": "42~MEDHKVFR+unknown+order+91348+2020-03-08+ExternalDataProvider4434567890"
+      }
+    ],
+    "authoredOn": "2020-03-08",
+    "dosageInstruction": [
+      {
+        "text": "Data Absent"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2020-03-08T11:18:15-05:00",
+      "versionId": "1",
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-medicationrequest"
+      ]
+    },
+    "subject": {
+      "reference": "Patient/1234567890211000000"
+    },
+    "id": "222333444555111000888333",
+    "medicationCodeableConcept": {
+      "coding": [
+        {
+          "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+          "code": "91348",
+          "display": "Hydrogen Peroxide 300 MG/ML Topical Solution"
+        }
+      ]
+    },
+    "intent": "order",
+    "resourceType": "MedicationRequest",
+    "status": "unknown"
+  }
+}

@@ -1,3 +1,18 @@
+> **NOT A PROVIDER CONTRACT — DO NOT PUBLISH, SCORE OR GENERATE CLIENTS FROM THIS FILE.**
+>
+> Reviewed 2026-08-30 by the API Evangelist enrichment pipeline. **Aetna publishes no GraphQL API.**
+> This document is a *conceptual model* written on Aetna's behalf in an earlier round; it says so
+> itself ("Conceptual — derived from..."), and it cites `https://developer.aetna.com/` as a source,
+> a hostname that does not resolve (NXDOMAIN, checked 2026-08-30).
+>
+> Aetna's real machine-readable contracts were harvested on 2026-08-30 and are in `openapi/` (three
+> assembled OpenAPI 3.0.3 documents), `openapi/_original/` (95 verbatim Swagger 2.0 documents Aetna
+> serves at https://developerportal.aetna.com/managedcontent/yaml/) and `fhir/` (two live FHIR
+> CapabilityStatements). Use those. The `type: GraphQL` pointer that used to sit in `apis.yml` has
+> been removed, because it asserted an API Aetna does not ship.
+>
+> Retained only as a record of what was written; it carries no provenance from Aetna.
+
 # Aetna GraphQL Schema
 
 ## Overview

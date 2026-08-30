@@ -1,0 +1,78 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf (Aetna's dated release
+  history, Production and Sandbox sections, entries from 2021-01-07 to 2026-08-19),
+  https://developerportal.aetna.com/assets/Data/Fhir.json (per-operation version + IG labels),
+  https://apif1.aetna.com/fhir/v2/patientaccess/metadata (CapabilityStatement date 2024-04-11),
+  https://apif1.aetna.com/fhir/v1/providerdirectory/metadata (CapabilityStatement date 2023-06-29),
+  openapi/_original/*.yml
+versioning:
+  scheme: uri-path
+  current:
+    patient_access: v2 (operations at 2.0.0 / 2.0.1); v3 exists in the catalog but every v3 spec file returned HTTP 403 to this run
+    provider_directory: v1 (/v1/providerdirectory and /v1/providerdirectorydata, both 1.0.0)
+    prior_authorization: v1 (/priorauthorizationsupport/v1, /clinicaldataexchange/v1, /coveragerequirementsdiscovery/v1)
+    provider_access: v1 (/provideraccess/v1)
+    realtime_pharmacy_benefit_check: v1
+  note: >-
+    Aetna versions in two places at once: the URI path (/v2, /v3) and a per-operation semantic version
+    it publishes in its own API catalog (2.0.0, 2.0.1, 3.0.0). It also versions by implementation
+    guide - the same resource can be US Core 3.1.1 on one path and 5.0.1 or 6.0.1 on another. An
+    integrator needs all three coordinates to know what they are calling.
+  docs: https://developerportal.aetna.com/
+deprecation:
+  policy_url: https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf
+  sunset_header: false
+  deprecation_header: false
+  mechanism: dated notices in the Previous Releases PDF, plus email to registered developers
+  observed_deprecations:
+    - date: '2023-09-29'
+      change: Version 1 APIs in the Sandbox environment decommissioned.
+    - date: '2022-05-07'
+      change: >-
+        Search parameter patient.identifier removed from Patient Access; _id and service-date
+        introduced in its place.
+    - date: '2024-02-02'
+      change: >-
+        "-apigw" suffix removed from API and Product display names (cosmetic; Aetna states no
+        functional impact).
+  note: >-
+    There is a real, dated, human-readable deprecation record going back to 2021 - which is more than
+    most payers publish - but it is a PDF, and it is the only channel. No RFC 8594 Sunset or
+    Deprecation response header appears in any of the 95 harvested specs, and no operation in any spec
+    carries `deprecated: true`. A machine cannot learn from the API that something is going away.
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No SLA or uptime commitment is published on the developer portal. One timing commitment does exist
+    in the release history: "Timeout limit for Org Affiliation API set to 120 secs" (2021-02-09).
+status_page:
+  url: null
+  mechanism: >-
+    Aetna publishes no status page. status.aetna.com does not resolve; aetna.statuspage.io redirects to
+    Atlassian's marketing site (i.e. the subdomain is unclaimed, not a page). Incidents are announced in
+    the same Previous Releases PDF after the fact - for example 2022-07-18, "requests to Aetna's
+    Medicare Provider Directory APIs to fail. The issue is resolved". The developer portal renders an
+    outage banner from its own /assets/Data/ content, but there is no public, machine-readable status feed.
+  probes:
+    - url: https://status.aetna.com
+      status: 'DNS: NXDOMAIN'
+    - url: https://aetna.statuspage.io
+      status: 200
+      note: redirects to https://www.atlassian.com/software/statuspage - an unclaimed subdomain, not Aetna's status page
+support:
+  developer_support_email: InteroperabilityDeveloperSupport@aetna.com
+  production_access_email: AetnaInteroperabilityProductionAccess@AETNA.com
+  note: Both addresses are Aetna's own, read from the info.contact block of its published specs and from the release history.
+roadmap:
+  url: https://developerportal.aetna.com/managedcontent/pdfs/Upcoming_Releases.pdf
+  status: >-
+    Aetna does publish a forward-looking "Upcoming Releases" PDF and links it from the portal bundle,
+    but it returned HTTP 403 (Akamai edge denial) to every attempt from this run's IP, so its contents
+    are not recorded here. The document's existence is evidenced by the portal's own main.js, which
+    references managedcontent/pdfs/Upcoming_Releases.pdf alongside Previous_Releases.pdf.
+  probed: '2026-08-30'
+  http_status: 403

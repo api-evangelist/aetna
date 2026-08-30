@@ -3,103 +3,75 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Aetna
 providerId: aetna
+generated: '2026-08-30'
+method: searched
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-08-30'
+source: >-
+  openapi/aetna-provider-directory-api-openapi.yml (429 responses declared on 11 operations),
+  https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/ (the error reference
+  Aetna links from the externalDocs block of every published Swagger),
+  https://developerportal.aetna.com/assets/Data/commonresponse.json
+provenance_note: >-
+  REPLACES a 2026-05-04 bulk-sweep scaffold. That file asserted free/professional/enterprise tiers at
+  10/100/1000 requests per minute with X-RateLimit-* headers - none of which Aetna publishes, and none
+  of which appears in any of the 95 Swagger documents Aetna serves. The scaffold's own description
+  said "Defaults are scaffold values to be replaced with published provider limits." They are replaced
+  here with what Aetna actually publishes, which is a 429 and no numbers.
 tags:
   - Health Insurance
   - Healthcare
   - FHIR
-  - Patient Access
-  - Provider Directory
   - Rate Limiting
-  - Quotas
   - Throttling
-description: Machine-readable rate limit definitions for the Aetna API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+description: >-
+  Aetna publishes no numeric rate limit for any of its Interoperability APIs. It does publish the
+  failure mode: a 429 with a FHIR OperationOutcome body, policed by source IP, declared on 11 of the
+  99 operations captured in this repo. No RateLimit-*, X-RateLimit-* or Retry-After header is
+  declared anywhere, so a client cannot see how close it is to the limit and cannot be told when to
+  retry - it can only observe the 429 after the fact.
+limit_count: 0
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
 responseCodes:
   throttled: 429
   quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Aetna Patient Access FHIR API
-      - Aetna Provider Directory FHIR API
-      - Aetna Drug Formulary FHIR API
-      - Aetna Provider EDI API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Aetna Patient Access FHIR API
-      - Aetna Provider Directory FHIR API
-      - Aetna Drug Formulary FHIR API
-      - Aetna Provider EDI API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Aetna Patient Access FHIR API
-      - Aetna Provider Directory FHIR API
-      - Aetna Drug Formulary FHIR API
-      - Aetna Provider EDI API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Aetna Patient Access FHIR API
-      - Aetna Provider Directory FHIR API
-      - Aetna Drug Formulary FHIR API
-      - Aetna Provider EDI API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Aetna Patient Access FHIR API
-      - Aetna Provider Directory FHIR API
-      - Aetna Drug Formulary FHIR API
-      - Aetna Provider EDI API
+  serviceUnavailable: 500
+limits: []
+signals:
+  - status: 429
+    scope: source IP
+    declared_on: 11 operations in the /v1/providerdirectorydata family
+    body:
+      resourceType: OperationOutcome
+      severity: error
+      code: transient
+      display: We have detected excessive traffic coming from this IP.
+      text: Too Many Request
+    provider_wording: >-
+      "Detected excessive traffic coming from this IP. Please reach out if you think this is incorrect."
+    reference_wording: >-
+      Aetna's linked error reference gives the cause of a 429 as "The rate limit has been exceeded for
+      the plan or operation being used."
+timeouts:
+  - operation: Organization Affiliation
+    limit_seconds: 120
+    source: Previous Releases 2021-02-09 - "Timeout limit for Org Affiliation API set to 120 secs."
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Undocumented ceiling
+    description: >-
+      No per-key, per-account or per-endpoint numeric limit is published. Any number a client assumes
+      is a guess.
+  - name: IP-based policing
+    description: >-
+      Aetna's own 429 message names the source IP, not the API key or application, as the throttled
+      unit. Callers behind shared egress should expect to contend with each other.
+  - name: Client-chosen backoff
+    description: >-
+      With no Retry-After, a client must choose its own exponential backoff with jitter. Aetna
+      publishes no guidance on retry timing.
 maintainers: []

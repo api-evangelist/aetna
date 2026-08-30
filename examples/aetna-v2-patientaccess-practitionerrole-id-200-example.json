@@ -1,0 +1,123 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_PractitionerRole_id",
+    "path": "/v2/patientaccess/PractitionerRole/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/practitionerrole/identifier/locpin/30018",
+        "type": {
+          "coding": [
+            {
+              "code": "PRN"
+            }
+          ]
+        },
+        "value": "S0108268-4476566-1711612+0004069640"
+      }
+    ],
+    "specialty": [
+      {
+        "coding": [
+          {
+            "system": "https://sources.aetna.com/practitionerrole/specialty/66",
+            "display": "Physician Assistant"
+          }
+        ]
+      },
+      {
+        "coding": [
+          {
+            "system": "https://sources.aetna.com/practitionerrole/specialty/66",
+            "code": "90380",
+            "display": "Physician Assistant (Adult)"
+          }
+        ]
+      }
+    ],
+    "contained": [
+      {
+        "identifier": [
+          {
+            "system": "https://sources.aetna.com/Location/identifier/locationID/3002",
+            "type": {
+              "coding": [
+                {
+                  "code": "Location ID"
+                }
+              ]
+            },
+            "value": "S0108268-4476566-1711612"
+          }
+        ],
+        "address": {
+          "country": "UNITED STATES OF AMERICA",
+          "city": "Cary",
+          "use": "work",
+          "line": [
+            "580 New Waverly Place",
+            "Suite 120"
+          ],
+          "district": "WAKE",
+          "postalCode": "27518-7406",
+          "state": "NC"
+        },
+        "name": "580 NEW WAVERLY PL STE 120-580 NEW WAVERLY PL STE 120",
+        "telecom": [
+          {
+            "system": "phone",
+            "use": "work",
+            "value": "1+9198588360"
+          }
+        ],
+        "id": "S0108268-4476566-1711612",
+        "position": {
+          "latitude": 35.739301,
+          "longitude": -78.775904
+        },
+        "resourceType": "Location"
+      }
+    ],
+    "code": [
+      {
+        "coding": [
+          {
+            "system": "http://nucc.org/provider-taxonomy",
+            "code": "363A00000X"
+          }
+        ]
+      }
+    ],
+    "practitioner": {
+      "reference": "Practitioner/0000000000000020807"
+    },
+    "meta": {
+      "lastUpdated": "2019-10-01T09:53:56.307-04:00",
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole"
+      ]
+    },
+    "organization": {
+      "reference": "Organization/0000000000000045560"
+    },
+    "location": [
+      {
+        "reference": "#S0108268-4476566-1711612"
+      }
+    ],
+    "telecom": [
+      {
+        "system": "phone",
+        "use": "work",
+        "value": "1+9198588360"
+      }
+    ],
+    "id": "0000000000000045431",
+    "resourceType": "PractitionerRole"
+  }
+}

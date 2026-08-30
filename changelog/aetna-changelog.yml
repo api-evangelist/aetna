@@ -1,0 +1,181 @@
+generated: '2026-08-30'
+method: searched
+source: https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf
+source_note: >-
+  Aetna's own "Previous Releases" document, split into a Production section and a Sandbox section.
+  Retrieved 2026-08-30 (HTTP 200) and read as text. It is a PDF, not a feed - there is no RSS, no
+  JSON, no HTML changelog page, and no per-release permalink. Entries below are the recent window,
+  transcribed faithfully; the document itself runs back to 2021-01-07.
+format: pdf
+feed: null
+scheme: dated entries, no release version numbers; per-operation semantic versions live in the API catalog
+current_versions:
+  patient_access: US Core 6.1.0 in Production since 2025-09-29 (upgraded from 3.1.1)
+  provider_directory: Da Vinci PDex Plan Net IG 1.2.0 since 2026-06-23
+  provider_access: Da Vinci PDex IG STU 2.1.0 since 2026-05-05
+entries:
+  - date: '2026-08-19'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - New "ECS Provider" role enables access to Provider Access APIs for organizations contracted with Aetna as ECS Providers.
+  - date: '2026-06-25'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - >-
+        IAL2 (NIST SP 800-63A Identity Assurance Level 2) authentication added as an optional
+        alternative to the existing well-known username/password member authentication, using CLEAR
+        and ID.me as Credential Service Providers.
+      - Existing applications are unaffected; IAL2 applications cannot use the Sandbox environment.
+      - Developer Portal UI refreshed around application registration and management.
+  - date: '2026-06-23'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - >-
+        Provider Directory APIs (Medicare and Commercial) under /v1/providerdirectorydata upgraded to
+        Da Vinci Implementation Guide 1.2.0 - explicitly non-breaking.
+      - New search parameters for PractitionerRole, InsurancePlan and HealthcareService.
+  - date: '2026-05-05'
+    environment: Production
+    type: version-upgrade
+    breaking: false
+    highlights:
+      - /provideraccess/v1/Group upgraded to Da Vinci PDex IG STU 2.1.0.
+      - /provideraccess/v1/Group/ExportFile/{fileId} upgraded to Bulk Data Access IG STU 3.0.0 + PDex STU 2.1.0.
+  - date: '2026-03-27'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - >-
+        Provider Access API launched in Production under product public-provider-group-fhir, letting
+        provider organizations and EHR vendors identify attributed member groups and request bulk data
+        export for treatment purposes.
+      - 'Operations: /provideraccess/v1/Group, /Group/{id}, /Group/$exportstatus/{id}, /Group/{id}/$davinci-data-export, /Group/ExportFile/{fileId}.'
+  - date: '2026-03-04'
+    environment: Production
+    type: breaking
+    breaking: true
+    highlights:
+      - >-
+        HOSTNAME configuration change required for subscribers to
+        public-realtimepharmacybenefitcheckatapi-fhir, public-clinicaldataexchange-fhir,
+        public-coveragerequirementsdiscoveryapi-fhir and public-priorauthorizationsupportapi-fhir -
+        production host moved to https://apix.cvshealth.com.
+    note: >-
+      This is the only breaking change in the recent window and it moved a subset of Aetna's
+      production APIs onto a CVS Health host. apix.cvshealth.com resolves (23.206.172.75) and answers
+      404 at the root and at /.well-known/smart-configuration, i.e. it is a live gateway that exposes
+      nothing anonymously. The four affected products are not among the specs this pipeline could
+      retrieve (all returned HTTP 403), so no contract in this repo declares that host.
+  - date: '2025-12-05'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - Payer to Payer API subscription opened for US Core 6.1.0 upgraded production APIs; new products public-payertopayerapi-fhir-f and -g.
+      - Known limitation stated by Aetna - POST is not implemented yet and returns an error.
+      - Developer Portal enabled multifactor authentication; EHR application creation and token generation restored.
+  - date: '2025-10-16'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - Da Vinci CDex $submit-attachment live - /clinicaldataexchange/v1/$submit-attachment (product public-clinicaldataexchange-fhir).
+      - Prior Authorization Support $submit and $inquire live - /priorauthorizationsupport/v1/Claim/$submit and /$inquire.
+  - date: '2025-09-29'
+    environment: Production
+    type: version-upgrade
+    breaking: false
+    highlights:
+      - Patient Access production APIs upgraded from US Core 3.1.1 to US Core 6.1.0.
+      - US Core 6.1.0 QuestionnaireResponse, ServiceRequest and Specimen resources added in production.
+  - date: '2025-09-23'
+    environment: Production
+    type: portal
+    breaking: false
+    highlights: [Developer Portal UI refreshed and API Library reorganised.]
+  - date: '2025-05-15'
+    environment: Production
+    type: coverage-expansion
+    breaking: false
+    highlights: [Patient Access APIs extended to fully insured Commercial members residing in Tennessee; no client changes required.]
+  - date: '2025-04-04'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - >-
+        Da Vinci Coverage Requirements Discovery live in Production for provider systems to check
+        whether prior authorization and documentation are required.
+      - 'Hooks supported: order-sign, order-dispatch, appointment-book.'
+      - >-
+        Explicitly NOT supported - Meritain members, Medicaid members, pharmacy prior auth, and
+        SNOMED procedure codes (CPT and HCPCS only).
+  - date: '2024-12-05'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - >-
+        Realtime Pharmacy Benefit Check launched for members and EHR systems to obtain prescription
+        cost and coverage information, in compliance with California AB 2352 and Texas HB 0662H.
+      - 'Products: public-realtimepharmacybenefitcheckapi-fhir and public-realtimepharmacybenefitcheckatapi-fhir.'
+  - date: '2024-11-15'
+    environment: Production
+    type: portal
+    breaking: false
+    highlights: [EHR application approval process and registration questionnaire added to the Developer Portal.]
+  - date: '2024-04-19'
+    environment: Production
+    type: version-upgrade
+    breaking: true
+    highlights:
+      - Upgraded to Da Vinci PDex US Drug Formulary 2.0.0 STU 2 - "major changes in number of Profiles, Resources, and Search Parameters".
+      - The existing List API was DECOMMISSIONED from Patient Access products.
+      - MedicationKnowledge upgraded to STU 2; new Formulary InsurancePlan, Basic and Location APIs added.
+      - Patient Access CapabilityStatement updated; FHIR server endpoint URLs unchanged.
+  - date: '2024-04-11'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights: [ExplanationOfBenefit and Coverage now support the _revinclude parameter.]
+  - date: '2024-02-02'
+    environment: Production
+    type: cosmetic
+    breaking: false
+    highlights: ['"-apigw" suffix removed from API and Product display names; Aetna states no functional impact.']
+  - date: '2023-12-15'
+    environment: Production
+    type: coverage-expansion
+    breaking: false
+    highlights: [Patient Access APIs extended to fully insured Commercial members residing in California.]
+  - date: '2023-11-15'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - Commercial insurance plan and provider data added to the Provider Directory APIs alongside Medicare data; no subscription changes required.
+  - date: '2023-09-29'
+    environment: Production
+    type: addition
+    breaking: false
+    highlights:
+      - Bulk FHIR export added for the Medicare Provider Directory - v1providerdirectorydataexport and v1providerdirectorydataexportstatusid.
+      - 'Bulk search parameters: _since and _type; _type supports the seven Da Vinci PDex Plan Net profiles.'
+      - Provider Directory CapabilityStatement updated.
+  - date: '2023-09-29'
+    environment: Sandbox
+    type: deprecation
+    breaking: true
+    highlights: [Version 1 APIs in the Sandbox environment decommissioned.]
+  - date: '2022-05-07'
+    environment: Production
+    type: deprecation
+    breaking: true
+    highlights: [Search parameter patient.identifier removed; _id and service-date search parameters introduced.]

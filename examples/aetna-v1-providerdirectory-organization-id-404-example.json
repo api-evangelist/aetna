@@ -1,0 +1,29 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_Organization_id",
+    "path": "/v1/providerdirectory/Organization/{id}",
+    "status": "404",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "issue": [
+      {
+        "severity": "error",
+        "code": "not-found",
+        "details": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+              "code": "MSG_NO_MATCH",
+              "display": "No Resource found"
+            }
+          ]
+        }
+      }
+    ],
+    "id": "687401f85fd3fefb43182c22",
+    "resourceType": "OperationOutcome"
+  }
+}

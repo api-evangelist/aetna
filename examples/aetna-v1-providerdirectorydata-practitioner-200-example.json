@@ -1,0 +1,396 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_Practitioner",
+    "path": "/v1/providerdirectorydata/Practitioner",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://hl7.org/fhir/sid/us-npi",
+              "use": "official",
+              "id": "NPI",
+              "type": {
+                "coding": [
+                  {
+                    "code": "NPI",
+                    "display": "National provider identifier"
+                  }
+                ],
+                "text": "NPI"
+              },
+              "value": "1619914108"
+            },
+            {
+              "system": "https://terminology.hl7.org/CodeSystem-v2-0203",
+              "type": {
+                "coding": [
+                  {
+                    "code": "PRN",
+                    "system": "https://terminology.hl7.org/CodeSystem-v2-0203",
+                    "display": "Provider number"
+                  }
+                ],
+                "text": "Aetna Provider Identification Number"
+              },
+              "value": "7295007"
+            }
+          ],
+          "qualification": [
+            {
+              "identifier": [
+                {
+                  "use": "official",
+                  "type": {
+                    "coding": [
+                      {
+                        "code": "MD",
+                        "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                        "display": "Medical License number"
+                      }
+                    ],
+                    "text": "Medical License number"
+                  },
+                  "value": "FM2472811"
+                }
+              ],
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueCode": "active",
+                      "url": "status"
+                    },
+                    {
+                      "valueCodeableConcept": {
+                        "coding": [
+                          {
+                            "code": "MI",
+                            "system": "https://www.usps.com/",
+                            "display": "Michigan"
+                          }
+                        ],
+                        "text": "Michigan"
+                      },
+                      "url": "whereValid"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/practitioner-qualification"
+                }
+              ],
+              "period": {
+                "start": "2022-01-01",
+                "end": "2023-12-31"
+              },
+              "code": {
+                "coding": [
+                  {
+                    "code": "LIC",
+                    "system": "https://aetna.com/degreeLicenseCertificate",
+                    "display": "License"
+                  }
+                ],
+                "text": "License"
+              }
+            }
+          ],
+          "address": [
+            {
+              "country": "US",
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueDecimal": 30.209816,
+                      "url": "latitude"
+                    },
+                    {
+                      "valueDecimal": -90.933047,
+                      "url": "longitude"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/StructureDefinition/geolocation"
+                }
+              ],
+              "city": "Gonzales",
+              "line": [
+                "2647 South St. Elizabeth Blvd., Suite 215"
+              ],
+              "district": "Ascension",
+              "postalCode": "70737",
+              "state": "LA",
+              "text": "2647 South St. Elizabeth Blvd., Suite 215, Gonzales, Ascension, LA 70737, US"
+            },
+            {
+              "country": "US",
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueDecimal": 30.401996,
+                      "url": "latitude"
+                    },
+                    {
+                      "valueDecimal": -91.106099,
+                      "url": "longitude"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/StructureDefinition/geolocation"
+                }
+              ],
+              "city": "Baton Rouge",
+              "line": [
+                "7777 Hennessy Blvd., Suite 409"
+              ],
+              "district": "East Baton Rouge",
+              "postalCode": "70808",
+              "state": "LA",
+              "text": "7777 Hennessy Blvd., Suite 409, Baton Rouge, East Baton Rouge, LA 70808, US"
+            }
+          ],
+          "gender": "male",
+          "meta": {
+            "lastUpdated": "2023-02-17T09:01:12.203698+00:00",
+            "versionId": "MTY3NjYyNDQ3MjIwMzY5ODAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner"
+            ]
+          },
+          "name": [
+            {
+              "given": [
+                "Kamal"
+              ],
+              "use": "official",
+              "text": "Mubarak, Kamal Khan, MD",
+              "family": "Mubarak",
+              "suffix": [
+                "MD"
+              ]
+            }
+          ],
+          "active": true,
+          "language": "en",
+          "telecom": [
+            {
+              "system": "phone",
+              "rank": 1,
+              "value": "2257655500"
+            },
+            {
+              "system": "phone",
+              "rank": 2,
+              "value": "2257655864"
+            },
+            {
+              "system": "fax",
+              "rank": 3,
+              "value": "2256444206"
+            },
+            {
+              "system": "fax",
+              "rank": 4,
+              "value": "2257652013"
+            }
+          ],
+          "id": "plannet-practitioner-d65cfe02cc6dce6cbd06bbf1a732b09a",
+          "resourceType": "Practitioner"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner/plannet-practitioner-d65cfe02cc6dce6cbd06bbf1a732b09a"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://hl7.org/fhir/sid/us-npi",
+              "use": "official",
+              "id": "NPI",
+              "type": {
+                "coding": [
+                  {
+                    "code": "NPI",
+                    "display": "National provider identifier"
+                  }
+                ],
+                "text": "NPI"
+              },
+              "value": "1497174189"
+            },
+            {
+              "system": "https://terminology.hl7.org/CodeSystem-v2-0203",
+              "type": {
+                "coding": [
+                  {
+                    "code": "PRN",
+                    "system": "https://terminology.hl7.org/CodeSystem-v2-0203",
+                    "display": "Provider number"
+                  }
+                ],
+                "text": "Aetna Provider Identification Number"
+              },
+              "value": "6029297"
+            }
+          ],
+          "qualification": [
+            {
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueCode": "active",
+                      "url": "status"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/practitioner-qualification"
+                }
+              ],
+              "period": {
+                "start": "2018-01-01"
+              },
+              "code": {
+                "coding": [
+                  {
+                    "code": "10601",
+                    "system": "https://aetna.com/practiceCode",
+                    "display": "Dermatology"
+                  }
+                ],
+                "text": "Board Certified"
+              }
+            }
+          ],
+          "address": [
+            {
+              "country": "US",
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueDecimal": 29.975156,
+                      "url": "latitude"
+                    },
+                    {
+                      "valueDecimal": -90.152017,
+                      "url": "longitude"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/StructureDefinition/geolocation"
+                }
+              ],
+              "city": "Metairie",
+              "line": [
+                "100 North Labarre Road, Suite C"
+              ],
+              "district": "Jefferson",
+              "postalCode": "70001",
+              "state": "LA",
+              "text": "100 North Labarre Road, Suite C, Metairie, Jefferson, LA 70001, US"
+            },
+            {
+              "country": "US",
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueDecimal": 32.367881,
+                      "url": "latitude"
+                    },
+                    {
+                      "valueDecimal": -86.285443,
+                      "url": "longitude"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/StructureDefinition/geolocation"
+                }
+              ],
+              "city": "Montgomery",
+              "line": [
+                "1111 Olive Street"
+              ],
+              "district": "Montgomery",
+              "postalCode": "36106",
+              "state": "AL",
+              "text": "1111 Olive Street, Montgomery, Montgomery, AL 36106, US"
+            }
+          ],
+          "gender": "male",
+          "meta": {
+            "lastUpdated": "2023-02-17T09:01:12.202076+00:00",
+            "versionId": "MTY3NjYyNDQ3MjIwMjA3NjAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner"
+            ]
+          },
+          "name": [
+            {
+              "given": [
+                "Blake"
+              ],
+              "use": "official",
+              "text": "Raggio, Blake Stephen, MD",
+              "family": "Raggio",
+              "suffix": [
+                "MD"
+              ]
+            }
+          ],
+          "active": true,
+          "language": "en",
+          "telecom": [
+            {
+              "system": "phone",
+              "rank": 1,
+              "value": "5048271717"
+            },
+            {
+              "system": "phone",
+              "rank": 2,
+              "value": "3348347221"
+            },
+            {
+              "system": "fax",
+              "rank": 3,
+              "value": "3342419848"
+            }
+          ],
+          "id": "plannet-practitioner-feb87959e76dce6cbd03487448d5cc67",
+          "resourceType": "Practitioner"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner/plannet-practitioner-feb87959e76dce6cbd03487448d5cc67"
+      }
+    ],
+    "total": 1004,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2",
+        "relation": "search"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2&_page_token=AQFpdQC-K9-zwxdTfMHAKUb6PWgZdvkOcCo6d46qaMxA1Ablh767bOIyQfMola4ZV1XnQi7TMzBAhEVmd-iGQ7Mo22l4CXogZqG2r1L5uENuU_pv2kDNHeu8jj1nc-rB6ZLHYPBb1MIJBrljsPTERgSR87toZVSfqetwHlY7FQOMG3Vs4zn-cesepxcUmlkzl2S6vhEt",
+        "relation": "next"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2",
+        "relation": "self"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_Organization_id",
+    "path": "/v1/providerdirectorydata/Organization/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "identifier": [
+      {
+        "system": "http://aetna.com/identifier",
+        "use": "official",
+        "type": {
+          "coding": [
+            {
+              "code": "NID",
+              "system": "http://aetna.com/identifier",
+              "display": "Network ID Number"
+            }
+          ],
+          "text": "Aetna Pharmacy Network ID Number"
+        },
+        "value": "P1"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2023-02-08T13:51:13.326888+00:00",
+      "versionId": "MTY3NTg2NDI3MzMyNjg4ODAwMA",
+      "profile": [
+        "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Network"
+      ]
+    },
+    "name": "Broad National with preferred pharmacies",
+    "active": true,
+    "language": "en",
+    "id": "plannet-network-f0f9ad3d9b83d94f7080386074dffe13",
+    "type": [
+      {
+        "coding": [
+          {
+            "code": "ntwk",
+            "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+            "display": "Network"
+          }
+        ],
+        "text": "A healthcare provider insurance network"
+      }
+    ],
+    "resourceType": "Organization"
+  }
+}

@@ -1,0 +1,269 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qahapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qaehapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_Application_Oauth:
+  - Public
+- FHIR_Application_Oauth:
+  - NonPII
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.*
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.*
+basePath: "/v1/providerdirectory"
+paths:
+  "/OrganizationAffiliation":
+    get:
+      summary: 'Retrieves the OrganizationAffiliation resource based on :   Specialty
+        + Location. Specialty search parameter will be the NUCC taxonomy code of the
+        specialty. Both Provider and Pharmacy data are available on this resource.'
+      description: This operation retrieves the OrganizationAffiliation resource based
+        on :Specialty + Location. Specialty search parameter will be the NUCC taxonomy
+        code of the specialty. Both Provider and Pharmacy data are available on this
+        resource.
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Bundle"
+          examples:
+            application/json:
+              entry:
+              - search:
+                  mode: match
+                resource:
+                  identifier:
+                  - use: official
+                  specialty:
+                  - coding:
+                    - system: http://nucc.org/provider-taxonomy
+                      code: 251E00000X
+                      display: Other
+                    text: Specialty
+                  period:
+                    start: '2020-01-01'
+                    end: '2020-12-31'
+                  code:
+                  - coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrganizationAffiliationRoleCS
+                      code: home
+                      display: Home Health Provider
+                    text: Home Health Provider
+                  meta:
+                    lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-OrganizationAffiliation
+                  active: true
+                  participatingOrganization:
+                    reference: Organization/0000000000001719695
+                    display: Coram Specialty Infusion Services
+                  language: en
+                  location:
+                  - reference: Location/0000000000001719712
+                    display: 4310 E Cotton Center Blvd Ste 110, Phoenix, AZ 85040
+                  id: '0000000000001719678'
+                  resourceType: OrganizationAffiliation
+                  network:
+                  - display: Aetna Better Health of West Virginia
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation/0000000000001719678
+              total: 1
+              link:
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1
+                relation: self
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1
+                relation: first
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1
+                relation: next
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/OrganizationAffiliation?specialty=251E00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=9&page=1
+                relation: last
+              id: 8daec58a-a3f4-11ed-9960-9d7971050000
+              type: searchset
+              resourceType: Bundle
+          description: This response returns a Bundle of OrganizationAffiliaton records.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      parameters:
+      - in: query
+        name: specialty
+        description: |-
+          Select OrganizationAffiliations providing the specified service.
+
+          Select Organizations or Pharmacies associated with the specified specialty.
+          Note:Specialty must be in Taxonomy format.
+        type: string
+        required: true
+      - in: query
+        name: location.address-state:exact
+        description: |-
+          Select OrganizationAffiliations with an address in the specified state.
+
+          State of the Organizations or Pharmacies.
+
+          State will be 2 letter abbreviation.
+        type: string
+        required: false
+      - in: query
+        name: location.address-city:exact
+        description: |-
+          Select OrganizationAffiliations with an address in the specified city.
+
+          Name of city, town etc of the Organizations or Pharmacies.
+        type: string
+        required: false
+      - in: query
+        name: location.address-postalcode:exact
+        description: |-
+          Select OrganizationAffiliations with an address in the specified postal code
+
+          US Zip code of the Organizations or Pharmacies.
+
+          Postal code will be priority over City +State.
+
+          Postal code will be 5 valid 5 digit numeric.
+        type: string
+        required: false
+      - in: query
+        name: page
+        description: 'Used for pagination: potential values to navigate to a specific
+          page. “self”–page=10  “first”–page=1  “last”–page=65  “previous”–page=9
+          “next”–page=11'
+        type: number
+        required: false
+      - in: query
+        name: _count
+        description: _count parameter is used to define the maximum number of search
+          results to show on a page
+        type: number
+        required: false
+host: qapif1.aetna.com/fhir
+produces:
+- application/json
+externalDocs:
+  description: HTTP Errors
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: "/Token"
+    authorizationUrl: "/Authorize"
+    description: ''
+    scopes:
+      patient/Patient.*: ''
+      patient/Patient.read: ''
+      patient/*.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: "/Token"
+    description: ''
+    scopes:
+      NonPII: ''
+      Public: ''
+    type: oauth2
+    flow: application
+definitions:
+  Entry:
+    description: An entry in a bundle resource - will contain a resource(s) returned
+      in the bundle
+    type: object
+    properties:
+      resource:
+        "$ref": "#/definitions/OrganizationAffiliation"
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          "$ref": "#/definitions/Entry"
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+  OrganizationAffiliation:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OrganizationAffiliation resource.
+      Full Documentation is available at: http://hl7.org/fhir/organizationaffiliation.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 OrganizationAffiliation resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-OrganizationAffiliation.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 OrganizationAffiliation resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-OrganizationAffiliation.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: InteroperabilityDeveloperSupport@aetna.com
+    url: http://
+  description: |-
+    This API retrieves OrganizationAffiliation resources based on :
+    Specialty + Location.
+    Specialty search parameter will be the NUCC taxonomy code of the specialty.
+    Both Provider and Pharmacy data are available on this resource.
+
+    The OrganizationAffiliation resource describes relationships between two or more organizations, including the services one organization provides another, the location(s) where they provide services, the availability of those services, electronic endpoints, and other relevant information.
+  x-ibm-name: v1providerdirectoryorganizationaffiliation
+  title: "/v1/providerdirectory/OrganizationAffiliation"
+  version: 1.0.0

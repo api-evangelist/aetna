@@ -1,0 +1,84 @@
+generated: '2026-08-30'
+method: searched
+source: openapi/aetna-*-openapi.yml (derived baseline from Aetna's 95 published Swagger documents), upgraded
+  from https://apif1.aetna.com/fhir/.well-known/smart-configuration (HTTP 200), https://vteapif1.aetna.com/fhirdemo/.well-known/smart-configuration
+  (HTTP 200), https://apif1.aetna.com/fhir/v2/patientaccess/metadata, https://apif1.aetna.com/fhir/v1/providerdirectory/metadata,
+  https://developerportal.aetna.com/managedcontent/pdfs/Token_Generation_Process-Patient_Access_APIs-Production.pdf,
+  https://developerportal.aetna.com/assets/Data/createapp.json
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: FHIR_Patient_Allergy_Read_AccessCode_Oauth
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    scopes: 4
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+  - openapi/aetna-provider-directory-api-openapi.yml
+- name: FHIR_Application_Oauth
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://$(catalog.url)/v3/internal/auth/oauth2/app/token
+    scopes: 2
+  description: "{\n \"BuildEieHeader\" : \"Header 3.2\",\n \"SecurityTemplate\" : \"FHIROpenApp\",\n \"Backend\"\
+    \ : \"Non-IIB, FHIRServer APIGEE APIs, requires Mutual TLS\",\n \"Errorhandlingpolicy\": \"Transparent\"\
+    \n \"Consumer\":\"External\",\n \"Mutual Auth between Consumer and APIC\" : \"Not Required\"\n}"
+  sources:
+  - openapi/aetna-provider-directory-api-openapi.yml
+docs: https://apif1.aetna.com/fhir/.well-known/smart-configuration
+profile: SMART App Launch 1.0.0 over OAuth 2.0 authorization code with PKCE
+endpoints:
+  production:
+    authorize: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/authorize
+    token: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/token
+    discovery: https://apif1.aetna.com/fhir/.well-known/smart-configuration
+  sandbox:
+    authorize: https://vteapif1.aetna.com/fhirdemo/v1/fhirserver_auth/oauth2/authorize
+    token: https://vteapif1.aetna.com/fhirdemo/v1/fhirserver_auth/oauth2/token
+    discovery: https://vteapif1.aetna.com/fhirdemo/.well-known/smart-configuration
+  discrepancy_note: Aetna publishes two different paths for the same endpoints. The live smart-configuration
+    documents give /fhir/prod/v1/fhirserver_auth/... ; the CapabilityStatements and Aetna's own Token Generation
+    PDF give /fhir/v1/fhirserver_auth/... . Both are recorded as served. A client should read the smart-configuration
+    at runtime rather than hard-coding either.
+client_authentication: client_secret_basic (Client ID and Secret sent as an HTTP Basic header)
+pkce:
+  required_for: public clients
+  code_challenge_methods_supported:
+  - S256
+anonymous_access:
+  available: false
+  note: 'Nothing in Aetna''s API surface is callable anonymously. Even the provider directory, which carries
+    no member data and which several peer payers expose openly, declares oauth2 on every operation. Two things
+    ARE anonymously readable and are the only unauthenticated surface: the two FHIR CapabilityStatements at
+    /metadata and the two smart-configuration documents.'
+registration:
+  model: portal registration, then per-application, then per-product subscription
+  portal: https://developerportal.aetna.com/
+  applicant_types:
+  - third-party developer application
+  - payer (payer-to-payer data exchange)
+  - EHR application
+  - provider system
+  - ECS Provider organization (added 2026-08-19)
+  note: A call to a product the application is not subscribed to returns 401, per Aetna's own error reference.
+    Production applications go through a review, not a purchase; the production-access mailbox is AetnaInteroperabilityProductionAccess@AETNA.com.
+identity_assurance:
+  ial2_supported: true
+  since: '2026-06-25'
+  credential_service_providers:
+  - CLEAR
+  - ID.me
+  standard: NIST SP 800-63A Identity Assurance Level 2
+  note: Optional. The alternative Aetna calls "Well-Known Authentication" uses the member's Aetna username
+    and password. IAL2 applications cannot use the Sandbox environment.
+spec_template_warning: Every published Swagger declares its oauth2 tokenUrl/authorizationUrl as the un-substituted
+  IBM API Connect template https://$(catalog.url)/... - a literal placeholder, not a URL. Any tool that generates
+  a client straight from Aetna's Swagger will emit a broken auth configuration. The endpoints block above carries
+  the real values.

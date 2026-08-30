@@ -1,0 +1,53 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Device",
+    "path": "/v2/patientaccess/Device",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "value": "00868475000235-2857cc9b-a48c-4af8-a519-e03341b0e832"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2021-08-19T05:30:29.655+00:00",
+            "versionId": "1",
+            "source": "#w7IOlsoDJ41Stj6p"
+          },
+          "patient": {
+            "reference": "Patient/2528728"
+          },
+          "id": "2528729",
+          "resourceType": "Device"
+        },
+        "fullUrl": "http://hapi.fhir.org/baseR4/Device/2528729"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2021-08-25T00:16:09.020+00:00"
+    },
+    "link": [
+      {
+        "url": "http://hapi.fhir.org/baseR4/Device?_count=1&_pretty=true",
+        "relation": "self"
+      },
+      {
+        "url": "http://hapi.fhir.org/baseR4?_getpages=785607f2-7d6a-445b-bab2-d61bb4358948&_getpagesoffset=1&_count=1&_pretty=true&_bundletype=searchset",
+        "relation": "next"
+      }
+    ],
+    "id": "785607f2-7d6a-445b-bab2-d61bb4358948",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

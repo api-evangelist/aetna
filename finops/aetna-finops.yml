@@ -11,155 +11,68 @@ providerId: aetna
 publisherName: Aetna
 serviceCategory: API
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+generated: '2026-08-30'
+method: searched
+modified: '2026-08-30'
+source: >-
+  https://developerportal.aetna.com/ (no pricing, no plans, no billing surface),
+  https://developerportal.aetna.com/assets/Data/quickstart.json,
+  plans/aetna-plans-pricing.yml, rate-limits/aetna-rate-limits.yml
+provenance_note: >-
+  REPLACES a 2026-05-04 bulk-sweep scaffold that modelled Aetna as a usage-based, monthly-invoiced,
+  USD-billed API vendor with api_requests, data_egress and compute_seconds meters and cost-per-1K-
+  request unit economics. None of that exists. Aetna bills nothing for these APIs. The scaffold was
+  also feeding derive-access-model.py, which was consequently labelling Aetna "Paid".
 tags:
   - Health Insurance
   - Healthcare
   - FHIR
-  - Patient Access
-  - Provider Directory
   - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Aetna API surface. Provides a FOCUS-aligned mapping for
-  cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+  - CMS Mandate
+description: >-
+  Aetna does not monetise its API surface, so there is no FinOps posture to model on the supply side.
+  The Interoperability APIs are published because CMS-9115-F and CMS-0057-F require a payer to make
+  member, directory and prior-authorization data available; there is no price, no meter, no invoice
+  and no chargeback. The only cost signals that exist are on the CONSUMER side - the cost of building
+  and operating against a read-only FHIR surface with no numeric rate limit and no cache headers.
+monetized: false
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
-  billingCurrency: USD
-  chargeCategories:
-    - Usage
-    - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
+  pricingCategory: no cost
+  billingFrequency: null
+  billingCurrency: null
+  chargeCategories: []
+  note: >-
+    Aetna issues no invoice for API consumption and publishes no rate card. "no cost" is the
+    FOCUS-nearest label for a surface that is free by federal mandate; it does not mean a free tier
+    of a paid product, because there is no paid product.
+meters: []
 focusColumns:
-  ServiceName: Aetna
-  ServiceCategory: Developer Tools / API
+  ServiceName: Aetna Interoperability APIs
+  ServiceCategory: API
   ProviderName: Aetna
   PublisherName: Aetna
-  InvoiceIssuerName: Aetna
-  PricingCategory: Usage-Based
-  PricingUnit: request
-  BillingCurrency: USD
-  ChargeCategory: Usage
-meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Aetna Patient Access FHIR API
-    baseURL: ''
-    tags:
-      - FHIR
-      - Patient Access
-      - Health Data
-      - Claims
-      - CMS Mandate
-    serviceName: Aetna Patient Access FHIR API
-    serviceCategory: API
-  - name: Aetna Provider Directory FHIR API
-    baseURL: ''
-    tags:
-      - FHIR
-      - Provider Directory
-      - Network
-      - Healthcare Providers
-      - CMS Mandate
-    serviceName: Aetna Provider Directory FHIR API
-    serviceCategory: API
-  - name: Aetna Drug Formulary FHIR API
-    baseURL: ''
-    tags:
-      - FHIR
-      - Drug Formulary
-      - Pharmacy
-      - Medications
-      - CMS Mandate
-    serviceName: Aetna Drug Formulary FHIR API
-    serviceCategory: API
-  - name: Aetna Provider EDI API
-    baseURL: ''
-    tags:
-      - EDI
-      - Claims
-      - Eligibility
-      - Provider Portal
-      - HIPAA
-    serviceName: Aetna Provider EDI API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+  InvoiceIssuerName: null
+  PricingCategory: no cost
+  PricingUnit: null
+  BillingCurrency: null
+  ChargeCategory: null
+consumer_cost_drivers:
+  - name: Uncapped retry cost
+    description: >-
+      Aetna publishes no numeric rate limit and no Retry-After. A consumer must budget for its own
+      backoff and for wasted calls absorbed by a 429 it cannot anticipate.
+  - name: No conditional requests
+    description: >-
+      No ETag, Last-Modified or Cache-Control is documented, so a consumer re-fetches full payloads.
+      This matters most on the provider directory, which is large, largely static reference data.
+  - name: Bulk export as the cheap path
+    description: >-
+      $export on /v1/providerdirectorydata and Provider Access $davinci-data-export exist precisely to
+      avoid "hundreds of requests" (Aetna's own wording, 2023-09-29). For any whole-network workload,
+      bulk is the cost-correct choice.
+  - name: Per-member authorization
+    description: >-
+      Patient Access data can only be retrieved with a token bound to one consenting member, so
+      consumer cost scales with enrolled members, not with API price.
+unitEconomics: []
 maintainers: []

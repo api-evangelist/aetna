@@ -1,0 +1,168 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Condition",
+    "path": "/v2/patientaccess/Condition",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "88805009",
+                "display": "Chronic congestive heart failure (disorder)"
+              }
+            ],
+            "text": "Chronic congestive heart failure (disorder)"
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                "code": "confirmed"
+              }
+            ]
+          },
+          "meta": {
+            "lastUpdated": "2020-03-24T23:43:11.810+00:00",
+            "versionId": "1",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition"
+            ],
+            "source": "#OA3EcmpoIPqxKVEk",
+            "tag": [
+              {
+                "system": "https://smarthealthit.org/tags",
+                "code": "Covid19 synthetic population from Synthea"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "Patient/b6935157-bc88-4a41-8c57-1238ca2d709a"
+          },
+          "recordedDate": "1989-11-19T22:39:06-06:00",
+          "id": 19382,
+          "encounter": {
+            "reference": "Encounter/b38bfd4b-dbe1-4bdb-9de5-95841ed73aad"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                  "code": "encounter-diagnosis",
+                  "display": "Encounter Diagnosis"
+                }
+              ]
+            }
+          ],
+          "onsetDateTime": "1989-11-19T22:39:06-06:00",
+          "resourceType": "Condition"
+        },
+        "fullUrl": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Condition/0000000000000045666"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "429007001",
+                "display": "History of cardiac arrest (situation)"
+              }
+            ],
+            "text": "History of cardiac arrest (situation)"
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                "code": "confirmed"
+              }
+            ]
+          },
+          "meta": {
+            "lastUpdated": "2020-03-24T23:43:33.379+00:00",
+            "versionId": "1",
+            "profile": [
+              "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition"
+            ],
+            "source": "#UIA891YdagSHgLfF",
+            "tag": [
+              {
+                "system": "https://smarthealthit.org/tags",
+                "code": "Covid19 synthetic population from Synthea"
+              }
+            ]
+          },
+          "subject": {
+            "reference": "Patient/65316c21-489d-48d5-be6f-1dbb3cd72dd0"
+          },
+          "recordedDate": "1991-08-08T22:32:23-05:00",
+          "id": 19383,
+          "encounter": {
+            "reference": "Encounter/1062344a-4e6b-4cac-b752-a790bd008d4c"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                  "code": "encounter-diagnosis",
+                  "display": "Encounter Diagnosis"
+                }
+              ]
+            }
+          ],
+          "onsetDateTime": "1991-08-08T22:32:23-05:00",
+          "resourceType": "Condition"
+        },
+        "fullUrl": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Condition/0000000000000045667"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2021-04-09T16:09:02.860+00:00"
+    },
+    "link": [
+      {
+        "url": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Condition?_count=3&page=1",
+        "relation": "self"
+      },
+      {
+        "url": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/Condition?_count=3&_page_token=Cjj3YQP%2Bdf%2F%2F%2F%2F%2BABchXMXghfgD%2FAf%2F%2BZTA5NWM4YmI0YWNlYWQ4Yjc5NDhjYTk2M2RhMDA5N2QAARAKIeRmIPX4MlS1OQAAAACKAfyeSAFQAFoLCfRXKWB76f3NEANgg8Tc2gc%3D",
+        "relation": "next"
+      }
+    ],
+    "id": "283388be-f4fa-4c09-bd16-d46282f6becb",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

@@ -1,0 +1,934 @@
+generated: '2026-08-30'
+method: searched
+source: openapi/aetna-patient-access-api-openapi.yml, openapi/aetna-provider-directory-api-openapi.yml (derived
+  baseline), upgraded from https://apif1.aetna.com/fhir/.well-known/smart-configuration (HTTP 200, live 2026-08-30),
+  https://apif1.aetna.com/fhir/v2/patientaccess/metadata, and https://developerportal.aetna.com/managedcontent/pdfs/Token_Generation_Process-Patient_Access_APIs-Production.pdf
+schemes:
+- name: FHIR_Patient_Allergy_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Binary_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_CarePlan_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_CareTeam_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRCareTeamRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Condition_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientConditionRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Coverage_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://devpih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/authorize
+    tokenUrl: https://devapih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/token
+- name: FHIR_Patient_Device_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRDeviceRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_DiagnosticReport_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientDiagnosticReportRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_DocumentReference_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientDocumentReferenceRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Encounter_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientEncounterRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Endpoint_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientEndpointRead",
+
+    "Backend" : Non-IIB, FHIRServer APIGEE APIs, requires Mutual TLS",
+
+    "Errorhandlingpolicy": "Transparent",
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_EOB_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientEOBRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent",
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Required"
+
+    }'
+- name: FHIR_Patient_Goal_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientGoalRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Immunization_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_MedicationKnowledge_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/authorize
+    tokenUrl: https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/token
+- name: FHIR_Patient_MedicationRequest_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientMedicationRequestRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Medication_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Observation_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://devpih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/authorize
+    tokenUrl: https://devapih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/token
+- name: FHIR_Patient_Organization_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Patient_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_PractitionerRole_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://devpih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/authorize
+    tokenUrl: https://devapih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/token
+- name: FHIR_Patient_Practitioner_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Procedure_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientProcedureRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Allergy_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Binary_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_CarePlan_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_CareTeam_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRCareTeamRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Condition_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientConditionRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Coverage_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Device_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRDeviceRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_DiagnosticReport_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientDiagnosticReportRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_DocumentReference_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientDocumentReferenceRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Encounter_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientEncounterRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Endpoint_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientEndpointRead",
+
+    "Backend" : Non-IIB, FHIRServer APIGEE APIs, requires Mutual TLS",
+
+    "Errorhandlingpolicy": "Transparent",
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_EOB_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/authorize
+    tokenUrl: https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/token
+- name: FHIR_Patient_Goal_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientGoalRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Immunization_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Location_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_MedicationDispense_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientMedicationDispenseRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_MedicationRequest_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientMedicationRequestRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_Patient_Medication_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Observation_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Organization_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Patient_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_PractitionerRole_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://devpih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/authorize
+    tokenUrl: https://devapih1.int.aetna.com/healthcare/devpath1/v7/auth/oauth2/token
+- name: FHIR_Patient_Practitioner_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+- name: FHIR_Patient_Procedure_Read_AccessCode_Oauth
+  source: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  flows:
+  - flow: authorizationCode
+  description: '{
+
+    "BuildEieHeader" : "Header 3.2",
+
+    "SecurityTemplate" : "FHIRPatientProcedureRead",
+
+    "Backend" : "IIB",
+
+    "Errorhandlingpolicy": "Transparent"
+
+    "Consumer":"External",
+
+    "Mutual Auth between Consumer and APIC" : "Not Required"
+
+    }'
+- name: FHIR_User_AccessCode_Oauth
+  source: openapi/aetna-provider-directory-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/authorize
+    tokenUrl: https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/token
+- name: FHIR_Application_Oauth
+  source: openapi/aetna-provider-directory-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://$(catalog.url)/v3/internal/auth/oauth2/app/token
+  description: "{\n \"BuildEieHeader\" : \"Header 3.2\",\n \"SecurityTemplate\" : \"FHIROpenApp\",\n \"Backend\"\
+    \ : \"Non-IIB, FHIRServer APIGEE APIs, requires Mutual TLS\",\n \"Errorhandlingpolicy\": \"Transparent\"\
+    \n \"Consumer\":\"External\",\n \"Mutual Auth between Consumer and APIC\" : \"Not Required\"\n}"
+scopes:
+- scope: NonPII
+  description: NonPII
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/aetna-provider-directory-api-openapi.yml
+- scope: Public
+  description: Public
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/aetna-provider-directory-api-openapi.yml
+- scope: patient/*.*
+  description: patient/*.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+  - openapi/aetna-provider-directory-api-openapi.yml
+- scope: patient/*.read
+  description: patient/*.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+  - openapi/aetna-provider-directory-api-openapi.yml
+- scope: patient/Allergy.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Allergy.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Binary.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Binary.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/CarePlan.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/CarePlan.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/CareTeam.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/CareTeam.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Condition.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Condition.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Coverage.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Coverage.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Device.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Device.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/DiagnosticReport.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/DiagnosticReport.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/DocumentReference.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/DocumentReference.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Encounter.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Encounter.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Endpoint.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Endpoint.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/ExplanationOfBenefit.*
+  description: patient/ExplanationOfBenefit.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/ExplanationOfBenefit.read
+  description: patient/ExplanationOfBenefit.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Goal.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Goal.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Immunization.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Immunization.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Location.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Location.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Medication.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Medication.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/MedicationDispense.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/MedicationDispense.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/MedicationKnowledge.*
+  description: patient/MedicationKnowledge.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+- scope: patient/MedicationKnowledge.read
+  description: patient/MedicationKnowledge.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+- scope: patient/MedicationRequest.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/MedicationRequest.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Observation.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Observation.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Organization.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Organization.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Patient.*
+  description: patient/Patient.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+  - openapi/aetna-provider-directory-api-openapi.yml
+- scope: patient/Patient.read
+  description: patient/Patient.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+  - openapi/aetna-provider-directory-api-openapi.yml
+- scope: patient/Practitioner.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Practitioner.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/PractitionerRole.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/PractitionerRole.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Procedure.*
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+- scope: patient/Procedure.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/aetna-patient-access-api-openapi.yml
+  - openapi/aetna-patient-access-api-sandbox-openapi.yml
+docs: https://apif1.aetna.com/fhir/.well-known/smart-configuration
+profile: SMART App Launch 1.0.0 scope syntax
+authorization_server:
+  production:
+    authorization_endpoint: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/authorize
+    token_endpoint: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/token
+  sandbox:
+    authorization_endpoint: https://vteapif1.aetna.com/fhirdemo/v1/fhirserver_auth/oauth2/authorize
+    token_endpoint: https://vteapif1.aetna.com/fhirdemo/v1/fhirserver_auth/oauth2/token
+  note: The tokenUrl in every published Swagger is the un-substituted IBM API Connect template https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/token
+    - not a usable URL. The real endpoints are the ones above, read live from the smart-configuration documents.
+    Aetna's own token-generation PDF and both CapabilityStatements name /fhir/v1/fhirserver_auth/... without
+    the "prod" segment; both forms are recorded because Aetna publishes both.
+advertised_scopes:
+  source: https://apif1.aetna.com/fhir/.well-known/smart-configuration scopes_supported
+  scopes:
+  - openid
+  - fhirUser
+  - profile
+  - launch/patient
+  - patient/*.read
+capabilities:
+  source: smart-configuration capabilities + Patient Access CapabilityStatement security extensions
+  values:
+  - client-public
+  - client-confidential-symmetric
+  - sso-openid-connect
+  - launch-standalone
+  - context-standalone-patient
+  - permission-patient
+  code_challenge_methods_supported:
+  - S256
+  token_endpoint_auth_methods_supported:
+  - client_secret_basic
+scope_families:
+- family: patient/{Resource}.read
+  count: 27
+  description: Per-resource read on the patient in context. Declared per operation in the Swagger securityDefinitions.
+- family: patient/{Resource}.*
+  count: 27
+  description: Per-resource wildcard. Aetna declares these alongside .read even though the surface is read-only.
+- family: patient/*.read
+  description: Read every resource in the patient compartment. The scope Aetna's own token guide tells developers
+    to request, as "launch/patient patient/*.read".
+- family: patient/*.*
+  description: Wildcard on everything in the patient compartment.
+- family: Public / NonPII
+  description: Client-credentials scopes on the FHIR_Application_Oauth scheme used by the provider-directory
+    surface, which carries no member data.
+grant_note: Aetna does not publish a scopes reference page. There is no page to link; the machine-readable
+  smart-configuration document is the closest thing and is used as `docs`. Scope descriptions in the schemes[]
+  below are Aetna's own securityDefinitions text, which in many cases repeats the scope string verbatim rather
+  than describing it.

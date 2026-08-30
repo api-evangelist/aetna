@@ -1,0 +1,1932 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qaehapi.aetna.com/fhirdemo/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qahapi.aetna.com/fhirdemo/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_Patient_DocumentReference_Read_AccessCode_Oauth:
+  - patient/DocumentReference.read
+- FHIR_Patient_DocumentReference_Read_AccessCode_Oauth:
+  - patient/DocumentReference.*
+- FHIR_Patient_DocumentReference_Read_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_Patient_DocumentReference_Read_AccessCode_Oauth:
+  - patient/*.*
+basePath: "/v2"
+paths:
+  "/patientaccess/DocumentReference/{id}":
+    get:
+      summary: This operation returns a DocumentReference Resource associated with
+        the Logical Id
+      description: Returns a Patient's DocumentReference Resource associated with
+        the Logical Id
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/USCoreDocumentReference"
+          examples:
+            application/json:
+              date: '2021-06-15T11:36:46.462+00:00'
+              identifier:
+              - system: https://sources.aetna.com/goal/identifier/99345
+                value: 42~MWRZ3456780+current+preliminary+34108-1+2021-06-15
+              custodian:
+                reference: Organization/e345b49-5c16-4bd4-d310
+              subject:
+                reference: Patient/123eb49-5c16-4bd4-c310
+              author:
+              - reference: Organization/e345b49-5c16-4bd4-d310
+              securityLabel:
+              - coding:
+                - system: http://terminology.hl7.org/CodeSystem/v3-Confidentiality
+                  code: V
+                  display: very restricted
+              description: Physical
+              masterIdentifier:
+                system: https://sources.aetna.com/goal/identifier/99345
+                value: 42~MWRZ3456780+current+preliminary+34108-1+2021-06-15
+              type:
+                coding:
+                - system: http://loinc.org
+                  code: 34108-1
+                  display: Outpatient Note
+              content:
+              - attachment:
+                  data: xmlversiog==
+                  language: en-us
+                  contentType: text/plain
+              docStatus: preliminary
+              meta:
+                lastUpdated: '2021-06-17T11:36:46.462+00:00'
+                versionId: '1'
+                profile:
+                - http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference
+              context:
+                period:
+                  start: '2020-06-23T08:00:00+11:00'
+                  end: '2020-06-23T08:01:00+11:00'
+                related:
+                - reference: DiagnosticReport/b1235b14-3a23-8bd1-b421
+                facilityType:
+                  coding:
+                  - system: http://snomed.info/sct
+                    code: '6827000'
+                    display: Local community health center
+                encounter:
+                  reference: Encounter/a925b49-5a13-7bd1-d410
+              id: zbdf8e23-7c16-5ad4-s310-467254b145e8
+              category:
+              - coding:
+                - system: http://hl7.org/fhir/us/core/CodeSystem/us-core-documentreference-category
+                  code: clinical-note
+                  display: Clinical Note
+              authenticator:
+                reference: Organization/e345b49-5c16-4bd4-d310
+              resourceType: DocumentReference
+              status: current
+          description: This response returns a representation of a DocumentReference
+            resource which conforms to the USCore DocumentReference profile.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided.
+        '404':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: not-found
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_NO_MATCH
+                    display: No Resource found
+              id: 687401f85fd3fefb43182c22
+              resourceType: OperationOutcome
+          description: The specified id doesn’t identify an existing Resource.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      parameters:
+      - in: path
+        name: id
+        description: This is the DocumentReference(unique) logical ID.
+        type: string
+        required: true
+host: vteapif1.aetna.com/fhirdemo
+produces:
+- application/json
+externalDocs:
+  description: HTTPS Common Error Codes
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_Patient_DocumentReference_Read_AccessCode_Oauth:
+    tokenUrl: ''
+    authorizationUrl: ''
+    description: |-
+      {
+      "BuildEieHeader" : "Header 3.2",
+      "SecurityTemplate" : "FHIRPatientDocumentReferenceRead",
+      "Backend" : "IIB",
+      "Errorhandlingpolicy": "Transparent"
+      "Consumer":"External",
+      "Mutual Auth between Consumer and APIC" : "Not Required"
+      }
+    scopes:
+      patient/*.read: ''
+      patient/DocumentReference.read: ''
+      patient/DocumentReference.*: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+definitions:
+  Meta:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        lastUpdated:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))"
+          description: When the resource last changed - e.g. when the version changed.
+          type: string
+        versionId:
+          pattern: "[A-Za-z0-9\\-\\.]{1,64}"
+          description: The version specific identifier, as it appears in the version
+            portion of the URL. This value changes when the resource is created, updated,
+            or deleted.
+          type: string
+        security:
+          description: Security labels applied to this resource. These tags connect
+            specific resources to the overall security policy and infrastructure.
+          type: array
+          items:
+            "$ref": "#/definitions/Coding"
+        profile:
+          description: A list of profiles (references to [StructureDefinition](structuredefinition.html#)
+            resources) that this resource claims to conform to. The URL is a reference
+            to [StructureDefinition.url](structuredefinition-definitions.html#StructureDefinition.url).
+          type: array
+          items:
+            pattern: "\\S*"
+            type: string
+        source:
+          pattern: "\\S*"
+          description: A uri that identifies the source system of the resource. This
+            provides a minimal amount of [Provenance](provenance.html#) information
+            that can be used to track or differentiate the source of information in
+            the resource. The source may identify another FHIR server, document, message,
+            database, etc.
+          type: string
+        tag:
+          description: Tags applied to this resource. Tags are intended to be used
+            to identify and relate resources to process and workflow, and applications
+            are not required to consider the tags when interpreting the meaning of
+            a resource.
+          type: array
+          items:
+            "$ref": "#/definitions/Coding"
+  DomainResource:
+    allOf:
+    - "$ref": "#/definitions/Resource"
+    - type: object
+      properties:
+        contained:
+          description: These resources do not have an independent existence apart
+            from the resource that contains them - they cannot be identified independently,
+            and nor can they have their own independent transaction scope.
+          type: array
+          items:
+            "$ref": "#/definitions/Resource"
+        extension:
+          description: May be used to represent additional information that is not
+            part of the basic definition of the resource. To make the use of extensions
+            safe and manageable, there is a strict set of governance applied to the
+            definition and use of extensions. Though any implementer can define an
+            extension, there is a set of requirements that SHALL be met as part of
+            the definition of the extension.
+          type: array
+          items:
+            "$ref": "#/definitions/Extension"
+        modifierExtension:
+          description: |-
+            May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
+
+            Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
+          type: array
+          items:
+            "$ref": "#/definitions/Extension"
+        text:
+          description: A human-readable narrative that contains a summary of the resource
+            and can be used to represent the content of the resource to a human. The
+            narrative need not encode all the structured data, but is required to
+            contain sufficient detail to make it "clinically safe" for a human to
+            just read the narrative. Resource definitions may define what content
+            should be represented in the narrative to ensure clinical safety.
+          "$ref": "#/definitions/Narrative"
+  Address:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        country:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Country - a nation as commonly understood or generally accepted.
+          type: string
+        period:
+          description: Time period when address was/is in use.
+          "$ref": "#/definitions/Period"
+        city:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The name of the city, town, suburb, village or other community
+            or delivery center.
+          type: string
+        use:
+          description: The purpose of this address.
+          type: string
+          enum:
+          - home
+          - work
+          - temp
+          - old
+          - billing
+        line:
+          description: This component contains the house number, apartment number,
+            street name, street direction, P.O. Box number, delivery hints, and similar
+            address information.
+          type: array
+          items:
+            pattern: "[ \\r\\n\\t\\S]+"
+            type: string
+        district:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The name of the administrative area (county).
+          type: string
+        postalCode:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A postal code designating a region defined by the postal service.
+          type: string
+        text:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Specifies the entire address as it should be displayed e.g.
+            on a postal label. This may be provided instead of or as well as the specific
+            parts.
+          type: string
+        state:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Sub-unit of a country with limited sovereignty in a federally
+            organized country. A code may be used if codes are in common use (e.g.
+            US 2 letter state codes).
+          type: string
+        type:
+          description: Distinguishes between physical addresses (those you can visit)
+            and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses
+            are both.
+          type: string
+          enum:
+          - postal
+          - physical
+          - both
+  Element:
+    type: object
+    properties:
+      extension:
+        description: May be used to represent additional information that is not part
+          of the basic definition of the element. To make the use of extensions safe
+          and manageable, there is a strict set of governance applied to the definition
+          and use of extensions. Though any implementer can define an extension, there
+          is a set of requirements that SHALL be met as part of the definition of
+          the extension.
+        type: array
+        items:
+          "$ref": "#/definitions/Extension"
+      id:
+        pattern: "[A-Za-z0-9\\-\\.]{1,64}"
+        description: Unique id for the element within a resource (for internal references).
+          This may be any string value that does not contain spaces.
+        type: string
+  USCoreCodeableConceptAssessPlan:
+    allOf:
+    - "$ref": "#/definitions/CodeableConcept"
+    - type: object
+    description: |-
+      This class is associated with the category property in the USCoreCarePlan
+      Required.
+  OperationOutcome_Issue:
+    allOf:
+    - "$ref": "#/definitions/BackboneElement"
+    - type: object
+      required:
+      - code
+      - severity
+      properties:
+        severity:
+          description: Indicates whether the issue indicates a variation from successful
+            processing.
+          type: string
+          enum:
+          - fatal
+          - error
+          - warning
+          - information
+        diagnostics:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Additional diagnostic information about the issue.
+          type: string
+        code:
+          description: Describes the type of the issue. The system that creates an
+            OperationOutcome SHALL choose the most applicable code from the IssueType
+            value set, and may additional provide its own code for the error in the
+            details element.
+          type: string
+          enum:
+          - invalid
+          - structure
+          - required
+          - value
+          - invariant
+          - security
+          - login
+          - unknown
+          - expired
+          - forbidden
+          - suppressed
+          - processing
+          - not-supported
+          - duplicate
+          - multiple-matches
+          - not-found
+          - deleted
+          - too-long
+          - code-invalid
+          - extension
+          - too-costly
+          - business-rule
+          - conflict
+          - transient
+          - lock-error
+          - no-store
+          - exception
+          - timeout
+          - incomplete
+          - throttled
+          - informational
+        expression:
+          description: A [simple subset of FHIRPath](fhirpath.html#simple) limited
+            to element names, repetition indicators and the default child accessor
+            that identifies one of the elements in the resource that caused this issue
+            to be raised.
+          type: array
+          items:
+            pattern: "[ \\r\\n\\t\\S]+"
+            type: string
+        details:
+          description: Additional details about the error. This may be a text description
+            of the error or a system code that identifies the error.
+          "$ref": "#/definitions/CodeableConcept"
+        location:
+          description: |-
+            This element is deprecated because it is XML specific. It is replaced by issue.expression, which is format independent, and simpler to parse.
+
+            For resource issues, this will be a simple XPath limited to element names, repetition indicators and the default child accessor that identifies one of the elements in the resource that caused this issue to be raised. For HTTP errors, will be "http." + the parameter name.
+          type: array
+          items:
+            pattern: "[ \\r\\n\\t\\S]+"
+            type: string
+  Attachment:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        data:
+          pattern: "(\\s*([0-9a-zA-Z\\+\\=]){4}\\s*)+"
+          description: The actual data of the attachment - a sequence of bytes, base64
+            encoded.
+          type: string
+        size:
+          format: int32
+          description: The number of bytes of data that make up this attachment (before
+            base64 encoding, if that is done).
+          type: integer
+        language:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: The human language of the content. The value can be any valid
+            value according to BCP 47.
+          type: string
+        title:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A label or set of text to display in place of the data.
+          type: string
+        contentType:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: Identifies the type of the data in the attachment and allows
+            a method to be chosen to interpret or render the data. Includes mime type
+            parameters such as charset where appropriate.
+          type: string
+        url:
+          pattern: "\\S*"
+          description: A location where the data can be accessed.
+          type: string
+        hash:
+          pattern: "(\\s*([0-9a-zA-Z\\+\\=]){4}\\s*)+"
+          description: The calculated hash of the data using SHA-1. Represented using
+            base64.
+          type: string
+        creation:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?"
+          description: The date that the attachment was first created.
+          type: string
+  Count:
+    allOf:
+    - "$ref": "#/definitions/Quantity"
+    - type: object
+  Timing_Repeat:
+    allOf:
+    - "$ref": "#/definitions/BackboneElement"
+    - type: object
+      properties:
+        boundsRange:
+          description: Either a duration for the length of the timing schedule, a
+            range of possible length, or outer bounds for start and/or end limits
+            of the timing schedule.
+          "$ref": "#/definitions/Range"
+        period:
+          description: Indicates the duration of time over which repetitions are to
+            occur; e.g. to express "3 times per day", 3 would be the frequency and
+            "1 day" would be the period. If periodMax is present, this element indicates
+            the lower bound of the allowed range of the period length.
+          type: number
+        offset:
+          format: int32
+          description: The number of minutes from the event. If the event code does
+            not indicate whether the minutes is before or after the event, then the
+            offset is assumed to be after the event.
+          type: integer
+        frequencyMax:
+          format: int32
+          description: If present, indicates that the frequency is a range - so to
+            repeat between [frequency] and [frequencyMax] times within the period
+            or period range.
+          type: integer
+        countMax:
+          format: int32
+          description: If present, indicates that the count is a range - so to perform
+            the action between [count] and [countMax] times.
+          type: integer
+        periodMax:
+          description: If present, indicates that the period is a range from [period]
+            to [periodMax], allowing expressing concepts such as "do this once every
+            3-5 days.
+          type: number
+        count:
+          format: int32
+          description: A total count of the desired number of repetitions across the
+            duration of the entire timing specification. If countMax is present, this
+            element indicates the lower bound of the allowed range of count values.
+          type: integer
+        periodUnit:
+          description: The units of time for the period in UCUM units.
+          type: string
+          enum:
+          - s
+          - min
+          - h
+          - d
+          - wk
+          - mo
+          - a
+        when:
+          description: An approximate time period during the day, potentially linked
+            to an event of daily living that indicates when the action should occur.
+          type: array
+          items:
+            type: string
+        frequency:
+          format: int32
+          description: The number of times to repeat the action within the specified
+            period. If frequencyMax is present, this element indicates the lower bound
+            of the allowed range of the frequency.
+          type: integer
+        boundsDuration:
+          description: Either a duration for the length of the timing schedule, a
+            range of possible length, or outer bounds for start and/or end limits
+            of the timing schedule.
+          "$ref": "#/definitions/Duration"
+        duration:
+          description: How long this thing happens for when it happens. If durationMax
+            is present, this element indicates the lower bound of the allowed range
+            of the duration.
+          type: number
+        durationMax:
+          description: If present, indicates that the duration is a range - so to
+            perform the action between [duration] and [durationMax] time length.
+          type: number
+        dayOfWeek:
+          description: If one or more days of week is provided, then the action happens
+            only on the specified day(s).
+          type: array
+          items:
+            type: string
+        boundsPeriod:
+          description: Either a duration for the length of the timing schedule, a
+            range of possible length, or outer bounds for start and/or end limits
+            of the timing schedule.
+          "$ref": "#/definitions/Period"
+        durationUnit:
+          description: The units of time for the duration, in UCUM units.
+          type: string
+          enum:
+          - s
+          - min
+          - h
+          - d
+          - wk
+          - mo
+          - a
+        timeOfDay:
+          description: Specified time of day for action to take place.
+          type: array
+          items:
+            pattern: "([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?"
+            type: string
+  ContactPoint:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        period:
+          description: Time period when the contact point was/is in use.
+          "$ref": "#/definitions/Period"
+        system:
+          description: Telecommunications form for contact point - what communications
+            system is required to make use of the contact.
+          type: string
+          enum:
+          - phone
+          - fax
+          - email
+          - pager
+          - url
+          - sms
+          - other
+        use:
+          description: Identifies the purpose for the contact point.
+          type: string
+          enum:
+          - home
+          - work
+          - temp
+          - old
+          - mobile
+        rank:
+          format: int32
+          description: Specifies a preferred order in which to use a set of contacts.
+            ContactPoints with lower rank values are more preferred than those with
+            higher rank values.
+          type: integer
+        value:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The actual contact point details, in a form that is meaningful
+            to the designated communication system (i.e. phone number or email address).
+          type: string
+  HumanName:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        given:
+          description: Given name.
+          type: array
+          items:
+            pattern: "[ \\r\\n\\t\\S]+"
+            type: string
+        period:
+          description: Indicates the period of time when this name was valid for the
+            named person.
+          "$ref": "#/definitions/Period"
+        use:
+          description: Identifies the purpose for this name.
+          type: string
+          enum:
+          - usual
+          - official
+          - temp
+          - nickname
+          - anonymous
+          - old
+          - maiden
+        prefix:
+          description: Part of the name that is acquired as a title due to academic,
+            legal, employment or nobility status, etc. and that appears at the start
+            of the name.
+          type: array
+          items:
+            pattern: "[ \\r\\n\\t\\S]+"
+            type: string
+        text:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Specifies the entire name as it should be displayed e.g. on
+            an application UI. This may be provided instead of or as well as the specific
+            parts.
+          type: string
+        family:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The part of a name that links to the genealogy. In some cultures
+            (e.g. Eritrea) the family name of a son is the first name of his father.
+          type: string
+        suffix:
+          description: Part of the name that is acquired as a title due to academic,
+            legal, employment or nobility status, etc. and that appears at the end
+            of the name.
+          type: array
+          items:
+            pattern: "[ \\r\\n\\t\\S]+"
+            type: string
+  Money:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        currency:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: ISO 4217 Currency Code.
+          type: string
+        value:
+          description: Numerical value (with implicit precision).
+          type: number
+  Identifier:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        period:
+          description: Time period during which identifier is/was valid for use.
+          "$ref": "#/definitions/Period"
+        system:
+          pattern: "\\S*"
+          description: Establishes the namespace for the value - that is, a URL that
+            describes a set values that are unique.
+          type: string
+        use:
+          description: The purpose of this identifier.
+          type: string
+          enum:
+          - usual
+          - official
+          - temp
+          - secondary
+          - old
+        assigner:
+          description: Organization that issued/manages the identifier.
+          "$ref": "#/definitions/Reference"
+        type:
+          description: A coded type for the identifier that can be used to determine
+            which identifier to use for a specific purpose.
+          "$ref": "#/definitions/CodeableConcept"
+        value:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The portion of the identifier typically relevant to the user
+            and which is unique within the context of the system.
+          type: string
+  Coding:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        system:
+          pattern: "\\S*"
+          description: The identification of the code system that defines the meaning
+            of the symbol in the code.
+          type: string
+        code:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: A symbol in syntax defined by the system. The symbol may be
+            a predefined code or an expression in a syntax defined by the coding system
+            (e.g. post-coordination).
+          type: string
+        userSelected:
+          description: Indicates that this coding was chosen by a user directly -
+            e.g. off a pick list of available items (codes or displays).
+          type: boolean
+        display:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A representation of the meaning of the code in the system,
+            following the rules of the system.
+          type: string
+        version:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The version of the code system which was used when choosing
+            this code. Note that a well-maintained code system does not need the version
+            reported, because the meaning of codes is consistent across versions.
+            However this cannot consistently be assured, and when the meaning is not
+            guaranteed to be consistent, the version SHOULD be exchanged.
+          type: string
+  Narrative:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      required:
+      - div
+      - status
+      properties:
+        div:
+          description: The actual narrative content, a stripped down version of XHTML.
+          type: string
+        status:
+          description: The status of the narrative - whether it's entirely generated
+            (from just the defined data or the extensions too), or whether a human
+            authored it and it may contain additional data.
+          type: string
+          enum:
+          - generated
+          - extensions
+          - additional
+          - empty
+  OperationOutcome:
+    allOf:
+    - "$ref": "#/definitions/DomainResource"
+    - type: object
+      required:
+      - issue
+      properties:
+        issue:
+          minItems: 1
+          description: An error, warning, or information message that results from
+            a system action.
+          type: array
+          items:
+            "$ref": "#/definitions/OperationOutcome_Issue"
+  USCoreDocumentReference:
+    allOf:
+    - "$ref": "#/definitions/DocumentReference"
+    - type: object
+      required:
+      - category
+      - content
+      - status
+      - subject
+      - type
+      properties:
+        date:
+          format: date-time
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            type = instant
+          type: string
+        identifier:
+          description: http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+          "$ref": "#/definitions/Identifier"
+        custodian:
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            Reference(US Core Organization Profile)
+          "$ref": "#/definitions/Reference"
+        subject:
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            Cardinality=1..1, Type=Reference(US Core Patient Profile)
+          "$ref": "#/definitions/Reference"
+        author:
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            Reference(US Core Practitioner Profile | PractitionerRole | US Core Organization Profile | Device | US Core Patient Profile | RelatedPerson)
+          type: array
+          items:
+            "$ref": "#/definitions/Reference"
+        context:
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            Following elements are under context and their multiplicity are:
+            encounter 0..1 type = Reference(US Core Encounter Profile)
+            period 0..1, type = Period
+          "$ref": "#/definitions/DocumentReference_Context"
+        type:
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            Cardinality=1..1 Type=CodeableConcept Binding: US Core DocumentReference Type (required) Min Binding: US Core Clinical Note Type
+          "$ref": "#/definitions/CodeableConcept"
+        category:
+          minItems: 1
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            Cardinality=1..* Type=CodeableConceptBinding: US Core DocumentReference Category (extensible)
+          type: array
+          items:
+            "$ref": "#/definitions/CodeableConcept"
+        content:
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+
+            Following elements under content and their multiplicity are:
+            attachment 1..1 type = Attachment, us-core-6: DocumentReference.content.attachment.url or DocumentReference.content.attachment.data or both SHALL be present.
+             |--contentType 1..1 type = code
+             |--url 0..1 type = url
+            format 0..1, type = Coding, Binding: DocumentReferenceFormatCodeSet (extensible)
+          "$ref": "#/definitions/DocumentReference_Content"
+        status:
+          description: |-
+            http://hl7.org/fhir/us/core/STU3.1/general-guidance.html#mustSupport
+            Binding: DocumentReferenceStatus (required)
+          type: string
+          enum:
+          - current
+          - superseded
+          - entered-in-error
+    description: |-
+      http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference
+
+      ##Summary of the Mandatory Requirements
+      1. A code in DocumentReference.status with a required binding to DocumentReferenceStatus
+      2. A CodeableConcept in DocumentReference.type with a required binding to US Core DocumentReference Type
+      3. One or more CodeableConcepts in DocumentReference.category with an extensible binding to US Core DocumentReference Category
+      4. A Patient Reference in DocumentReference.subject
+      5. A Content in DocumentReference.content
+       - which must have a Attachment value in DocumentReference.content.attachment
+      - which must have a code value in DocumentReference.content.attachment.contentType with a required binding to MimeType
+      - which should have a base64Binary value in DocumentReference.content.attachment.data
+      - which should have an url value in DocumentReference.content.attachment.url
+       - which should have a Coding value in DocumentReference.content.format with an extensible binding to DocumentReference Format Code Set
+
+      ##Summary of the Must Support Requirements
+      1. One or more Identifiers in DocumentReference.identifier
+      2. An instant in DocumentReference.date
+      3. One or more Author References in DocumentReference.author
+      4. A Custodian Reference in DocumentReference.custodian
+      5. A Context in DocumentReference.context
+       - which should have a Encounter Reference value in DocumentReference.context.encounter
+       - which should have a Period value in DocumentReference.context.period
+
+      ##Summary of Constraints
+      1. DocumentReference.content.attachment.url or DocumentReference.content.attachment.data or both SHALL be present.
+  SampledData:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      required:
+      - dimensions
+      - origin
+      - period
+      properties:
+        period:
+          description: The length of time between sampling times, measured in milliseconds.
+          type: number
+        data:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A series of data points which are decimal values separated
+            by a single space (character u20). The special values "E" (error), "L"
+            (below detection limit) and "U" (above detection limit) can also be used
+            in place of a decimal value.
+          type: string
+        origin:
+          description: The base quantity that a measured value of zero represents.
+            In addition, this provides the units of the entire measurement series.
+          "$ref": "#/definitions/SimpleQuantity"
+        upperLimit:
+          description: The upper limit of detection of the measured points. This is
+            needed if any of the data points have the value "U" (higher than detection
+            limit).
+          type: number
+        lowerLimit:
+          description: The lower limit of detection of the measured points. This is
+            needed if any of the data points have the value "L" (lower than detection
+            limit).
+          type: number
+        factor:
+          description: A correction factor that is applied to the sampled data points
+            before they are added to the origin.
+          type: number
+        dimensions:
+          format: int32
+          description: The number of sample points at each time point. If this value
+            is greater than one, then the dimensions will be interlaced - all the
+            sample points for a point in time will be recorded at once.
+          type: integer
+  USCoreCodeableConceptLaboratorySlice:
+    allOf:
+    - "$ref": "#/definitions/CodeableConcept"
+    - type: object
+    description: |-
+      This class is associated with the category property in the USCoreDiagnosticReportLab
+      Required.
+  Ratio:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        numerator:
+          description: The value of the numerator.
+          "$ref": "#/definitions/Quantity"
+        denominator:
+          description: The value of the denominator.
+          "$ref": "#/definitions/Quantity"
+  Age:
+    allOf:
+    - "$ref": "#/definitions/Quantity"
+    - type: object
+  Distance:
+    allOf:
+    - "$ref": "#/definitions/Quantity"
+    - type: object
+  DocumentReference:
+    allOf:
+    - "$ref": "#/definitions/DomainResource"
+    - type: object
+      required:
+      - content
+      - status
+      properties:
+        date:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))"
+          description: When the document reference was created.
+          type: string
+        identifier:
+          description: Other identifiers associated with the document, including version
+            independent identifiers.
+          type: array
+          items:
+            "$ref": "#/definitions/Identifier"
+        custodian:
+          description: Identifies the organization or group who is responsible for
+            ongoing maintenance of and access to the document.
+          "$ref": "#/definitions/Reference"
+        subject:
+          description: Who or what the document is about. The document can be about
+            a person, (patient or healthcare practitioner), a device (e.g. a machine)
+            or even a group of subjects (such as a document about a herd of farm animals,
+            or a set of patients that share a common exposure).
+          "$ref": "#/definitions/Reference"
+        author:
+          description: Identifies who is responsible for adding the information to
+            the document.
+          type: array
+          items:
+            "$ref": "#/definitions/Reference"
+        securityLabel:
+          description: A set of Security-Tag codes specifying the level of privacy/security
+            of the Document. Note that DocumentReference.meta.security contains the
+            security labels of the "reference" to the document, while DocumentReference.securityLabel
+            contains a snapshot of the security labels on the document the reference
+            refers to.
+          type: array
+          items:
+            "$ref": "#/definitions/CodeableConcept"
+        description:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Human-readable description of the source document.
+          type: string
+        masterIdentifier:
+          description: Document identifier as assigned by the source of the document.
+            This identifier is specific to this version of the document. This unique
+            identifier may be used elsewhere to identify this version of the document.
+          "$ref": "#/definitions/Identifier"
+        type:
+          description: Specifies the particular kind of document referenced (e.g.
+            History and Physical, Discharge Summary, Progress Note). This usually
+            equates to the purpose of making the document referenced.
+          "$ref": "#/definitions/CodeableConcept"
+        content:
+          minItems: 1
+          description: The document and format referenced. There may be multiple content
+            element repetitions, each with a different format.
+          type: array
+          items:
+            "$ref": "#/definitions/DocumentReference_Content"
+        docStatus:
+          description: The status of the underlying document.
+          type: string
+          enum:
+          - preliminary
+          - final
+          - amended
+          - entered-in-error
+        context:
+          description: The clinical context in which the document was prepared.
+          "$ref": "#/definitions/DocumentReference_Context"
+        category:
+          description: A categorization for the type of document referenced - helps
+            for indexing and searching. This may be implied by or derived from the
+            code specified in the DocumentReference.type.
+          type: array
+          items:
+            "$ref": "#/definitions/CodeableConcept"
+        relatesTo:
+          description: Relationships that this document has with other document references
+            that already exist.
+          type: array
+          items:
+            "$ref": "#/definitions/DocumentReference_RelatesTo"
+        authenticator:
+          description: Which person or organization authenticates that this document
+            is valid.
+          "$ref": "#/definitions/Reference"
+        status:
+          description: The status of this document reference.
+          type: string
+          enum:
+          - current
+          - superseded
+          - entered-in-error
+  Reference:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        reference:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A reference to a location at which the other resource is found.
+            The reference may be a relative reference, in which case it is relative
+            to the service base URL, or an absolute URL that resolves to the location
+            where the resource is found. The reference may be version specific or
+            not. If the reference is not to a FHIR RESTful server, then it should
+            be assumed to be version specific. Internal fragment references (start
+            with '#') refer to contained resources.
+          type: string
+        identifier:
+          description: An identifier for the target resource. This is used when there
+            is no way to reference the other resource directly, either because the
+            entity it represents is not available through a FHIR server, or because
+            there is no way for the author of the resource to convert a known identifier
+            to an actual location. There is no requirement that a Reference.identifier
+            point to something that is actually exposed as a FHIR instance, but it
+            SHALL point to a business concept that would be expected to be exposed
+            as a FHIR instance, and that instance would need to be of a FHIR resource
+            type allowed by the reference.
+          "$ref": "#/definitions/Identifier"
+        display:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Plain text narrative that identifies the resource in addition
+            to the resource reference.
+          type: string
+        type:
+          pattern: "\\S*"
+          description: |-
+            The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.
+
+            The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).
+          type: string
+  DocumentReference_RelatesTo:
+    allOf:
+    - "$ref": "#/definitions/BackboneElement"
+    - type: object
+      required:
+      - code
+      - target
+      properties:
+        code:
+          description: The type of relationship that this document has with anther
+            document.
+          type: string
+          enum:
+          - replaces
+          - transforms
+          - signs
+          - appends
+        target:
+          description: The target document of this relationship.
+          "$ref": "#/definitions/Reference"
+  Resource:
+    type: object
+    required:
+    - resourceType
+    properties:
+      meta:
+        description: The metadata about the resource. This is content that is maintained
+          by the infrastructure. Changes to the content might not always be associated
+          with version changes to the resource.
+        "$ref": "#/definitions/Meta"
+      implicitRules:
+        pattern: "\\S*"
+        description: A reference to a set of rules that were followed when the resource
+          was constructed, and which must be understood when processing the content.
+          Often, this is a reference to an implementation guide that defines the special
+          rules along with other profiles etc.
+        type: string
+      language:
+        pattern: "[^\\s]+(\\s[^\\s]+)*"
+        description: The base language in which the resource is written.
+        type: string
+      id:
+        pattern: "[A-Za-z0-9\\-\\.]{1,64}"
+        description: The logical id of the resource, as used in the URL for the resource.
+          Once assigned, this value never changes.
+        type: string
+      resourceType:
+        type: string
+        enum:
+        - Account
+        - ActivityDefinition
+        - AdverseEvent
+        - AllergyIntolerance
+        - Appointment
+        - AppointmentResponse
+        - AuditEvent
+        - Basic
+        - Binary
+        - BiologicallyDerivedProduct
+        - BodyStructure
+        - Bundle
+        - CapabilityStatement
+        - CarePlan
+        - CareTeam
+        - CatalogEntry
+        - ChargeItem
+        - ChargeItemDefinition
+        - Claim
+        - ClaimResponse
+        - ClinicalImpression
+        - CodeSystem
+        - Communication
+        - CommunicationRequest
+        - CompartmentDefinition
+        - Composition
+        - ConceptMap
+        - Condition
+        - Consent
+        - Contract
+        - Coverage
+        - CoverageEligibilityRequest
+        - CoverageEligibilityResponse
+        - DetectedIssue
+        - Device
+        - DeviceDefinition
+        - DeviceMetric
+        - DeviceRequest
+        - DeviceUseStatement
+        - DiagnosticReport
+        - DocumentManifest
+        - DocumentReference
+        - DomainResource
+        - EffectEvidenceSynthesis
+        - Encounter
+        - Endpoint
+        - EnrollmentRequest
+        - EnrollmentResponse
+        - EpisodeOfCare
+        - EventDefinition
+        - Evidence
+        - EvidenceVariable
+        - ExampleScenario
+        - ExplanationOfBenefit
+        - FamilyMemberHistory
+        - Flag
+        - Goal
+        - GraphDefinition
+        - Group
+        - GuidanceResponse
+        - HealthcareService
+        - ImagingStudy
+        - Immunization
+        - ImmunizationEvaluation
+        - ImmunizationRecommendation
+        - ImplementationGuide
+        - InsurancePlan
+        - Invoice
+        - Library
+        - Linkage
+        - List
+        - Location
+        - Measure
+        - MeasureReport
+        - Media
+        - Medication
+        - MedicationAdministration
+        - MedicationDispense
+        - MedicationKnowledge
+        - MedicationRequest
+        - MedicationStatement
+        - MedicinalProduct
+        - MedicinalProductAuthorization
+        - MedicinalProductContraindication
+        - MedicinalProductIndication
+        - MedicinalProductIngredient
+        - MedicinalProductInteraction
+        - MedicinalProductManufactured
+        - MedicinalProductPackaged
+        - MedicinalProductPharmaceutical
+        - MedicinalProductUndesirableEffect
+        - MessageDefinition
+        - MessageHeader
+        - MolecularSequence
+        - NamingSystem
+        - NutritionOrder
+        - Observation
+        - ObservationDefinition
+        - OperationDefinition
+        - OperationOutcome
+        - Organization
+        - OrganizationAffiliation
+        - Parameters
+        - Patient
+        - PaymentNotice
+        - PaymentReconciliation
+        - Person
+        - PlanDefinition
+        - Practitioner
+        - PractitionerRole
+        - Procedure
+        - Provenance
+        - Questionnaire
+        - QuestionnaireResponse
+        - RelatedPerson
+        - RequestGroup
+        - ResearchDefinition
+        - ResearchElementDefinition
+        - ResearchStudy
+        - ResearchSubject
+        - Resource
+        - RiskAssessment
+        - RiskEvidenceSynthesis
+        - Schedule
+        - SearchParameter
+        - ServiceRequest
+        - Slot
+        - Specimen
+        - SpecimenDefinition
+        - StructureDefinition
+        - StructureMap
+        - Subscription
+        - Substance
+        - SubstanceNucleicAcid
+        - SubstancePolymer
+        - SubstanceProtein
+        - SubstanceReferenceInformation
+        - SubstanceSourceMaterial
+        - SubstanceSpecification
+        - SupplyDelivery
+        - SupplyRequest
+        - Task
+        - TerminologyCapabilities
+        - TestReport
+        - TestScript
+        - ValueSet
+        - VerificationResult
+        - VisionPrescription
+    discriminator: resourceType
+  SimpleQuantity:
+    allOf:
+    - "$ref": "#/definitions/Quantity"
+    - type: object
+  Period:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        start:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?"
+          description: The start of the period. The boundary is inclusive.
+          type: string
+        end:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?"
+          description: The end of the period. If the end of the period is missing,
+            it means no end was known or planned at the time the instance was created.
+            The start may be in the past, and the end date in the future, which means
+            that period is expected/planned to end at that time.
+          type: string
+  Quantity:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        comparator:
+          description: How the value should be understood and represented - whether
+            the actual value is greater or less than the stated value due to measurement
+            issues; e.g. if the comparator is "<>
+          type: string
+          enum:
+          - "<"
+          - "<="
+          - ">="
+          - ">"
+        unit:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A human-readable form of the unit.
+          type: string
+        system:
+          pattern: "\\S*"
+          description: The identification of the system that provides the coded form
+            of the unit.
+          type: string
+        code:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: A computer processable form of the unit in some unit representation
+            system.
+          type: string
+        value:
+          description: The value of the measured amount. The value includes an implicit
+            precision in the presentation of the value.
+          type: number
+  Duration:
+    allOf:
+    - "$ref": "#/definitions/Quantity"
+    - type: object
+  Range:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        high:
+          description: The high limit. The boundary is inclusive.
+          "$ref": "#/definitions/SimpleQuantity"
+        low:
+          description: The low limit. The boundary is inclusive.
+          "$ref": "#/definitions/SimpleQuantity"
+  RelatedArtifact:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      required:
+      - type
+      properties:
+        citation:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A bibliographic citation for the related artifact. This text
+            SHOULD be formatted according to an accepted citation format.
+          type: string
+        resource:
+          pattern: "\\S*"
+          description: The related resource, such as a library, value set, profile,
+            or other knowledge resource.
+          type: string
+        display:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A brief description of the document or knowledge resource being
+            referenced, suitable for display to a consumer.
+          type: string
+        document:
+          description: The document being referenced, represented as an attachment.
+            This is exclusive with the resource element.
+          "$ref": "#/definitions/Attachment"
+        label:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A short label that can be used to reference the citation from
+            elsewhere in the containing artifact, such as a footnote index.
+          type: string
+        type:
+          description: The type of relationship to the related artifact.
+          type: string
+          enum:
+          - documentation
+          - justification
+          - citation
+          - predecessor
+          - successor
+          - derived-from
+          - depends-on
+          - composed-of
+        url:
+          pattern: "\\S*"
+          description: A url for the artifact that can be followed to access the actual
+            content.
+          type: string
+  Annotation:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      required:
+      - text
+      properties:
+        authorString:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The individual responsible for making the annotation.
+          type: string
+        authorReference:
+          description: The individual responsible for making the annotation.
+          "$ref": "#/definitions/Reference"
+        time:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?"
+          description: Indicates when this particular annotation was made.
+          type: string
+        text:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The text of the annotation in markdown format.
+          type: string
+  GeolocationLongitudeExt:
+    allOf:
+    - "$ref": "#/definitions/GeolocationExt"
+    - type: object
+      required:
+      - ValueDecimal
+      - url
+      properties:
+        ValueDecimal:
+          type: number
+        url:
+          default: longitude
+          type: string
+  Extension:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      required:
+      - url
+      properties:
+        valueBase64Binary:
+          pattern: "(\\s*([0-9a-zA-Z\\+\\=]){4}\\s*)+"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueBoolean:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: boolean
+        valueCoding:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Coding"
+        valueTime:
+          pattern: "([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueIdentifier:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Identifier"
+        valueReference:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Reference"
+        valueMoney:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Money"
+        valueRange:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Range"
+        valueSignature:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Signature"
+        valueUri:
+          pattern: "\\S*"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueDistance:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Distance"
+        valueUrl:
+          pattern: "\\S*"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueContactDetail:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/ContactDetail"
+        valueMeta:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Meta"
+        valueUuid:
+          pattern: urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueCodeableConcept:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/CodeableConcept"
+        valueRatio:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Ratio"
+        valueMarkdown:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueAttachment:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Attachment"
+        valueUsageContext:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/UsageContext"
+        valueDateTime:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueInteger:
+          format: int32
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: integer
+        valueUnsignedInt:
+          format: int32
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: integer
+        valueHumanName:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/HumanName"
+        valueQuantity:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Quantity"
+        valueRelatedArtifact:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/RelatedArtifact"
+        valueCanonical:
+          pattern: "\\S*"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueCount:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Count"
+        valueId:
+          pattern: "[A-Za-z0-9\\-\\.]{1,64}"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueDecimal:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: number
+        valueCode:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueDate:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valueOid:
+          pattern: urn:oid:[0-2](\.(0|[1-9][0-9]*))+
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        url:
+          pattern: "\\S*"
+          description: Source of the definition for the extension code - a logical
+            name or a URL.
+          type: string
+        valueAddress:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Address"
+        valueContactPoint:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/ContactPoint"
+        valueString:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valuePeriod:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Period"
+        valueSampledData:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/SampledData"
+        valueTiming:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Timing"
+        valueInstant:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))"
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: string
+        valuePositiveInt:
+          format: int32
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          type: integer
+        valueDuration:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Duration"
+        valueAge:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Age"
+        valueAnnotation:
+          description: Value of extension - must be one of a constrained set of the
+            data types (see [Extensibility](extensibility.html) for a list).
+          "$ref": "#/definitions/Annotation"
+  ContactDetail:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        name:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: The name of an individual to contact.
+          type: string
+        telecom:
+          description: The contact details for the individual (if a name was provided)
+            or the organization.
+          type: array
+          items:
+            "$ref": "#/definitions/ContactPoint"
+  GeolocationLatitudeExt:
+    allOf:
+    - "$ref": "#/definitions/GeolocationExt"
+    - type: object
+      required:
+      - ValueDecimal
+      - url
+      properties:
+        ValueDecimal:
+          type: number
+        url:
+          default: latitude
+          type: string
+  BackboneElement:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        modifierExtension:
+          description: |-
+            May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
+
+            Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
+          type: array
+          items:
+            "$ref": "#/definitions/Extension"
+  UsageContext:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      required:
+      - code
+      properties:
+        valueCodeableConcept:
+          description: A value that defines the context specified in this context
+            of use. The interpretation of the value is defined by the code.
+          "$ref": "#/definitions/CodeableConcept"
+        code:
+          description: A code that identifies the type of context being specified
+            by this usage context.
+          "$ref": "#/definitions/Coding"
+        valueReference:
+          description: A value that defines the context specified in this context
+            of use. The interpretation of the value is defined by the code.
+          "$ref": "#/definitions/Reference"
+        valueRange:
+          description: A value that defines the context specified in this context
+            of use. The interpretation of the value is defined by the code.
+          "$ref": "#/definitions/Range"
+        valueQuantity:
+          description: A value that defines the context specified in this context
+            of use. The interpretation of the value is defined by the code.
+          "$ref": "#/definitions/Quantity"
+  DocumentReference_Context:
+    allOf:
+    - "$ref": "#/definitions/BackboneElement"
+    - type: object
+      properties:
+        period:
+          description: The time period over which the service that is described by
+            the document was provided.
+          "$ref": "#/definitions/Period"
+        related:
+          description: Related identifiers or resources associated with the DocumentReference.
+          type: array
+          items:
+            "$ref": "#/definitions/Reference"
+        facilityType:
+          description: The kind of facility where the patient was seen.
+          "$ref": "#/definitions/CodeableConcept"
+        practiceSetting:
+          description: This property may convey specifics about the practice setting
+            where the content was created, often reflecting the clinical specialty.
+          "$ref": "#/definitions/CodeableConcept"
+        encounter:
+          description: Describes the clinical encounter or type of care that the document
+            content is associated with.
+          type: array
+          items:
+            "$ref": "#/definitions/Reference"
+        event:
+          description: This list of codes represents the main clinical acts, such
+            as a colonoscopy or an appendectomy, being documented. In some cases,
+            the event is inherent in the type Code, such as a "History and Physical
+            Report" in which the procedure being documented is necessarily a "History
+            and Physical" act.
+          type: array
+          items:
+            "$ref": "#/definitions/CodeableConcept"
+        sourcePatientInfo:
+          description: The Patient Information as known when the document was published.
+            May be a reference to a version specific, or contained.
+          "$ref": "#/definitions/Reference"
+  Signature:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      required:
+      - type
+      - when
+      - who
+      properties:
+        data:
+          pattern: "(\\s*([0-9a-zA-Z\\+\\=]){4}\\s*)+"
+          description: The base64 encoding of the Signature content. When signature
+            is not recorded electronically this element would be empty.
+          type: string
+        onBehalfOf:
+          description: A reference to an application-usable description of the identity
+            that is represented by the signature.
+          "$ref": "#/definitions/Reference"
+        sigFormat:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: A mime type that indicates the technical format of the signature.
+            Important mime types are application/signature+xml for X ML DigSig, application/jose
+            for JWS, and image/* for a graphical image of a signature, etc.
+          type: string
+        targetFormat:
+          pattern: "[^\\s]+(\\s[^\\s]+)*"
+          description: A mime type that indicates the technical format of the target
+            resources signed by the signature.
+          type: string
+        type:
+          minItems: 1
+          description: An indication of the reason that the entity signed this document.
+            This may be explicitly included as part of the signature information and
+            can be used when determining accountability for various actions concerning
+            the document.
+          type: array
+          items:
+            "$ref": "#/definitions/Coding"
+        when:
+          pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))"
+          description: When the digital signature was signed.
+          type: string
+        who:
+          description: A reference to an application-usable description of the identity
+            that signed (e.g. the signature used their private key).
+          "$ref": "#/definitions/Reference"
+  USCoreIdentifier:
+    allOf:
+    - "$ref": "#/definitions/Identifier"
+    - type: object
+  Timing:
+    allOf:
+    - "$ref": "#/definitions/BackboneElement"
+    - type: object
+      properties:
+        code:
+          description: A code for the timing schedule (or just text in code.text).
+            Some codes such as BID are ubiquitous, but many institutions define their
+            own additional codes. If a code is provided, the code is understood to
+            be a complete statement of whatever is specified in the structured timing
+            data, and either the code or the data may be used to interpret the Timing,
+            with the exception that .repeat.bounds still applies over the code (and
+            is not contained in the code).
+          "$ref": "#/definitions/CodeableConcept"
+        repeat:
+          description: A set of rules that describe when the event is scheduled.
+          "$ref": "#/definitions/Timing_Repeat"
+        event:
+          description: Identifies specific times when the event occurs.
+          type: array
+          items:
+            pattern: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]+)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?"
+            type: string
+  USCoreIdentifierCLIA:
+    allOf:
+    - "$ref": "#/definitions/USCoreIdentifier"
+    - type: object
+    description: |-
+      Clinical Laboratory Improvement Amendments (CLIA) Number for laboratories
+
+      This class is associated with the identifier property in the USCoreOrganization
+
+      Required Pattern: At least the following:
+
+      Elements are under identifierCLIA and their Cardinality and Type:
+
+       system1..1 uriThe namespace for the identifier value, Fixed Value: urn:oid:2.16.840.1.113883.4.7
+  USCoreIdentifierNPI:
+    allOf:
+    - "$ref": "#/definitions/USCoreIdentifier"
+    - type: object
+    description: |-
+      National Provider Identifier (NPI)
+
+      This class is associated with the identifier property in the USCorePractitioner and USCoreOrganization
+
+      Required Pattern: At least the following:
+
+      Elements are under identifierNPI and their Cardinality and Type:
+
+       system1..1 uri The namespace for the identifier value, Fixed Value: http://hl7.org/fhir/sid/us-npi
+  GeolocationExt:
+    allOf:
+    - "$ref": "#/definitions/Extension"
+    - type: object
+      required:
+      - url
+      properties:
+        url:
+          default: http://hl7.org/fhir/StructureDefinition/geolocation
+          type: string
+  DocumentReference_Content:
+    allOf:
+    - "$ref": "#/definitions/BackboneElement"
+    - type: object
+      required:
+      - attachment
+      properties:
+        attachment:
+          description: The document or URL of the document along with critical metadata
+            to prove content has integrity.
+          "$ref": "#/definitions/Attachment"
+        format:
+          description: An identifier of the document encoding, structure, and template
+            that the document conforms to beyond the base format indicated in the
+            mimeType.
+          "$ref": "#/definitions/Coding"
+  CodeableConcept:
+    allOf:
+    - "$ref": "#/definitions/Element"
+    - type: object
+      properties:
+        coding:
+          description: A reference to a code defined by a terminology system.
+          type: array
+          items:
+            "$ref": "#/definitions/Coding"
+        text:
+          pattern: "[ \\r\\n\\t\\S]+"
+          description: A human language representation of the concept as seen/selected/uttered
+            by the user who entered the data and/or which represents the intended
+            meaning of the user.
+          type: string
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: interoperabilitydevelopersupport@aetna.com
+  description: |-
+    The Aetna Patient Access API is an enterprise API that implements the HL7 FHIR standard to meet the CMS requirements for Interoperability. The API provides the ability for Aetna members to access their Clinical data using Third-party client applications supporting those standards. The Patient Access API supports the FHIR DocumentReference resource that conforms to the HL7 FHIR USCore Implementation Guide STU5 Release v5.0.1 and supports USCore DocumentReference profile. The API follows the User token security model.
+
+    The DocumentReference Read API supports the following operations:
+
+    1. Read the current state of the resource using the Logical (unique) ID [FHIR Base]/DocumentReference/{id}
+  x-ibm-name: v2patientaccessdocumentreferenceid
+  title: "/v2/patientaccess/DocumentReference/{id}"
+  version: 2.0.0

@@ -1,0 +1,199 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  openapi/aetna-patient-access-api-openapi.yml, openapi/aetna-provider-directory-api-openapi.yml,
+  openapi/_original/*.yml (95 Swagger 2.0 documents Aetna publishes at
+  https://developerportal.aetna.com/managedcontent/yaml/),
+  https://apif1.aetna.com/fhir/.well-known/smart-configuration,
+  https://apif1.aetna.com/fhir/v2/patientaccess/metadata,
+  https://developerportal.aetna.com/assets/Data/commonresponse.json,
+  https://developerportal.aetna.com/managedcontent/pdfs/Token_Generation_Process-Patient_Access_APIs-Production.pdf,
+  https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+summary: >-
+  Aetna does not define house API conventions. It runs an IBM API Connect gateway in front of HL7
+  FHIR R4 servers, so the cross-cutting semantics an agent needs are FHIR's, with a thin layer of
+  gateway behaviour on top (429 traffic policing, a 405 for unsupported verbs, an optional
+  x-clientrefid correlation header). Everything below is read from Aetna's own published artifacts or
+  is the FHIR normative behaviour its CapabilityStatements bind it to. Where a convention genuinely
+  does not exist it is recorded as absent rather than assumed.
+auth:
+  style: oauth2-bearer
+  profile: SMART App Launch 1.0.0, authorization code with PKCE (S256) for public clients
+  header: 'Authorization: Bearer {access_token}'
+  applies_to:
+    - api: Patient Access / Payer to Payer
+      base: https://apif1.aetna.com/fhir
+      required: true
+      authorization_endpoint: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/authorize
+      token_endpoint: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/token
+      note: >-
+        The live smart-configuration names the /fhir/prod/v1/ endpoints; Aetna's own Token Generation
+        PDF and both CapabilityStatements name /fhir/v1/ (no "prod" segment). Both are recorded
+        because Aetna publishes both and a client cannot tell from the documents which is current.
+      scopes: [openid, fhirUser, profile, launch/patient, 'patient/*.read']
+      client_auth: client_secret_basic ("Send as Basic Auth Header")
+      consent: >-
+        A member (or a previous member) signs in during the authorization step; the token is bound to
+        that member's patient context. IAL2 identity proofing via CLEAR or ID.me is an optional
+        alternative for third-party production applications since 2026-06-25.
+    - api: Provider Directory
+      base: https://apif1.aetna.com/fhir/v1/providerdirectory
+      required: true
+      note: >-
+        Unlike several peer payers, Aetna does NOT expose the provider directory anonymously. Its
+        Swagger securityDefinitions declare oauth2 on every provider-directory operation, including a
+        clientCredentials scheme (FHIR_Application_Oauth) with scopes Public and NonPII. The live
+        CapabilityStatement carries the SMART oauth-uris extension.
+  cross_link: authentication/aetna-authentication.yml
+idempotency:
+  supported: na
+  header: null
+  reason: >-
+    Every operation in all 95 published specs is an HTTP GET - FHIR type-level search or instance
+    read. There is no create, update or delete on the public surface, so there is no unsafe request
+    for an idempotency key to protect. Aetna does document write operations elsewhere in its catalog
+    ($submit-attachment, Claim/$submit, $davinci-data-export) but every one of those spec files
+    returned HTTP 403 to this run, so nothing can be said about their idempotency contract.
+  note: >-
+    Recorded as `na`, not as a failure. No Idempotency pointer is emitted in apis.yml - there is
+    nothing for one to point at.
+reversibility:
+  applicable: false
+  grade: na
+  write_surface: none
+  reason: >-
+    The 99 operations captured in this repo are read-only GETs. An agent calling Aetna's public FHIR
+    surface cannot change anything, so there is nothing to reverse, no reversal operation to name and
+    no window to state. reversibility, dry_run_mode and idempotency are all `na` for this provider.
+  unassessed_write_surface:
+    - '/priorauthorizationsupport/v1/Claim/$submit'
+    - '/priorauthorizationsupport/v1/Claim/$inquire'
+    - '/clinicaldataexchange/v1/$submit-attachment'
+    - '/provideraccess/v1/Group/{id}/$davinci-data-export'
+  unassessed_write_surface_note: >-
+    These write and long-running operations are listed in Aetna's own API catalog and release
+    history, but every one of their spec documents returned HTTP 403 during this pass. Whether any
+    of them can be cancelled, withdrawn or corrected, and inside what window, is NOT recorded here
+    because Aetna's contract for them could not be read. This is an honest gap, not a finding of
+    absence - do not read `grade: na` as covering those four.
+pagination:
+  style: fhir-bundle-links with an opaque page token
+  supported: true
+  request_params:
+    - name: _count
+      in: query
+      description: Maximum number of search results to show on a page (Aetna's own wording).
+    - name: _page_token
+      in: query
+      description: >-
+        Server-provided opaque token. Aetna - "This value will be provided by the Server. Used to
+        retrieve the next page of results. If a search returns more resources than fit on one page,
+        the response includes a pagination URL in the Bundle.link field. The value with
+        Bundle.link.relation = next indicates that you can use the corresponding Bundle.link.url."
+      declared_on: 35 of 99 operations
+    - name: page
+      in: query
+      description: >-
+        Numeric page navigation, declared on 7 operations (mostly provider directory). Aetna's own
+        example - "self"=page=10, "first"=page=1, "last"=page=65, "previous"=page=9, "next"=page=11.
+  response_shape:
+    resource: Bundle
+    type: searchset
+    fields: [total, 'entry[]', 'link[]']
+    relations: [self, first, previous, next, last]
+  note: >-
+    Two pagination idioms coexist - an opaque _page_token on Patient Access and numeric page on parts
+    of the directory. Follow Bundle.link where relation == "next" verbatim; do not construct page URLs
+    by hand.
+filtering_and_search:
+  style: fhir-search-parameters
+  most_declared:
+    _count: 40
+    _revinclude: 36
+    _page_token: 35
+    patient: 31
+    _id: 18
+    date: 10
+    category: 8
+    _lastUpdated: 8
+    identifier: 7
+    _include: 7
+  modifiers_used: ['name:contains', 'address-city:exact', 'address-state:exact', 'address-postalcode:exact', 'location.address-state:exact']
+  note: >-
+    Aetna rejects unknown query parameters with a 400, so an agent must not probe with parameters the
+    CapabilityStatement does not list. The authoritative per-resource parameter list is at
+    GET https://apif1.aetna.com/fhir/v2/patientaccess/metadata and
+    GET https://apif1.aetna.com/fhir/v1/providerdirectory/metadata, both anonymously readable
+    (verified 200 on 2026-08-30) - which is unusual and useful, since most payers gate /metadata.
+field_selection:
+  supported: partial
+  params: [_include, _revinclude, _profile]
+  note: >-
+    _elements and _summary are FHIR normative but are not declared on any Aetna operation. _profile is
+    declared on 6 operations and is how a caller selects between CARIN Blue Button EOB profiles.
+content_negotiation:
+  request_header: 'Accept: application/json'
+  response_media_type: application/json
+  fhir_json_declared: false
+  note: >-
+    Every published Swagger declares `produces: [application/json]`, NOT application/fhir+json, even
+    though the payloads are FHIR resources. Aetna's linked error reference documents a 406 when the
+    API cannot produce a supported response type. XML is not declared anywhere.
+request_tracing:
+  request_id_header: null
+  correlation_header: x-clientrefid
+  correlation_required: false
+  correlation_description: 'Aetna''s own wording: "optional UUID to track the transaction."'
+  declared_on: the /v1/providerdirectorydata family
+  response_id: >-
+    Error bodies carry an OperationOutcome.id (for example "687401f85fd3fefb43182c22"), which is the
+    handle to quote to support. No response header carries it.
+  note: >-
+    x-clientrefid is a real, provider-documented correlation header, but it is declared on only one
+    API family. Patient Access operations declare no tracing header at all.
+versioning:
+  style: uri-path plus per-operation semantic version plus implementation-guide version
+  current: v2 (Patient Access), v1 (Provider Directory, Provider Access, Prior Auth, RTPBC)
+  cross_link: lifecycle/aetna-lifecycle.yml
+errors:
+  envelope: FHIR OperationOutcome, served as application/json
+  rfc9457: false
+  statuses: [200, 203, 400, 401, 403, 404, 405, 406, 429, 500]
+  cross_link: errors/aetna-problem-types.yml
+rate_limit_signalling:
+  headers_documented: []
+  status_on_exhaustion: 429
+  retry_after: false
+  body_on_exhaustion: >-
+    FHIR OperationOutcome, severity error, code transient, display "We have detected excessive traffic
+    coming from this IP.", text "Too Many Request"
+  note: >-
+    A 429 is genuinely documented (on 11 operations) and its body is specified, which is more than
+    most payers do - but no numeric limit, no RateLimit-* / X-RateLimit-* header and no Retry-After is
+    published anywhere. The policing is by source IP, per Aetna's own message, not by API key.
+  cross_link: rate-limits/aetna-rate-limits.yml
+caching:
+  headers_documented: []
+  note: >-
+    No Cache-Control, ETag or Last-Modified behaviour is documented. The provider directory is
+    largely static reference data and is the obvious caching candidate, but nothing in the contract
+    supports conditional requests. FHIR R4 defines ETag/If-None-Match on read; Aetna does not declare it.
+webhooks_and_events:
+  supported: false
+  note: >-
+    No webhook, event, streaming or FHIR Subscription surface is published, and no AsyncAPI document
+    exists. Integration is poll-only. The nearest thing to asynchrony is the Bulk Data Access
+    $export / $exportstatus pair on the provider directory and Provider Access, which is a polling
+    job pattern rather than an event feed.
+timeouts:
+  documented:
+    - operation: Organization Affiliation
+      limit_seconds: 120
+      source: Previous Releases, 2021-02-09 - "Timeout limit for Org Affiliation API set to 120 secs."
+consent:
+  model: member-directed, revocable, patient-context-scoped
+  note: >-
+    Patient Access data flows only after a member authenticates in the SMART authorization step and
+    grants the requested patient/* scopes. Eligibility is not universal - Aetna expanded Patient
+    Access to fully insured Commercial members in California (2023-12-15) and Tennessee (2025-05-15)
+    as separate dated releases, so coverage is state-and-product dependent.

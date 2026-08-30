@@ -1,0 +1,238 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_Organization_id",
+    "path": "/v1/providerdirectory/Organization/{id}",
+    "status": "203",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "identifier": [
+      {
+        "system": "http://hl7.org/fhir/sid/us-npi",
+        "use": "official",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "NPI",
+              "display": "National provider identifier"
+            }
+          ],
+          "text": "NPI"
+        },
+        "value": "1255525895"
+      }
+    ],
+    "partOf": {
+      "reference": "Organization/0000000000000016411",
+      "display": "LOUDON MEDICAL GROUP"
+    },
+    "address": [
+      {
+        "country": "US",
+        "city": "Lovettsville",
+        "use": "work",
+        "line": [
+          "3 E Broad Way"
+        ],
+        "district": "LOUDOUN",
+        "postalCode": "20180",
+        "text": "3 E Broad Way, Lovettsville, VA 20180",
+        "state": "VA",
+        "type": "physical"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2020-07-28T05:00:54.485+00:00",
+      "versionId": "4.0.1",
+      "profile": [
+        "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization"
+      ]
+    },
+    "name": "LOUDOUN MEDICAL GROUP P.C.",
+    "active": true,
+    "language": "en",
+    "telecom": [
+      {
+        "extension": [
+          {
+            "extension": [
+              {
+                "valueCode": "mon",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "tue",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "wed",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "thu",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "fri",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueTime": "08:30:00",
+                "url": "availableStartTime"
+              },
+              {
+                "valueTime": "17:00:00",
+                "url": "availableEndTime"
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+          },
+          {
+            "valueReference": {
+              "display": "3 E Broad Way, Lovettsville, VA 20180"
+            },
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary"
+          }
+        ],
+        "system": "phone",
+        "use": "work",
+        "value": "(540) 338-9896"
+      },
+      {
+        "extension": [
+          {
+            "extension": [
+              {
+                "valueCode": "mon",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "tue",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "wed",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "thu",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "fri",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueTime": "08:30:00",
+                "url": "availableStartTime"
+              },
+              {
+                "valueTime": "17:00:00",
+                "url": "availableEndTime"
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+          },
+          {
+            "valueReference": {
+              "display": "20 Town Sq, Unit 180, Lovettsville, VA 20180"
+            },
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary"
+          }
+        ],
+        "system": "phone",
+        "use": "work",
+        "value": "(540) 579-0500"
+      },
+      {
+        "extension": [
+          {
+            "extension": [
+              {
+                "valueCode": "mon",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "tue",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueCode": "wed",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueTime": "08:00:00",
+                "url": "availableStartTime"
+              },
+              {
+                "valueTime": "17:00:00",
+                "url": "availableEndTime"
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+          },
+          {
+            "extension": [
+              {
+                "valueCode": "thu",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueTime": "08:00:00",
+                "url": "availableStartTime"
+              },
+              {
+                "valueTime": "20:00:00",
+                "url": "availableEndTime"
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+          },
+          {
+            "extension": [
+              {
+                "valueCode": "fri",
+                "url": "daysOfWeek"
+              },
+              {
+                "valueTime": "08:00:00",
+                "url": "availableStartTime"
+              },
+              {
+                "valueTime": "12:00:00",
+                "url": "availableEndTime"
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+          },
+          {
+            "valueReference": {
+              "display": "2 Pidgeon Hill Dr, Ste 400, Sterling, VA 20165"
+            },
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary"
+          }
+        ],
+        "system": "phone",
+        "use": "work",
+        "value": "(703) 726-1300"
+      }
+    ],
+    "id": "0000000000000140213",
+    "type": [
+      {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+            "code": "prvgrp",
+            "display": "Provider Group"
+          }
+        ],
+        "text": "Provider Group"
+      }
+    ],
+    "resourceType": "Organization"
+  }
+}

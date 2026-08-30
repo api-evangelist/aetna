@@ -1,0 +1,1005 @@
+generated: '2026-08-30'
+method: generated
+source: openapi/aetna-patient-access-api-openapi.yml, openapi/aetna-patient-access-api-sandbox-openapi.yml,
+  openapi/aetna-provider-directory-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 99
+  by_action_class:
+    connected: 99
+  by_consequence:
+    read: 99
+  human_in_the_loop_required: 0
+operations:
+- path: /v2/patientaccess/AllergyIntolerance
+  method: get
+  operationId: get_v2_patientaccess_AllergyIntolerance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/AllergyIntolerance/{id}
+  method: get
+  operationId: get_v2_patientaccess_AllergyIntolerance_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Binary/{id}
+  method: get
+  operationId: get_v2_patientaccess_Binary_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CarePlan
+  method: get
+  operationId: get_v2_patientaccess_CarePlan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CarePlan/{id}
+  method: get
+  operationId: get_v2_patientaccess_CarePlan_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CareTeam
+  method: get
+  operationId: get_v2_patientaccess_CareTeam
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CareTeam/{id}
+  method: get
+  operationId: get_v2_patientaccess_CareTeam_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Condition
+  method: get
+  operationId: get_v2_patientaccess_Condition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Condition/{id}
+  method: get
+  operationId: get_v2_patientaccess_Condition_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Coverage
+  method: get
+  operationId: get_v2_patientaccess_Coverage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Coverage/{id}
+  method: get
+  operationId: get_v2_patientaccess_Coverage_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Device
+  method: get
+  operationId: get_v2_patientaccess_Device
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Device/{id}
+  method: get
+  operationId: get_v2_patientaccess_Device_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DiagnosticReport
+  method: get
+  operationId: get_v2_patientaccess_DiagnosticReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DiagnosticReport/{id}
+  method: get
+  operationId: get_v2_patientaccess_DiagnosticReport_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DocumentReference
+  method: get
+  operationId: get_v2_patientaccess_DocumentReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DocumentReference/{id}
+  method: get
+  operationId: get_v2_patientaccess_DocumentReference_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Encounter
+  method: get
+  operationId: get_v2_patientaccess_Encounter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Encounter/{id}
+  method: get
+  operationId: get_v2_patientaccess_Encounter_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Endpoint/{id}
+  method: get
+  operationId: get_v2_patientaccess_Endpoint_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/ExplanationOfBenefit
+  method: get
+  operationId: get_v2_patientaccess_ExplanationOfBenefit
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/ExplanationOfBenefit/{id}
+  method: get
+  operationId: get_v2_patientaccess_ExplanationOfBenefit_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Goal
+  method: get
+  operationId: get_v2_patientaccess_Goal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Goal/{id}
+  method: get
+  operationId: get_v2_patientaccess_Goal_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Immunization
+  method: get
+  operationId: get_v2_patientaccess_Immunization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Immunization/{id}
+  method: get
+  operationId: get_v2_patientaccess_Immunization_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/MedicationKnowledge
+  method: get
+  operationId: get_v2_patientaccess_MedicationKnowledge
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/MedicationKnowledge/{id}
+  method: get
+  operationId: get_v2_patientaccess_MedicationKnowledge_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/MedicationRequest
+  method: get
+  operationId: get_v2_patientaccess_MedicationRequest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/MedicationRequest/{id}
+  method: get
+  operationId: get_v2_patientaccess_MedicationRequest_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Medication/{id}
+  method: get
+  operationId: get_v2_patientaccess_Medication_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Observation
+  method: get
+  operationId: get_v2_patientaccess_Observation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Observation/{id}
+  method: get
+  operationId: get_v2_patientaccess_Observation_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Organization/{id}
+  method: get
+  operationId: get_v2_patientaccess_Organization_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Patient
+  method: get
+  operationId: get_v2_patientaccess_Patient
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Patient/{id}
+  method: get
+  operationId: get_v2_patientaccess_Patient_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/PractitionerRole/{id}
+  method: get
+  operationId: get_v2_patientaccess_PractitionerRole_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Practitioner/{id}
+  method: get
+  operationId: get_v2_patientaccess_Practitioner_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Procedure
+  method: get
+  operationId: get_v2_patientaccess_Procedure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Procedure/{id}
+  method: get
+  operationId: get_v2_patientaccess_Procedure_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/AllergyIntolerance/{id}
+  method: get
+  operationId: get_v2_patientaccess_AllergyIntolerance_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/AllergyIntolerance
+  method: get
+  operationId: get_v2_patientaccess_AllergyIntolerance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Binary/{id}
+  method: get
+  operationId: get_v2_patientaccess_Binary_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CarePlan/{id}
+  method: get
+  operationId: get_v2_patientaccess_CarePlan_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CarePlan
+  method: get
+  operationId: get_v2_patientaccess_CarePlan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CareTeam/{id}
+  method: get
+  operationId: get_v2_patientaccess_CareTeam_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/CareTeam
+  method: get
+  operationId: get_v2_patientaccess_CareTeam
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Condition/{id}
+  method: get
+  operationId: get_v2_patientaccess_Condition_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Condition
+  method: get
+  operationId: get_v2_patientaccess_Condition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Coverage
+  method: get
+  operationId: get_v2_patientaccess_Coverage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Device/{id}
+  method: get
+  operationId: get_v2_patientaccess_Device_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Device
+  method: get
+  operationId: get_v2_patientaccess_Device
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DiagnosticReport/{id}
+  method: get
+  operationId: get_v2_patientaccess_DiagnosticReport_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DiagnosticReport
+  method: get
+  operationId: get_v2_patientaccess_DiagnosticReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DocumentReference/{id}
+  method: get
+  operationId: get_v2_patientaccess_DocumentReference_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/DocumentReference
+  method: get
+  operationId: get_v2_patientaccess_DocumentReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Encounter/{id}
+  method: get
+  operationId: get_v2_patientaccess_Encounter_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Encounter
+  method: get
+  operationId: get_v2_patientaccess_Encounter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/Endpoint/{id}
+  method: get
+  operationId: get_v2_Endpoint_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/ExplanationOfBenefit/{id}
+  method: get
+  operationId: get_v2_patientaccess_ExplanationOfBenefit_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/ExplanationOfBenefit
+  method: get
+  operationId: get_v2_patientaccess_ExplanationOfBenefit
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Goal/{id}
+  method: get
+  operationId: get_v2_patientaccess_Goal_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Goal
+  method: get
+  operationId: get_v2_patientaccess_Goal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Immunization/{id}
+  method: get
+  operationId: get_v2_patientaccess_Immunization_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Immunization
+  method: get
+  operationId: get_v2_patientaccess_Immunization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Location/{id}
+  method: get
+  operationId: get_v2_patientaccess_Location_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/MedicationDispense
+  method: get
+  operationId: get_v2_patientaccess_MedicationDispense
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/MedicationRequest/{id}
+  method: get
+  operationId: get_v2_patientaccess_MedicationRequest_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/MedicationRequest
+  method: get
+  operationId: get_v2_patientaccess_MedicationRequest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Medication/{id}
+  method: get
+  operationId: get_v2_patientaccess_Medication_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Observation/{id}
+  method: get
+  operationId: get_v2_patientaccess_Observation_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Observation
+  method: get
+  operationId: get_v2_patientaccess_Observation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Organization/{id}
+  method: get
+  operationId: get_v2_patientaccess_Organization_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Patient/{id}
+  method: get
+  operationId: get_v2_patientaccess_Patient_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Patient
+  method: get
+  operationId: get_v2_patientaccess_Patient
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/PractitionerRole/{id}
+  method: get
+  operationId: get_v2_patientaccess_PractitionerRole_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Practitioner/{id}
+  method: get
+  operationId: get_v2_patientaccess_Practitioner_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Procedure/{id}
+  method: get
+  operationId: get_v2_patientaccess_Procedure_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/patientaccess/Procedure
+  method: get
+  operationId: get_v2_patientaccess_Procedure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/InsurancePlan
+  method: get
+  operationId: get_v1_providerdirectory_InsurancePlan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/Location
+  method: get
+  operationId: get_v1_providerdirectory_Location
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/Location/{id}
+  method: get
+  operationId: get_v1_providerdirectory_Location_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/Organization
+  method: get
+  operationId: get_v1_providerdirectory_Organization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/OrganizationAffiliation
+  method: get
+  operationId: get_v1_providerdirectory_OrganizationAffiliation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/Organization/{id}
+  method: get
+  operationId: get_v1_providerdirectory_Organization_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/Practitioner
+  method: get
+  operationId: get_v1_providerdirectory_Practitioner
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/PractitionerRole
+  method: get
+  operationId: get_v1_providerdirectory_PractitionerRole
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectory/Practitioner/{id}
+  method: get
+  operationId: get_v1_providerdirectory_Practitioner_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/HealthcareService
+  method: get
+  operationId: get_v1_providerdirectorydata_HealthcareService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/HealthcareService/{id}
+  method: get
+  operationId: get_v1_providerdirectorydata_HealthcareService_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/InsurancePlan
+  method: get
+  operationId: get_v1_providerdirectorydata_InsurancePlan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/Location/{id}
+  method: get
+  operationId: get_v1_providerdirectorydata_Location_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/Location
+  method: get
+  operationId: get_v1_providerdirectorydata_Location
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/Organization
+  method: get
+  operationId: get_v1_providerdirectorydata_Organization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/Organization/{id}
+  method: get
+  operationId: get_v1_providerdirectorydata_Organization_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/OrganizationAffiliation
+  method: get
+  operationId: get_v1_providerdirectorydata_OrganizationAffiliation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/Practitioner
+  method: get
+  operationId: get_v1_providerdirectorydata_Practitioner
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/Practitioner/{id}
+  method: get
+  operationId: get_v1_providerdirectorydata_Practitioner_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/providerdirectorydata/PractitionerRole
+  method: get
+  operationId: get_v1_providerdirectorydata_PractitionerRole
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

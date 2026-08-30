@@ -1,0 +1,156 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_Location_id",
+    "path": "/v1/providerdirectory/Location/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "search": {
+      "mode": "match"
+    },
+    "resource": {
+      "extension": [
+        {
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/accessibility",
+                "code": "handiaccess",
+                "display": "handicap accessible"
+              }
+            ],
+            "text": "Offers a variety of services and programs for persons with disabilities"
+          },
+          "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/accessibility"
+        },
+        {
+          "extension": [
+            {
+              "valueBoolean": false,
+              "url": "acceptingPatients"
+            }
+          ],
+          "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+        },
+        {
+          "valueString": "This location accepts all types of patients",
+          "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatientprofile"
+        }
+      ],
+      "specialty": [
+        {
+          "coding": [
+            {
+              "code": "332B00000X",
+              "display": "Durable Medical Equipment & Medical Supplies"
+            }
+          ],
+          "text": "Durable Medical Equipment & Medical Supplies"
+        }
+      ],
+      "code": [
+        {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/organization-role",
+              "display": "Healthcare Provider"
+            }
+          ],
+          "text": "Healthcare Provider"
+        }
+      ],
+      "address": {
+        "country": "USA",
+        "city": "WESTERLY",
+        "use": "work",
+        "line": [
+          "101 AIRPORT RD"
+        ],
+        "postalCode": "028913432",
+        "text": "101 AIRPORT RD, WESTERLY, RI 028913432",
+        "state": "RI",
+        "type": "both"
+      },
+      "language": "en",
+      "hoursOfOperation": [
+        {
+          "allDay": true,
+          "daysOfWeek": [
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            "sat",
+            "sun"
+          ]
+        }
+      ],
+      "type": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+              "code": "HOSP",
+              "userSelected": true,
+              "display": "Hospital"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "lastUpdated": "2020-07-28T05:00:54.485+00:00",
+        "versionId": "4.0.1",
+        "profile": [
+          "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location"
+        ]
+      },
+      "name": "Poole'S Pharmacy Care",
+      "telecom": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueBoolean": true,
+                  "url": "allDay"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+            }
+          ],
+          "system": "phone",
+          "use": "work",
+          "value": "743.125.4429 x2376"
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueBoolean": true,
+                  "url": "allDay"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+            }
+          ],
+          "system": "fax",
+          "use": "work",
+          "value": "779-475-4330 x580"
+        }
+      ],
+      "id": "0000000000000013710",
+      "position": {
+        "latitude": 41.349716,
+        "longitude": -71.81142
+      },
+      "resourceType": "Location",
+      "status": "active"
+    },
+    "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/Location/0000000000000013710"
+  }
+}

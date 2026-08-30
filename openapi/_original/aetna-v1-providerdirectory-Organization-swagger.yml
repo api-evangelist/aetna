@@ -1,0 +1,374 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qahapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qaehapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_Application_Oauth:
+  - Public
+- FHIR_Application_Oauth:
+  - NonPII
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.*
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.*
+basePath: "/v1/providerdirectory"
+paths:
+  "/Organization":
+    get:
+      summary: Retrieves Organization resources based on search criteria(name, location)
+      description: This operation retrieves Organization resources based on search
+        criteria(name, location)
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Bundle"
+          examples:
+            application/json:
+              entry:
+              - search:
+                  mode: match
+                resource:
+                  identifier:
+                  - system: http://hl7.org/fhir/sid/us-npi
+                    use: official
+                    type:
+                      coding:
+                      - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                        code: NPI
+                        display: National provider identifier
+                      text: NPI
+                    value: '1255525895'
+                  partOf:
+                    reference: Organization/0000000000000016411
+                    display: LOUDON MEDICAL GROUP
+                  address:
+                  - country: US
+                    city: Sterling
+                    use: work
+                    line:
+                    - 46440 Benedict Dr Ste 107
+                    district: LOUDOUN
+                    postalCode: '20164'
+                    text: 46440 Benedict Dr, Ste 107, Sterling, VA 20164
+                    state: VA
+                    type: physical
+                  meta:
+                    lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization
+                  name: LOUDOUN MEDICAL GROUP P.C.
+                  active: true
+                  language: en
+                  telecom:
+                  - extension:
+                    - extension:
+                      - valueCode: mon
+                        url: daysOfWeek
+                      - valueCode: tue
+                        url: daysOfWeek
+                      - valueCode: wed
+                        url: daysOfWeek
+                      - valueCode: thu
+                        url: daysOfWeek
+                      - valueCode: fri
+                        url: daysOfWeek
+                      - valueTime: '08:00:00'
+                        url: availableStartTime
+                      - valueTime: '20:00:00'
+                        url: availableEndTime
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                    - valueReference:
+                        display: 46440 Benedict Dr, Ste 107, Sterling, VA 20164
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                    system: phone
+                    use: work
+                    value: "(703) 450-1125"
+                  id: '0000000000000140213'
+                  type:
+                  - coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS
+                      code: prvgrp
+                      display: Provider Group
+                    text: Provider Group
+                  resourceType: Organization
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/Organization/0000000000000140213
+              - search:
+                  mode: match
+                resource:
+                  identifier:
+                  - system: http://hl7.org/fhir/sid/us-npi
+                    use: official
+                    type:
+                      coding:
+                      - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                        code: NPI
+                        display: National provider identifier
+                      text: NPI
+                    value: '1376677989'
+                  address:
+                  - country: US
+                    city: Sterling
+                    use: work
+                    line:
+                    - 46440 Benedict Dr Ste 107
+                    district: LOUDOUN
+                    postalCode: '20164'
+                    text: 46440 Benedict Dr, Ste 107, Sterling, VA 20164
+                    state: VA
+                    type: physical
+                  meta:
+                    lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization
+                  name: LOUDOUN MEDICAL GROUP P.C.
+                  active: true
+                  language: en
+                  telecom:
+                  - extension:
+                    - extension:
+                      - valueCode: mon
+                        url: daysOfWeek
+                      - valueCode: tue
+                        url: daysOfWeek
+                      - valueCode: wed
+                        url: daysOfWeek
+                      - valueCode: thu
+                        url: daysOfWeek
+                      - valueCode: fri
+                        url: daysOfWeek
+                      - valueTime: '08:00:00'
+                        url: availableStartTime
+                      - valueTime: '20:00:00'
+                        url: availableEndTime
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                    - extension:
+                      - valueCode: sat
+                        url: daysOfWeek
+                      - valueCode: sun
+                        url: daysOfWeek
+                      - valueTime: '09:00:00'
+                        url: availableStartTime
+                      - valueTime: '17:00:00'
+                        url: availableEndTime
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                    - valueReference:
+                        display: 46440 Benedict Dr, Ste 107, Sterling, VA 20164
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                    system: phone
+                    use: work
+                    value: "(703) 450-1125"
+                  id: '0000000000000016405'
+                  type:
+                  - coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS
+                      code: prvgrp
+                      display: Provider Group
+                    text: Provider Group
+                  resourceType: Organization
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/Organization/0000000000000016405
+              total: 2
+              link:
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/Organization?name:contains=LOUDOUN%20MEDICAL%20GROUP%20P.C.&address-postalcode:exact=20164&page=1
+                relation: self
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/Organization?name:contains=LOUDOUN%20MEDICAL%20GROUP%20P.C.&address-postalcode:exact=20164&page=1
+                relation: first
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/Organization?name:contains=LOUDOUN%20MEDICAL%20GROUP%20P.C.&address-postalcode:exact=20164&page=1
+                relation: last
+              id: 35660ea4-a7d4-11ed-b57d-9d7918350000
+              type: searchset
+              resourceType: Bundle
+          description: The request has succeeded. The response returns a Bundle of
+            Organization resources.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      parameters:
+      - in: query
+        name: name:contains
+        description: Select Organizations with the specified name (matches 2 or more
+          characters within the Name data type).
+        type: string
+        required: true
+      - in: query
+        name: address-city:exact
+        description: |-
+          Select Organizations with the specified address-city.
+
+          Name of city, town etc of the Organization
+        type: string
+        required: false
+      - in: query
+        name: address-state:exact
+        description: |-
+          Select Organizations with the specified address-state.
+
+          Sub-unit of country of the Organization.
+          State will be 2 letter abbreviation.
+        type: string
+        required: false
+      - in: query
+        name: address-postalcode:exact
+        description: |-
+          Select Organizations with the specified address-postalcode.
+
+          US Zip code of the Organization.
+
+          Postal code will be priority over City +State.
+
+          Postal code will be 5 valid 5 digit numeric.
+        type: string
+        required: false
+      - in: query
+        name: _count
+        description: _count parameter is used to define the maximum number of search
+          results to show on a page
+        type: number
+        required: false
+      - in: query
+        name: page
+        description: 'Used for pagination: potential values to navigate to a specific
+          page.“self”–page=10 “first”–page=1 “last”–page=65 “previous”–page=9 “next”–page=11'
+        type: number
+        required: false
+host: apif1.aetna.com/fhir
+produces:
+- application/json
+externalDocs:
+  description: HTTP Errors
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: "/Token"
+    authorizationUrl: "/Authorize"
+    description: ''
+    scopes:
+      patient/Patient.*: ''
+      patient/Patient.read: ''
+      patient/*.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: "/Token"
+    description: ''
+    scopes:
+      NonPII: ''
+      Public: ''
+    type: oauth2
+    flow: application
+definitions:
+  Entry:
+    description: An entry in a bundle resource - will contain a resource(s) returned
+      in the bundle
+    type: object
+    properties:
+      resource:
+        "$ref": "#/definitions/Organization"
+  Organization:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use.
+
+      This is the HL7 FHIR Release 4.0.1 Organization resource.
+      Full Documentation is available at: http://hl7.org/fhir/organization.html
+
+      US Core 3.1.1 Documentation is available at:
+      http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-organization.html
+
+      For the CARIN-BB 1.0.0 Organization resource full documentation is available at:
+      http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Organization.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 Organization resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Organization.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 Network resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Network.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 Organization resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Organization.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 Network resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Network.html
+    type: object
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          "$ref": "#/definitions/Entry"
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: InteroperabilityDeveloperSupport@aetna.com
+    url: http://
+  description: |-
+    This API retrieves Organization resources based on a search by name and location.
+    Both Provider and Pharmacy data are available on this resource. Special characters are supported but may be handled differently by each application tool.
+
+    This API retrieves details on Plannet Organization Resources. An organization is a formal or informal grouping of people or organizations with a common purpose, such as a company, institution, corporation, community group, or healthcare practice.
+  x-ibm-name: v1providerdirectoryorganization
+  title: "/v1/providerdirectory/Organization"
+  version: 1.0.0

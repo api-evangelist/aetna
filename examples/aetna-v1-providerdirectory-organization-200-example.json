@@ -1,0 +1,281 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_Organization",
+    "path": "/v1/providerdirectory/Organization",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://hl7.org/fhir/sid/us-npi",
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "NPI",
+                    "display": "National provider identifier"
+                  }
+                ],
+                "text": "NPI"
+              },
+              "value": "1255525895"
+            }
+          ],
+          "partOf": {
+            "reference": "Organization/0000000000000016411",
+            "display": "LOUDON MEDICAL GROUP"
+          },
+          "address": [
+            {
+              "country": "US",
+              "city": "Sterling",
+              "use": "work",
+              "line": [
+                "46440 Benedict Dr Ste 107"
+              ],
+              "district": "LOUDOUN",
+              "postalCode": "20164",
+              "text": "46440 Benedict Dr, Ste 107, Sterling, VA 20164",
+              "state": "VA",
+              "type": "physical"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2020-07-28T05:00:54.485+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization"
+            ]
+          },
+          "name": "LOUDOUN MEDICAL GROUP P.C.",
+          "active": true,
+          "language": "en",
+          "telecom": [
+            {
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueCode": "mon",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "tue",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "wed",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "thu",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "fri",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueTime": "08:00:00",
+                      "url": "availableStartTime"
+                    },
+                    {
+                      "valueTime": "20:00:00",
+                      "url": "availableEndTime"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+                },
+                {
+                  "valueReference": {
+                    "display": "46440 Benedict Dr, Ste 107, Sterling, VA 20164"
+                  },
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary"
+                }
+              ],
+              "system": "phone",
+              "use": "work",
+              "value": "(703) 450-1125"
+            }
+          ],
+          "id": "0000000000000140213",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+                  "code": "prvgrp",
+                  "display": "Provider Group"
+                }
+              ],
+              "text": "Provider Group"
+            }
+          ],
+          "resourceType": "Organization"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/Organization/0000000000000140213"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://hl7.org/fhir/sid/us-npi",
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                    "code": "NPI",
+                    "display": "National provider identifier"
+                  }
+                ],
+                "text": "NPI"
+              },
+              "value": "1376677989"
+            }
+          ],
+          "address": [
+            {
+              "country": "US",
+              "city": "Sterling",
+              "use": "work",
+              "line": [
+                "46440 Benedict Dr Ste 107"
+              ],
+              "district": "LOUDOUN",
+              "postalCode": "20164",
+              "text": "46440 Benedict Dr, Ste 107, Sterling, VA 20164",
+              "state": "VA",
+              "type": "physical"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2020-07-28T05:00:54.485+00:00",
+            "versionId": "4.0.1",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization"
+            ]
+          },
+          "name": "LOUDOUN MEDICAL GROUP P.C.",
+          "active": true,
+          "language": "en",
+          "telecom": [
+            {
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueCode": "mon",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "tue",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "wed",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "thu",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "fri",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueTime": "08:00:00",
+                      "url": "availableStartTime"
+                    },
+                    {
+                      "valueTime": "20:00:00",
+                      "url": "availableEndTime"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+                },
+                {
+                  "extension": [
+                    {
+                      "valueCode": "sat",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueCode": "sun",
+                      "url": "daysOfWeek"
+                    },
+                    {
+                      "valueTime": "09:00:00",
+                      "url": "availableStartTime"
+                    },
+                    {
+                      "valueTime": "17:00:00",
+                      "url": "availableEndTime"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime"
+                },
+                {
+                  "valueReference": {
+                    "display": "46440 Benedict Dr, Ste 107, Sterling, VA 20164"
+                  },
+                  "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary"
+                }
+              ],
+              "system": "phone",
+              "use": "work",
+              "value": "(703) 450-1125"
+            }
+          ],
+          "id": "0000000000000016405",
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+                  "code": "prvgrp",
+                  "display": "Provider Group"
+                }
+              ],
+              "text": "Provider Group"
+            }
+          ],
+          "resourceType": "Organization"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectory/Organization/0000000000000016405"
+      }
+    ],
+    "total": 2,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/Organization?name:contains=LOUDOUN%20MEDICAL%20GROUP%20P.C.&address-postalcode:exact=20164&page=1",
+        "relation": "self"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/Organization?name:contains=LOUDOUN%20MEDICAL%20GROUP%20P.C.&address-postalcode:exact=20164&page=1",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectory/Organization?name:contains=LOUDOUN%20MEDICAL%20GROUP%20P.C.&address-postalcode:exact=20164&page=1",
+        "relation": "last"
+      }
+    ],
+    "id": "35660ea4-a7d4-11ed-b57d-9d7918350000",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

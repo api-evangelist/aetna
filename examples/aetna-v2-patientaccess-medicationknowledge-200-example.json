@@ -1,0 +1,76 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_MedicationKnowledge",
+    "path": "/v2/patientaccess/MedicationKnowledge",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "code": {
+            "coding": [
+              {
+                "code": "1551300",
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "display": "0.5 ML dulaglutide 1.5 MG/ML Auto-Injector [Trulicity]"
+              },
+              {
+                "code": "1551299",
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "display": "Trulicity Injectable Product"
+              }
+            ]
+          },
+          "meta": {
+            "lastUpdated": "2023-05-10T15:21:01.446451+00:00",
+            "versionId": "MTY4MzczMjA2MTQ0NjQ1MTAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug"
+            ]
+          },
+          "doseForm": {
+            "coding": [
+              {
+                "code": "385219001",
+                "system": "http://snomed.info/sct",
+                "display": "Injection solution"
+              }
+            ]
+          },
+          "id": "680d636f-e0c6-390d-9f26-bfd2b0658cba",
+          "resourceType": "MedicationKnowledge",
+          "status": "active"
+        },
+        "fullUrl": "https://apif1.aetna.com/v2/patientaccess/MedicationKnowledge/680d636f-e0c6-390d-9f26-bfd2b0658cba"
+      }
+    ],
+    "total": 1,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/v2/patientaccess/MedicationKnowledge/?code=1091341&_count=1",
+        "relation": "search"
+      },
+      {
+        "url": "https://apif1.aetna.com/v2/patientaccess/MedicationKnowledge/?code=1091341&_count=1&_page_token=Cjj3YbK59f%2F%2F%2F%2F%2BABdLBZgLQTgD%2FAf%2F%2BN2FkZTEzMWI4ODU5MTc4ODQ5ZDc3YzhmZjA2ZThhMzUAARBkIeRmIPX4MlS1OQAAAAAKRk2eSBlQAFoLCaNYzTmGjuzXEANgu96v7QU%3D",
+        "relation": "next"
+      },
+      {
+        "url": "https://apif1.aetna.com/v2/patientaccess/MedicationKnowledge/?code=1091341&_count=1",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/v2/patientaccess/MedicationKnowledge/?code=1091341&_count=1",
+        "relation": "self"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

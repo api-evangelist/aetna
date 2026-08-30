@@ -1,0 +1,645 @@
+generated: '2026-08-30'
+method: derived
+source: openapi/aetna-patient-access-api-openapi.yml, openapi/aetna-provider-directory-api-openapi.yml (assembled
+  from Aetna's 95 published Swagger 2.0 documents)
+summary: 'Aetna''s data model is not Aetna''s - it is HL7 FHIR R4 as profiled by CARIN for Blue Button, US
+  Core and Da Vinci PDex Plan Net. The entities below are the FHIR resource types Aetna actually exposes, and
+  the relationships are derived only from FHIR reference-typed search parameters Aetna itself declares in its
+  specs, not from the FHIR specification at large. The consequence for an integrator is that the entity graph
+  is portable: the same client model works against any conformant payer, and the payer-specific part is which
+  resources are exposed, at which IG version, and on which base path.'
+identifier_style:
+  style: FHIR logical id
+  pattern: opaque server-assigned string in the {id} path segment; also searchable as _id
+  business_identifiers: the `identifier` search parameter carries real-world identifiers (NPI for Practitioner,
+    member id for Patient/Coverage)
+  note: Aetna publishes no id prefixes or typed-id scheme; ids are opaque.
+entity_count: 27
+entities:
+- name: AllergyIntolerance
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_AllergyIntolerance
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_AllergyIntolerance_id
+  search_params:
+  - patient
+- name: Binary
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  operation_count: 1
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Binary_id
+  search_params: []
+- name: CarePlan
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CarePlan
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CarePlan_id
+  search_params:
+  - category
+  - patient
+- name: CareTeam
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CareTeam
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CareTeam_id
+  search_params:
+  - patient
+  - status
+- name: Condition
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Condition
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Condition_id
+  search_params:
+  - patient
+- name: Coverage
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Coverage
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Coverage_id
+  search_params:
+  - identifier
+  - patient
+- name: Device
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Device
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Device_id
+  search_params:
+  - patient
+- name: DiagnosticReport
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DiagnosticReport
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DiagnosticReport_id
+  search_params:
+  - category
+  - code
+  - date
+  - patient
+- name: DocumentReference
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DocumentReference
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DocumentReference_id
+  search_params:
+  - category
+  - date
+  - patient
+  - type
+- name: Encounter
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Encounter
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Encounter_id
+  search_params:
+  - date
+  - patient
+- name: Endpoint
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  operation_count: 1
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Endpoint_id
+  search_params: []
+- name: ExplanationOfBenefit
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_ExplanationOfBenefit
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_ExplanationOfBenefit_id
+  search_params:
+  - page
+  - patient
+  - service-date
+- name: Goal
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Goal
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Goal_id
+  search_params:
+  - patient
+- name: HealthcareService
+  apis:
+  - Provider Directory
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_HealthcareService
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_HealthcareService_id
+  search_params:
+  - delivery-method
+  - location
+  - name
+  - organization
+  - service-category
+  - specialty
+- name: Immunization
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Immunization
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Immunization_id
+  search_params:
+  - patient
+- name: InsurancePlan
+  apis:
+  - Provider Directory
+  interactions:
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_InsurancePlan
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_InsurancePlan
+  search_params:
+  - address-state
+  - coverage-area
+  - identifier
+  - name
+  - network
+  - owned-by
+  - period
+  - type
+- name: Location
+  apis:
+  - Provider Directory
+  interactions:
+  - read
+  - search
+  operation_count: 4
+  operations:
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Location
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Location_id
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Location_id
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Location
+  search_params:
+  - address
+  - address-city
+  - address-city:exact
+  - address-postalcode:exact
+  - address-state
+  - address-state:exact
+  - organization
+  - page
+  - partof
+  - type
+- name: Medication
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  operation_count: 1
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Medication_id
+  search_params: []
+- name: MedicationKnowledge
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationKnowledge
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationKnowledge_id
+  search_params:
+  - code
+  - doseform
+  - drug-name
+  - status
+- name: MedicationRequest
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationRequest
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationRequest_id
+  search_params:
+  - intent
+  - patient
+  - status
+- name: Observation
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Observation
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Observation_id
+  search_params:
+  - category
+  - code
+  - date
+  - patient
+- name: Organization
+  apis:
+  - Patient Access
+  - Provider Directory
+  interactions:
+  - read
+  - search
+  operation_count: 5
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Organization_id
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Organization
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Organization_id
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Organization
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Organization_id
+  search_params:
+  - address
+  - address-city:exact
+  - address-postalcode:exact
+  - address-state:exact
+  - name
+  - name:contains
+  - page
+  - partof
+  - type
+- name: OrganizationAffiliation
+  apis:
+  - Provider Directory
+  interactions:
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_OrganizationAffiliation
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_OrganizationAffiliation
+  search_params:
+  - location
+  - location.address-city:exact
+  - location.address-postalcode:exact
+  - location.address-state:exact
+  - network
+  - page
+  - participating-organization
+  - primary-organization
+  - service
+  - specialty
+- name: Patient
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Patient
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Patient_id
+  search_params:
+  - identifier
+- name: Practitioner
+  apis:
+  - Patient Access
+  - Provider Directory
+  interactions:
+  - read
+  - search
+  operation_count: 5
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Practitioner_id
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Practitioner
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Practitioner_id
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Practitioner
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Practitioner_id
+  search_params:
+  - address-city:exact
+  - address-postalcode:exact
+  - address-state:exact
+  - family
+  - family:contains
+  - given
+  - identifier
+  - name
+  - name:contains
+  - page
+- name: PractitionerRole
+  apis:
+  - Patient Access
+  - Provider Directory
+  interactions:
+  - read
+  - search
+  operation_count: 3
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_PractitionerRole_id
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_PractitionerRole
+  - openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_PractitionerRole
+  search_params:
+  - identifier
+  - location
+  - location.address-city:exact
+  - location.address-postalcode:exact
+  - location.address-state:exact
+  - network
+  - organization
+  - page
+  - practitioner
+  - role
+  - specialty
+- name: Procedure
+  apis:
+  - Patient Access
+  interactions:
+  - read
+  - search
+  operation_count: 2
+  operations:
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Procedure
+  - openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Procedure_id
+  search_params:
+  - date
+  - patient
+relationships:
+- from: AllergyIntolerance
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna AllergyIntolerance operations
+- from: CarePlan
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna CarePlan operations
+- from: CareTeam
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna CareTeam operations
+- from: Condition
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Condition operations
+- from: Coverage
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Coverage operations
+- from: Device
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Device operations
+- from: DiagnosticReport
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna DiagnosticReport operations
+- from: DocumentReference
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna DocumentReference operations
+- from: Encounter
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Encounter operations
+- from: ExplanationOfBenefit
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna ExplanationOfBenefit operations
+- from: Goal
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Goal operations
+- from: Immunization
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Immunization operations
+- from: MedicationRequest
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna MedicationRequest operations
+- from: Observation
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Observation operations
+- from: PractitionerRole
+  to: Location
+  kind: belongs_to
+  via: location
+  evidence: search parameter `location` declared on Aetna PractitionerRole operations
+- from: PractitionerRole
+  to: Location
+  kind: belongs_to
+  via: location.address-city:exact
+  evidence: search parameter `location.address-city:exact` declared on Aetna PractitionerRole operations
+- from: PractitionerRole
+  to: Location
+  kind: belongs_to
+  via: location.address-postalcode:exact
+  evidence: search parameter `location.address-postalcode:exact` declared on Aetna PractitionerRole operations
+- from: PractitionerRole
+  to: Location
+  kind: belongs_to
+  via: location.address-state:exact
+  evidence: search parameter `location.address-state:exact` declared on Aetna PractitionerRole operations
+- from: PractitionerRole
+  to: Organization
+  kind: belongs_to
+  via: network
+  evidence: search parameter `network` declared on Aetna PractitionerRole operations
+- from: PractitionerRole
+  to: Organization
+  kind: belongs_to
+  via: organization
+  evidence: search parameter `organization` declared on Aetna PractitionerRole operations
+- from: PractitionerRole
+  to: Practitioner
+  kind: belongs_to
+  via: practitioner
+  evidence: search parameter `practitioner` declared on Aetna PractitionerRole operations
+- from: Procedure
+  to: Patient
+  kind: belongs_to
+  via: patient
+  evidence: search parameter `patient` declared on Aetna Procedure operations
+- from: InsurancePlan
+  to: Organization
+  kind: belongs_to
+  via: network
+  evidence: search parameter `network` declared on Aetna InsurancePlan operations
+- from: Location
+  to: Organization
+  kind: belongs_to
+  via: organization
+  evidence: search parameter `organization` declared on Aetna Location operations
+- from: OrganizationAffiliation
+  to: Location
+  kind: belongs_to
+  via: location
+  evidence: search parameter `location` declared on Aetna OrganizationAffiliation operations
+- from: OrganizationAffiliation
+  to: Location
+  kind: belongs_to
+  via: location.address-city:exact
+  evidence: search parameter `location.address-city:exact` declared on Aetna OrganizationAffiliation operations
+- from: OrganizationAffiliation
+  to: Location
+  kind: belongs_to
+  via: location.address-postalcode:exact
+  evidence: search parameter `location.address-postalcode:exact` declared on Aetna OrganizationAffiliation
+    operations
+- from: OrganizationAffiliation
+  to: Location
+  kind: belongs_to
+  via: location.address-state:exact
+  evidence: search parameter `location.address-state:exact` declared on Aetna OrganizationAffiliation operations
+- from: OrganizationAffiliation
+  to: Organization
+  kind: belongs_to
+  via: network
+  evidence: search parameter `network` declared on Aetna OrganizationAffiliation operations
+- from: OrganizationAffiliation
+  to: Organization
+  kind: belongs_to
+  via: participating-organization
+  evidence: search parameter `participating-organization` declared on Aetna OrganizationAffiliation operations
+- from: OrganizationAffiliation
+  to: Organization
+  kind: belongs_to
+  via: primary-organization
+  evidence: search parameter `primary-organization` declared on Aetna OrganizationAffiliation operations
+- from: OrganizationAffiliation
+  to: HealthcareService
+  kind: belongs_to
+  via: service
+  evidence: search parameter `service` declared on Aetna OrganizationAffiliation operations
+- from: HealthcareService
+  to: Location
+  kind: belongs_to
+  via: location
+  evidence: search parameter `location` declared on Aetna HealthcareService operations
+- from: HealthcareService
+  to: Organization
+  kind: belongs_to
+  via: organization
+  evidence: search parameter `organization` declared on Aetna HealthcareService operations
+relationship_note: Derived conservatively. FHIR defines far more references between these resources than Aetna
+  makes searchable; only the traversals Aetna actually exposes as a declared search parameter are recorded,
+  because those are the only ones an agent can follow through this API. Everything else requires reading the
+  returned resource body and dereferencing Reference.reference by hand.
+clusters:
+- name: Member and coverage
+  entities:
+  - Patient
+  - Coverage
+  - InsurancePlan
+  - ExplanationOfBenefit
+  note: The CARIN Blue Button claims spine. ExplanationOfBenefit is the richest resource Aetna publishes and
+    carries five selectable C4BB profiles.
+- name: Clinical record
+  entities:
+  - AllergyIntolerance
+  - CarePlan
+  - CareTeam
+  - Condition
+  - Device
+  - DiagnosticReport
+  - DocumentReference
+  - Encounter
+  - Goal
+  - Immunization
+  - Observation
+  - Procedure
+  - MedicationRequest
+  note: US Core clinical data, versions 3.1.1 / 5.0.1 / 6.1.0 depending on the operation.
+- name: Pharmacy and formulary
+  entities:
+  - Medication
+  - MedicationKnowledge
+  note: Da Vinci PDex US Drug Formulary 2.0.0 STU 2. The Formulary List API was decommissioned on 2024-04-19
+    and replaced by InsurancePlan/Basic/Location formulary resources, which this run could not retrieve (HTTP
+    403).
+- name: Provider network
+  entities:
+  - Practitioner
+  - PractitionerRole
+  - Organization
+  - OrganizationAffiliation
+  - Location
+  - HealthcareService
+  - InsurancePlan
+  note: Da Vinci PDex Plan Net 1.2.0. PractitionerRole is the join that makes the directory usable - it binds
+    a clinician to an organization, a location, a network and a service.
+- name: Infrastructure
+  entities:
+  - Binary
+  - Endpoint
+  note: Binary serves attachments referenced from DocumentReference; Endpoint is FHIR service metadata.

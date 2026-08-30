@@ -1,0 +1,357 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_PractitionerRole",
+    "path": "/v1/providerdirectorydata/PractitionerRole",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://aetna.com/identifier",
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "code": "SPCB",
+                    "system": "https://aetna.com/identifierType/practiceCode",
+                    "display": "Specialty Practice Code - BOTH"
+                  }
+                ],
+                "text": "Chiropractor Specialty Practice Code \u2013 PCP and Specialist Roles"
+              },
+              "value": "33042"
+            },
+            {
+              "system": "http://aetna.com/identifier",
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "code": "CAPIDOPN",
+                    "system": "https://aetna.com/identifier/capitationID",
+                    "display": "Capitation Office Identifier \u2013 OPEN"
+                  }
+                ],
+                "text": "Capitation Office Identifier for POIN(s) 0000022281\u2013 Open Status"
+              },
+              "value": "53042"
+            }
+          ],
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS",
+                        "code": "newpt",
+                        "display": "Accepting"
+                      }
+                    ],
+                    "text": "Accepting patients"
+                  },
+                  "url": "acceptingPatients"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+            },
+            {
+              "valueReference": {
+                "reference": "Organization/plannet-network-f98e8fbab8e328bd1184f353fbad5cd3",
+                "identifier": {
+                  "system": "http://aetna.com/identifier",
+                  "use": "official",
+                  "type": {
+                    "coding": [
+                      {
+                        "code": "NID",
+                        "system": "http://aetna.com/identifier",
+                        "display": "Network ID Number"
+                      }
+                    ],
+                    "text": "Aetna Pharmacy Network ID Number"
+                  },
+                  "value": "S2"
+                },
+                "display": "Aetna Direct NAP"
+              },
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference"
+            }
+          ],
+          "period": {
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "code": "111NT0100X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Thermography Chiropractor"
+                },
+                {
+                  "code": "111NX0100X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Occupational Health Chiropractor"
+                },
+                {
+                  "code": "111NX0800X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Orthopedic Chiropractor"
+                },
+                {
+                  "code": "111NS0005X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Sports Physician"
+                }
+              ]
+            }
+          ],
+          "code": [
+            {
+              "coding": [
+                {
+                  "code": "ch",
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/ProviderRoleCS",
+                  "display": "Chiropractor"
+                }
+              ]
+            }
+          ],
+          "practitioner": {
+            "reference": "Practitioner/plannet-practitioner-f34317ef286dce6cbd0345a2892ffb24",
+            "display": "Gomez, Gloria, MED"
+          },
+          "active": true,
+          "language": "en",
+          "meta": {
+            "lastUpdated": "2022-03-23T13:31:33.802713+00:00",
+            "versionId": "MTY0ODA0MjI5MzgwMjcxMzAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole"
+            ]
+          },
+          "organization": {
+            "reference": "Organization/plannet-organization-a76f9512226dce6cbd06b05421765942",
+            "display": "Advanced Chiropractic & Rehabilitation, Inc"
+          },
+          "location": [
+            {
+              "reference": "Location/plannet-location-98718bfa198baa5738bc8c40b1d3b42f",
+              "display": "701 West Fletcher Avenue, Suite B, Tampa, Hillsborough, FL 33612, USA"
+            },
+            {
+              "reference": "Location/plannet-location-880fc54ff38baa5738abd2ccade5f7b4",
+              "display": "13813 West Hillsborough Avenue, Tampa, Hillsborough, FL 33635, USA"
+            }
+          ],
+          "telecom": [
+            {
+              "system": "phone",
+              "rank": 1,
+              "value": "8139251700"
+            },
+            {
+              "system": "phone",
+              "rank": 2,
+              "value": "8139689800"
+            },
+            {
+              "system": "fax",
+              "rank": 3,
+              "value": "8139251744"
+            }
+          ],
+          "id": "plannet-practitionerrole-8607176b3d67d278d4b7137fcb0a3cd3",
+          "resourceType": "PractitionerRole"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/PractitionerRole/plannet-practitionerrole-12812d34f31d5fa350146ac42dacd52b"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://aetna.com/identifier",
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "code": "SPC",
+                    "system": "https://aetna.com/identifierType/practiceCode",
+                    "display": "Specialty Practice Code"
+                  }
+                ],
+                "text": "Psychologist Specialty Practice Code"
+              },
+              "value": "33042"
+            }
+          ],
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS",
+                        "code": "newpt",
+                        "display": "Accepting"
+                      }
+                    ],
+                    "text": "Accepting patients"
+                  },
+                  "url": "acceptingPatients"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+            },
+            {
+              "valueReference": {
+                "reference": "Organization/plannet-network-221457651c2c6791a85524779b3d1d40",
+                "identifier": {
+                  "system": "http://aetna.com/identifier",
+                  "use": "official",
+                  "type": {
+                    "coding": [
+                      {
+                        "code": "NID",
+                        "system": "http://aetna.com/identifier",
+                        "display": "Network ID Number"
+                      }
+                    ],
+                    "text": "Aetna Pharmacy Network ID Number"
+                  },
+                  "value": "F2"
+                },
+                "display": "W. Central FL Medicare PPO 3408"
+              },
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference"
+            }
+          ],
+          "period": {
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "code": "225XF0002X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Feeding. Eating & Swallowing Occupational Therapist"
+                },
+                {
+                  "code": "225XG0600X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Gerontology Occupational Therapist"
+                },
+                {
+                  "code": "225XH1200X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Hand Occupational Therapist"
+                },
+                {
+                  "code": "225XL0004X",
+                  "system": "http://nucc.org/provider-taxonomy",
+                  "display": "Low Vision Occupational Therapist"
+                }
+              ]
+            }
+          ],
+          "code": [
+            {
+              "coding": [
+                {
+                  "code": "py",
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/ProviderRoleCS",
+                  "display": "Psychologist"
+                }
+              ]
+            }
+          ],
+          "active": true,
+          "language": "en",
+          "meta": {
+            "lastUpdated": "2022-03-23T13:31:33.758448+00:00",
+            "versionId": "MTY0ODA0MjI5Mzc1ODQ0ODAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole"
+            ]
+          },
+          "organization": {
+            "reference": "Organization/plannet-organization-e45ffb51286dce6cbd0a3ca1f848e0fa",
+            "display": "DNA Comprehensive Therapy Services, LLC"
+          },
+          "location": [
+            {
+              "reference": "Location/plannet-location-391e84c0cf8baa5738b3381774466050",
+              "display": "3191 Harbor Blvd., Suite A, Port Charlotte, Charlotte, FL 33952, USA"
+            },
+            {
+              "reference": "Location/plannet-location-d53d0bb8c08baa5738b69ccbe9e090d8",
+              "display": "1777 Tamiami Trail, Suite 201, Port Charlotte, Charlotte, FL 33948, USA"
+            },
+            {
+              "reference": "Location/plannet-location-be48c445648baa5738b6972546637afc",
+              "display": "4310 Metro Pkwy., Suite 205, Fort Myers, Lee, FL 33916, USA"
+            },
+            {
+              "reference": "Location/plannet-location-b21158a58c8baa5738b69417ce4bb881",
+              "display": "6430 Plantation Park Court, Suite 200, Fort Myers, Lee, FL 33966, USA"
+            }
+          ],
+          "telecom": [
+            {
+              "system": "phone",
+              "rank": 1,
+              "value": "7862443732"
+            },
+            {
+              "system": "fax",
+              "rank": 2,
+              "value": "9544801784"
+            }
+          ],
+          "id": "plannet-practitionerrole-de1adfcde965561fff543f446a18d3cb",
+          "resourceType": "PractitionerRole"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/PractitionerRole/plannet-practitionerrole-12812d34f31d5fa350146ac42dacd529"
+      }
+    ],
+    "total": 4,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/PractitionerRole?_count=2",
+        "relation": "search"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/PractitionerRole?_count=2&_page_token=Cjj3YIGJFv%2F%2F%2F%2F%2BABcCQjgd%2BagD%2FAf%2F%2BY2YxNjhhNTcxYzI3ZDQwYTExNzRiMjBjOWZjOWVkM2EAARACIRdZYDGqWfwzOQAAAADpdn6fSAJQAFoLCbGK4RJnYbokEANgxMKh8gM%3D",
+        "relation": "next"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/PractitionerRole?_count=2",
+        "relation": "first"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/PractitionerRole?_count=2",
+        "relation": "self"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

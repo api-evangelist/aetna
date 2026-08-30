@@ -1,0 +1,355 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qahapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qaehapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_Application_Oauth:
+  - Public
+- FHIR_Application_Oauth:
+  - NonPII
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.*
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.*
+basePath: "/v1/providerdirectory"
+paths:
+  "/Location":
+    get:
+      summary: "Search all resources of type Location based on postalCode or (State
+        and City)\r\n"
+      description: Search all resources of type Location based on postalCode or (State
+        and City)
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Bundle"
+          examples:
+            application/json:
+              entry:
+              - search:
+                  mode: match
+                resource:
+                  extension:
+                  - extension:
+                    - valueCodeableConcept:
+                        coding:
+                        - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS
+                          code: newpt
+                          display: Accepting
+                        text: Accepting patients
+                      url: acceptingPatients
+                    url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients
+                  address:
+                    country: US
+                    city: Bradley Beach
+                    use: work
+                    line:
+                    - 13 Main St Ste 1
+                    district: MONMOUTH
+                    postalCode: '07720'
+                    text: 13 Main St Ste 1, Bradley Beach, NJ 07720
+                    state: NJ
+                    type: physical
+                  meta:
+                    lastUpdated: '2020-11-19T05:00:54.485+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location
+                  name: Ryan, Amy, MSW
+                  language: en
+                  telecom:
+                  - extension:
+                    - extension:
+                      - valueCode: mon
+                        url: daysOfWeek
+                      - valueCode: wed
+                        url: daysOfWeek
+                      - valueTime: '10:00:00'
+                        url: availableStartTime
+                      - valueTime: '15:00:00'
+                        url: availableEndTime
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                    system: phone
+                    use: work
+                    value: "(732) 795-0918"
+                  hoursOfOperation:
+                  - closingTime: '15:00:00'
+                    openingTime: '10:00:00'
+                    daysOfWeek:
+                    - mon
+                    - wed
+                  id: '0000000000001971501'
+                  type:
+                  - coding:
+                    - system: http://terminology.hl7.org/CodeSystem/v3-RoleCode
+                      code: WORK
+                      display: work site
+                  resourceType: Location
+                  status: active
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/Location/0000000000001971501
+              - search:
+                  mode: match
+                resource:
+                  extension:
+                  - valueCodeableConcept:
+                      coding:
+                      - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AccessibilityCS
+                        code: cultcomp
+                        display: Cultural competence
+                      - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AccessibilityCS
+                        code: handiaccess
+                        display: handicap accessible
+                      text: Offers a variety of accessibility services
+                    url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/accessibility
+                  address:
+                    country: USA
+                    city: BRADLEY BEACH
+                    use: work
+                    line:
+                    - 128 MAIN ST
+                    district: MONMOUTH COUNTY
+                    postalCode: '07720'
+                    text: 128 MAIN ST, BRADLEY BEACH, NJ 07720
+                    state: NJ
+                    type: physical
+                  meta:
+                    lastUpdated: '2020-11-19T05:00:54.485+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location
+                  name: BRADLEY BEACH PHARMACY
+                  language: en
+                  telecom:
+                  - extension:
+                    - extension:
+                      - valueCode: sun
+                        url: daysOfWeek
+                      - valueTime: '09:00:00'
+                        url: availableStartTime
+                      - valueTime: '14:00:00'
+                        url: availableEndTime
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                    - extension:
+                      - valueCode: mon
+                        url: daysOfWeek
+                      - valueCode: tue
+                        url: daysOfWeek
+                      - valueCode: wed
+                        url: daysOfWeek
+                      - valueCode: thu
+                        url: daysOfWeek
+                      - valueCode: fri
+                        url: daysOfWeek
+                      - valueCode: sat
+                        url: daysOfWeek
+                      - valueTime: '09:00:00'
+                        url: availableStartTime
+                      - valueTime: '19:00:00'
+                        url: availableEndTime
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                    system: phone
+                    use: work
+                    value: 732-774-7174
+                  hoursOfOperation:
+                  - closingTime: '14:00:00'
+                    openingTime: '09:00:00'
+                    daysOfWeek:
+                    - sun
+                  - closingTime: '19:00:00'
+                    openingTime: '09:00:00'
+                    daysOfWeek:
+                    - mon
+                    - tue
+                    - wed
+                    - thu
+                    - fri
+                    - sat
+                  id: '0000000000001830496'
+                  position:
+                    latitude: 40.199858
+                    longitude: -74.018929
+                  type:
+                  - coding:
+                    - system: http://terminology.hl7.org/CodeSystem/v3-RoleCode
+                      code: PHARM
+                      display: Pharmacy
+                  resourceType: Location
+                  status: active
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/Location/0000000000001830496
+              total: 67
+              link:
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=1
+                relation: self
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=1
+                relation: first
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=2
+                relation: next
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/Location?address-city:exact=phoenix&address-state:exact=az&_count=2&page=1&address-postalcode:exact=07720&page=34
+                relation: last
+              id: 295e2008-a3f4-11ed-abb4-9d7971040000
+              type: searchset
+              resourceType: Bundle
+          description: This response returns a Bundle of Location records.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn't provided, or an unknown parameter
+            is provided.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      parameters:
+      - in: query
+        name: address-city:exact
+        description: Select Locations with the specified city
+        type: string
+        required: false
+      - in: query
+        name: address-state:exact
+        description: Select Locations with the specified state
+        type: string
+        required: false
+      - in: query
+        name: address-postalcode:exact
+        description: Select Locations with the specified postal code
+        type: string
+        required: false
+      - in: query
+        name: _count
+        format: float
+        description: _count parameter is used to define the maximum number of search
+          results to show on a page
+        type: number
+        required: false
+      - in: query
+        name: page
+        format: float
+        description: 'Used for pagination: potential values to navigate to a specific
+          page. “self”–page=10  “first”–page=1  “last”–page=65  “previous”–page=9
+          “next”–page=11'
+        type: number
+        required: false
+host: apif1.aetna.com/fhir
+produces:
+- application/json
+externalDocs:
+  description: HTTPS Common Error Codes
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: "/Token"
+    authorizationUrl: "/Authorize"
+    description: ''
+    scopes:
+      patient/Patient.*: ''
+      patient/Patient.read: ''
+      patient/*.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: "/Token"
+    description: ''
+    scopes:
+      NonPII: ''
+      Public: ''
+    type: oauth2
+    flow: application
+definitions:
+  Entry:
+    description: An entry in a bundle resource - will contain a resource(s) returned
+      in the bundle
+    type: object
+    properties:
+      resource:
+        "$ref": "#/definitions/Location"
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          "$ref": "#/definitions/Entry"
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+  Location:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Location resource.
+      Full Documentation is available at: http://hl7.org/fhir/location.html
+
+      US Core 3.1.1 Documentation is available at:
+      http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-location.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 Location resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Location.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 Location resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Location.html
+    type: object
+info:
+  contact:
+    name: interoperabilitydevelopersupport
+    url: http://
+    email: interoperabilitydevelopersupport@aetna.com
+  description: "Retrieve Location resource based on either:\n1) identifier \n2) (address-state
+    and address-city) or (address-postalcode)\nSpecial characters are supported but
+    may be handled differently by each application tool."
+  x-ibm-name: v1providerdirectorylocation
+  title: "/v1/providerdirectory/Location"
+  version: 1.0.0

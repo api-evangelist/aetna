@@ -1,3 +1,17 @@
+# =============================================================================
+# NOT A PROVIDER CONTRACT — DO NOT PUBLISH, SCORE OR GENERATE CLIENTS FROM THIS FILE.
+#
+# Reviewed 2026-08-30 by the API Evangelist enrichment pipeline. Aetna publishes no
+# GraphQL API. This SDL is a CONCEPTUAL MODEL written on Aetna's behalf in an earlier
+# round. Its stated source, https://developer.aetna.com/, does not resolve (NXDOMAIN,
+# checked 2026-08-30).
+#
+# Aetna's real contracts: openapi/ (assembled OpenAPI 3.0.3), openapi/_original/ (95
+# verbatim Swagger 2.0 documents from https://developerportal.aetna.com/managedcontent/yaml/)
+# and fhir/ (two live FHIR CapabilityStatements). The apis.yml `type: GraphQL` pointer has
+# been removed.
+# =============================================================================
+
 # Aetna Conceptual GraphQL Schema
 # Derived from Aetna/CVS Health public developer documentation, FHIR R4 APIs,
 # DaVinci Implementation Guides, and CMS Interoperability Final Rule (CMS-9115-F).

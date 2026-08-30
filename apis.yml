@@ -8,185 +8,557 @@ deliveryModel:
   confidence: medium
   source:
   - pricing
-  generated: '2026-08-28'
+  generated: '2026-08-30'
   method: derived
 specificationVersion: '0.23'
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: free
+  onboarding: self-serve
   trial: false
-  try_now: false
+  try_now: true
   public: false
-  label: Freemium
-  confidence: medium
+  label: Free · Self-serve signup
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
+  - finops
+  - authentication
+  - scopes
+  - rate-limits
+  - security
+  - sandbox
+  generated: '2026-08-30'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aetna.png
 url: https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/apis.yml
-modified: '2026-04-19'
+modified: '2026-08-30'
 name: Aetna
-description: Aetna, a CVS Health company, offers health insurance, dental, vision,
-  and other plans for individuals, families, employers, health care providers, and
-  insurance agents and brokers. As a major U.S. health insurer, Aetna provides federally
-  mandated FHIR R4 APIs for patient access, provider directory, and drug formulary
-  data under CMS Interoperability and Patient Access Final Rule (CMS-9115-F). Provider
-  connectivity is supported through the Availity portal for EDI transactions.
+description: 'Aetna, a CVS Health company, is one of the largest U.S. health insurers, offering medical,
+  dental, vision, pharmacy and Medicare/Medicaid plans to individuals, families, employers, health care
+  providers and brokers. Its public API surface is entirely regulatory: Aetna operates an Interoperability
+  API Developer Portal at developerportal.aetna.com that publishes HL7 FHIR R4 interfaces mandated by
+  the CMS Interoperability and Patient Access Final Rule (CMS-9115-F) and the Advancing Interoperability
+  and Improving Prior Authorization Final Rule (CMS-0057-F) - Patient Access, Payer to Payer, Provider
+  Directory, Provider Access, Prior Authorization (Da Vinci CRD, PAS and CDex) and Realtime Pharmacy Benefit
+  Check. Aetna publishes a machine-readable catalog of 139 operations and serves a Swagger 2.0 document
+  for each one, plus live FHIR CapabilityStatements and SMART App Launch discovery documents on its production
+  and sandbox FHIR gateways. Everything is read-only, everything requires OAuth 2.0 under SMART App Launch,
+  and everything is free - there is no pricing, no plan and no metered product. Provider EDI connectivity
+  is handled separately through the Availity portal.'
 tags:
 - Health Insurance
 - Healthcare
 - FHIR
 - Patient Access
 - Provider Directory
+- Drug Formulary
+- Prior Authorization
+- CMS Interoperability
+- SMART on FHIR
+- CARIN Blue Button
+- Da Vinci
+- Payer
 - Fortune 100
+- CVS Health
 apis:
 - aid: aetna-patient-access-fhir-api
   name: Aetna Patient Access FHIR API
-  description: FHIR R4 compliant Patient Access API providing members secure access
-    to their health data including claims, clinical data, and coverage information.
-    Required under CMS Interoperability and Patient Access Final Rule (CMS-9115-F).
-    Supports SMART on FHIR authorization and provides access to ExplanationOfBenefit,
-    Coverage, Patient, and related FHIR resources.
+  description: HL7 FHIR R4 Patient Access API giving Aetna members, through an app they authorize, access
+    to their adjudicated claims, encounter data, coverage, clinical records and formulary information.
+    Implements the CARIN for Blue Button framework (v1.0.0 and v2.0.0) and US Core (3.1.1, 5.0.1 and 6.1.0
+    depending on the resource), required under CMS-9115-F. Secured with SMART App Launch 1.0.0 OAuth 2.0
+    authorization code with PKCE and a member-bound patient context. Exposes Patient, Coverage, ExplanationOfBenefit,
+    Condition, Encounter, Observation, Procedure, MedicationRequest, MedicationKnowledge, DocumentReference,
+    CarePlan, CareTeam, Goal, AllergyIntolerance, Immunization, DiagnosticReport, Device, Binary and Endpoint.
+    The same operations back the Payer to Payer API used by another payer for member-directed data exchange.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apif1.aetna.com/fhir
   tags:
   - FHIR
   - Patient Access
-  - Health Data
+  - CARIN Blue Button
+  - US Core
   - Claims
+  - Coverage
+  - SMART on FHIR
   - CMS Mandate
   properties:
+  - type: OpenAPI
+    url: openapi/aetna-patient-access-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/aetna-patient-access-api-sandbox-openapi.yml
+  - type: Overlay
+    url: overlays/aetna-patient-access-api-overlay.yaml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
   - type: Documentation
-    url: https://www.aetna.com/individuals-families/member-rights-resources/member-data-access.html
+    url: https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
   - type: Authentication
-    url: https://www.aetna.com/individuals-families/member-rights-resources/member-data-access.html
-  - url: graphql/aetna-graphql.md
-    type: GraphQL
+    url: authentication/aetna-authentication.yml
+  - type: CapabilityStatement
+    url: fhir/aetna-patient-access-capability-statement.json
+  - type: Examples
+    url: examples/
 - aid: aetna-provider-directory-fhir-api
   name: Aetna Provider Directory FHIR API
-  description: FHIR R4 compliant Provider Directory API providing standardized access
-    to in-network provider and facility information. Enables third-party applications
-    to search for providers, verify network participation, and access provider details.
-    Required under CMS Interoperability and Patient Access Final Rule for payer-to-payer
-    data exchange.
+  description: HL7 FHIR R4 Provider Directory API implementing the Da Vinci PDex Plan Net Implementation
+    Guide (upgraded to version 1.2.0 on 2026-06-23), covering both Medicare and Commercial networks. Exposes
+    Practitioner, PractitionerRole, Organization, OrganizationAffiliation, InsurancePlan, Location and
+    HealthcareService across two surfaces - an interactive directory at /v1/providerdirectory and a data
+    surface at /v1/providerdirectorydata that additionally offers Bulk FHIR $export and $exportstatus.
+    Unlike several peer payers, Aetna requires OAuth on the directory; it is not anonymously callable.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apif1.aetna.com/fhir
   tags:
   - FHIR
   - Provider Directory
+  - Da Vinci
+  - PDex Plan Net
+  - Bulk FHIR
   - Network
-  - Healthcare Providers
   - CMS Mandate
   properties:
+  - type: OpenAPI
+    url: openapi/aetna-provider-directory-api-openapi.yml
+  - type: Overlay
+    url: overlays/aetna-provider-directory-api-overlay.yaml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
   - type: Documentation
-    url: https://www.aetna.com/health-care-professionals/working-with-aetna/provider-directory.html
+    url: https://developerportal.aetna.com/
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: Authentication
+    url: authentication/aetna-authentication.yml
+  - type: CapabilityStatement
+    url: fhir/aetna-provider-directory-capability-statement.json
 - aid: aetna-drug-formulary-fhir-api
   name: Aetna Drug Formulary FHIR API
-  description: FHIR R4 compliant Drug Formulary API providing standardized access
-    to plan formulary data including covered drugs, tiers, cost-sharing requirements,
-    and prior authorization requirements. Implements the DaVinci PDEX Formulary Implementation
-    Guide. Enables members and third-party applications to compare drug coverage across
-    health plans.
+  description: Da Vinci PDex US Drug Formulary 2.0.0 STU 2 formulary data, delivered as part of the Patient
+    Access API product rather than as a separate base URL. MedicationKnowledge carries covered drugs,
+    tiers, cost sharing and restrictions such as prior authorization and step therapy; formulary InsurancePlan,
+    Basic and Location resources were added on 2024-04-19 when the older List API was decommissioned.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apif1.aetna.com/fhir
   tags:
   - FHIR
   - Drug Formulary
+  - Da Vinci
   - Pharmacy
-  - Medications
+  - MedicationKnowledge
   - CMS Mandate
   properties:
+  - type: OpenAPI
+    url: openapi/aetna-patient-access-api-openapi.yml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
   - type: Documentation
-    url: https://www.aetna.com/individuals-families/member-rights-resources/member-data-access.html
-- aid: aetna-provider-edi-api
-  name: Aetna Provider EDI API
-  description: Electronic Data Interchange connectivity for healthcare providers enabling
-    electronic submission of claims, eligibility verification, claim status inquiries,
-    and remittance advice. Accessible through the Availity provider portal supporting
-    EDI 837 (claims), 270/271 (eligibility), 276/277 (claim status), and 835 (remittance)
-    HIPAA transactions.
+    url: https://developerportal.aetna.com/
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+- aid: aetna-prior-authorization-fhir-api
+  name: Aetna Prior Authorization FHIR API
+  description: 'Da Vinci prior-authorization surface built for CMS-0057-F: Coverage Requirements Discovery
+    (STU 2.1) at /coveragerequirementsdiscovery/v1/cds-services/{id} supporting the order-sign, order-dispatch
+    and appointment-book CDS Hooks; Prior Authorization Support (STU 2.1) at /priorauthorizationsupport/v1/Claim/$submit
+    and /$inquire; and Clinical Data Exchange (CDex STU 2.1.0) at /clinicaldataexchange/v1/$submit-attachment.
+    Aetna states that Meritain members, Medicaid members, pharmacy prior authorization and SNOMED procedure
+    codes are not supported. Production traffic for these products moved to the apix.cvshealth.com host
+    on 2026-03-04. Every spec document for this API returned HTTP 403 when this repo was harvested, so
+    no machine-readable contract for it is held here.'
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apix.cvshealth.com
   tags:
-  - EDI
-  - Claims
-  - Eligibility
-  - Provider Portal
-  - HIPAA
+  - FHIR
+  - Prior Authorization
+  - Da Vinci
+  - CDS Hooks
+  - CRD
+  - PAS
+  - CDex
+  - CMS-0057-F
   properties:
   - type: Documentation
-    url: https://www.aetna.com/health-care-professionals/claims-payment/claims-submission.html
+    url: https://developerportal.aetna.com/
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: APIReference
+    url: https://developerportal.aetna.com/assets/Data/Fhir.json
+- aid: aetna-provider-access-fhir-api
+  name: Aetna Provider Access FHIR API
+  description: Launched in Production on 2026-03-27 under the public-provider-group-fhir product, the
+    Provider Access API lets provider organizations and EHR vendors identify their attributed member groups
+    and request a bulk data export for treatment purposes. Operations cover /provideraccess/v1/Group,
+    /Group/{id}, /Group/$exportstatus/{id}, /Group/{id}/$davinci-data-export and /Group/ExportFile/{fileId},
+    implementing Da Vinci PDex STU 2.1.0 with Bulk Data Access IG STU 3.0.0. A dedicated ECS Provider
+    role was added 2026-08-19.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apif1.aetna.com/fhir
+  tags:
+  - FHIR
+  - Provider Access
+  - Da Vinci
+  - Bulk FHIR
+  - Member Attribution
+  - CMS-0057-F
+  properties:
+  - type: Documentation
+    url: https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/provider-access-options.html
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: APIReference
+    url: https://developerportal.aetna.com/assets/Data/Fhir.json
+- aid: aetna-realtime-pharmacy-benefit-check-api
+  name: Aetna Realtime Pharmacy Benefit Check API
+  description: Consumer Real-Time Pharmacy Benefit Check 1.0.0, launched 2024-12-05, letting members and
+    EHR systems retrieve prescription drug cost and coverage information at the point of prescribing.
+    Built to satisfy California AB 2352 and Texas HB 0662H. Exposed as a FHIR messaging operation at /v1/realtimepharmacybenefitcheck/$process-message
+    (member-facing) and /realtimepharmacybenefitcheck/v1/$process-message (provider-facing). Production
+    traffic moved to the apix.cvshealth.com host on 2026-03-04. Spec documents returned HTTP 403 to this
+    harvest.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apix.cvshealth.com
+  tags:
+  - FHIR
+  - Pharmacy
+  - Real-Time Benefit Check
+  - RTPBC
+  - Prescription Cost
+  properties:
+  - type: Documentation
+    url: https://developerportal.aetna.com/
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: APIReference
+    url: https://developerportal.aetna.com/assets/Data/Fhir.json
+- aid: aetna-provider-edi-api
+  name: Aetna Provider EDI Connectivity
+  description: HIPAA X12 electronic data interchange for health care professionals - EDI 837 claims, 270/271
+    eligibility and benefits, 276/277 claim status and 835 remittance advice. This is not an Aetna-hosted
+    REST API and Aetna publishes no machine-readable contract for it; connectivity runs through the Availity
+    provider portal and through clearinghouses, against the ASC X12 5010 and NCPDP D.0 transaction standards
+    Aetna documents on aetna.com.
+  humanURL: https://www.aetna.com/health-care-professionals/availity.html
+  baseURL: https://www.availity.com
+  tags:
+  - EDI
+  - X12
+  - HIPAA
+  - Claims
+  - Eligibility
+  - Remittance
+  - Availity
+  - Clearinghouse
+  properties:
+  - type: Documentation
+    url: https://www.aetna.com/health-care-professionals/claims-payment-reimbursement/electronic-claims.html
   - type: Portal
-    url: https://www.availity.com
+    url: https://www.aetna.com/health-care-professionals/availity.html
+  - type: Conformance
+    url: https://www.aetna.com/health-care-professionals/icd-10-5010-npi-information/5010-d0-transaction-standards.html
 common:
+- type: OpenAPI
+  url: openapi/aetna-patient-access-api-openapi.yml
+- type: OpenAPI
+  url: openapi/aetna-provider-directory-api-openapi.yml
+- type: Overlay
+  url: overlays/aetna-patient-access-api-overlay.yaml
+- type: CapabilityStatement
+  url: fhir/aetna-patient-access-capability-statement.json
+- type: Vocabulary
+  url: vocabulary/aetna-vocabulary.yaml
+- type: JSONSchema
+  url: json-schema/aetna-allergyintolerance.json
+- type: JSONSchema
+  url: json-schema/aetna-bundle.json
+- type: JSONSchema
+  url: json-schema/aetna-careplan.json
+- type: JSONSchema
+  url: json-schema/aetna-careteam.json
+- type: JSONSchema
+  url: json-schema/aetna-condition.json
+- type: JSONSchema
+  url: json-schema/aetna-device.json
+- type: JSONSchema
+  url: json-schema/aetna-diagnosticreport.json
+- type: JSONSchema
+  url: json-schema/aetna-documentreference.json
+- type: JSONSchema
+  url: json-schema/aetna-encounter.json
+- type: JSONSchema
+  url: json-schema/aetna-explanationofbenefit.json
+- type: JSONSchema
+  url: json-schema/aetna-goal.json
+- type: JSONSchema
+  url: json-schema/aetna-healthcareservice.json
+- type: JSONSchema
+  url: json-schema/aetna-immunization.json
+- type: JSONSchema
+  url: json-schema/aetna-insuranceplan.json
+- type: JSONSchema
+  url: json-schema/aetna-location.json
+- type: JSONSchema
+  url: json-schema/aetna-medicationknowledge.json
+- type: JSONSchema
+  url: json-schema/aetna-medicationrequest.json
+- type: JSONSchema
+  url: json-schema/aetna-observation.json
+- type: JSONSchema
+  url: json-schema/aetna-operationoutcome.json
+- type: JSONSchema
+  url: json-schema/aetna-organization.json
+- type: JSONSchema
+  url: json-schema/aetna-organizationaffiliation.json
+- type: JSONSchema
+  url: json-schema/aetna-patient.json
+- type: JSONSchema
+  url: json-schema/aetna-practitioner.json
+- type: JSONSchema
+  url: json-schema/aetna-practitionerrole.json
+- type: JSONSchema
+  url: json-schema/aetna-procedure.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-insuranceplan-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-location-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-location-id-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-organization-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-organization-id-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-organizationaffiliation-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-practitioner-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-practitioner-id-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectory-practitionerrole-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-healthcareservice-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-healthcareservice-id-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-insuranceplan-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-location-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-location-id-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-organization-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-organization-id-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-organizationaffiliation-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-practitioner-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-practitioner-id-200-example.json
+- type: Examples
+  url: examples/aetna-v1-providerdirectorydata-practitionerrole-200-example.json
+- type: Authentication
+  url: authentication/aetna-authentication.yml
+- type: OAuthScopes
+  url: scopes/aetna-scopes.yml
+- type: Conformance
+  url: conformance/aetna-conformance.yml
+- type: Compliance
+  url: conformance/aetna-conformance.yml
+- type: ErrorCatalog
+  url: errors/aetna-problem-types.yml
+- type: Conventions
+  url: conventions/aetna-conventions.yml
+- type: Lifecycle
+  url: lifecycle/aetna-lifecycle.yml
+- type: Deprecation
+  url: https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf
+- type: ChangeLog
+  url: changelog/aetna-changelog.yml
+- type: ChangeLog
+  url: https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf
+- type: Roadmap
+  url: https://developerportal.aetna.com/managedcontent/pdfs/Upcoming_Releases.pdf
+- type: Sandbox
+  url: sandbox/aetna-sandbox.yml
+- type: DataModel
+  url: data-model/aetna-data-model.yml
+- type: RateLimits
+  url: rate-limits/aetna-rate-limits.yml
+- type: Plans
+  url: plans/aetna-plans-pricing.yml
+- type: Packages
+  url: packages/aetna-packages.yml
+- type: MCPServer
+  url: mcp/aetna-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/aetna-llms.txt
+- type: WellKnown
+  url: well-known/aetna-well-known.yml
+- type: AgenticAccess
+  url: agentic-access/aetna-agentic-access.yml
 - type: DomainSecurity
   url: security/aetna-domain-security.yml
-- type: GitHubOrganization
-  url: https://github.com/aetnahealth
-- type: LinkedIn
-  url: https://www.linkedin.com/company/aetna
-- type: Website
-  url: https://www.aetna.com
-- type: Portal
-  url: https://www.aetna.com/health-care-professionals.html
+- type: FinOps
+  url: finops/aetna-finops.yml
+- type: DeveloperPortal
+  url: https://developerportal.aetna.com/
+- type: Documentation
+  url: https://developerportal.aetna.com/
+- type: APIReference
+  url: https://developerportal.aetna.com/assets/Data/Fhir.json
+- type: GettingStarted
+  url: https://developerportal.aetna.com/gettingstarted/1000
+- type: SignUp
+  url: https://developerportal.aetna.com/
 - type: Login
   url: https://member.aetna.com
 - type: Support
   url: https://www.aetna.com/individuals-families/contact-aetna.html
+- type: Website
+  url: https://www.aetna.com
+- type: Portal
+  url: https://www.aetna.com/health-care-professionals.html
+- type: GitHubOrganization
+  url: https://github.com/aetnahealth
+- type: LinkedIn
+  url: https://www.linkedin.com/company/aetna
 - type: PrivacyPolicy
   url: https://www.aetna.com/legal-notices/privacy.html
 - type: TermsOfService
-  url: https://www.aetna.com/legal-notices/terms-of-use.html
+  url: https://developerportal.aetna.com/termsofuse
 - type: Features
   data:
   - name: FHIR R4 Compliance
-    description: All patient-facing APIs implement HL7 FHIR Release 4 standard for
-      interoperability.
+    description: All patient-facing APIs implement HL7 FHIR Release 4 standard for interoperability.
   - name: SMART on FHIR Authorization
-    description: Secure OAuth 2.0 authorization framework for patient-authorized third-party
-      app access.
+    description: Secure OAuth 2.0 authorization framework for patient-authorized third-party app access.
   - name: CMS Interoperability Compliance
-    description: Full compliance with CMS-9115-F Interoperability and Patient Access
-      Final Rule.
+    description: Full compliance with CMS-9115-F Interoperability and Patient Access Final Rule.
   - name: EDI Transaction Support
-    description: Complete HIPAA-compliant EDI transaction set for provider administrative
-      workflows.
+    description: Complete HIPAA-compliant EDI transaction set for provider administrative workflows.
   - name: Payer-to-Payer Data Exchange
-    description: Supports member-directed payer-to-payer data exchange for continuity
-      of care.
+    description: Supports member-directed payer-to-payer data exchange for continuity of care.
   - name: DaVinci Implementation Guides
-    description: Implements HL7 DaVinci Project PDEX, PDex Drug Formulary, and Plan
-      Net guides.
+    description: Implements HL7 DaVinci Project PDEX, PDex Drug Formulary, and Plan Net guides.
 - type: UseCases
   data:
   - name: Member Health Record Access
-    description: Members use SMART on FHIR apps to access their complete health records
-      across providers.
+    description: Members use SMART on FHIR apps to access their complete health records across providers.
   - name: Provider Network Verification
-    description: Developers build directory search tools to help patients find in-network
-      providers.
+    description: Developers build directory search tools to help patients find in-network providers.
   - name: Drug Cost Comparison
-    description: Applications use formulary API to compare medication costs across
-      Aetna plans.
+    description: Applications use formulary API to compare medication costs across Aetna plans.
   - name: Electronic Claims Submission
-    description: Healthcare providers submit claims electronically via EDI 837 transactions
-      through Availity.
+    description: Healthcare providers submit claims electronically via EDI 837 transactions through Availity.
   - name: Eligibility Verification
-    description: Providers verify member eligibility and benefits in real time using
-      270/271 EDI transactions.
+    description: Providers verify member eligibility and benefits in real time using 270/271 EDI transactions.
   - name: Remittance Processing
-    description: Providers receive and process electronic remittance advice via EDI
-      835 transactions.
+    description: Providers receive and process electronic remittance advice via EDI 835 transactions.
 - type: Integrations
   data:
   - name: CVS Caremark
-    description: Integrated pharmacy benefit management for prescription drug coverage
-      and mail-order pharmacy.
+    description: Integrated pharmacy benefit management for prescription drug coverage and mail-order
+      pharmacy.
   - name: Availity
-    description: Primary provider portal for EDI transactions, eligibility, claims,
-      and authorization requests.
+    description: Primary provider portal for EDI transactions, eligibility, claims, and authorization
+      requests.
   - name: Epic Payer Platform
-    description: EHR integration enabling clinical workflows including prior authorization
-      and care management.
+    description: EHR integration enabling clinical workflows including prior authorization and care management.
   - name: Apple Health
-    description: FHIR-based integration enabling Aetna members to view health data
-      in Apple Health app.
+    description: FHIR-based integration enabling Aetna members to view health data in Apple Health app.
   - name: CommonWell Health Alliance
-    description: Interoperability network participation for cross-organization health
-      data exchange.
+    description: Interoperability network participation for cross-organization health data exchange.
   - name: CMS Blue Button 2.0
-    description: Alignment with CMS Blue Button 2.0 FHIR API patterns for Medicare
-      data access.
+    description: Alignment with CMS Blue Button 2.0 FHIR API patterns for Medicare data access.
+created: '2026-05-04'
+maintainers:
+- FN: API Evangelist
+  email: info@apievangelist.com
+x-enrichment:
+  date: '2026-08-30'
+  status: enriched
+  artifacts_added: 219
+  artifacts_updated: 6
+  pass: local-v1
+  headline: Aetna was previously recorded with no machine-readable contract. It publishes 139 of them.
+    The developer portal is an Angular SPA that serves an HTML shell on every route, which is why earlier
+    rounds missed it; its own JavaScript loads a machine-readable API catalog at https://developerportal.aetna.com/assets/Data/Fhir.json,
+    and each entry names a Swagger 2.0 file served from https://developerportal.aetna.com/managedcontent/yaml/.
+    95 of the 138 named files were retrieved (43 returned Akamai 403). Two live FHIR CapabilityStatements
+    and two SMART App Launch discovery documents were also captured. A fabricated 'conceptual' GraphQL
+    schema from an earlier round was demoted and its apis.yml pointer removed; Aetna ships no GraphQL
+    API.
+  pointer_checks:
+    checked: '2026-08-30'
+    method: GET with a browser User-Agent, following redirects
+    removed_confirmed_dead:
+    - url: https://www.aetna.com/individuals-families/member-rights-resources/member-data-access.html
+      status: 404
+    - url: https://www.aetna.com/health-care-professionals/working-with-aetna/provider-directory.html
+      status: 404
+    - url: https://www.aetna.com/health-care-professionals/claims-payment/claims-submission.html
+      status: 404
+    - url: https://www.aetna.com/legal-notices/terms-of-use.html
+      status: 404
+    - url: graphql/aetna-graphql.md
+      status: removed - fabricated conceptual schema, not a provider contract
+    verified_live:
+    - url: https://www.aetna.com
+      status: 200
+    - url: https://www.aetna.com/health-care-professionals.html
+      status: 200
+    - url: https://www.aetna.com/individuals-families/contact-aetna.html
+      status: 200
+    - url: https://www.aetna.com/legal-notices/privacy.html
+      status: 200
+    - url: https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
+      status: 200
+    - url: https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/provider-access-options.html
+      status: 200
+    - url: https://www.aetna.com/health-care-professionals/availity.html
+      status: 200
+    - url: https://www.aetna.com/health-care-professionals/claims-payment-reimbursement/electronic-claims.html
+      status: 200
+    - url: https://www.aetna.com/health-care-professionals/icd-10-5010-npi-information/5010-d0-transaction-standards.html
+      status: 200
+    - url: https://member.aetna.com
+      status: 200
+    - url: https://news.aetna.com
+      status: 200
+    - url: https://github.com/aetnahealth
+      status: 200
+    - url: https://www.linkedin.com/company/aetna
+      status: 200
+    - url: https://www.availity.com
+      status: 200
+    - url: https://developerportal.aetna.com/
+      status: 200
+    - url: https://developerportal.aetna.com/assets/Data/Fhir.json
+      status: 200
+    - url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
+      status: 200
+    - url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
+      status: 200
+    - url: https://apif1.aetna.com/fhir/.well-known/smart-configuration
+      status: 200
+    - url: https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf
+      status: 200
+    spa_caveat: 'developerportal.aetna.com is an Angular single-page app: every route, including a deliberate
+      control probe at /definitely-not-a-real-route-control-probe, returns the same 1,055-byte HTML shell
+      with HTTP 200. Route-level pointers (/gettingstarted/1000, /termsofuse) therefore cannot be confirmed
+      by status code. They are emitted because search engines have indexed each one with its own distinct
+      title (''Aetna Interoperability API Developer Portal Terms and ...''), which is independent evidence
+      the route renders real content client-side.'
+    unverifiable:
+    - url: https://developerportal.aetna.com/managedcontent/pdfs/Upcoming_Releases.pdf
+      status: 403
+      note: Akamai edge denial to this run's IP after a burst of spec downloads. NOT confirmed dead -
+        the portal's own main.js references this exact path alongside Previous_Releases.pdf, which did
+        return 200. Emitted as the Roadmap pointer.
+x-parent: cvs-health
+x-relationship: acquisition
+x-acquired: 2018

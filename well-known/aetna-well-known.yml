@@ -1,0 +1,109 @@
+generated: '2026-08-30'
+method: probed
+source: >-
+  live GET probes on 2026-08-30 of every apis.yml host, every OpenAPI servers[] host and the
+  developer-portal host: www.aetna.com, apif1.aetna.com, vteapif1.aetna.com, developerportal.aetna.com
+note: >-
+  Aetna serves NO document at any host-root /.well-known/* path. www.aetna.com returns a real 404 (an
+  HTML error page, 49,382 bytes, on every path including /llms.txt); apif1.aetna.com and
+  vteapif1.aetna.com return a JSON 404 envelope from the IBM API Connect gateway on every host-root
+  path. What Aetna DOES serve is the spec-defined SMART App Launch discovery document, one per FHIR
+  base path, and those are real JSON objects saved verbatim alongside this index. They are the only
+  well-known documents this provider publishes, and they are the reason a WellKnown pointer is emitted.
+  developerportal.aetna.com could not be assessed: its Akamai edge returned 403 "Access Denied" to
+  every anonymous /.well-known/* request from this run's IP after an earlier burst of spec downloads,
+  so no conclusion about that host is recorded here.
+hosts:
+  - host: apif1.aetna.com
+    role: production FHIR API gateway (apis.yml baseURL + OpenAPI servers[])
+    documents:
+      - path: /fhir/.well-known/smart-configuration
+        url: https://apif1.aetna.com/fhir/.well-known/smart-configuration
+        status: 200
+        content_type: application/json
+        file: aetna-smart-configuration.json
+        spec: SMART App Launch 1.0.0
+        parsed: json-object
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /fhir/v2/patientaccess/.well-known/smart-configuration
+        status: 404
+        note: >-
+          The per-service path does NOT serve its own smart-configuration; only the /fhir base does.
+          Recorded because SMART App Launch clients are told to look under the FHIR base URL, and for
+          Aetna the FHIR base for discovery purposes is /fhir, not /fhir/v2/patientaccess.
+  - host: vteapif1.aetna.com
+    role: sandbox FHIR API gateway (OpenAPI servers[])
+    documents:
+      - path: /fhirdemo/.well-known/smart-configuration
+        url: https://vteapif1.aetna.com/fhirdemo/.well-known/smart-configuration
+        status: 200
+        content_type: application/json
+        file: aetna-sandbox-smart-configuration.json
+        spec: SMART App Launch 1.0.0
+        parsed: json-object
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: www.aetna.com
+    role: corporate site (apis.yml Website)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: developerportal.aetna.com
+    role: developer portal / API library / spec distribution
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        note: Akamai edge denial to this run's IP; NOT evidence of absence.
+      - path: /.well-known/agent-card.json
+        status: 403
+        note: Akamai edge denial to this run's IP; NOT evidence of absence.
+      - path: /.well-known/agent.json
+        status: 403
+        note: Akamai edge denial to this run's IP; NOT evidence of absence.
+hit_count: 2
+soft_404_control:
+  probed: https://www.aetna.com/.well-known/definitely-not-a-real-path-aetna-control
+  note: >-
+    www.aetna.com answers 404 with a 49,382-byte HTML error page for every unknown /.well-known/ path,
+    so the 404s above are genuine negatives rather than a catch-all 200. apif1/vteapif1 return a
+    111-byte JSON 404 envelope, likewise a genuine negative.
+security_txt: null

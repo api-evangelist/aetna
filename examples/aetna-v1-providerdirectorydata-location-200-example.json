@@ -1,0 +1,135 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_Location",
+    "path": "/v1/providerdirectorydata/Location",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "code": "PLAC",
+                    "display": "Placer Identifier"
+                  }
+                ]
+              }
+            },
+            {
+              "system": "http://aetna.com/identifier",
+              "type": {
+                "coding": [
+                  {
+                    "code": "SLN",
+                    "system": "http://aetna.com/identifier",
+                    "display": "Service Location Number"
+                  }
+                ],
+                "text": "Aetna Service Location Number"
+              },
+              "value": "4441165"
+            }
+          ],
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "code": "nopt",
+                        "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS",
+                        "display": "Not Accepting"
+                      }
+                    ],
+                    "text": "Not Accepting patients"
+                  },
+                  "url": "acceptingPatients"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+            },
+            {
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AccessibilityCS"
+                  }
+                ]
+              },
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/accessibility"
+            }
+          ],
+          "address": {
+            "country": "US",
+            "city": "San Diego",
+            "line": [
+              "5739 PACIFIC CENTER BLVD"
+            ],
+            "use": "work",
+            "district": "San Diego",
+            "postalCode": "92121",
+            "state": "CA",
+            "text": "5739 PACIFIC CENTER BLVD, San Diego, San Diego, CA 92121, US",
+            "type": "physical"
+          },
+          "meta": {
+            "lastUpdated": "2023-02-08T14:15:24.246828+00:00",
+            "versionId": "MTY3NTg2NTcyNDI0NjgyODAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location"
+            ]
+          },
+          "name": "Quest Diagnostics Incorporated",
+          "language": "en",
+          "telecom": [
+            {
+              "system": "phone",
+              "use": "work",
+              "rank": 1,
+              "value": "8882778772"
+            }
+          ],
+          "id": "plannet-location-9fb71274cf8baa5738abd8aa67d48bf3",
+          "position": {
+            "latitude": 32.904127,
+            "longitude": -117.196721
+          },
+          "type": [
+            {
+              "coding": [
+                {
+                  "code": "WORK",
+                  "display": "work site"
+                }
+              ]
+            }
+          ],
+          "resourceType": "Location",
+          "status": "active"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/Location/plannet-location-9fb71274cf8baa5738abd8aa67d48bf3"
+      }
+    ],
+    "total": 1,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/Location/?address=Prescott",
+        "relation": "search"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Medication_id",
+    "path": "/v2/patientaccess/Medication/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "code": {
+      "coding": [
+        {
+          "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+          "code": "206765",
+          "display": "Prinivil 10 MG Oral Tablet"
+        }
+      ],
+      "text": "lisinopril oral 10 mg"
+    },
+    "meta": {
+      "extension": [
+        {
+          "valueString": "Uscore Med1 Example",
+          "url": "http://hl7.org/fhir/StructureDefinition/instance-name"
+        },
+        {
+          "valueMarkdown": "This is a uscore med1 example for the *US Core Medication Profile*.",
+          "url": "http://hl7.org/fhir/StructureDefinition/instance-description"
+        }
+      ],
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-medication"
+      ]
+    },
+    "id": "uscore-med1",
+    "text": {
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><p><b>code</b>: <span title=\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 206765}\">lisinopril oral 10 mg</span></p></div>",
+      "status": "generated"
+    },
+    "resourceType": "Medication"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_DocumentReference_id",
+    "path": "/v2/patientaccess/DocumentReference/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "date": "2021-06-15T11:36:46.462+00:00",
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/goal/identifier/99345",
+        "value": "42~MWRZ3456780+current+preliminary+34108-1+2021-06-15"
+      }
+    ],
+    "custodian": {
+      "reference": "Organization/e345b49-5c16-4bd4-d310"
+    },
+    "subject": {
+      "reference": "Patient/123eb49-5c16-4bd4-c310"
+    },
+    "author": [
+      {
+        "reference": "Organization/e345b49-5c16-4bd4-d310"
+      }
+    ],
+    "securityLabel": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+            "code": "V",
+            "display": "very restricted"
+          }
+        ]
+      }
+    ],
+    "description": "Physical",
+    "masterIdentifier": {
+      "system": "https://sources.aetna.com/goal/identifier/99345",
+      "value": "42~MWRZ3456780+current+preliminary+34108-1+2021-06-15"
+    },
+    "type": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "34108-1",
+          "display": "Outpatient Note"
+        }
+      ]
+    },
+    "content": [
+      {
+        "attachment": {
+          "data": "xmlversiog==",
+          "language": "en-us",
+          "contentType": "text/plain"
+        }
+      }
+    ],
+    "docStatus": "preliminary",
+    "meta": {
+      "lastUpdated": "2021-06-17T11:36:46.462+00:00",
+      "versionId": "1",
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference"
+      ]
+    },
+    "context": {
+      "period": {
+        "start": "2020-06-23T08:00:00+11:00",
+        "end": "2020-06-23T08:01:00+11:00"
+      },
+      "related": [
+        {
+          "reference": "DiagnosticReport/b1235b14-3a23-8bd1-b421"
+        }
+      ],
+      "facilityType": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "6827000",
+            "display": "Local community health center"
+          }
+        ]
+      },
+      "encounter": {
+        "reference": "Encounter/a925b49-5a13-7bd1-d410"
+      }
+    },
+    "id": "zbdf8e23-7c16-5ad4-s310-467254b145e8",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/us/core/CodeSystem/us-core-documentreference-category",
+            "code": "clinical-note",
+            "display": "Clinical Note"
+          }
+        ]
+      }
+    ],
+    "authenticator": {
+      "reference": "Organization/e345b49-5c16-4bd4-d310"
+    },
+    "resourceType": "DocumentReference",
+    "status": "current"
+  }
+}

@@ -1,0 +1,12 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/json-schema/aetna-insuranceplan.json",
+ "title": "Aetna FHIR R4 InsurancePlan",
+ "description": "See the appropriate Implementation Guide for proper documentation to use\n\nThis is the HL7 FHIR Release 4.0.1 InsurancePlan resource.\nFull Documentation is available at: http://hl7.org/fhir/insuranceplan.html\n\nFor the DaVinci PDEX Plan Net 1.0.0 InsurancePlan resource documentation is available at:\nhttp://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-InsurancePlan.html\n\nFor the DaVinci PDEX Plan Net 1.1.0 InsurancePlan resource documentation is available at:\nhttp://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-InsurancePlan.html",
+ "x-provenance": {
+  "generated": "2026-08-30",
+  "method": "derived",
+  "source": "openapi/aetna-provider-directory-api-openapi.yml"
+ },
+ "type": "object"
+}

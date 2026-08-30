@@ -1,0 +1,108 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Immunization",
+    "path": "/v2/patientaccess/Immunization",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "RxConnect",
+              "value": "11181211064"
+            },
+            {
+              "system": "RxConnect",
+              "value": "11180968922"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2021-03-09T16:18:54.405304+00:00",
+            "versionId": "MTYxNTMwNjczNDQwNTMwNDAwMA"
+          },
+          "patient": {
+            "reference": "Patient/11180968922"
+          },
+          "protocolApplied": [
+            {
+              "doseNumberPositiveInt": 1
+            }
+          ],
+          "id": "11181211064",
+          "lotNumber": "1",
+          "recorded": "2021-01-07",
+          "expirationDate": "2022-01-01",
+          "resourceType": "Immunization",
+          "status": "completed"
+        },
+        "fullUrl": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Immunization/11181211064"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "RxConnect",
+              "value": "11181210653"
+            },
+            {
+              "system": "RxConnect",
+              "value": "11212828151"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2021-03-09T16:18:54.405304+00:00",
+            "versionId": "MTYxNTMwNjczNDQwNTMwNDAwMA"
+          },
+          "patient": {
+            "reference": "Patient/11212828151"
+          },
+          "protocolApplied": [
+            {
+              "doseNumberPositiveInt": 1
+            }
+          ],
+          "id": "11181210653",
+          "lotNumber": "12",
+          "recorded": "2021-01-07",
+          "expirationDate": "2021-10-10",
+          "resourceType": "Immunization",
+          "status": "completed"
+        },
+        "fullUrl": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Immunization/11181210653"
+      }
+    ],
+    "total": 2,
+    "link": [
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Immunization/?_count=2",
+        "relation": "search"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Immunization/?_count=2&_page_token=Cjj3YEef7v%2F%2F%2F%2F%2BABb0c6BuGuAD%2FAf%2F%2BOGQzY2FiYmE2OTc5N2U0NGFmNmNiM2Y1OTAwYWRhOGIAARACIRdZYDGqWfwzOQAAAAARYLifSAJQAFoLCcJRz98ugOf9EANg3JPmgwY%3D",
+        "relation": "next"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Immunization/?_count=2",
+        "relation": "first"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/Immunization/?_count=2",
+        "relation": "self"
+      }
+    ],
+    "id": "a7bca4215fbc6e68b01b0801",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

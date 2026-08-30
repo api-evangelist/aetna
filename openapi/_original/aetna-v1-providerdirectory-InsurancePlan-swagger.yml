@@ -1,0 +1,238 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qahapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qaehapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_Application_Oauth:
+  - Public
+- FHIR_Application_Oauth:
+  - NonPII
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.*
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.*
+basePath: "/v1/providerdirectory"
+paths:
+  "/InsurancePlan":
+    get:
+      summary: Retrieve InsurancePlan resource based on Coverage Area (Coverage area
+        is a 2-digit state abbreviation). Both Provider and Pharmacy data are available
+        on this resource.
+      description: Returns insurance plans and network keys for a specific state
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Bundle"
+          examples:
+            application/json:
+              entry:
+              - search:
+                  mode: match
+                resource:
+                  identifier:
+                  - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                    use: official
+                    assigner:
+                      display: Aetna Better Health of New Jersey
+                    type:
+                      coding:
+                      - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                        code: XV
+                        display: Health Plan Identifier
+                    value: Aetna Better Health of New Jersey - NJ
+                  period:
+                    start: '2020-01-01T00:00:00Z'
+                    end: '2020-12-31T23:59:59Z'
+                  language: en
+                  type:
+                  - coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS
+                      code: medihmo
+                      display: Medicaid HMO
+                  administeredBy:
+                    display: Aetna Better Health of New Jersey
+                  network:
+                  - reference: Organization/0000000000000212937
+                    display: Aetna Better Health of New Jersey
+                  - reference: Organization/0000000000000212938
+                    display: Aetna Assure Premier Plus (HMO D-SNP)
+                  - reference: Organization/0000000000000212939
+                    display: Aetna Assure Premier Plus (HMO D-SNP)
+                  meta:
+                    lastUpdated: '2020-10-23T00:00:00.000+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan
+                  contact:
+                  - address:
+                      city: Princeton
+                      line:
+                      - 3 Independence Way
+                      - Suite 400
+                      postalCode: '08540-6626'
+                      state: NJ
+                    name:
+                      use: official
+                      text: ABH New Jersey
+                    telecom:
+                    - system: phone
+                      use: work
+                      value: 1-855-232-3596
+                  name: Aetna Better Health of New Jersey
+                  id: '0000000000000212936'
+                  ownedBy:
+                    display: Aetna Better Health of New Jersey
+                  resourceType: InsurancePlan
+                  status: active
+                  coverageArea:
+                  - display: NJ
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/InsurancePlan/0000000000000212936
+              total: 1
+              link:
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/InsurancePlan?address-state=nj&page=1
+                relation: self
+              id: 32ed03f463dd540f05fbb9f1
+              type: searchset
+              resourceType: Bundle
+          description: This response returns a Bundle of InsurancePlan(s) information
+            based on the input received.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      schemes:
+      - https
+      parameters:
+      - in: query
+        name: address-state
+        description: |-
+          The state code of the InsurancePlan's coverage
+
+
+          State will be 2 letter abbreviation.
+        type: string
+        required: true
+host: apif1.aetna.com/fhir
+produces:
+- application/json
+externalDocs:
+  description: HTTP Common Error Codes
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: "/Token"
+    authorizationUrl: "/Authorize"
+    description: ''
+    scopes:
+      patient/Patient.*: ''
+      patient/Patient.read: ''
+      patient/*.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: "/Token"
+    description: ''
+    scopes:
+      NonPII: ''
+      Public: ''
+    type: oauth2
+    flow: application
+definitions:
+  Entry:
+    description: An entry in a bundle resource - will contain a resource(s) returned
+      in the bundle
+    type: object
+    properties:
+      resource:
+        "$ref": "#/definitions/InsurancePlan"
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          "$ref": "#/definitions/Entry"
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+  InsurancePlan:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 InsurancePlan resource.
+      Full Documentation is available at: http://hl7.org/fhir/insuranceplan.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 InsurancePlan resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-InsurancePlan.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 InsurancePlan resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-InsurancePlan.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: InteroperabilityDeveloperSupport@aetna.com
+  description: |-
+    Retrieve Insurance Plan resource based on Coverage Area (Coverage area is a 2-digit state abbreviation).
+    Both Provider and Pharmacy data are available on this resource.
+  x-ibm-name: v1providerdirectoryinsuranceplan
+  title: "/v1/providerdirectory/InsurancePlan"
+  version: 1.0.0

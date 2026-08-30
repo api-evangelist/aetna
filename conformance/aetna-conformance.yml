@@ -1,0 +1,217 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://apif1.aetna.com/fhir/v2/patientaccess/metadata (live FHIR CapabilityStatement, HTTP 200),
+  https://apif1.aetna.com/fhir/v1/providerdirectory/metadata (live FHIR CapabilityStatement, HTTP 200),
+  https://apif1.aetna.com/fhir/.well-known/smart-configuration (live SMART App Launch document, HTTP 200),
+  https://developerportal.aetna.com/assets/Data/Fhir.json (Aetna's own API catalog, which names the
+  implementation guide each operation conforms to),
+  https://developerportal.aetna.com/managedcontent/yaml/*.yaml (95 provider-published Swagger 2.0 documents),
+  https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf (dated release history),
+  openapi/_original/*.yml
+summary: >-
+  Aetna is a regulatory-driven FHIR publisher and its entire conformance posture is healthcare-
+  interoperability shaped. Everything it publishes exists because CMS-9115-F (Interoperability and
+  Patient Access) and CMS-0057-F (Advancing Interoperability and Improving Prior Authorization) told
+  it to, and it conforms to the HL7 implementation guides those rules name: CARIN for Blue Button,
+  US Core, Da Vinci PDex, Da Vinci PDex Plan Net, Da Vinci US Drug Formulary, Da Vinci CRD, Da Vinci
+  PAS and Da Vinci CDex. Aetna names the exact IG and version per operation in its own API catalog,
+  which is unusually precise. It does NOT adopt the general-purpose web-API conventions the rest of
+  the catalog is measured on: no RFC 9457 problem+json (the error envelope is FHIR OperationOutcome),
+  no RFC 8594 Sunset/Deprecation signalling, no idempotency key, and no RateLimit-* response headers
+  even though a 429 with an OperationOutcome body is documented.
+standards:
+  - id: fhir-r4
+    name: HL7 FHIR 4.0.1 (R4)
+    conforms: true
+    evidence: >-
+      Both live CapabilityStatements declare fhirVersion 4.0.1. Every published operation is a FHIR
+      resource interaction and every response schema is a FHIR resource or Bundle.
+  - id: fhir-rest
+    name: FHIR RESTful API (read + type-level search)
+    conforms: true
+    evidence: >-
+      99 merged operations across the harvested specs are FHIR type-level search (GET /{Resource}) or
+      instance read (GET /{Resource}/{id}); GET /fhir/v2/patientaccess/metadata and
+      GET /fhir/v1/providerdirectory/metadata each return a CapabilityStatement (verified live 2026-08-30).
+  - id: fhir-capability-statement
+    name: FHIR CapabilityStatement discovery
+    conforms: true
+    evidence: >-
+      https://apif1.aetna.com/fhir/v2/patientaccess/metadata (AETNACARINPatientAccessCapabilityStatement,
+      dated 2024-04-11, 29 resource types) and https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
+      (AETNADaVinciPdexPlanNetCapabilityStatement, dated 2023-06-29, 6 resource types) are both live and
+      anonymously readable. Saved verbatim in fhir/.
+  - id: smart-app-launch
+    name: SMART App Launch 1.0.0
+    conforms: true
+    evidence: >-
+      https://apif1.aetna.com/fhir/.well-known/smart-configuration advertises capabilities
+      client-public, client-confidential-symmetric, sso-openid-connect and launch-standalone, with
+      scopes openid, fhirUser, profile, launch/patient and patient/*.read. The Patient Access
+      CapabilityStatement additionally advertises context-standalone-patient and permission-patient.
+  - id: oauth2
+    name: OAuth 2.0 authorization code
+    conforms: true
+    evidence: >-
+      smart-configuration names authorization_endpoint
+      https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/authorize and token_endpoint
+      https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/token with response_types_supported
+      [code] and token_endpoint_auth_methods_supported [client_secret_basic]. Every Patient Access
+      Swagger declares an oauth2 securityDefinition with flow accessCode.
+  - id: pkce
+    name: OAuth 2.0 PKCE (RFC 7636)
+    conforms: true
+    evidence: >-
+      smart-configuration declares code_challenge_methods_supported ["S256"] and the capability
+      client-public; the IBM API Connect oauth provider is named fhir-server-pkce-api-provider in the
+      securityDefinitions of the published Swagger documents.
+  - id: oidc
+    name: OpenID Connect
+    conforms: true
+    evidence: >-
+      smart-configuration lists the sso-openid-connect capability and the openid + fhirUser scopes.
+      NOTE - no /.well-known/openid-configuration is served on any Aetna host (404 on apif1,
+      vteapif1 and www), so OIDC metadata itself is not discoverable; the release history records
+      "SMART on FHIR APIs to certify an OPENID Connect (OIDC) token" shipping 2021-01-07.
+  - id: carin-blue-button
+    name: CARIN for Blue Button Framework (C4BB)
+    conforms: true
+    version: v1.0.0 and v2.0.0
+    evidence: >-
+      Aetna's API catalog labels 14 operations "CARIN Blue Button Implementation Guide (v1.0.0)" or
+      "(v2.0.0)". The ExplanationOfBenefit operation documents the C4BB profiles it supports by
+      StructureDefinition URL - Base, Pharmacy, Inpatient-Institutional, Outpatient-Institutional and
+      Professional-NonClinician - in its own _profile parameter description.
+  - id: us-core
+    name: US Core / USCDI
+    conforms: true
+    version: STU 3 (3.1.1), STU 5 (5.0.1), STU 6 (6.0.1/6.1.0)
+    evidence: >-
+      Aetna's API catalog names the exact US Core version per operation - 24 operations at 3.1.1, 26 at
+      5.0.1, 15 at 6.0.1. The Swagger responses carry x-USCore* profile annotations (x-USCoreCondition,
+      x-USCoreDiagnosticReportLab, x-USCoreEncounter, x-USCoreGoal, x-USCoreImmunization,
+      x-USCoreMedicationRequest, x-USCorePractitionerRole, x-USCoreProcedure, x-Provenance).
+  - id: davinci-pdex
+    name: Da Vinci Payer Data Exchange (PDex)
+    conforms: true
+    version: STU 1 (1.0.0), and STU 2.1.0 for Provider Access
+    evidence: >-
+      15 operations labelled "DaVinci Payer Data Exchange Implementation Guide (v1.0.0: STU 1)" in the
+      API catalog. Release history 2026-05-05 upgraded /provideraccess/v1/Group to PDex STU 2.1.0.
+  - id: davinci-pdex-plan-net
+    name: Da Vinci PDex Plan Net (provider directory)
+    conforms: true
+    version: 1.1.0, upgraded to 1.2.0 on 2026-06-23
+    evidence: >-
+      The live provider-directory CapabilityStatement is named
+      AETNADaVinciPdexPlanNetCapabilityStatement and exposes Practitioner, PractitionerRole,
+      Organization, OrganizationAffiliation, InsurancePlan and Location. Release history 2026-06-23
+      records the non-breaking upgrade to Da Vinci IG 1.2.0 with new PractitionerRole, InsurancePlan
+      and HealthcareService search parameters.
+  - id: davinci-us-drug-formulary
+    name: Da Vinci PDex US Drug Formulary
+    conforms: true
+    version: 2.0.0 STU 2
+    evidence: >-
+      7 operations labelled "DaVinci Payer Data Exchange (PDex) US Drug Formulary 2.0.0" in the API
+      catalog; release history 2024-04-19 records the upgrade of MedicationKnowledge to STU 2 and the
+      addition of Formulary InsurancePlan, Basic and Location operations to the Patient Access product.
+  - id: davinci-crd
+    name: Da Vinci Coverage Requirements Discovery (CRD)
+    conforms: true
+    version: STU 2.1
+    evidence: >-
+      Aetna's API catalog lists /coveragerequirementsdiscovery/v1/cds-services/{id} at
+      "Da Vinci - Coverage Requirements Discovery STU 2.1". The spec file itself returned HTTP 403 to
+      this run, so the operation is catalogued but its contract was not retrieved.
+  - id: davinci-pas
+    name: Da Vinci Prior Authorization Support (PAS)
+    conforms: true
+    version: STU 2.1
+    evidence: >-
+      /priorauthorizationsupport/v1/claim listed at "Da Vinci - Prior Authorization Support (PAS) STU 2.1".
+      Spec file HTTP 403 to this run.
+  - id: davinci-cdex
+    name: Da Vinci Clinical Data Exchange (CDex)
+    conforms: true
+    version: STU 2.1.0
+    evidence: >-
+      /clinicaldataexchange/v1/$submit-attachment listed at "Da Vinci Clinical Data Exchange (CDex)
+      STU 2.1.0"; release history 2025-10-16 records the API going live. Spec file HTTP 403 to this run.
+  - id: cds-hooks
+    name: CDS Hooks
+    conforms: true
+    evidence: >-
+      Release history 2024-02-02 - "The required fields for order-sign are updated to match the CDS hook
+      standard for /v1/cdshooks/cds-services/{id}" - and 2025-04-04 lists the order-dispatch hook. The
+      CRD service supports the order-select and order-sign hooks.
+  - id: bulk-data-access
+    name: HL7 FHIR Bulk Data Access (Flat FHIR)
+    conforms: true
+    version: STU 3.0.0
+    evidence: >-
+      /v1/providerdirectorydata/$export and /$exportstatus/{id} appear in Aetna's API catalog, and the
+      2026-05-05 release note names "Bulk Data Access IG STU 3.0.0" for
+      /provideraccess/v1/Group/ExportFile/{fileId}. Both spec files returned HTTP 403 to this run.
+  - id: cms-9115-f
+    name: CMS Interoperability and Patient Access Final Rule (CMS-9115-F)
+    conforms: true
+    evidence: >-
+      Aetna's own portal copy - "APIs provided by Aetna or one of its subsidiaries or affiliates,
+      including Allina Health | Aetna and Innovation Health, pursuant to the Centers for Medicare &
+      Medicaid Services ('CMS') Interoperability and Patient Access Final Rule (CMS-9115-F)."
+  - id: cms-0057-f
+    name: CMS Advancing Interoperability and Improving Prior Authorization Final Rule (CMS-0057-F)
+    conforms: true
+    evidence: >-
+      Release history 2026-03-27 launches the Provider Access API "in accordance with CMS 0057-F for
+      Advancing Interoperability and Improving Prior Authorization Processes."
+  - id: nist-800-63a-ial2
+    name: NIST SP 800-63A Identity Assurance Level 2
+    conforms: true
+    evidence: >-
+      Release 2026-06-25 added optional IAL2 authentication for third-party production applications
+      via CLEAR and ID.me as Credential Service Providers, gated on the question "Does your application
+      perform identity proofing at IAL2 or higher, in accordance with NIST SP 800-63A?"
+  - id: hipaa
+    name: HIPAA (protected health information)
+    conforms: true
+    evidence: >-
+      Aetna is a covered entity; the Patient Access API surface is member-consented PHI and the portal
+      terms bind third-party developers accordingly. No independent audit report is published.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors are FHIR OperationOutcome in application/json, not application/problem+json. See
+      errors/aetna-problem-types.yml.
+  - id: rfc8594-sunset-deprecation
+    conforms: false
+    evidence: >-
+      Deprecations are announced in a PDF release document, not signalled with Sunset or Deprecation
+      response headers. No such header appears in any of the 95 harvested specs.
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      Every published operation is a GET. See conventions/aetna-conventions.yml - idempotency is `na`
+      on this surface, not missing.
+  - id: ratelimit-headers
+    name: RFC 9238 / draft-ietf-httpapi-ratelimit-headers
+    conforms: false
+    evidence: >-
+      A 429 response is documented on 11 operations with a FHIR OperationOutcome body ("Detected
+      excessive traffic coming from this IP"), but no RateLimit-*, X-RateLimit-* or Retry-After header
+      is declared anywhere.
+domain_standard:
+  declared: true
+  standard: HL7 FHIR R4 with CARIN Blue Button, US Core and Da Vinci implementation guides
+  where: >-
+    Read from the contract, not from marketing copy - the live CapabilityStatements at
+    /fhir/v2/patientaccess/metadata and /fhir/v1/providerdirectory/metadata declare fhirVersion 4.0.1
+    and name the implementation, and Aetna's machine-readable API catalog at
+    https://developerportal.aetna.com/assets/Data/Fhir.json binds an implementation-guide name and
+    version to every single operation it publishes.
+  why_it_matters: >-
+    A payer, EHR vendor or member-facing app that already speaks CARIN Blue Button and US Core
+    integrates with Aetna with no bespoke connector. The IG version per operation is the load-bearing
+    detail: Aetna runs US Core 3.1.1, 5.0.1 and 6.0.1 simultaneously across different resources.

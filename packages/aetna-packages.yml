@@ -1,0 +1,39 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  registry.npmjs.org search + package metadata, pypi.org/simple/, https://github.com/aetnahealth
+  (Aetna's GitHub organization), https://developerportal.aetna.com/ (no SDK or downloads section)
+summary: >-
+  Aetna ships no client libraries. There is no first-party SDK in any registry, the GitHub
+  organization aetnahealth exists but exposes zero public repositories, and the Developer Portal
+  offers Swagger downloads rather than generated clients - its own guidance is to import the
+  downloaded Swagger into Postman and drive the API from there.
+package_count: 0
+official_package_count: 0
+packages: []
+searched_registries:
+  - registry: npm
+    query: aetna
+    result: >-
+      No first-party package. The npm package named `aetna` (version 1.1.1, published 2025-08-21) is
+      Pressbooks' front-end style guide - repository github.com/pressbooks/aetna, maintainers at
+      pressbooks.com - and has nothing to do with Aetna the insurer. Recorded explicitly because a
+      name-only match here would be a false positive.
+    checked: '2026-08-30'
+  - registry: pypi
+    query: aetna
+    result: HTTP 404 - no package by that name.
+    checked: '2026-08-30'
+  - registry: github
+    query: https://api.github.com/orgs/aetnahealth/repos
+    result: organization exists (id 599028) but returns an empty repository list.
+    checked: '2026-08-30'
+  - registry: maven-central
+    result: not probed - no Java client is referenced anywhere in Aetna's documentation.
+    checked: '2026-08-30'
+distribution_note: >-
+  What Aetna distributes instead of an SDK is the contract itself: 139 per-operation Swagger 2.0
+  documents listed at https://developerportal.aetna.com/assets/Data/Fhir.json and served from
+  https://developerportal.aetna.com/managedcontent/yaml/. Any FHIR client library (HAPI, fhirclient,
+  fhir.resources) works against it because the surface is standard FHIR R4 - which is a reasonable
+  reason for a payer not to ship its own SDK, and is recorded here as the finding rather than as a gap.

@@ -1,0 +1,27 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Device_id",
+    "path": "/v2/patientaccess/Device/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "identifier": [
+      {
+        "value": "00868475000235-2857cc9b-a48c-4af8-a519-e03341b0e832"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2021-08-19T05:30:29.655+00:00",
+      "versionId": "1",
+      "source": "#w7IOlsoDJ41Stj6p"
+    },
+    "patient": {
+      "reference": "Patient/2528728"
+    },
+    "id": "2528729",
+    "resourceType": "Device"
+  }
+}

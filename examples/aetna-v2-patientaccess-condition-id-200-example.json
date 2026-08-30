@@ -1,0 +1,79 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Condition_id",
+    "path": "/v2/patientaccess/Condition/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/encounter/identifier/memberenctid/50063"
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "88805009",
+          "display": "Chronic congestive heart failure (disorder)"
+        }
+      ],
+      "text": "Chronic congestive heart failure (disorder)"
+    },
+    "verificationStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        }
+      ]
+    },
+    "subject": {
+      "reference": "Patient/b6935157-bc88-4a41-8c57-1238ca2d709a"
+    },
+    "recordedDate": "1989-11-19T22:39:06-06:00",
+    "encounter": {
+      "reference": "Encounter/b38bfd4b-dbe1-4bdb-9de5-95841ed73aad"
+    },
+    "clinicalStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active"
+        }
+      ]
+    },
+    "onsetDateTime": "1989-11-19T22:39:06-06:00",
+    "meta": {
+      "lastUpdated": "2020-03-24T23:43:11.810+00:00",
+      "versionId": "1",
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition"
+      ],
+      "source": "#OA3EcmpoIPqxKVEk",
+      "tag": [
+        {
+          "system": "https://smarthealthit.org/tags",
+          "code": "Covid19 synthetic population from Synthea"
+        }
+      ]
+    },
+    "id": 19382,
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+            "code": "encounter-diagnosis",
+            "display": "Encounter Diagnosis"
+          }
+        ]
+      }
+    ],
+    "value": "42~ME402739+unknown+unknown+99255+2016-03-29+2016-04-03",
+    "resourceType": "Condition"
+  }
+}

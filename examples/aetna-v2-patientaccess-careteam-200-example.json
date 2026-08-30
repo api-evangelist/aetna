@@ -1,0 +1,121 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_CareTeam",
+    "path": "/v2/patientaccess/CareTeam",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "value": "12345"
+            }
+          ],
+          "period": {
+            "end": "2013-01-01"
+          },
+          "subject": {
+            "reference": "Patient/example",
+            "display": "Peter James Chalmers"
+          },
+          "encounter": {
+            "reference": "Encounter/example"
+          },
+          "participant": [
+            {
+              "role": [
+                {
+                  "text": "responsiblePerson"
+                }
+              ],
+              "member": {
+                "reference": "Patient/example",
+                "display": "Peter James Chalmers"
+              }
+            },
+            {
+              "period": {
+                "end": "2013-01-01"
+              },
+              "role": [
+                {
+                  "text": "adviser"
+                }
+              ],
+              "member": {
+                "reference": "#pr1",
+                "display": "Dorothy Dietition"
+              },
+              "onBehalfOf": {
+                "reference": "Organization/f001"
+              }
+            }
+          ],
+          "contained": [
+            {
+              "name": [
+                {
+                  "given": [
+                    "Dorothy"
+                  ],
+                  "family": "Dietician"
+                }
+              ],
+              "id": "pr1",
+              "resourceType": "Practitioner"
+            }
+          ],
+          "managingOrganization": [
+            {
+              "reference": "Organization/f001"
+            }
+          ],
+          "name": "Peter James Charlmers Care Plan for Inpatient Encounter",
+          "id": "example",
+          "text": {
+            "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Care Team</div>",
+            "status": "generated"
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA27976-2",
+                  "display": "Encounter-focused care team"
+                }
+              ]
+            }
+          ],
+          "resourceType": "CareTeam",
+          "status": "active"
+        },
+        "fullUrl": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/CareTeam/0000000000000045666"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2021-04-09T16:09:02.860+00:00"
+    },
+    "link": [
+      {
+        "url": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/CareTeam?_count=3&page=1",
+        "relation": "self"
+      },
+      {
+        "url": "https://qaapih1.aetna.com/fhir/qapath3/v1/patientaccess/CareTeam?_count=3&page=2",
+        "relation": "next"
+      }
+    ],
+    "id": "283388be-f4fa-4c09-bd16-d46282f6becb",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

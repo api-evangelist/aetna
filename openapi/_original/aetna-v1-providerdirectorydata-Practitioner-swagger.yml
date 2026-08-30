@@ -1,0 +1,1089 @@
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  cors:
+    enabled: true
+  activity-log:
+    success-content: activity
+    error-content: header
+    enabled: true
+  catalogs:
+    qapath3:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    delivery:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    stress:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    qapath1:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    qapath2:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    prod:
+      properties:
+        x-api-key: MfAri03JO8hgVzerGiITA6FGafayv5XV
+        backendURL: >-
+          http://127.0.0.1:7798/apigee-url/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    devpath2:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    devpath3:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    devpath1:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+    uat:
+      properties:
+        x-api-key: ''
+        backendURL: ''
+  testable: true
+  assembly:
+    finally: []
+    catch: []
+    execute:
+      - gatewayscript:
+          comment:
+            - >-
+              GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+              converting gatewayscript to `gatewayscript_1.0.0`.
+          source: >-
+            var apim = require('local:///isp/policy/apim.custom.js');
+
+            var hm = require('header-metadata');
+
+            var file_path =
+            'local:///policy/common/ValidatePaginationParam_v1.0.0.js';
+
+            var commonFunc = require(file_path);
+
+            commonFunc.validate_pagination_param(50);
+          title: Function Call
+          version: 1.0.0
+      - gatewayscript:
+          comment:
+            - >-
+              GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+              converting gatewayscript to `gatewayscript_1.0.0`.
+          source: >-
+            var catalog_name = apim.getvariable('env.path');
+
+            var file_path =
+            'local:///policy/common/'+catalog_name+'/CreateEIEHeader_v3.2.js';
+
+            var eieheader_module = require(file_path);
+
+            eieheader_module.create_eie_header_v3_2('header','v3.2','JSON','');
+          title: Create EIE Header 3.2
+          version: 1.0.0
+      - gatewayscript:
+          comment:
+            - >-
+              GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+              converting gatewayscript to `gatewayscript_1.0.0`.
+          source: |-
+            var key = apim.getvariable('api.properties.x-api-key');
+            apim.setvariable('message.headers.x-api-key', key,'add');
+          title: Set API Key Header
+          version: 1.0.0
+      - switch:
+          comment:
+            - >-
+              SW08: `switch` policy set to `switch_1.5.0`, converting `switch`
+              to `switch_1.5.0`. For details, see:
+              https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SWITCH_CONVERTED_TO_WRAPPER
+          title: switch
+          version: 1.5.0
+          case:
+            - condition: (api.operation.id==='GETOperation')
+              execute:
+                - if:
+                    condition: apim.getvariable('exception_flag') != true;
+                    comment:
+                      - >-
+                        SW09: `if` policy set to `if_1.5.0`, converting `if` to
+                        `if_1.5.0`. For details, see:
+                        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#IF_CONVERTED_TO_WRAPPER
+                    title: if
+                    execute:
+                      - invoke:
+                          cache-response: no-cache
+                          verb: keep
+                          description: >-
+                            dev1-api.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+                          stop-on-error: []
+                          comment:
+                            - >-
+                              INV17: Invoke policy set to `invoke_1.5.0`,
+                              converting invoke to `invoke_1.5.0`. For details,
+                              see:
+                              https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#INVOKE_WRAPPER_FOUND
+                          target-url: $(backendURL)?$(finalquerystring)
+                          title: invoke call APIGEE FHIR Practitioner API
+                          version: 1.5.0
+                          cache-ttl: 900
+                          timeout: 60
+                    version: 1.5.0
+            - condition: (api.operation.id==='GETOperation-id')
+              execute:
+                - invoke:
+                    cache-response: no-cache
+                    verb: keep
+                    description: >-
+                      dev1-api.cvshealth.com/fhir/cms/plannet-practitioner-profile/v1/Practitioner
+                    stop-on-error: []
+                    comment:
+                      - >-
+                        INV17: Invoke policy set to `invoke_1.5.0`, converting
+                        invoke to `invoke_1.5.0`. For details, see:
+                        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#INVOKE_WRAPPER_FOUND
+                    target-url: $(backendURL)/$(request.parameters.id)
+                    title: invoke call APIGEE FHIR Practitioner API
+                    version: 1.5.0
+                    cache-ttl: 900
+                    timeout: 60
+      - gatewayscript:
+          description: Alter the backend response for the fullUrl and url fields
+          comment:
+            - >-
+              GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+              converting gatewayscript to `gatewayscript_1.0.0`.
+          source: "var respJson = apim.getvariable('message.body');\nvar host_name = apim.getvariable('api.endpoint.hostname');\nvar org_name = apim.getvariable('api.org.name');\nvar catalogName = apim.getvariable('env.path');\nvar resoursePath = apim.getvariable('request.path');\nvar chunk_link = respJson.link;\nvar chunk_entry = respJson.entry;\nvar req_query_params = apim.getvariable('request.search');\nvar finalFullUrl;\nvar apic_req_url = \"https://\" + host_name + \"/\" + org_name + \"/\" + catalogName + resoursePath;\nvar array_apic_url = apic_req_url.split('/');\nvar apic_url_length = array_apic_url.length;\n\nvar apic_popped = array_apic_url[apic_url_length - 1];\nvar full_final_split_1;\n\nif (respJson.entry != undefined || respJson.link != undefined) {\n   if(respJson.link !=undefined)\n       {\n   for (var i = 0; i < chunk_link.length; i++) {\n      var split_url = chunk_link[i].url.split('?');\n      var x = chunk_link[i].url.split('/');\n      var y = x.length;\n      var resp_popped = x[y - 1]; //path parameter of backend response from url\n      if (apic_popped == resp_popped) //To confirm whether backend has path param or not\n      {\n         if (split_url[1] == undefined || split_url[1] == \"\") //To check if backend resp has query param or not\n         {\n            finalFullUrl = apic_req_url;\n         } else {\n            finalFullUrl = apic_req_url + '?' + split_url[1];\n         }\n         respJson.link[i].url = finalFullUrl;\n\n      } else\n      {\n         if (split_url[1] == undefined || split_url[1] == \"\") {\n            finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\tfinalFullUrl = finalFullUrl.replace('/?','');\n         } else {\n            finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\tfinalFullUrl = finalFullUrl.replace('/?','?');\n         }\n         respJson.link[i].url = finalFullUrl;\n      }\n   }\n}\n   if (respJson.entry != undefined) {\n      for (var i = 0; i < chunk_entry.length; i++) {\n          if(chunk_entry[i].fullUrl!=undefined)\n          {\n         var split_url = chunk_entry[i].fullUrl.split('?');\n         var x = chunk_entry[i].fullUrl.split('/');\n         var y = x.length;\n         var resp_popped = x[y - 1]; //path parameter of backend response\n         if (apic_popped == resp_popped) //this is to confirm whether backend has path param or not\n         {\n            if (split_url[1] == undefined || split_url[1] == \"\") //this block is to check if backend resp has query param or not\n            {\n               finalFullUrl = apic_req_url;\n            } else {\n               finalFullUrl = apic_req_url + '?' + split_url[1];\n            }\n            respJson.entry[i].fullUrl = finalFullUrl;\n\n         } else\n         {\n            if (split_url[1] == undefined || split_url[1] == \"\") {\n               finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\t   finalFullUrl = finalFullUrl.replace('/?','');\n            } else {\n               finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\t   finalFullUrl = finalFullUrl.replace('/?','?');\n            }\n            respJson.entry[i].fullUrl = finalFullUrl;\n\t\t\t\n         }\n      }\n      }\n   }\n   session.output.write(respJson);\n   apim.output('application/fhir+json');\n} else {\n   session.output.write(apim.getvariable('message.body'));\n   apim.output('application/fhir+json');\n}"
+          title: Alter Backend Response
+          version: 1.0.0
+  type: rest
+  compatibility:
+    enforce-required-params: false
+    comment:
+      - >-
+        API44: Set compatibility toggle `allow-chunked-uploads` to value:
+        `false`. For details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_COMPATIBILITY_TOGGLE
+      - >-
+        API44: Set compatibility toggle `enforce-required-params` to value:
+        `false`. For details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_COMPATIBILITY_TOGGLE
+      - >-
+        API44: Set compatibility toggle `request-headers` to value: `true`. For
+        details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_COMPATIBILITY_TOGGLE
+      - >-
+        API43: Created `compatibility:` section for API-wide toggles set by
+        migration utility. For details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#COMPATIBILITY_INFO
+    migrated-api: true
+    request-headers: true
+    wrapper-policies:
+      allow-chunked-uploads: false
+  properties:
+    x-api-key:
+      description: ''
+      value: ''
+      encoded: false
+    backendURL:
+      description: ''
+      value: ''
+      encoded: false
+  gateway: datapower-api-gateway
+schemes:
+  - https
+swagger: '2.0'
+security:
+  - FHIR_Application_Oauth:
+      - Public
+  - FHIR_Application_Oauth:
+      - NonPII
+  - FHIR_User_AccessCode_Oauth:
+      - patient/Patient.read
+  - FHIR_User_AccessCode_Oauth:
+      - patient/Patient.*
+  - FHIR_User_AccessCode_Oauth:
+      - patient/*.read
+  - FHIR_User_AccessCode_Oauth:
+      - patient/*.*
+basePath: /v1/providerdirectorydata
+paths:
+  /Practitioner:
+    get:
+      summary: The API provides a collection of Practitioner Profile.
+      description: The API provides a collection of Practitioner Profile.
+      operationId: GETOperation
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Bundle'
+          examples:
+            application/json:
+              entry:
+                - search:
+                    mode: match
+                  resource:
+                    identifier:
+                      - system: 'http://hl7.org/fhir/sid/us-npi'
+                        use: official
+                        id: NPI
+                        type:
+                          coding:
+                            - code: NPI
+                              display: National provider identifier
+                          text: NPI
+                        value: '1619914108'
+                      - system: 'https://terminology.hl7.org/CodeSystem-v2-0203'
+                        type:
+                          coding:
+                            - code: PRN
+                              system: 'https://terminology.hl7.org/CodeSystem-v2-0203'
+                              display: Provider number
+                          text: Aetna Provider Identification Number
+                        value: '7295007'
+                    qualification:
+                      - identifier:
+                          - use: official
+                            type:
+                              coding:
+                                - code: MD
+                                  system: >-
+                                    http://terminology.hl7.org/CodeSystem/v2-0203
+                                  display: Medical License number
+                              text: Medical License number
+                            value: FM2472811
+                        extension:
+                          - extension:
+                              - valueCode: active
+                                url: status
+                              - valueCodeableConcept:
+                                  coding:
+                                    - code: MI
+                                      system: 'https://www.usps.com/'
+                                      display: Michigan
+                                  text: Michigan
+                                url: whereValid
+                            url: >-
+                              http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/practitioner-qualification
+                        period:
+                          start: '2022-01-01'
+                          end: '2023-12-31'
+                        code:
+                          coding:
+                            - code: LIC
+                              system: 'https://aetna.com/degreeLicenseCertificate'
+                              display: License
+                          text: License
+                    address:
+                      - country: US
+                        extension:
+                          - extension:
+                              - valueDecimal: 30.209816
+                                url: latitude
+                              - valueDecimal: -90.933047
+                                url: longitude
+                            url: >-
+                              http://hl7.org/fhir/StructureDefinition/geolocation
+                        city: Gonzales
+                        line:
+                          - '2647 South St. Elizabeth Blvd., Suite 215'
+                        district: Ascension
+                        postalCode: '70737'
+                        state: LA
+                        text: >-
+                          2647 South St. Elizabeth Blvd., Suite 215, Gonzales,
+                          Ascension, LA 70737, US
+                      - country: US
+                        extension:
+                          - extension:
+                              - valueDecimal: 30.401996
+                                url: latitude
+                              - valueDecimal: -91.106099
+                                url: longitude
+                            url: >-
+                              http://hl7.org/fhir/StructureDefinition/geolocation
+                        city: Baton Rouge
+                        line:
+                          - '7777 Hennessy Blvd., Suite 409'
+                        district: East Baton Rouge
+                        postalCode: '70808'
+                        state: LA
+                        text: >-
+                          7777 Hennessy Blvd., Suite 409, Baton Rouge, East
+                          Baton Rouge, LA 70808, US
+                    gender: male
+                    meta:
+                      lastUpdated: '2023-02-17T09:01:12.203698+00:00'
+                      versionId: MTY3NjYyNDQ3MjIwMzY5ODAwMA
+                      profile:
+                        - >-
+                          http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner
+                    name:
+                      - given:
+                          - Kamal
+                        use: official
+                        text: 'Mubarak, Kamal Khan, MD'
+                        family: Mubarak
+                        suffix:
+                          - MD
+                    active: true
+                    language: en
+                    telecom:
+                      - system: phone
+                        rank: 1
+                        value: '2257655500'
+                      - system: phone
+                        rank: 2
+                        value: '2257655864'
+                      - system: fax
+                        rank: 3
+                        value: '2256444206'
+                      - system: fax
+                        rank: 4
+                        value: '2257652013'
+                    id: plannet-practitioner-d65cfe02cc6dce6cbd06bbf1a732b09a
+                    resourceType: Practitioner
+                  fullUrl: >-
+                    https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner/plannet-practitioner-d65cfe02cc6dce6cbd06bbf1a732b09a
+                - search:
+                    mode: match
+                  resource:
+                    identifier:
+                      - system: 'http://hl7.org/fhir/sid/us-npi'
+                        use: official
+                        id: NPI
+                        type:
+                          coding:
+                            - code: NPI
+                              display: National provider identifier
+                          text: NPI
+                        value: '1497174189'
+                      - system: 'https://terminology.hl7.org/CodeSystem-v2-0203'
+                        type:
+                          coding:
+                            - code: PRN
+                              system: 'https://terminology.hl7.org/CodeSystem-v2-0203'
+                              display: Provider number
+                          text: Aetna Provider Identification Number
+                        value: '6029297'
+                    qualification:
+                      - extension:
+                          - extension:
+                              - valueCode: active
+                                url: status
+                            url: >-
+                              http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/practitioner-qualification
+                        period:
+                          start: '2018-01-01'
+                        code:
+                          coding:
+                            - code: '10601'
+                              system: 'https://aetna.com/practiceCode'
+                              display: Dermatology
+                          text: Board Certified
+                    address:
+                      - country: US
+                        extension:
+                          - extension:
+                              - valueDecimal: 29.975156
+                                url: latitude
+                              - valueDecimal: -90.152017
+                                url: longitude
+                            url: >-
+                              http://hl7.org/fhir/StructureDefinition/geolocation
+                        city: Metairie
+                        line:
+                          - '100 North Labarre Road, Suite C'
+                        district: Jefferson
+                        postalCode: '70001'
+                        state: LA
+                        text: >-
+                          100 North Labarre Road, Suite C, Metairie, Jefferson,
+                          LA 70001, US
+                      - country: US
+                        extension:
+                          - extension:
+                              - valueDecimal: 32.367881
+                                url: latitude
+                              - valueDecimal: -86.285443
+                                url: longitude
+                            url: >-
+                              http://hl7.org/fhir/StructureDefinition/geolocation
+                        city: Montgomery
+                        line:
+                          - 1111 Olive Street
+                        district: Montgomery
+                        postalCode: '36106'
+                        state: AL
+                        text: >-
+                          1111 Olive Street, Montgomery, Montgomery, AL 36106,
+                          US
+                    gender: male
+                    meta:
+                      lastUpdated: '2023-02-17T09:01:12.202076+00:00'
+                      versionId: MTY3NjYyNDQ3MjIwMjA3NjAwMA
+                      profile:
+                        - >-
+                          http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner
+                    name:
+                      - given:
+                          - Blake
+                        use: official
+                        text: 'Raggio, Blake Stephen, MD'
+                        family: Raggio
+                        suffix:
+                          - MD
+                    active: true
+                    language: en
+                    telecom:
+                      - system: phone
+                        rank: 1
+                        value: '5048271717'
+                      - system: phone
+                        rank: 2
+                        value: '3348347221'
+                      - system: fax
+                        rank: 3
+                        value: '3342419848'
+                    id: plannet-practitioner-feb87959e76dce6cbd03487448d5cc67
+                    resourceType: Practitioner
+                  fullUrl: >-
+                    https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner/plannet-practitioner-feb87959e76dce6cbd03487448d5cc67
+              total: 1004
+              link:
+                - url: >-
+                    https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2
+                  relation: search
+                - url: >-
+                    https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2&_page_token=AQFpdQC-K9-zwxdTfMHAKUb6PWgZdvkOcCo6d46qaMxA1Ablh767bOIyQfMola4ZV1XnQi7TMzBAhEVmd-iGQ7Mo22l4CXogZqG2r1L5uENuU_pv2kDNHeu8jj1nc-rB6ZLHYPBb1MIJBrljsPTERgSR87toZVSfqetwHlY7FQOMG3Vs4zn-cesepxcUmlkzl2S6vhEt
+                  relation: next
+                - url: >-
+                    https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2
+                  relation: first
+                - url: >-
+                    https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/Practitioner?_count=2
+                  relation: self
+              type: searchset
+              resourceType: Bundle
+          description: Success. This response returns a Bundle of Practitioner records.
+        '400':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: value
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_PARAM_INVALID
+                        display: >-
+                          error parsing date "2021 - 15 - 29" : invalid
+                          dateTime: "2021 - 15 - 29" 
+                    text: Missing or invalid inputs
+              language: en-US
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided.
+        '401':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_ACCESS_DENIED
+                        display: >-
+                          Looks like you are not authorized to use this API.
+                          Please validate your API Key.
+                    text: You must authenticate before you can use this service
+              language: en-US
+              resourceType: OperationOutcome
+          description: The request is unauthorized.
+        '403':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_ACCESS_DENIED
+                        display: Forbidden
+                    text: Access Denied
+              language: en-US
+              resourceType: OperationOutcome
+          description: The requested resource is forbidden for some reason.
+        '404':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: no-store
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_NO_MATCH
+                        display: 'resource not found: List/yy'
+                    text: No Resource found matching the query
+              language: en-US
+              resourceType: OperationOutcome
+          description: >-
+            The specified System Identifier doesn’t identify an existing
+            resource.
+        '405':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_RESOURCE_NOT_ALLOWED
+                        display: Method Not Allowed
+                    text: Not allowed to submit a resource for this operation
+              language: en-US
+              resourceType: OperationOutcome
+          description: The specified Method is not allowed in the request.
+        '429':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_UNKNOWN_TYPE
+                        display: >-
+                          We have detected excessive traffic coming from this
+                          IP.
+                    text: Too Many Request
+              language: en-US
+              resourceType: OperationOutcome
+          description: >-
+            Detected excessive traffic coming from this IP. Please reach out if
+            you think this is incorrect.
+        '500':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_SVC_FAILURE
+                        display: >-
+                          An Unexpected error occurred while fulfilling this
+                          request. Our engineers have been notified. Please try
+                          again in some time.
+                    text: Error occurred while processing response
+              language: en-US
+              resourceType: OperationOutcome
+          description: An unexpected internal error has occurred.
+      parameters:
+        - in: query
+          name: _count
+          description: >-
+            The maximum number of search results on a page. The server is not
+            bound to return the number requested, but cannot return more.
+          type: number
+          required: false
+        - in: query
+          name: _id
+          description: Logical id of this artifact
+          type: string
+          required: false
+        - in: query
+          name: name
+          description: >-
+            Select Practitioners with the specified name (matches against any of
+            the elements in the HumanName data type).
+          type: string
+          required: false
+        - in: query
+          name: family
+          description: Select Practitioners with the specified family name.
+          type: string
+          required: false
+        - in: query
+          name: given
+          description: Select Practitioners with the specified given name.
+          type: string
+          required: false
+        - in: query
+          name: _revinclude
+          description: >-
+            request that the search results include additional resources
+            ("included resources") related to the resources directly matching
+            the query ("primary results").
+
+
+            Supported values :
+
+            PractitionerRole:practitioner
+          type: string
+          required: false
+        - in: query
+          name: _page_token
+          description: >-
+            Used to retrieve the next page of results If a search returns more
+            resources than fit on one page, the response includes a pagination
+            URL in the Bundle.
+          type: string
+          required: false
+        - in: query
+          name: _lastUpdated
+          format: date
+          description: Used to select resources based on the last time they were changed.
+          type: string
+          required: false
+  '/Practitioner/{id}':
+    get:
+      summary: The API provides a Plannet Practitioner Profile with respect to Id
+      description: The API provides a Plannet Practitioner Profile with respect to Id.
+      operationId: GETOperation-id
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Practitioner'
+          examples:
+            application/json:
+              identifier:
+                - system: 'http://hl7.org/fhir/sid/us-npi'
+                  use: official
+                  id: NPI
+                  type:
+                    coding:
+                      - code: NPI
+                        display: National provider identifier
+                    text: NPI
+                  value: '1619914108'
+                - system: 'https://terminology.hl7.org/CodeSystem-v2-0203'
+                  type:
+                    coding:
+                      - code: PRN
+                        system: 'https://terminology.hl7.org/CodeSystem-v2-0203'
+                        display: Provider number
+                    text: Aetna Provider Identification Number
+                  value: '7295007'
+              qualification:
+                - identifier:
+                    - use: official
+                      type:
+                        coding:
+                          - code: MD
+                            system: 'http://terminology.hl7.org/CodeSystem/v2-0203'
+                            display: Medical License number
+                        text: Medical License number
+                      value: FM2472811
+                  extension:
+                    - extension:
+                        - valueCode: active
+                          url: status
+                        - valueCodeableConcept:
+                            coding:
+                              - code: MI
+                                system: 'https://www.usps.com/'
+                                display: Michigan
+                            text: Michigan
+                          url: whereValid
+                      url: >-
+                        http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/practitioner-qualification
+                  period:
+                    start: '2022-01-01'
+                    end: '2023-12-31'
+                  code:
+                    coding:
+                      - code: LIC
+                        system: 'https://aetna.com/degreeLicenseCertificate'
+                        display: License
+                    text: License
+              address:
+                - country: US
+                  extension:
+                    - extension:
+                        - valueDecimal: 30.209816
+                          url: latitude
+                        - valueDecimal: -90.933047
+                          url: longitude
+                      url: 'http://hl7.org/fhir/StructureDefinition/geolocation'
+                  city: Gonzales
+                  line:
+                    - '2647 South St. Elizabeth Blvd., Suite 215'
+                  district: Ascension
+                  postalCode: '70737'
+                  state: LA
+                  text: >-
+                    2647 South St. Elizabeth Blvd., Suite 215, Gonzales,
+                    Ascension, LA 70737, US
+                - country: US
+                  extension:
+                    - extension:
+                        - valueDecimal: 30.401996
+                          url: latitude
+                        - valueDecimal: -91.106099
+                          url: longitude
+                      url: 'http://hl7.org/fhir/StructureDefinition/geolocation'
+                  city: Baton Rouge
+                  line:
+                    - '7777 Hennessy Blvd., Suite 409'
+                  district: East Baton Rouge
+                  postalCode: '70808'
+                  state: LA
+                  text: >-
+                    7777 Hennessy Blvd., Suite 409, Baton Rouge, East Baton
+                    Rouge, LA 70808, US
+              gender: male
+              meta:
+                lastUpdated: '2023-02-17T09:01:12.203698+00:00'
+                versionId: MTY3NjYyNDQ3MjIwMzY5ODAwMA
+                profile:
+                  - >-
+                    http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner
+              name:
+                - given:
+                    - Kamal
+                  use: official
+                  text: 'Mubarak, Kamal Khan, MD'
+                  family: Mubarak
+                  suffix:
+                    - MD
+              active: true
+              language: en
+              telecom:
+                - system: phone
+                  rank: 1
+                  value: '2257655500'
+                - system: phone
+                  rank: 2
+                  value: '2257655864'
+                - system: fax
+                  rank: 3
+                  value: '2256444206'
+                - system: fax
+                  rank: 4
+                  value: '2257652013'
+              id: plannet-practitioner-d65cfe02cc6dce6cbd06bbf1a732b09a
+              resourceType: Practitioner
+          description: Success. This response returns a Practitioner record.
+        '400':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: value
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_PARAM_INVALID
+                        display: >-
+                          error parsing date "2021 - 15 - 29" : invalid
+                          dateTime: "2021 - 15 - 29" 
+                    text: Missing or invalid inputs
+              language: en-US
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided.
+        '401':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_ACCESS_DENIED
+                        display: >-
+                          Looks like you are not authorized to use this API.
+                          Please validate your API Key.
+                    text: You must authenticate before you can use this service
+              language: en-US
+              resourceType: OperationOutcome
+          description: The request is unauthorized.
+        '403':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_ACCESS_DENIED
+                        display: Forbidden
+                    text: Access Denied
+              language: en-US
+              resourceType: OperationOutcome
+          description: The requested resource is forbidden for some reason.
+        '404':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: no-store
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_NO_MATCH
+                        display: 'resource not found: List/yy'
+                    text: No Resource found matching the query
+              language: en-US
+              resourceType: OperationOutcome
+          description: >-
+            The specified System Identifier doesn’t identify an existing
+            resource.
+        '405':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_RESOURCE_NOT_ALLOWED
+                        display: Method Not Allowed
+                    text: Not allowed to submit a resource for this operation
+              language: en-US
+              resourceType: OperationOutcome
+          description: The specified Method is not allowed in the request.
+        '429':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_UNKNOWN_TYPE
+                        display: >-
+                          We have detected excessive traffic coming from this
+                          IP.
+                    text: Too Many Request
+              language: en-US
+              resourceType: OperationOutcome
+          description: >-
+            Detected excessive traffic coming from this IP. Please reach out if
+            you think this is incorrect.
+        '500':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_SVC_FAILURE
+                        display: >-
+                          An Unexpected error occurred while fulfilling this
+                          request. Our engineers have been notified. Please try
+                          again in some time.
+                    text: Error occurred while processing response
+              language: en-US
+              resourceType: OperationOutcome
+          description: An unexpected internal error has occurred.
+      parameters:
+        - in: header
+          name: x-clientrefid
+          description: optional UUID to track the transaction.
+          type: string
+          required: false
+        - in: path
+          name: id
+          description: The logical id of the resource.
+          type: string
+          required: true
+produces:
+  - application/json
+host: apif1.aetna.com/fhir
+externalDocs:
+  description: HTTPS Common Error Codes
+  url: 'https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/'
+x-ibm-comment:
+  - >-
+    AMU version used to port this API:
+    v10.0.1.6-R2-50b032947f4a846833eb1684602450e2efa9d6bc-2022-05-27T02:49:53Z
+  - >-
+    API03: Suffix -apigw appended to API `title` and `x-ibm-name`. For details,
+    see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#API_NAME_ADDED_SUFFIX
+  - 'API06: Changed gateway type to `datapower-api-gateway`.'
+  - >-
+    API14: Ported v5-compatible policies to work with the API Gateway and
+    updated policy versions.
+  - >-
+    API45: Compatibility toggle: `copy-id-headers-to-message` set to value:
+    `false`, which is the same as the API Gateway default. For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#COMPAT_TOGGLE_MATCHES_APIGW_DEFAULT
+  - >-
+    API45: Compatibility toggle: `return-v5-responses` set to value: `false`,
+    which is the same as the API Gateway default. For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#COMPAT_TOGGLE_MATCHES_APIGW_DEFAULT
+  - >-
+    API61: Set buffering property to true. For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_BUFFERING
+  - >-
+    API24: Removed redundant `parse` policy from the beginning of the assembly.
+    For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#REMOVED_REDUNDANT_FRONT_PARSE
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: 'https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/token'
+    authorizationUrl: 'https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/authorize'
+    description: ''
+    x-ibm-oauth-provider: fhir-server-pkce-api-provider
+    scopes:
+      patient/Patient.*: patient/Patient.*
+      patient/Patient.read: patient/Patient.read
+      patient/*.read: patient/*.read
+      patient/*.*: patient/*.*
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: 'https://$(catalog.url)/v3/internal/auth/oauth2/app/token'
+    description: |-
+      {
+       "BuildEieHeader" : "Header 3.2",
+       "SecurityTemplate" : "FHIROpenApp",
+       "Backend" : "Non-IIB, FHIRServer APIGEE APIs, requires Mutual TLS",
+       "Errorhandlingpolicy": "Transparent"
+       "Consumer":"External",
+       "Mutual Auth between Consumer and APIC" : "Not Required"
+      }
+    x-ibm-oauth-provider: v3-internal-auth-oauth2-app-token
+    scopes:
+      NonPII: NonPII
+      Public: Public
+    type: oauth2
+    flow: application
+definitions:
+  Practitioner:
+    description: >-
+      See the appropriate Implementation Guide for proper documentation to use
+
+
+      This is the HL7 FHIR Release 4.0.1 Practitioner resource.
+
+      Full Documentation is available at: http://hl7.org/fhir/practitioner.html
+
+
+      US Core 3.1.1 Documentation is available at:
+
+      http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-practitioner.html
+
+
+      For the CARIN-BB 1.0.0 Practitioner resource full documentation is
+      available at:
+
+      http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Practitioner.html
+
+
+      For the DaVinci PDEX Plan Net 1.0.0 Practitioner resource documentation is
+      available at:
+
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Practitioner.html
+
+
+      For the DaVinci PDEX Plan Net 1.1.0 Practitioner resource documentation is
+      available at:
+
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Practitioner.html
+
+
+      For the DaVinci PDEX Plan Net 1.2.0 Practitioner resource documentation is
+      available at:
+
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.2/StructureDefinition-plannet-Practitioner.html
+    type: object
+  Entry:
+    description: >-
+      An entry in a bundle resource - will contain a resource(s) returned in the
+      bundle
+    type: object
+    properties:
+      resource:
+        $ref: '#/definitions/Practitioner'
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          $ref: '#/definitions/Entry'
+  OperationOutcome:
+    description: >-
+      See the appropriate Implementation Guide for proper documentation to use
+
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+
+      Full Documentation is available at:
+      http://hl7.org/fhir/operationoutcome.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: interoperabilitydevelopersupport@aetna.com
+  description: >-
+    This API provides details about Plannet Practitioner. Practitioner is a
+    person who is directly or indirectly involved in the provisioning of
+    healthcare..
+  x-ibm-name: v1providerdirectorydatapractitioner
+  title: /v1/providerdirectorydata/Practitioner
+  version: 1.0.0
+consumes:
+  - application/json

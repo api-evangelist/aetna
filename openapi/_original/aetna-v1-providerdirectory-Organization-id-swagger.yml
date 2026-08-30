@@ -1,0 +1,445 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qahapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qaehapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_Application_Oauth:
+  - Public
+- FHIR_Application_Oauth:
+  - NonPII
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.*
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.*
+basePath: "/v1/providerdirectory"
+paths:
+  "/Organization/{id}":
+    get:
+      summary: Retrieves details of a Plannet Organization Resource based on a logical
+        id.
+      description: Retrieves details of a Plannet Organization Resource based on a
+        logical id.
+      operationId: GET
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Organization"
+          examples:
+            application/json:
+              identifier:
+              - system: http://hl7.org/fhir/sid/us-npi
+                use: official
+                type:
+                  coding:
+                  - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                    code: NPI
+                    display: National provider identifier
+                  text: NPI
+                value: '1255525895'
+              partOf:
+                reference: Organization/0000000000000016411
+                display: LOUDON MEDICAL GROUP
+              address:
+              - country: US
+                city: Lovettsville
+                use: work
+                line:
+                - 3 E Broad Way
+                district: LOUDOUN
+                postalCode: '20180'
+                text: 3 E Broad Way, Lovettsville, VA 20180
+                state: VA
+                type: physical
+              - country: US
+                city: Lovettsville
+                use: work
+                line:
+                - 20 Town Sq Unit 180
+                district: LOUDOUN
+                postalCode: '20180'
+                text: 20 Town Sq, Unit 180, Lovettsville, VA 20180
+                state: VA
+                type: physical
+              - country: US
+                city: Sterling
+                use: work
+                line:
+                - 2 Pidgeon Hill Dr Ste 400
+                district: LOUDOUN
+                postalCode: '20165'
+                text: 2 Pidgeon Hill Dr, Ste 400, Sterling, VA 20165
+                state: VA
+                type: physical
+              meta:
+                lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                versionId: 4.0.1
+                profile:
+                - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization
+              name: LOUDOUN MEDICAL GROUP P.C.
+              active: true
+              language: en
+              telecom:
+              - extension:
+                - extension:
+                  - valueCode: mon
+                    url: daysOfWeek
+                  - valueCode: tue
+                    url: daysOfWeek
+                  - valueCode: wed
+                    url: daysOfWeek
+                  - valueCode: thu
+                    url: daysOfWeek
+                  - valueCode: fri
+                    url: daysOfWeek
+                  - valueTime: '08:30:00'
+                    url: availableStartTime
+                  - valueTime: '17:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - valueReference:
+                    display: 3 E Broad Way, Lovettsville, VA 20180
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                system: phone
+                use: work
+                value: "(540) 338-9896"
+              - extension:
+                - extension:
+                  - valueCode: mon
+                    url: daysOfWeek
+                  - valueCode: tue
+                    url: daysOfWeek
+                  - valueCode: wed
+                    url: daysOfWeek
+                  - valueCode: thu
+                    url: daysOfWeek
+                  - valueCode: fri
+                    url: daysOfWeek
+                  - valueTime: '08:30:00'
+                    url: availableStartTime
+                  - valueTime: '17:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - valueReference:
+                    display: 20 Town Sq, Unit 180, Lovettsville, VA 20180
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                system: phone
+                use: work
+                value: "(540) 579-0500"
+              - extension:
+                - extension:
+                  - valueCode: mon
+                    url: daysOfWeek
+                  - valueCode: tue
+                    url: daysOfWeek
+                  - valueCode: wed
+                    url: daysOfWeek
+                  - valueTime: '08:00:00'
+                    url: availableStartTime
+                  - valueTime: '17:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - extension:
+                  - valueCode: thu
+                    url: daysOfWeek
+                  - valueTime: '08:00:00'
+                    url: availableStartTime
+                  - valueTime: '20:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - extension:
+                  - valueCode: fri
+                    url: daysOfWeek
+                  - valueTime: '08:00:00'
+                    url: availableStartTime
+                  - valueTime: '12:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - valueReference:
+                    display: 2 Pidgeon Hill Dr, Ste 400, Sterling, VA 20165
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                system: phone
+                use: work
+                value: "(703) 726-1300"
+              id: '0000000000000140213'
+              type:
+              - coding:
+                - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS
+                  code: prvgrp
+                  display: Provider Group
+                text: Provider Group
+              resourceType: Organization
+          description: This returns a valid Organization record based on the id passed.
+        '203':
+          schema:
+            "$ref": "#/definitions/Organization"
+          examples:
+            application/json:
+              identifier:
+              - system: http://hl7.org/fhir/sid/us-npi
+                use: official
+                type:
+                  coding:
+                  - system: http://terminology.hl7.org/CodeSystem/v2-0203
+                    code: NPI
+                    display: National provider identifier
+                  text: NPI
+                value: '1255525895'
+              partOf:
+                reference: Organization/0000000000000016411
+                display: LOUDON MEDICAL GROUP
+              address:
+              - country: US
+                city: Lovettsville
+                use: work
+                line:
+                - 3 E Broad Way
+                district: LOUDOUN
+                postalCode: '20180'
+                text: 3 E Broad Way, Lovettsville, VA 20180
+                state: VA
+                type: physical
+              meta:
+                lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                versionId: 4.0.1
+                profile:
+                - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization
+              name: LOUDOUN MEDICAL GROUP P.C.
+              active: true
+              language: en
+              telecom:
+              - extension:
+                - extension:
+                  - valueCode: mon
+                    url: daysOfWeek
+                  - valueCode: tue
+                    url: daysOfWeek
+                  - valueCode: wed
+                    url: daysOfWeek
+                  - valueCode: thu
+                    url: daysOfWeek
+                  - valueCode: fri
+                    url: daysOfWeek
+                  - valueTime: '08:30:00'
+                    url: availableStartTime
+                  - valueTime: '17:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - valueReference:
+                    display: 3 E Broad Way, Lovettsville, VA 20180
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                system: phone
+                use: work
+                value: "(540) 338-9896"
+              - extension:
+                - extension:
+                  - valueCode: mon
+                    url: daysOfWeek
+                  - valueCode: tue
+                    url: daysOfWeek
+                  - valueCode: wed
+                    url: daysOfWeek
+                  - valueCode: thu
+                    url: daysOfWeek
+                  - valueCode: fri
+                    url: daysOfWeek
+                  - valueTime: '08:30:00'
+                    url: availableStartTime
+                  - valueTime: '17:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - valueReference:
+                    display: 20 Town Sq, Unit 180, Lovettsville, VA 20180
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                system: phone
+                use: work
+                value: "(540) 579-0500"
+              - extension:
+                - extension:
+                  - valueCode: mon
+                    url: daysOfWeek
+                  - valueCode: tue
+                    url: daysOfWeek
+                  - valueCode: wed
+                    url: daysOfWeek
+                  - valueTime: '08:00:00'
+                    url: availableStartTime
+                  - valueTime: '17:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - extension:
+                  - valueCode: thu
+                    url: daysOfWeek
+                  - valueTime: '08:00:00'
+                    url: availableStartTime
+                  - valueTime: '20:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - extension:
+                  - valueCode: fri
+                    url: daysOfWeek
+                  - valueTime: '08:00:00'
+                    url: availableStartTime
+                  - valueTime: '12:00:00'
+                    url: availableEndTime
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/contactpoint-availabletime
+                - valueReference:
+                    display: 2 Pidgeon Hill Dr, Ste 400, Sterling, VA 20165
+                  url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                system: phone
+                use: work
+                value: "(703) 726-1300"
+              id: '0000000000000140213'
+              type:
+              - coding:
+                - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS
+                  code: prvgrp
+                  display: Provider Group
+                text: Provider Group
+              resourceType: Organization
+          description: This response, which is a valid Organization record based on
+            the id passed, may be incomplete.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided.
+        '404':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: not-found
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_NO_MATCH
+                    display: No Resource found
+              id: 687401f85fd3fefb43182c22
+              resourceType: OperationOutcome
+          description: The specified id doesn’t identify an existing Resource
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      parameters:
+      - in: path
+        name: id
+        description: This is the unique logical id of the Resource.
+        type: string
+        required: true
+host: apif1.aetna.com/fhir
+produces:
+- application/json
+externalDocs:
+  description: HTTP Errors
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: "/Token"
+    authorizationUrl: "/Authorize"
+    description: ''
+    scopes:
+      patient/Patient.*: ''
+      patient/Patient.read: ''
+      patient/*.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: "/Token"
+    description: ''
+    scopes:
+      NonPII: ''
+      Public: ''
+    type: oauth2
+    flow: application
+definitions:
+  Organization:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use.
+
+      This is the HL7 FHIR Release 4.0.1 Organization resource.
+      Full Documentation is available at: http://hl7.org/fhir/organization.html
+
+      US Core 3.1.1 Documentation is available at:
+      http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-organization.html
+
+      For the CARIN-BB 1.0.0 Organization resource full documentation is available at:
+      http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Organization.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 Organization resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Organization.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 Network resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Network.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 Organization resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Organization.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 Network resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Network.html
+    type: object
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    url: http://
+    email: InteroperabilityDeveloperSupport@aetna.com
+  description: |-
+    Retrieve Organization resource based on Logical Id.
+
+    This API retrieves details on a Plannet Organization Resource. An organization is a formal or informal grouping of people or organizations with a common purpose, such as a company, institution, corporation, community group, or healthcare practice.
+  x-ibm-name: v1providerdirectoryorganizationid
+  termsOfService: ''
+  title: "/v1/providerdirectory/Organization/{id}"
+  version: 1.0.0

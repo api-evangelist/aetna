@@ -1,0 +1,70 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://vteapif1.aetna.com/fhirdemo/.well-known/smart-configuration (HTTP 200, live),
+  https://vteapif1.aetna.com/fhirdemo/v2/patientaccess/metadata (HTTP 200, live CapabilityStatement),
+  https://developerportal.aetna.com/assets/Data/Fhir.json (the portal's API catalog marks each
+  operation Production or sandbox),
+  https://developerportal.aetna.com/managedcontent/yaml/*_sandbox.yaml (39 sandbox Swagger documents),
+  https://developerportal.aetna.com/managedcontent/pdfs/Token_Generation_Process-Patient_Access_APIs-Sandbox.pdf,
+  https://developerportal.aetna.com/assets/Data/createapp.json
+summary: >-
+  Aetna runs a genuine, separately-hosted sandbox with its own FHIR base, its own OAuth server and its
+  own contracts - 41 of the 139 operations in Aetna's API catalog are sandbox operations, and 39 of
+  their Swagger documents were retrieved and are archived in openapi/_original/. It is NOT a
+  key-prefix mode on the production host; it is a different hostname. Access still requires portal
+  registration and an application, so it is a gated sandbox rather than an open playground.
+environments:
+  - name: Production
+    fhir_base: https://apif1.aetna.com/fhir
+    authorization_endpoint: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/authorize
+    token_endpoint: https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/token
+    smart_configuration: https://apif1.aetna.com/fhir/.well-known/smart-configuration
+    capability_statement: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
+    data: real member data, released only with that member's authorization
+  - name: Sandbox
+    fhir_base: https://vteapif1.aetna.com/fhirdemo
+    authorization_endpoint: https://vteapif1.aetna.com/fhirdemo/v1/fhirserver_auth/oauth2/authorize
+    token_endpoint: https://vteapif1.aetna.com/fhirdemo/v1/fhirserver_auth/oauth2/token
+    smart_configuration: https://vteapif1.aetna.com/fhirdemo/.well-known/smart-configuration
+    capability_statement: https://vteapif1.aetna.com/fhirdemo/v2/patientaccess/metadata
+    data: synthetic / demo member data ("fhirdemo")
+separation:
+  mechanism: separate hostname and separate OAuth authorization server
+  key_prefixes: none
+  note: >-
+    There is no test-vs-live key prefix. A sandbox application gets its own Client ID and Secret from
+    the Developer Portal, bound to sandbox products (product names carry a `sandbox-` prefix, e.g.
+    sandbox-payertopayerapi-fhir, sandbox-provideraccessapi-fhir, sandbox-cdshooksapi-fhir). A
+    production credential will not authenticate against vteapif1 and vice versa.
+onboarding:
+  steps:
+    - Register or log in at https://developerportal.aetna.com/
+    - Click My Application, then Create New
+    - Enter an application name and a callback URL
+    - >-
+      Choose "An application to utilize patient access and/or provider directory API" (third-party
+      developer) or "Health Plan to utilize payer to payer data exchange" (payer)
+    - Choose the application environment (Sandbox or Production)
+    - Submit, then record the Client ID and Client Secret
+    - Subscribe the application to the products that contain the APIs to be called
+  source: https://developerportal.aetna.com/assets/Data/createapp.json
+  note: >-
+    Aetna is explicit that a developer must be subscribed to the product containing an API before that
+    API can be invoked - an unsubscribed call returns 401, per Aetna's own error reference.
+test_values:
+  documented: false
+  note: >-
+    Aetna publishes no magic test identifiers, no synthetic member IDs, and no fixture list. The
+    sandbox authorization flow requires signing in as a demo member whose credentials are issued
+    through the portal, so there is nothing to record verbatim here and nothing has been invented.
+constraints:
+  - >-
+    Sandbox is NOT available to third-party production applications that opt into IAL2 authentication
+    (Aetna, 2026-06-25).
+  - Version 1 APIs in the sandbox environment were decommissioned on 2023-09-29.
+  - >-
+    Sandbox sometimes leads production - CRD, Provider Access $Group and Patient $everything all
+    appeared in sandbox before Production, per the release history's separate Sandbox section.
+test_clock: null
+fixture_tooling: null

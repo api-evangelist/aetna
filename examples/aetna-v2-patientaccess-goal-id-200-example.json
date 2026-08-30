@@ -1,0 +1,124 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_Goal_id",
+    "path": "/v2/patientaccess/Goal/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "statusDate": "2015-01-01",
+    "identifier": [
+      {
+        "system": "https://sources.aetna.com/goal/identifier/99123",
+        "value": "81~123456780+active+3141-9"
+      }
+    ],
+    "lifecycleStatus": "active",
+    "subject": {
+      "reference": "Patient/cded2d66-d1238-41d8-97bd-9d62cd1"
+    },
+    "description": {
+      "text": "Patient is targeting a pulse oximetry of 92% and a weight of 195 lbs"
+    },
+    "outcomeCode": [
+      {
+        "text": "Cholesterol is within the limit"
+      }
+    ],
+    "priority": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/goal-priority",
+          "code": "high-priority",
+          "display": "High Priority"
+        }
+      ]
+    },
+    "target": [
+      {
+        "detailRange": {
+          "high": {
+            "unit": "lbs",
+            "system": "http://unitsofmeasure.org",
+            "code": "[lb_av]",
+            "value": 180
+          },
+          "low": {
+            "unit": "lbs",
+            "system": "http://unitsofmeasure.org",
+            "code": "[lb_av]",
+            "value": 160
+          }
+        },
+        "measure": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3141-9",
+              "display": "Weight Measured"
+            }
+          ]
+        },
+        "dueDate": "2016-04"
+      },
+      {
+        "detailRange": {
+          "high": {
+            "unit": "lbs",
+            "system": "http://unitsofmeasure.org",
+            "code": "[lb_av]",
+            "value": 180
+          },
+          "low": {
+            "unit": "lbs",
+            "system": "http://unitsofmeasure.org",
+            "code": "[lb_av]",
+            "value": 160
+          }
+        },
+        "measure": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "10450-5",
+              "display": "Glucose [Mass/volume] in Serum or Plasma --10 hours fasting"
+            }
+          ]
+        },
+        "dueDate": "2016-04"
+      }
+    ],
+    "meta": {
+      "lastUpdated": "2021-06-20T14:13:01.591+00:00",
+      "versionId": "1",
+      "profile": [
+        "http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal"
+      ]
+    },
+    "id": "cded2d66-a318-41d8-97bd-9d62cdefb5a1",
+    "achievementStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/goal-achievement",
+          "code": "in-progress",
+          "display": "In Progress"
+        }
+      ]
+    },
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/goal-category",
+            "code": "dietary",
+            "display": "Dietary"
+          }
+        ]
+      }
+    ],
+    "startDate": "2012-06-01",
+    "resourceType": "Goal"
+  }
+}

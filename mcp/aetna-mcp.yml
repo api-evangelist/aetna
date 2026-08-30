@@ -1,0 +1,349 @@
+generated: '2026-08-30'
+method: derived
+status: candidate
+source: openapi/aetna-patient-access-api-openapi.yml, openapi/aetna-provider-directory-api-openapi.yml
+search_note: 'NO MCP server exists. Searched npm (registry search for aetna, and for @modelcontextprotocol
+  servers naming Aetna), the Aetna Developer Portal, the aetnahealth GitHub organization (which has zero public
+  repositories), and probed every Aetna host for an agent surface: /.well-known/ai-plugin.json, /.well-known/agent-card.json
+  and /.well-known/agent.json all return 404 on apif1.aetna.com, vteapif1.aetna.com and www.aetna.com (developerportal.aetna.com
+  returned 403 to this run''s IP and so is not evidence either way). The tools below are a DERIVED CANDIDATE
+  surface computed from Aetna''s own OpenAPI operations - a proposal for what an MCP server over these FHIR
+  APIs would expose, not something anyone ships today. No endpoint URL is guessed.'
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+  note: 'mode is none because Aetna publishes neither a remote MCP endpoint nor a local stdio package. If Aetna
+    ever ships one, every tool below would carry SMART on FHIR OAuth 2.0 with a member patient context - including
+    the provider directory, which unlike several peer payers Aetna does NOT expose anonymously. That makes
+    an Aetna MCP server harder to stand up than a directory-only one: there is no unauthenticated tool in the
+    set.'
+server:
+  name: aetna
+  transport: null
+  url: null
+tools:
+- name: search_allergy_intolerance
+  description: Retrieves all Allergy Intolerances associated to an Authenticated User based on the search criteria
+    (patient fhir logical id)
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_AllergyIntolerance
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_allergy_intolerance
+  description: Retrieves AllergyIntolerance details using the Id and formats the response in USCoreAllergyIntolerance  profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_AllergyIntolerance_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_binary
+  description: This operation returns a Binary Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Binary_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_care_plan
+  description: Retrieves all Care Plans associated to an Authenticated User based on the search criteria (patient
+    fhir logical id, date, status and category)
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CarePlan
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_care_plan
+  description: Retrieves CarePlan details using the Id and formats the response in USCoreCarePlan profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CarePlan_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_care_team
+  description: This operation retrieves all CareTeam records associated to an Authenticated User based on the
+    search criteria
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CareTeam
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_care_team
+  description: This operation returns a CareTeam Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_CareTeam_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_condition
+  description: Retrieves all Conditions associated with a patient and formats the response to the USCoreCondition
+    profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Condition
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_condition
+  description: Retrieves conditon details using the Id and formats the response to the USCoreCondition profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Condition_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_coverage
+  description: Retrieves a patient's coverage details using the Id and formats the response to the CARIN profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Coverage
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_coverage
+  description: Retrieves a patient's coverage details using the Id and formats the response to the CARIN profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Coverage_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_device
+  description: This operation retrieves all Device records associated to an Authenticated User based on the
+    search criteria
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Device
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_device
+  description: This operation returns a Device Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Device_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_diagnostic_report
+  description: This operation retrieves all DiagnosticReports associated to an Authenticated User based on
+    the search criteria (patient fhir logical id, date, code, category)
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DiagnosticReport
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_diagnostic_report
+  description: This operation returns a DiagnosticReport Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DiagnosticReport_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_document_reference
+  description: This operation retrieves all DocumentReferences associated to an Authenticated User based on
+    the search criteria (patient fhir logical id, date, category, type)
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DocumentReference
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_document_reference
+  description: This operation returns a DocumentReference Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_DocumentReference_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_encounter
+  description: This operation retrieves all Encounters associated to an Authenticated User based on the search
+    criteria (patient fhir logical id, date)
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Encounter
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_encounter
+  description: This operation returns a Encounter Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Encounter_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_endpoint
+  description: This operation returns a Endpoint Resource associated with the Logical Id.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Endpoint_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_explanation_of_benefit
+  description: Retrieves a patient's Explanation Of Benefit details using the Member Id and formats the response
+    to the available CARIN profiles.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_ExplanationOfBenefit
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_explanation_of_benefit
+  description: Retrieves a patient's Explanation Of Benefit details using the EOB Logical Identifier and formats
+    the response to the available CARIN profiles.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_ExplanationOfBenefit_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_goal
+  description: This operation retrieves all Goal records associated to an Authenticated User based on the search
+    criteria
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Goal
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_goal
+  description: This operation returns a Goal Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Goal_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_immunization
+  description: This operation retrieves all Immunizations associated to an Authenticated User based on the
+    search criteria patient fhir logical id.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Immunization
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_immunization
+  description: This operation returns a Immunization Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Immunization_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_medication_knowledge
+  description: Retrieves all MedicationKnowledge resources associated with an authenticated patient and formats
+    the response to the USDFFormularyDrug profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationKnowledge
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_medication_knowledge
+  description: Returns a MedicationKnowledge resource associated with the unique logical id.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationKnowledge_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_medication_request
+  description: This operation retrieves all MedicationRequests associated with an Authenticated User based
+    on the search criteria (patient fhir logical id, status, intent)
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationRequest
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_medication_request
+  description: This operation returns a MedicationRequest Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_MedicationRequest_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_medication
+  description: This operation returns a Medication Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Medication_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_observation
+  description: This operation will retrieve all Observation details associated with a patient and formats the
+    response to the Observation profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Observation
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_observation
+  description: Retrieves observation details using the Id and formats the response in Observation profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Observation_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_organization
+  description: Read the current state of the resource using the Logical (unique) ID [FHIR Base]/Organization/{id}
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Organization_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_patient
+  description: Retrieves a patient's details
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Patient
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_patient
+  description: Retrieves a patient's details using the Id and formats the response to the CARINBBPatient profile.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Patient_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_practitioner_role
+  description: Read the current state of the resource using the Logical (unique) ID [FHIR Base]/PractitionerRole/{id}
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_PractitionerRole_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_practitioner
+  description: Read the current state of the resource using the Logical (unique) ID [FHIR Base]/Practitioner/{id}
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Practitioner_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_procedure
+  description: This operation retrieves all Procedures associated to an Authenticated User based on the search
+    criteria patient fhir logical id.
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Procedure
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: read_procedure
+  description: This operation returns a Procedure Resource associated with the Logical Id
+  source_operation: openapi/aetna-patient-access-api-openapi.yml#get_v2_patientaccess_Procedure_id
+  api: patient-access
+  auth: oauth2-smart-on-fhir
+- name: search_insurance_plan
+  description: Retrieve InsurancePlan resource based on Coverage Area (Coverage area is a 2-digit state abbreviation).
+    Both Provider and Pharmacy data are available on this resource.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_InsurancePlan
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_location
+  description: Search all resources of type Location based on postalCode or (State and City)
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Location
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: read_location
+  description: Retrieves a Location Resource based on the Unique Logical ID
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Location_id
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_organization
+  description: Retrieves Organization resources based on search criteria(name, location)
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Organization
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_organization_affiliation
+  description: 'Retrieves the OrganizationAffiliation resource based on :   Specialty + Location. Specialty
+    search parameter will be the NUCC taxonomy code of the specialty. Both Provider and Pharmacy data are available
+    on this resource.'
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_OrganizationAffiliation
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: read_organization_2
+  description: Retrieves details of a Plannet Organization Resource based on a logical id.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Organization_id
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_practitioner
+  description: Retrieve a bundle of Practitioner records based on the search criteria.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Practitioner
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_practitioner_role
+  description: Retrieves list of Practitioner(s) that meets specialty and location parameters
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_PractitionerRole
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: read_practitioner_2
+  description: Retrieves details of individual Practitioner(s) by Logical ID.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectory_Practitioner_id
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_healthcare_service_bulk
+  description: HealthCareServices offered by an organization/practitioner at a location.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_HealthcareService
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: read_healthcare_service_bulk
+  description: HealthCareServices offered by a particular organization/practitioner based on given ID
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_HealthcareService_id
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_insurance_plan_bulk
+  description: Retrieves all InsurancePlans based on the search criteria
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_InsurancePlan
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: read_location_bulk
+  description: ID specific Location where healthcare services are provided.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Location_id
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_location_bulk
+  description: Location where healthcare services are provided.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Location
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_organization_bulk
+  description: Retrieves  a Bundle of Organization Resources(Organization and/or Network profiles) based on
+    the search criteria.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Organization
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: read_organization_bulk
+  description: Retrieves an Organization Resources(Organization or Network profile) based on the  FHIR logical
+    ID.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Organization_id
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_organization_affiliation_bulk
+  description: Retrieves all OrganizationAffiliations based on the search criteria
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_OrganizationAffiliation
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_practitioner_bulk
+  description: The API provides a collection of Practitioner Profile.
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Practitioner
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: read_practitioner_bulk
+  description: The API provides a Plannet Practitioner Profile with respect to Id
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_Practitioner_id
+  api: provider-directory
+  auth: oauth2-smart-on-fhir
+- name: search_practitioner_role_bulk
+  description: Retrieves all PractitionerRoles based on the search criteria
+  source_operation: openapi/aetna-provider-directory-api-openapi.yml#get_v1_providerdirectorydata_PractitionerRole
+  api: provider-directory
+  auth: oauth2-smart-on-fhir

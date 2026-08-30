@@ -1,0 +1,30 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectory_Location_id",
+    "path": "/v1/providerdirectory/Location/{id}",
+    "status": "500",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "issue": [
+      {
+        "severity": "fatal",
+        "diagnostics": "Backend service failure",
+        "code": "exception",
+        "details": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+              "code": "MSG_SVC_FAILURE",
+              "display": "Error occurred while processing response"
+            }
+          ]
+        }
+      }
+    ],
+    "id": "53c27ea45fd8f0ff0af91f91",
+    "resourceType": "OperationOutcome"
+  }
+}

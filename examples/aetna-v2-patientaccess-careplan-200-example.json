@@ -1,0 +1,92 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-patient-access-api-openapi.yml",
+    "operationId": "get_v2_patientaccess_CarePlan",
+    "path": "/v2/patientaccess/CarePlan",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "subject": {
+            "reference": "Patient/example",
+            "display": "Amy Shaw"
+          },
+          "text": {
+            "status": "additional"
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/core/CodeSystem/careplan-category",
+                  "code": "assess-plan"
+                }
+              ]
+            }
+          ],
+          "recorded": "2021-01-07",
+          "resourceType": "CarePlan",
+          "status": "completed"
+        },
+        "fullUrl": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/CarePlan/11181211064"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "subject": {
+            "reference": "Patient/example",
+            "display": "Amy Shaw"
+          },
+          "text": {
+            "status": "additional"
+          },
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/core/CodeSystem/careplan-category",
+                  "code": "assess-plan"
+                }
+              ]
+            }
+          ],
+          "recorded": "2021-01-07",
+          "resourceType": "CarePlan",
+          "status": "completed"
+        },
+        "fullUrl": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/CarePlan/11181210653"
+      }
+    ],
+    "total": 2,
+    "link": [
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/CarePlan/?_count=2",
+        "relation": "search"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/CarePlan/?_count=2&_page_token=Cjj3YEef7v%2F%2F%2F%2F%2BABb0c6BuGuAD%2FAf%2F%2BOGQzY2FiYmE2OTc5N2U0NGFmNmNiM2Y1OTAwYWRhOGIAARACIRdZYDGqWfwzOQAAAAARYLifSAJQAFoLCcJRz98ugOf9EANg3JPmgwY%3D",
+        "relation": "next"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/CarePlan/?_count=2",
+        "relation": "first"
+      },
+      {
+        "url": "https://healthcare.googleapis.com/v1/projects/cdr-devl/locations/us-east4/datasets/cdr-fhir-ds/fhirStores/cdr-fhir-r4-test/fhir/CarePlan/?_count=2",
+        "relation": "self"
+      }
+    ],
+    "id": "a7bca4215fbc6e68b01b0801",
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}

@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Aetna Provider Directory API
+  version: 1.0.0
+extends: openapi/aetna-provider-directory-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: aetna
+    x-apievangelist-harvested: '2026-08-30'
+    x-apievangelist-source: https://developerportal.aetna.com/managedcontent/yaml/ (per-operation Swagger 2.0),
+      catalogued at https://developerportal.aetna.com/assets/Data/Fhir.json
+    x-apievangelist-conformance: conformance/aetna-conformance.yml
+    x-apievangelist-conventions: conventions/aetna-conventions.yml
+    x-apievangelist-errors: errors/aetna-problem-types.yml
+    x-apievangelist-lifecycle: lifecycle/aetna-lifecycle.yml
+    x-apievangelist-data-model: data-model/aetna-data-model.yml
+- target: $.info
+  description: Record what this pipeline changed relative to the provider-served documents.
+  update:
+    x-apievangelist-enhancements:
+    - Assembled 16 single-operation Swagger 2.0 documents into one OpenAPI 3.0.3 document (paths, components.schemas,
+      components.securitySchemes union).
+    - 'Rewrote #/definitions/ $refs to #/components/schemas/.'
+    - 'Converted swagger securityDefinitions (flow: accessCode) to OpenAPI 3 securitySchemes (flows.authorizationCode).'
+    - Assigned a unique operationId per operation. Aetna sets every operationId to the literal string "GET",
+      which cannot survive a merge.
+    - Moved response schema + examples under content[mediaType] using the source document's produces list.
+    - Stamped x-source-file on every operation so each one resolves back to its unmodified original in openapi/_original/.
+    x-apievangelist-not-changed:
+    - No summary, description, parameter, schema, example, security requirement or server URL was authored,
+      reworded or invented. Every one is Aetna's.

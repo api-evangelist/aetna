@@ -1,0 +1,334 @@
+---
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  testable: true
+x-ibm-endpoints:
+- endpointUrl: https://qahapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+- endpointUrl: https://qaehapi.aetna.com/fhir/qapath3
+  type:
+  - production
+  - development
+schemes:
+- https
+swagger: '2.0'
+security:
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/Patient.*
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.read
+- FHIR_User_AccessCode_Oauth:
+  - patient/*.*
+- FHIR_Application_Oauth:
+  - NonPII
+- FHIR_Application_Oauth:
+  - Public
+basePath: "/v1/providerdirectory"
+paths:
+  "/PractitionerRole":
+    get:
+      summary: Retrieves list of Practitioner(s) that meets specialty and location
+        parameters
+      description: 'Retrieves PractitionerRole resources based on : Specialty + Location.Specialty
+        search parameter will be the NUCC taxonomy code of the specialty.'
+      responses:
+        '200':
+          schema:
+            "$ref": "#/definitions/Bundle"
+          examples:
+            application/json:
+              entry:
+              - search:
+                  mode: match
+                resource:
+                  extension:
+                  - extension:
+                    - valueCodeableConcept:
+                        coding:
+                        - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS
+                          code: newpt
+                      url: acceptingPatients
+                    url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients
+                  - valueReference:
+                      display: Mercy Care DCS CHP
+                    url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference
+                  specialty:
+                  - coding:
+                    - system: http://nucc.org/provider-taxonomy
+                      code: 207L00000X
+                      display: Anesthesiology Physician
+                    text: Specialty
+                  availableTime:
+                  - availableEndTime: '17:00:00'
+                    daysOfWeek:
+                    - mon
+                    - tue
+                    - wed
+                    - thu
+                    - fri
+                    availableStartTime: '08:00:00'
+                  code:
+                  - coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/ProviderRoleCS
+                      code: ph
+                      display: Physician
+                    text: Physician
+                  practitioner:
+                    reference: Practitioner/0000000000000150099
+                    display: CRAWLEY-BERTOLO, THERESA
+                  meta:
+                    lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole
+                  active: true
+                  language: en
+                  location:
+                  - reference: Location/0000000000000150110
+                    display: 4800 N 22ND ST, Phoenix, AZ 85016
+                  telecom:
+                  - extension:
+                    - valueReference:
+                        display: 4800 N 22ND ST, Phoenix, AZ 85016
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                    system: phone
+                    use: work
+                    value: "(602) 955-1000"
+                  id: '0000000000000150087'
+                  resourceType: PractitionerRole
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole/0000000000000150087
+              - search:
+                  mode: match
+                resource:
+                  extension:
+                  - extension:
+                    - valueCodeableConcept:
+                        coding:
+                        - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS
+                          code: nopt
+                      url: acceptingPatients
+                    url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients
+                  - valueReference:
+                      display: Mercy Care DCS CHP
+                    url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference
+                  specialty:
+                  - coding:
+                    - system: http://nucc.org/provider-taxonomy
+                      code: 207L00000X
+                      display: Anesthesiology Physician
+                    text: Specialty
+                  code:
+                  - coding:
+                    - system: http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/ProviderRoleCS
+                      code: ph
+                      display: Physician
+                    text: Physician
+                  practitioner:
+                    reference: Practitioner/0000000000000150000
+                    display: FROMMERT, ALLAN
+                  meta:
+                    lastUpdated: '2020-07-28T05:00:54.485+00:00'
+                    versionId: 4.0.1
+                    profile:
+                    - http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole
+                  active: true
+                  language: en
+                  location:
+                  - reference: Location/0000000000000150111
+                    display: 4800 N 22ND ST, Phoenix, AZ 85016
+                  telecom:
+                  - extension:
+                    - valueReference:
+                        display: 4800 N 22ND ST, Phoenix, AZ 85016
+                      url: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary
+                    system: phone
+                    use: work
+                    value: "(602) 955-1000"
+                  id: '0000000000000150088'
+                  resourceType: PractitionerRole
+                fullUrl: https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole/0000000000000150088
+              total: 25
+              link:
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=1
+                relation: self
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=1
+                relation: first
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=2
+                relation: next
+              - url: https://apif1.aetna.com/fhir/v1/providerdirectory/PractitionerRole?specialty=207L00000X&location.address-city:exact=Phoenix&location.address-state:exact=az&_count=2&page=13
+                relation: last
+              id: ca26f1e8-a7d4-11ed-b57d-9d7918350000
+              type: searchset
+              resourceType: Bundle
+          description: The response would return a Bundle of PractitionerRoles.
+        '400':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: error
+                code: required
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_RESOURCE_ID_MISSING
+                    display: Resource Id Missing
+              id: 14c27ea91f91d8f01234
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided, or an unknown parameter
+            is provided.
+        '500':
+          schema:
+            "$ref": "#/definitions/OperationOutcome"
+          examples:
+            application/json:
+              issue:
+              - severity: fatal
+                diagnostics: Backend service failure
+                code: exception
+                details:
+                  coding:
+                  - system: http://hl7.org/fhir/ValueSet/operation-outcome
+                    code: MSG_SVC_FAILURE
+                    display: Error occurred while processing response
+              id: 53c27ea45fd8f0ff0af91f91
+              resourceType: OperationOutcome
+          description: Internal Server Error. Failures on the server side.
+      schemes:
+      - https
+      parameters:
+      - in: query
+        name: specialty
+        description: |-
+          Select PractitionerRoles associated with the specified specialty
+          Note:Specialty must be in Taxonomy format.
+        type: string
+        required: false
+      - in: query
+        name: location.address-city:exact
+        description: |-
+          Select PractitionerRoles available at the specified City
+
+          Name of city, town etc of the PractitionerRole location.
+        type: string
+        required: false
+      - in: query
+        name: location.address-state:exact
+        description: |-
+          Select PractitionerRoles available at the specified state.
+
+          Sub-unit of country of the PractitionerRole location. State will be 2 letter abbreviation.
+        type: string
+        required: false
+      - in: query
+        name: location.address-postalcode:exact
+        description: |-
+          Select PractitionerRoles available at the specified postal zip code.
+
+          US Zip code of the PractitionerRole location.
+          Postal code will be priority over City +State.
+
+          Postal code will be 5 valid 5 digit numeric.
+        type: string
+        required: false
+      - in: query
+        name: page
+        description: 'Used for pagination: potential values to navigate to a specific
+          page.“self”–page=10 “first”–page=1 “last”–page=65 “previous”–page=9 “next”–page=11'
+        type: number
+        required: false
+      - in: query
+        name: _count
+        description: _count parameter is used to define the maximum number of search
+          results to show on a page
+        type: number
+        required: false
+host: apif1.aetna.com/fhir
+produces:
+- application/json
+externalDocs:
+  description: HTTP Errors
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: "/Token"
+    authorizationUrl: "/Authorize"
+    description: ''
+    scopes:
+      patient/Patient.*: ''
+      patient/Patient.read: ''
+      patient/*.read: ''
+      patient/*.*: ''
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: "/Token"
+    description: ''
+    scopes:
+      NonPII: ''
+      Public: ''
+    type: oauth2
+    flow: application
+definitions:
+  Entry:
+    description: An entry in a bundle resource - will contain a resource(s) returned
+      in the bundle
+    type: object
+    properties:
+      resource:
+        "$ref": "#/definitions/PractitionerRole"
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          "$ref": "#/definitions/Entry"
+  OperationOutcome:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+      Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html
+    type: object
+  PractitionerRole:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 PractitionerRole resource.
+      Full Documentation is available at: http://hl7.org/fhir/practitionerrole.html
+
+      US Core 3.1.1 Documentation is available at:
+      http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-practitionerrole.html
+
+      For the DaVinci PDEX Plan Net 1.0.0 PractitionerRole resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-PractitionerRole.html
+
+      For the DaVinci PDEX Plan Net 1.1.0 PractitionerRole resource documentation is available at:
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-PractitionerRole.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: InteroperabilityDeveloperSupport@aetna.com
+    url: http://
+  description: |-
+    Retrieves PractitionerRole resources based on :
+    Specialty + Location.
+    Specialty search parameter will be the NUCC taxonomy code of the specialty.
+
+    This API provides details about Plannet PractitionerRole. PractitionerRole describes details about a provider, which can be a practitioner or an organization. When the provider is a practitioner, there may be a relationship to an organization. A provider renders services to patients at a location. When the provider is a practitioner, there may also be a relationship to an organization. Practitioner participation in healthcare provider insurance networks may be direct or through their role at an organization.
+  x-ibm-name: v1providerdirectorypractitionerrole
+  title: "/v1/providerdirectory/PractitionerRole"
+  version: 1.0.0

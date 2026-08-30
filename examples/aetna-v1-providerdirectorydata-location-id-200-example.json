@@ -1,0 +1,78 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_Location_id",
+    "path": "/v1/providerdirectorydata/Location/{id}",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "extension": [
+      {
+        "extension": [
+          {
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "nopt",
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS"
+                }
+              ]
+            },
+            "url": "acceptingPatients"
+          },
+          {
+            "url": "fromNetwork"
+          },
+          {
+            "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/accessibility"
+          }
+        ]
+      }
+    ],
+    "address": {
+      "country": "US",
+      "city": "Prescott",
+      "line": [
+        "125 North Washington Street"
+      ],
+      "use": "work",
+      "district": "Ogemaw",
+      "postalCode": "48756",
+      "state": "MI",
+      "text": "125 North Washington Street, Prescott, Ogemaw, MI, 48756, USA",
+      "type": "physical"
+    },
+    "meta": {
+      "lastUpdated": "2021-04-09T09:00:52.068245+00:00",
+      "versionId": "MTYxNzk1ODg1MjA2ODI0NTAwMA",
+      "profile": [
+        "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location"
+      ]
+    },
+    "name": "Prescott Clinic, P.C.",
+    "language": "en-US",
+    "telecom": [
+      {
+        "system": "phone",
+        "use": "work",
+        "rank": 1,
+        "value": "9898733352"
+      },
+      {
+        "system": "fax",
+        "use": "work",
+        "rank": 2,
+        "value": "9898733949"
+      }
+    ],
+    "id": "a8dbb12fa1a89f11d4eee4813a38db1f",
+    "position": {
+      "latitude": 44.191023,
+      "longitude": -83.930409
+    },
+    "resourceType": "Location",
+    "status": "active"
+  }
+}

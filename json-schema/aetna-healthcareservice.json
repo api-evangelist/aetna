@@ -1,0 +1,12 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/json-schema/aetna-healthcareservice.json",
+ "title": "Aetna FHIR R4 HealthcareService",
+ "description": "See the appropriate Implementation Guide for proper documentation to use\n\nThis is the HL7 FHIR Release 4.0.1 HealthcareService resource.\nFull Documentation is available at: http://hl7.org/fhir/healthcareservice.html\n\nFor the DaVinci PDEX Plan Net 1.0.0 HealthcareService resource documentation is available at:\nhttp://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-HealthcareService.html\n\nFor the DaVinci PDEX Plan Net 1.1.0 HealthcareService resource documentation is available at:\nhttp://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-HealthcareService.html\n\nFor the DaVinci PDEX Plan Net 1.2.0 HealthcareService resource documentation is available at:\nhttp://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.2/StructureDefinition-plannet-HealthcareService.html",
+ "x-provenance": {
+  "generated": "2026-08-30",
+  "method": "derived",
+  "source": "openapi/aetna-provider-directory-api-openapi.yml"
+ },
+ "type": "object"
+}

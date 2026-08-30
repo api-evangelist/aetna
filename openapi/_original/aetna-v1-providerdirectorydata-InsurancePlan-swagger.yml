@@ -1,0 +1,824 @@
+x-ibm-configuration:
+  phase: realized
+  enforced: true
+  cors:
+    enabled: true
+  activity-log:
+    success-content: activity
+    error-content: header
+    enabled: true
+  catalogs:
+    qapath3:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    delivery:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    stress:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    qapath1:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    qapath2:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    prod:
+      properties:
+        x-api-key: MfAri03JO8hgVzerGiITA6FGafayv5XV
+        backendURL: >-
+          http://127.0.0.1:7798/apigee-url/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    devpath2:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    devpath3:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    devpath1:
+      properties:
+        x-api-key: G3VIdNTOjscKbVGPqb8aNMeCA1dAHxnz
+        backendURL: >-
+          https://internal-sit1-apix.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+    uat:
+      properties:
+        x-api-key: ''
+        backendURL: ''
+  testable: true
+  assembly:
+    finally: []
+    catch: []
+    execute:
+      - gatewayscript:
+          comment:
+            - >-
+              GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+              converting gatewayscript to `gatewayscript_1.0.0`.
+          source: >-
+            var apim = require('local:///isp/policy/apim.custom.js');
+
+            var hm = require('header-metadata');
+
+            var file_path =
+            'local:///policy/common/ValidatePaginationParam_v1.0.0.js';
+
+            var commonFunc = require(file_path);
+
+            commonFunc.validate_pagination_param(30);
+          title: Function Call
+          version: 1.0.0
+      - gatewayscript:
+          comment:
+            - >-
+              GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+              converting gatewayscript to `gatewayscript_1.0.0`.
+          source: >-
+            var catalog_name = apim.getvariable('env.path');
+
+            var file_path =
+            'local:///policy/common/'+catalog_name+'/CreateEIEHeader_v3.2.js';
+
+            var eieheader_module = require(file_path);
+
+            eieheader_module.create_eie_header_v3_2('header','v3.2','JSON','');
+          title: Create EIE Header 3.2
+          version: 1.0.0
+      - gatewayscript:
+          comment:
+            - >-
+              GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+              converting gatewayscript to `gatewayscript_1.0.0`.
+          source: |-
+            var key = apim.getvariable('api.properties.x-api-key');
+            apim.setvariable('message.headers.x-api-key', key,'add');
+          title: Set API Key Header
+          version: 1.0.0
+      - if:
+          condition: apim.getvariable('exception_flag') != true;
+          comment:
+            - >-
+              SW09: `if` policy set to `if_1.5.0`, converting `if` to
+              `if_1.5.0`. For details, see:
+              https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#IF_CONVERTED_TO_WRAPPER
+          title: if
+          execute:
+            - invoke:
+                cache-response: no-cache
+                verb: keep
+                description: >-
+                  dev1-api.cvshealth.com/fhir/cms/plannet-insurance-plan/v1/InsurancePlan
+                comment:
+                  - >-
+                    INV17: Invoke policy set to `invoke_1.5.0`, converting
+                    invoke to `invoke_1.5.0`. For details, see:
+                    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#INVOKE_WRAPPER_FOUND
+                target-url: $(backendURL)?$(finalquerystring)
+                title: invoke call APIGEE FHIR InsurancePlan API
+                version: 1.5.0
+                timeout: 60
+            - gatewayscript:
+                description: Alter the backend response for the fullUrl and url fields
+                comment:
+                  - >-
+                    GWS17: Gatewayscript policy set to `gatewayscript_1.0.0`,
+                    converting gatewayscript to `gatewayscript_1.0.0`.
+                source: "var respJson = apim.getvariable('message.body');\nvar host_name = apim.getvariable('api.endpoint.hostname');\nvar org_name = apim.getvariable('api.org.name');\nvar catalogName = apim.getvariable('env.path');\nvar resoursePath = apim.getvariable('request.path');\nvar chunk_link = respJson.link;\nvar chunk_entry = respJson.entry;\nvar req_query_params = apim.getvariable('request.search');\nvar finalFullUrl;\nvar apic_req_url = \"https://\" + host_name + \"/\" + org_name + \"/\" + catalogName + resoursePath;\nvar array_apic_url = apic_req_url.split('/');\nvar apic_url_length = array_apic_url.length;\n\nvar apic_popped = array_apic_url[apic_url_length - 1];\nvar full_final_split_1;\n\nif (respJson.entry != undefined || respJson.link != undefined) {\n   if(respJson.link !=undefined)\n       {\n   for (var i = 0; i < chunk_link.length; i++) {\n      var split_url = chunk_link[i].url.split('?');\n      var x = chunk_link[i].url.split('/');\n      var y = x.length;\n      var resp_popped = x[y - 1]; //path parameter of backend response from url\n      if (apic_popped == resp_popped) //To confirm whether backend has path param or not\n      {\n         if (split_url[1] == undefined || split_url[1] == \"\") //To check if backend resp has query param or not\n         {\n            finalFullUrl = apic_req_url;\n         } else {\n            finalFullUrl = apic_req_url + '?' + split_url[1];\n         }\n         respJson.link[i].url = finalFullUrl;\n\n      } else\n      {\n         if (split_url[1] == undefined || split_url[1] == \"\") {\n            finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\tfinalFullUrl = finalFullUrl.replace('/?','');\n         } else {\n            finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\tfinalFullUrl = finalFullUrl.replace('/?','?');\n         }\n         respJson.link[i].url = finalFullUrl;\n      }\n   }\n}\n   if (respJson.entry != undefined) {\n      for (var i = 0; i < chunk_entry.length; i++) {\n          if(chunk_entry[i].fullUrl!=undefined)\n          {\n         var split_url = chunk_entry[i].fullUrl.split('?');\n         var x = chunk_entry[i].fullUrl.split('/');\n         var y = x.length;\n         var resp_popped = x[y - 1]; //path parameter of backend response\n         if (apic_popped == resp_popped) //this is to confirm whether backend has path param or not\n         {\n            if (split_url[1] == undefined || split_url[1] == \"\") //this block is to check if backend resp has query param or not\n            {\n               finalFullUrl = apic_req_url;\n            } else {\n               finalFullUrl = apic_req_url + '?' + split_url[1];\n            }\n            respJson.entry[i].fullUrl = finalFullUrl;\n\n         } else\n         {\n            if (split_url[1] == undefined || split_url[1] == \"\") {\n               finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\t   finalFullUrl = finalFullUrl.replace('/?','');\n            } else {\n               finalFullUrl = apic_req_url + \"/\" + resp_popped;\n\t\t\t   finalFullUrl = finalFullUrl.replace('/?','?');\n            }\n            respJson.entry[i].fullUrl = finalFullUrl;\n\t\t\t\n         }\n      }\n      }\n   }\n   session.output.write(respJson);\n   apim.output('application/fhir+json');\n} else {\n   session.output.write(apim.getvariable('message.body'));\n   apim.output('application/fhir+json');\n}"
+                title: Alter Backend Response
+                version: 1.0.0
+          version: 1.5.0
+  type: rest
+  compatibility:
+    enforce-required-params: false
+    comment:
+      - >-
+        API44: Set compatibility toggle `allow-chunked-uploads` to value:
+        `false`. For details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_COMPATIBILITY_TOGGLE
+      - >-
+        API44: Set compatibility toggle `enforce-required-params` to value:
+        `false`. For details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_COMPATIBILITY_TOGGLE
+      - >-
+        API44: Set compatibility toggle `request-headers` to value: `true`. For
+        details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_COMPATIBILITY_TOGGLE
+      - >-
+        API43: Created `compatibility:` section for API-wide toggles set by
+        migration utility. For details, see:
+        https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#COMPATIBILITY_INFO
+    migrated-api: true
+    request-headers: true
+    wrapper-policies:
+      allow-chunked-uploads: false
+  properties:
+    x-api-key:
+      description: ''
+      value: ''
+      encoded: false
+    backendURL:
+      description: ''
+      value: ''
+      encoded: false
+  gateway: datapower-api-gateway
+schemes:
+  - https
+swagger: '2.0'
+security:
+  - FHIR_Application_Oauth:
+      - Public
+  - FHIR_Application_Oauth:
+      - NonPII
+  - FHIR_User_AccessCode_Oauth:
+      - patient/Patient.read
+  - FHIR_User_AccessCode_Oauth:
+      - patient/Patient.*
+  - FHIR_User_AccessCode_Oauth:
+      - patient/*.read
+  - FHIR_User_AccessCode_Oauth:
+      - patient/*.*
+basePath: /v1/providerdirectorydata
+paths:
+  /InsurancePlan:
+    get:
+      summary: Retrieves all InsurancePlans based on the search criteria
+      description: >-
+        Health insurance coverage benefits that are offered under a particular
+        network type
+      operationId: GETOperation
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Bundle'
+          examples:
+            application/json:
+              entry:
+                - search:
+                    mode: match
+                  resource:
+                    identifier:
+                      - use: official
+                        assigner:
+                          display: Aetna Medicare
+                        type:
+                          coding:
+                            - code: XV
+                              system: 'http://terminology.hl7.org/CodeSystem/v2-0203'
+                              display: Health Plan Identifier
+                        value: H5521122
+                      - use: official
+                        assigner:
+                          display: Aetna Medicare
+                        type:
+                          coding:
+                            - code: XV
+                              system: 'http://terminology.hl7.org/CodeSystem/v2-0203'
+                              display: Health Plan Identifier
+                        value: H5521263
+                      - use: official
+                        type:
+                          coding:
+                            - code: XX
+                              system: 'http://terminology.hl7.org/CodeSystem/v2-0203'
+                              display: Organization Identifier
+                        value: I
+                    period:
+                      start: '2023-01-01'
+                      end: '2023-12-31'
+                    language: en
+                    administeredBy:
+                      display: AetnaMedicare
+                    type:
+                      - coding:
+                          - code: mediadvppo
+                            system: 'http://aetna.com/InsuranceProductType'
+                        text: Medicare Advantage PPO
+                    network:
+                      - reference: >-
+                          Organization/plannet-network-f0f9ad3d9b83d94f7080386074dffe13
+                        display: Broad National with preferred pharmacies
+                      - reference: >-
+                          Organization/plannet-network-85c2a896a433b4104b0de39ce06bda77
+                        display: >-
+                          National ANC Medicare PPO - Medicare Advantage AHP
+                          12236
+                      - reference: >-
+                          Organization/plannet-network-2346ae7d8cf4d8749a549cf255531a70
+                        display: myNEXUS HHC Natl MEPPO 12283
+                      - reference: >-
+                          Organization/plannet-network-eee5e087511188b15c1418485963fbf9
+                        display: Central PA Medicare PPO 3399
+                      - reference: >-
+                          Organization/plannet-network-d22427a4ccefd7edccfbcfa2ad6afc19
+                        display: Western PA Medicare PPO 3400
+                      - reference: >-
+                          Organization/plannet-network-0e6d91af1cd85da5cb71beddece9e9e2
+                        display: SEPA Medicare PPO 3401
+                      - reference: >-
+                          Organization/plannet-network-077aa75bbc91d501cae87815968182f2
+                        display: PA BrksCnty Medicare PPO 3402
+                      - reference: >-
+                          Organization/plannet-network-2d51199967fa2eaddd4c44cb42b4e276
+                        display: NEPA Medicare PPO 3404
+                      - reference: >-
+                          Organization/plannet-network-ea38bf5f73a8c66d3013a7827a09fda9
+                        display: Walk In Clinic - Medicare PPO
+                      - reference: >-
+                          Organization/plannet-network-bb3a0ffe2328fd9a462aae509f1b8707
+                        display: Aetna Health Plans - DPPO
+                    meta:
+                      lastUpdated: '2023-02-08T13:51:18.825873+00:00'
+                      versionId: MTY3NTg2NDI3ODgyNTg3MzAwMA
+                      profile:
+                        - >-
+                          http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan
+                    contact:
+                      - name:
+                          text: AetnaMedicare
+                        telecom:
+                          - system: phone
+                            use: work
+                            rank: 1
+                            value: 1-833-570-6670
+                    name: Aetna Medicare Gold Plan (PPO)
+                    alias:
+                      - Aetna Medicare Value (PPO)
+                    id: plannet-insuranceplan-b905bacf4dbba560e758d719e97d003a
+                    ownedBy:
+                      display: Aetna
+                    resourceType: InsurancePlan
+                    status: active
+                  fullUrl: >-
+                    https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan/plannet-insuranceplan-b905bacf4dbba560e758d719e97d003a
+                - search:
+                    mode: match
+                  resource:
+                    identifier:
+                      - use: official
+                        assigner:
+                          display: Aetna Medicare
+                        type:
+                          coding:
+                            - code: XX
+                              system: 'http://terminology.hl7.org/CodeSystem/v2-0203'
+                              display: Organization Identifier
+                        value: G
+                    period:
+                      start: '2023-01-01'
+                      end: '2023-12-31'
+                    language: en
+                    administeredBy:
+                      display: AetnaRetireePlans
+                    type:
+                      - coding:
+                          - code: mediadvppo
+                            system: 'http://aetna.com/InsuranceProductType'
+                        text: Medicare Advantage PPO
+                    network:
+                      - reference: >-
+                          Organization/plannet-network-f0f9ad3d9b83d94f7080386074dffe13
+                        display: Broad National with preferred pharmacies
+                      - reference: >-
+                          Organization/plannet-network-b0c122e633d57dda4ed5dae528bcc787
+                        display: Medicare PPO Group Plans 11558
+                      - reference: >-
+                          Organization/plannet-network-85c2a896a433b4104b0de39ce06bda77
+                        display: >-
+                          National ANC Medicare PPO - Medicare Advantage AHP
+                          12236
+                      - reference: >-
+                          Organization/plannet-network-2346ae7d8cf4d8749a549cf255531a70
+                        display: myNEXUS HHC Natl MEPPO 12283
+                      - reference: >-
+                          Organization/plannet-network-64511dfe1a9dad1715b1c102ac693f97
+                        display: AmericanSpecHlthNatlMEPPO 12744
+                      - reference: >-
+                          Organization/plannet-network-c469c0d967656b617b513b277b194d5e
+                        display: Dallas TX Medicare PPO 3395
+                      - reference: >-
+                          Organization/plannet-network-41515d34f21ab4a417e532fb9ad91b9b
+                        display: San Antonio TX Medicare PPO 3406
+                      - reference: >-
+                          Organization/plannet-network-1df06d19fff9dc5d5d5a871ffbf9db22
+                        display: Austin TX Medicare PPO 3407
+                      - reference: >-
+                          Organization/plannet-network-591ef6a733f42575543bb3b8ba7e80ab
+                        display: Houston TX Medicare PPO 3414
+                      - reference: >-
+                          Organization/plannet-network-224973ff8ec174cd683bdeb67f995926
+                        display: Corpus Christi TX Medicare PPO 3510
+                      - reference: >-
+                          Organization/plannet-network-de7835377a9459101c526968f5684e3f
+                        display: El Paso Medicare PPO 3516
+                      - reference: >-
+                          Organization/plannet-network-ea38bf5f73a8c66d3013a7827a09fda9
+                        display: Walk In Clinic - Medicare PPO
+                      - reference: >-
+                          Organization/plannet-network-3fc9811a23adda89508a49b7a3b86556
+                        display: Rio Grande Valley TX Medicare PPO 4069
+                      - reference: >-
+                          Organization/plannet-network-d8ea6a48e90c55cba4a3d6681e551c92
+                        display: Hill Country TX Medicare PPO 4232
+                      - reference: >-
+                          Organization/plannet-network-7fae8280ca667594ed9c223ef2754ba1
+                        display: Lubbock TX Medicare PPO 4243
+                      - reference: >-
+                          Organization/plannet-network-56d4d90dfcf4029bd8d96188236f29e4
+                        display: E. TX Medicare PPO 4245
+                      - reference: >-
+                          Organization/plannet-network-e0806de79227b8d11df2d7fa3d46a6d8
+                        display: Amarillo TX Medicare PPO 4247
+                      - reference: >-
+                          Organization/plannet-network-bb3a0ffe2528fd9a462aae509f1b899b
+                        display: Aetna Health Plans - DPPO
+                    meta:
+                      lastUpdated: '2023-02-17T08:48:45.812139+00:00'
+                      versionId: MTY3NjYyMzcyNTgxMjEzOTAwMA
+                      profile:
+                        - >-
+                          http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan
+                    contact:
+                      - name:
+                          text: AetnaRetireePlans
+                        telecom:
+                          - system: phone
+                            use: work
+                            rank: 1
+                            value: 1-888-267-2637
+                    name: Aetna Medicare Plan (PPO)
+                    id: plannet-insuranceplan-55ea4421f0aac570fb46ec06adf08f61
+                    ownedBy:
+                      display: Aetna
+                    coverageArea:
+                      - display: >-
+                          TX-Anderson; TX-Aransas; TX-Archer; TX-Armstrong;
+                          TX-Atascosa; TX-Austin; TX-Bailey; TX-Bandera;
+                          TX-Bastrop; TX-Baylor; TX-Bee; TX-Bexar; TX-Blanco;
+                          TX-Borden; TX-Bosque; TX-Brazoria; TX-Brazos;
+                          TX-Briscoe; TX-Brooks; TX-Burleson; TX-Burnet;
+                          TX-Caldwell; TX-Callahan; TX-Cameron; TX-Camp;
+                          TX-Carson; TX-Cass; TX-Castro; TX-Chambers;
+                          TX-Cherokee; TX-Clay; TX-Cochran; TX-Coke; TX-Coleman;
+                          TX-Collin; TX-Comal; TX-Concho; TX-Cooke; TX-Coryell;
+                          TX-Crosby; TX-Dallas; TX-Dawson; TX-Deaf Smith;
+                          TX-Delta; TX-Denton; TX-DeWitt; TX-Dickens; TX-Dimmit;
+                          TX-Donley; TX-Duval; TX-Ector; TX-El Paso; TX-Ellis;
+                          TX-Falls; TX-Fannin; TX-Fayette; TX-Fisher; TX-Floyd;
+                          TX-Fort Bend; TX-Franklin; TX-Freestone; TX-Galveston;
+                          TX-Garza; TX-Gillespie; TX-Glasscock; TX-Goliad;
+                          TX-Gonzales; TX-Gray; TX-Grayson; TX-Gregg; TX-Grimes;
+                          TX-Guadalupe; TX-Hale; TX-Hall; TX-Hamilton;
+                          TX-Hardin; TX-Harris; TX-Harrison; TX-Hartley;
+                          TX-Haskell; TX-Hays; TX-Henderson; TX-Hidalgo;
+                          TX-Hill; TX-Hockley; TX-Hood; TX-Hopkins; TX-Houston;
+                          TX-Hunt; TX-Hutchinson; TX-Irion; TX-Jack;
+                          TX-Jefferson; TX-Jim Hogg; TX-Jim Wells; TX-Johnson;
+                          TX-Jones; TX-Karnes; TX-Kaufman; TX-Kendall;
+                          TX-Kenedy; TX-Kent; TX-Kerr; TX-Kimble; TX-Kleberg;
+                          TX-Knox; TX-La Salle; TX-Lamb; TX-Lampasas; TX-Lavaca;
+                          TX-Lee; TX-Leon; TX-Liberty; TX-Limestone; TX-Llano;
+                          TX-Lubbock; TX-Lynn; TX-Madison; TX-Marion; TX-Martin;
+                          TX-Mason; TX-Matagorda; TX-McCulloch; TX-McLennan;
+                          TX-McMullen; TX-Medina; TX-Menard; TX-Midland;
+                          TX-Milam; TX-Mills; TX-Montague; TX-Montgomery;
+                          TX-Moore; TX-Morris; TX-Motley; TX-Nacogdoches;
+                          TX-Navarro; TX-Nolan; TX-Nueces; TX-Oldham; TX-Orange;
+                          TX-Palo Pinto; TX-Panola; TX-Parker; TX-Polk;
+                          TX-Potter; TX-Rains; TX-Randall; TX-Reagan; TX-Real;
+                          TX-Red River; TX-Refugio; TX-Roberts; TX-Robertson;
+                          TX-Rockwall; TX-Runnels; TX-Rusk; TX-San Jacinto;
+                          TX-San Patricio; TX-San Saba; TX-Schleicher;
+                          TX-Shackelford; TX-Shelby; TX-Smith; TX-Somervell;
+                          TX-Starr; TX-Sterling; TX-Stonewall; TX-Sutton;
+                          TX-Swisher; TX-Tarrant; TX-Taylor; TX-Terry;
+                          TX-Throckmorton; TX-Travis; TX-Trinity; TX-Tyler;
+                          TX-Upshur; TX-Van Zandt; TX-Walker; TX-Waller;
+                          TX-Washington; TX-Webb; TX-Wharton; TX-Wheeler;
+                          TX-Willacy; TX-Williamson; TX-Wilson; TX-Wise;
+                          TX-Wood; TX-Young; TX-Zavala
+                    resourceType: InsurancePlan
+                    status: active
+                  fullUrl: >-
+                    https://apif1.aetna.com/fhir/prod/v1/providerdirectorydata/InsurancePlan/plannet-insuranceplan-55ea4421f0aac570fb46ec06adf08f61
+              total: 4
+              link:
+                - url: >-
+                    https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2
+                  relation: search
+                - url: >-
+                    https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2&_page_token=Cjj3YIGJFv%2F%2F%2F%2F%2BABcCQjgd%2BagD%2FAf%2F%2BY2YxNjhhNTcxYzI3ZDQwYTExNzRiMjBjOWZjOWVkM2EAARACIRdZYDGqWfwzOQAAAADpdn6fSAJQAFoLCbGK4RJnYbokEANgxMKh8gM%3D
+                  relation: next
+                - url: >-
+                    https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2
+                  relation: first
+                - url: >-
+                    https://apif1.aetna.com/fhir/v1/providerdirectorydata/InsurancePlan?_count=2
+                  relation: self
+              type: searchset
+              resourceType: Bundle
+          description: Success. This response returns a Bundle of InsurancePlan records.
+        '400':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: value
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_PARAM_INVALID
+                        display: >-
+                          error parsing date "2021 - 15 - 29" : invalid
+                          dateTime: "2021 - 15 - 29" 
+                    text: Missing or invalid inputs
+              language: en-US
+              resourceType: OperationOutcome
+          description: A required parameter isn’t provided.
+        '401':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_ACCESS_DENIED
+                        display: >-
+                          Looks like you are not authorized to use this API.
+                          Please validate your API Key.
+                    text: You must authenticate before you can use this service
+              language: en-US
+              resourceType: OperationOutcome
+          description: The request is unauthorized.
+        '403':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_ACCESS_DENIED
+                        display: Forbidden
+                    text: Access Denied
+              language: en-US
+              resourceType: OperationOutcome
+          description: The requested resource is forbidden for some reason.
+        '404':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: no-store
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_NO_MATCH
+                        display: 'resource not found: List/yy'
+                    text: No Resource found matching the query
+              language: en-US
+              resourceType: OperationOutcome
+          description: >-
+            The specified System Identifier doesn’t identify an existing
+            resource.
+        '405':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_RESOURCE_NOT_ALLOWED
+                        display: Method Not Allowed
+                    text: Not allowed to submit a resource for this operation
+              language: en-US
+              resourceType: OperationOutcome
+          description: The specified Method is not allowed in the request.
+        '429':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_UNKNOWN_TYPE
+                        display: >-
+                          We have detected excessive traffic coming from this
+                          IP.
+                    text: Too Many Request
+              language: en-US
+              resourceType: OperationOutcome
+          description: >-
+            Detected excessive traffic coming from this IP. Please reach out if
+            you think this is incorrect.
+        '500':
+          schema:
+            $ref: '#/definitions/OperationOutcome'
+          examples:
+            application/json:
+              issue:
+                - severity: error
+                  code: transient
+                  details:
+                    coding:
+                      - system: 'http://hl7.org/fhir/R4/valueset-operation-outcome.html'
+                        code: MSG_SVC_FAILURE
+                        display: >-
+                          An Unexpected error occurred while fulfilling this
+                          request. Our engineers have been notified. Please try
+                          again in some time.
+                    text: Error occurred while processing response
+              language: en-US
+              resourceType: OperationOutcome
+          description: An unexpected internal error has occurred.
+      parameters:
+        - in: query
+          name: _count
+          description: >-
+            The maximum number of search results on a page. The server is not
+            bound to return the number requested, but cannot return more.
+          type: number
+          required: false
+        - in: query
+          name: _id
+          description: Logical id of this artifact
+          type: string
+          required: false
+        - in: query
+          name: owned-by
+          description: Select products that are owned by the specified organization.
+          type: string
+          required: false
+        - in: query
+          name: coverage-area
+          description: Select products that are offered in the specified location.
+          type: string
+          required: false
+        - in: query
+          name: name
+          description: Select products with the specified name.
+          type: string
+          required: false
+        - in: query
+          name: identifier
+          description: >-
+            Business identifiers assigned to this health insurance product which
+            remain constant as the resource is updated and propagates from
+            server to server.
+
+
+
+            For each InsurancePlan, there is an identifier to indicate
+            Individual(identifier.value = I) or Group(identifier.value = G)
+            Plan.
+          type: string
+          required: false
+        - in: query
+          name: _lastUpdated
+          description: When the resource version last changed.
+          type: string
+          required: false
+        - in: query
+          name: _include
+          description: >-
+            request that the search results include additional resources
+            ("included resources") related to the resources directly matching
+            the query ("primary results").
+
+
+            Supported values :
+
+            InsurancePlan:administered-by
+
+            InsurancePlan:owned-by
+
+            InsurancePlan:coverage-area
+          type: string
+          required: false
+        - in: query
+          name: _page_token
+          description: >-
+            Used to retrieve the next page of results If a search returns more
+            resources than fit on one page, the response includes a pagination
+            URL in the Bundle.
+          type: string
+          required: false
+        - in: query
+          name: type
+          description: Select insurance plans of the specified type.
+          type: string
+          required: false
+        - in: query
+          name: network
+          description: Select Organization entries in a given InsurancePlan's network
+          type: string
+          required: false
+        - in: query
+          name: period
+          description: >-
+            Select InsurancePlan entries that are active during the specified
+            period
+          type: string
+          required: false
+produces:
+  - application/json
+host: apif1.aetna.com/fhir
+externalDocs:
+  description: HTTPS Common Error Codes
+  url: 'https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/'
+x-ibm-comment:
+  - >-
+    AMU version used to port this API:
+    v10.0.1.6-R2-50b032947f4a846833eb1684602450e2efa9d6bc-2022-05-27T02:49:53Z
+  - >-
+    API03: Suffix -apigw appended to API `title` and `x-ibm-name`. For details,
+    see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#API_NAME_ADDED_SUFFIX
+  - 'API06: Changed gateway type to `datapower-api-gateway`.'
+  - >-
+    API14: Ported v5-compatible policies to work with the API Gateway and
+    updated policy versions.
+  - >-
+    API45: Compatibility toggle: `copy-id-headers-to-message` set to value:
+    `false`, which is the same as the API Gateway default. For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#COMPAT_TOGGLE_MATCHES_APIGW_DEFAULT
+  - >-
+    API45: Compatibility toggle: `return-v5-responses` set to value: `false`,
+    which is the same as the API Gateway default. For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#COMPAT_TOGGLE_MATCHES_APIGW_DEFAULT
+  - >-
+    API61: Set buffering property to true. For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#SET_BUFFERING
+  - >-
+    API24: Removed redundant `parse` policy from the beginning of the assembly.
+    For details, see:
+    https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=cadag-messages-generated-during-conversion-apis-datapower-api-gateway#REMOVED_REDUNDANT_FRONT_PARSE
+securityDefinitions:
+  FHIR_User_AccessCode_Oauth:
+    tokenUrl: 'https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/token'
+    authorizationUrl: 'https://$(catalog.url)/v1/internal/fhirserver_auth/oauth2/authorize'
+    description: ''
+    x-ibm-oauth-provider: fhir-server-pkce-api-provider
+    scopes:
+      patient/Patient.*: patient/Patient.*
+      patient/Patient.read: patient/Patient.read
+      patient/*.read: patient/*.read
+      patient/*.*: patient/*.*
+    type: oauth2
+    flow: accessCode
+  FHIR_Application_Oauth:
+    tokenUrl: 'https://$(catalog.url)/v3/internal/auth/oauth2/app/token'
+    description: "{\n\t\"BuildEieHeader\" : \"Header 3.2\",\n\t\"SecurityTemplate\" : \"FHIROpenApp\",\n\t\"Backend\" : \"Non-IIB, FHIRServer APIGEE APIs, requires Mutual TLS\",\n\t\"Errorhandlingpolicy\": \"Transparent\"\n\t\"Consumer\":\"External\",\n\t\"Mutual Auth between Consumer and APIC\" : \"Not Required\"\t\n}"
+    x-ibm-oauth-provider: v3-internal-auth-oauth2-app-token
+    scopes:
+      NonPII: NonPII
+      Public: Public
+    type: oauth2
+    flow: application
+definitions:
+  Entry:
+    description: >-
+      An entry in a bundle resource - will contain a resource(s) returned in the
+      bundle
+    type: object
+    properties:
+      resource:
+        $ref: '#/definitions/InsurancePlan'
+  Bundle:
+    description: |-
+      See the appropriate Implementation Guide for proper documentation to use
+
+      This is the HL7 FHIR Release 4.0.1 Bundle resource.
+      Full Documentation is available at: http://hl7.org/fhir/bundle.html
+    type: object
+    properties:
+      entry:
+        type: array
+        items:
+          $ref: '#/definitions/Entry'
+  OperationOutcome:
+    description: >-
+      See the appropriate Implementation Guide for proper documentation to use
+
+
+      This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+
+      Full Documentation is available at:
+      http://hl7.org/fhir/operationoutcome.html
+    type: object
+  InsurancePlan:
+    description: >-
+      See the appropriate Implementation Guide for proper documentation to use
+
+
+      This is the HL7 FHIR Release 4.0.1 InsurancePlan resource.
+
+      Full Documentation is available at: http://hl7.org/fhir/insuranceplan.html
+
+
+      For the DaVinci PDEX Plan Net 1.0.0 InsurancePlan resource documentation
+      is available at:
+
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-InsurancePlan.html
+
+
+      For the DaVinci PDEX Plan Net 1.1.0 InsurancePlan resource documentation
+      is available at:
+
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-InsurancePlan.html
+
+
+      For the DaVinci PDEX Plan Net 1.2.0 InsurancePlan resource documentation
+      is available at:
+
+      http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.2/StructureDefinition-plannet-InsurancePlan.html
+    type: object
+info:
+  contact:
+    name: Interoperability Developer Support
+    email: interoperabilitydevelopersupport@aetna.com
+  description: >-
+    An InsurancePlan is a discrete package of health insurance coverage benefits
+    that are offered under a particular network type. A given payer’s products
+    typically differ by network type and/or covered benefits. A plan pairs a
+    product’s covered benefits with the particular cost sharing structure
+    offered to a consumer. A given product may comprise multiple plans (i.e.
+    each plan offers different cost sharing requirements for the same set of
+    covered benefits).InsurancePlan describes a health insurance offering
+    comprised of a list of covered benefits (i.e. the product), costs associated
+    with those benefits (i.e. the plan), and additional information about the
+    offering, such as who it is owned and administered by, a coverage area,
+    contact information, etc.
+  x-ibm-name: v1providerdirectorydatainsuranceplan
+  title: /v1/providerdirectorydata/InsurancePlan
+  version: 1.0.0

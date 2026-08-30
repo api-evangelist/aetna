@@ -1,0 +1,117 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  openapi/aetna-patient-access-api-openapi.yml, openapi/aetna-provider-directory-api-openapi.yml,
+  openapi/aetna-patient-access-api-sandbox-openapi.yml (derived from the 4xx/5xx responses of the 95
+  Swagger 2.0 documents Aetna publishes),
+  https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/ (the error reference
+  every Aetna spec links from its own externalDocs block),
+  https://developerportal.aetna.com/assets/Data/commonresponse.json (the portal's "Common Responses" table)
+format: fhir-operationoutcome
+envelope:
+  media_type: application/json
+  resource_type: OperationOutcome
+  fields:
+    - issue[].severity        # error | warning | information
+    - issue[].code            # FHIR issue-type code, e.g. required, not-found, transient
+    - issue[].details.coding[] # system + code + display, e.g. MSG_RESOURCE_ID_MISSING
+    - issue[].details.text
+    - id                      # server-assigned identifier for the failure
+    - language
+    - resourceType            # always "OperationOutcome"
+  rfc9457: false
+  note: >-
+    Aetna returns FHIR OperationOutcome rather than RFC 9457 problem+json, and serves it as
+    application/json rather than application/fhir+json. Every error example below is Aetna's own,
+    lifted verbatim from the response examples in its published Swagger documents.
+coverage:
+  operations_analysed: 99
+  operations_declaring_400: 99
+  operations_declaring_404: 85
+  operations_declaring_500: 99
+  operations_declaring_401: 11
+  operations_declaring_403: 11
+  operations_declaring_405: 11
+  operations_declaring_429: 11
+  note: >-
+    Coverage is uneven and that is a real finding: 401, 403, 405 and 429 are declared on only 11 of
+    99 operations (the /v1/providerdirectorydata family). An agent reading the Patient Access specs
+    alone would not know that 401, 403, 405 or 429 are possible, even though the gateway returns them.
+problems:
+  - status: 400
+    code: MSG_RESOURCE_ID_MISSING
+    title: Bad Request
+    detail: A required parameter isn't provided, or an unknown parameter is provided.
+    issue_code: required
+    remediation: >-
+      Supply every mandatory search parameter for the resource. Aetna rejects unknown parameters as
+      well as missing ones, so do not pass FHIR search parameters the CapabilityStatement does not list.
+    source: every published operation
+  - status: 401
+    title: Unauthorized
+    detail: >-
+      The request is unauthorized. Per Aetna's own error reference: the required client identification
+      has not been successfully provided, user authentication failed or did not take place, or the
+      application is not registered with the plan being used.
+    remediation: >-
+      Re-run the SMART App Launch authorization-code flow against
+      https://apif1.aetna.com/fhir/prod/v1/fhirserver_auth/oauth2/authorize and confirm the application
+      is subscribed in the Developer Portal to the product that contains this API.
+    source: /v1/providerdirectorydata/* responses + APIC-Common-Error-Codes
+  - status: 403
+    title: Forbidden
+    detail: The requested resource is forbidden. Aetna's error reference gives the cause as "the application is not active".
+    remediation: Check the application's state in the Developer Portal; production applications require approval.
+    source: /v1/providerdirectorydata/* responses + APIC-Common-Error-Codes
+  - status: 404
+    code: MSG_NO_MATCH
+    title: Not Found
+    detail: >-
+      The specified id doesn't identify an existing Resource, or the system identifier specified
+      doesn't identify an existing resource. Aetna's error reference adds a second cause: the API URL
+      was not found in the organization or environment.
+    issue_code: not-found
+    remediation: >-
+      Distinguish the two cases. A FHIR OperationOutcome body means the resource id is unknown; a
+      gateway-shaped 404 means the path or environment is wrong (for example calling a /v3 path that
+      only exists in sandbox).
+    source: 85 of 99 operations
+  - status: 405
+    title: Method Not Allowed
+    detail: The specified method is not allowed in the request; the API URL was found but no operation supports the requested HTTP verb.
+    remediation: Aetna's public FHIR surface is read-only - use GET.
+    source: /v1/providerdirectorydata/* responses + APIC-Common-Error-Codes
+  - status: 406
+    title: Not Acceptable
+    detail: The API cannot produce any response that is supported by the application.
+    remediation: Send Accept application/json. Aetna declares produces application/json (not application/fhir+json).
+    source: APIC-Common-Error-Codes (Aetna's linked reference; not declared in any spec)
+  - status: 429
+    code: MSG_UNKNOWN_TYPE
+    title: Too Many Requests
+    detail: >-
+      "Detected excessive traffic coming from this IP. Please reach out if you think this is
+      incorrect." Aetna's linked error reference states the cause as "the rate limit has been exceeded
+      for the plan or operation being used".
+    issue_code: transient
+    remediation: >-
+      Back off and retry. No Retry-After header and no RateLimit-* headers are declared, so the client
+      has to choose its own backoff - see rate-limits/aetna-rate-limits.yml.
+    source: /v1/providerdirectorydata/* responses + APIC-Common-Error-Codes
+  - status: 500
+    title: Internal Server Error
+    detail: Failures on the server side; an unexpected internal error has occurred. Try again at a later time.
+    remediation: Retry with exponential backoff. Every published operation declares this response.
+    source: every published operation
+  - status: 203
+    title: Non-Authoritative Information
+    detail: >-
+      Declared on two provider-directory read operations. Recorded because it is unusual and an agent
+      treating only 200 as success would mis-handle it.
+    source: /v1/providerdirectory/Organization/{id}, /v1/providerdirectorydata read operations
+external_reference:
+  url: https://eaintegrationgovernance.github.io/APIC-Common-Error-Codes.github.io/
+  note: >-
+    Aetna links this page from the externalDocs block of every published Swagger document
+    ("HTTPS Common Error Codes"). It is hosted on github.io by Aetna's own enterprise API governance
+    team, not on an aetna.com domain - recorded as-is rather than treated as third-party.

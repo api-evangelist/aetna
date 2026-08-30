@@ -1,0 +1,209 @@
+{
+  "x-source": {
+    "spec": "openapi/aetna-provider-directory-api-openapi.yml",
+    "operationId": "get_v1_providerdirectorydata_Organization",
+    "path": "/v1/providerdirectorydata/Organization",
+    "status": "200",
+    "media_type": "application/json",
+    "note": "Response example published verbatim by Aetna in its own Swagger document; extracted, not authored."
+  },
+  "example": {
+    "entry": [
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://aetna.com/identifier",
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "code": "NID",
+                    "system": "http://aetna.com/identifier",
+                    "display": "Network ID Number"
+                  }
+                ],
+                "text": "Aetna Pharmacy Network ID Number"
+              },
+              "value": "P1"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2023-02-08T13:51:13.326888+00:00",
+            "versionId": "MTY3NTg2NDI3MzMyNjg4ODAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Network"
+            ]
+          },
+          "name": "Broad National with preferred pharmacies",
+          "active": true,
+          "language": "en",
+          "id": "plannet-network-f0f9ad3d9b83d94f7080386074dffe13",
+          "type": [
+            {
+              "coding": [
+                {
+                  "code": "ntwk",
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+                  "display": "Network"
+                }
+              ],
+              "text": "A healthcare provider insurance network"
+            }
+          ],
+          "resourceType": "Organization"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/Organization/plannet-network-f0f9ad3d9b83d94f7080386074dffe13"
+      },
+      {
+        "search": {
+          "mode": "match"
+        },
+        "resource": {
+          "identifier": [
+            {
+              "system": "http://hl7.org/fhir/sid/us-npi",
+              "use": "official",
+              "type": {
+                "coding": [
+                  {
+                    "code": "NPI",
+                    "system": "https://terminology.hl7.org/2.1.0/CodeSystem-v2-0203.html",
+                    "display": "National Provider Identifier"
+                  }
+                ]
+              },
+              "value": "1255334470"
+            },
+            {
+              "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+              "type": {
+                "coding": [
+                  {
+                    "code": "fac",
+                    "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+                    "display": "Facility"
+                  }
+                ],
+                "text": "Aetna Provider Identification Number"
+              },
+              "value": "0007373707"
+            }
+          ],
+          "extension": [
+            {
+              "extension": [
+                {
+                  "valueCode": "active",
+                  "url": "status"
+                },
+                {
+                  "valueCodeableConcept": {
+                    "coding": [
+                      {
+                        "code": "PA",
+                        "display": "Pennsylvania"
+                      }
+                    ]
+                  },
+                  "url": "whereValid"
+                },
+                {
+                  "valueIdentifier": {
+                    "value": "ce4afe9000cfce505277a514ca507527961e32bb2b315f187c5cde5c"
+                  },
+                  "url": "Identifier"
+                }
+              ],
+              "url": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS"
+            }
+          ],
+          "address": [
+            {
+              "country": "US",
+              "extension": [
+                {
+                  "extension": [
+                    {
+                      "valueDecimal": 40.790913,
+                      "url": "latitude"
+                    },
+                    {
+                      "valueDecimal": -76.557578,
+                      "url": "longitude"
+                    }
+                  ],
+                  "url": "http://hl7.org/fhir/StructureDefinition/geolocation"
+                }
+              ],
+              "city": "Shamokin",
+              "line": [
+                "27 West Independence Street"
+              ],
+              "use": "work",
+              "district": "Northumberland",
+              "postalCode": "17872",
+              "state": "PA",
+              "text": "27 West Independence Street, Shamokin, Northumberland, PA, 17872, USA",
+              "type": "physical"
+            }
+          ],
+          "meta": {
+            "lastUpdated": "2023-02-08T14:07:21.226750+00:00",
+            "versionId": "MTY3NTg2NTI0MTIyNjc1MDAwMA",
+            "profile": [
+              "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization"
+            ]
+          },
+          "name": "Assist Home Care Inc.",
+          "active": true,
+          "language": "en",
+          "telecom": [
+            {
+              "system": "phone",
+              "use": "work",
+              "rank": 1,
+              "value": "5706449840"
+            },
+            {
+              "system": "fax",
+              "use": "work",
+              "rank": 2,
+              "value": "5706449841"
+            }
+          ],
+          "id": "plannet-organization-caaa8474bd6dce6cbd06b90cf5431226",
+          "type": [
+            {
+              "coding": [
+                {
+                  "code": "fac",
+                  "system": "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrgTypeCS",
+                  "display": "Facility"
+                }
+              ]
+            }
+          ],
+          "resourceType": "Organization"
+        },
+        "fullUrl": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/Organization/plannet-organization-caaa8474bd6dce6cbd06b90cf5431226"
+      }
+    ],
+    "total": 2,
+    "link": [
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/Organization/?_count=2",
+        "relation": "search"
+      },
+      {
+        "url": "https://apif1.aetna.com/fhir/v1/providerdirectorydata/Organization/?_count=2&_page_token=Cjj3YH03h%2F%2F%2F%2F%2F%2BABcBOqI6igAD%2FAf%2F%2BZjUzZjA3NDA5NTI3NWYwMWM2MzdmZDllODllYWNlMWIAARACIRdZYDGqWfwzOQAAAAB4yIKfSAJQAFoLCWeiOXz1pNE4EANg1JPvcw%3D%3D",
+        "relation": "next"
+      }
+    ],
+    "type": "searchset",
+    "resourceType": "Bundle"
+  }
+}
