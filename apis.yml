@@ -60,7 +60,7 @@ tags:
 - Fortune 100
 - CVS Health
 apis:
-- aid: aetna-patient-access-fhir-api
+- aid: aetna:aetna-patient-access-fhir-api
   name: Aetna Patient Access FHIR API
   description: HL7 FHIR R4 Patient Access API giving Aetna members, through an app they authorize, access
     to their adjudicated claims, encounter data, coverage, clinical records and formulary information.
@@ -100,7 +100,7 @@ apis:
     url: fhir/aetna-patient-access-capability-statement.json
   - type: Examples
     url: examples/
-- aid: aetna-provider-directory-fhir-api
+- aid: aetna:aetna-provider-directory-fhir-api
   name: Aetna Provider Directory FHIR API
   description: HL7 FHIR R4 Provider Directory API implementing the Da Vinci PDex Plan Net Implementation
     Guide (upgraded to version 1.2.0 on 2026-06-23), covering both Medicare and Commercial networks. Exposes
@@ -133,7 +133,7 @@ apis:
     url: authentication/aetna-authentication.yml
   - type: CapabilityStatement
     url: fhir/aetna-provider-directory-capability-statement.json
-- aid: aetna-drug-formulary-fhir-api
+- aid: aetna:aetna-drug-formulary-fhir-api
   name: Aetna Drug Formulary FHIR API
   description: Da Vinci PDex US Drug Formulary 2.0.0 STU 2 formulary data, delivered as part of the Patient
     Access API product rather than as a separate base URL. MedicationKnowledge carries covered drugs,
@@ -157,7 +157,7 @@ apis:
     url: https://developerportal.aetna.com/
   - type: DeveloperPortal
     url: https://developerportal.aetna.com/
-- aid: aetna-prior-authorization-fhir-api
+- aid: aetna:aetna-prior-authorization-fhir-api
   name: Aetna Prior Authorization FHIR API
   description: 'Da Vinci prior-authorization surface built for CMS-0057-F: Coverage Requirements Discovery
     (STU 2.1) at /coveragerequirementsdiscovery/v1/cds-services/{id} supporting the order-sign, order-dispatch
@@ -185,7 +185,7 @@ apis:
     url: https://developerportal.aetna.com/
   - type: APIReference
     url: https://developerportal.aetna.com/assets/Data/Fhir.json
-- aid: aetna-provider-access-fhir-api
+- aid: aetna:aetna-provider-access-fhir-api
   name: Aetna Provider Access FHIR API
   description: Launched in Production on 2026-03-27 under the public-provider-group-fhir product, the
     Provider Access API lets provider organizations and EHR vendors identify their attributed member groups
@@ -209,7 +209,7 @@ apis:
     url: https://developerportal.aetna.com/
   - type: APIReference
     url: https://developerportal.aetna.com/assets/Data/Fhir.json
-- aid: aetna-realtime-pharmacy-benefit-check-api
+- aid: aetna:aetna-realtime-pharmacy-benefit-check-api
   name: Aetna Realtime Pharmacy Benefit Check API
   description: Consumer Real-Time Pharmacy Benefit Check 1.0.0, launched 2024-12-05, letting members and
     EHR systems retrieve prescription drug cost and coverage information at the point of prescribing.
@@ -232,7 +232,7 @@ apis:
     url: https://developerportal.aetna.com/
   - type: APIReference
     url: https://developerportal.aetna.com/assets/Data/Fhir.json
-- aid: aetna-provider-edi-api
+- aid: aetna:aetna-provider-edi-api
   name: Aetna Provider EDI Connectivity
   description: HIPAA X12 electronic data interchange for health care professionals - EDI 837 claims, 270/271
     eligibility and benefits, 276/277 claim status and 835 remittance advice. This is not an Aetna-hosted
@@ -392,7 +392,10 @@ common:
   url: packages/aetna-packages.yml
 - type: X-MCPServerCandidate
   url: mcp/aetna-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: LLMsTxt
