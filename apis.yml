@@ -196,64 +196,6 @@ apis:
     url: https://developerportal.aetna.com/
   - type: CapabilityStatement
     url: fhir/aetna-provider-directory-capability-statement.json
-- aid: aetna:aetna-healthcareservice-api
-  name: Aetna Healthcare Service API
-  description: The HealthcareService API from Aetna — 2 operation(s) for healthcareservice.
-  humanURL: https://developerportal.aetna.com/
-  baseURL: https://apif1.aetna.com/fhir
-  tags:
-  - HealthcareService
-  properties:
-  - type: OpenAPI
-    url: openapi/aetna-healthcareservice-api-openapi.yml
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
-  - type: Documentation
-    url: >-
-      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
-  - type: DeveloperPortal
-    url: https://developerportal.aetna.com/
-  - type: Authentication
-    url: authentication/aetna-authentication.yml
-  - type: CapabilityStatement
-    url: fhir/aetna-patient-access-capability-statement.json
-  - type: Examples
-    url: examples/
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
-  - type: Documentation
-    url: https://developerportal.aetna.com/
-  - type: CapabilityStatement
-    url: fhir/aetna-provider-directory-capability-statement.json
-- aid: aetna:aetna-insuranceplan-api
-  name: Aetna Insurance Plan API
-  description: The InsurancePlan API from Aetna — 1 operation(s) for insuranceplan.
-  humanURL: https://developerportal.aetna.com/
-  baseURL: https://apif1.aetna.com/fhir
-  tags:
-  - InsurancePlan
-  properties:
-  - type: OpenAPI
-    url: openapi/aetna-insuranceplan-api-openapi.yml
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
-  - type: Documentation
-    url: >-
-      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
-  - type: DeveloperPortal
-    url: https://developerportal.aetna.com/
-  - type: Authentication
-    url: authentication/aetna-authentication.yml
-  - type: CapabilityStatement
-    url: fhir/aetna-patient-access-capability-statement.json
-  - type: Examples
-    url: examples/
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
-  - type: Documentation
-    url: https://developerportal.aetna.com/
-  - type: CapabilityStatement
-    url: fhir/aetna-provider-directory-capability-statement.json
 - aid: aetna:aetna-location-api
   name: Aetna Location API
   description: The Location API from Aetna — 2 operation(s) for location.
@@ -341,35 +283,6 @@ apis:
     url: https://developerportal.aetna.com/
   - type: CapabilityStatement
     url: fhir/aetna-provider-directory-capability-statement.json
-- aid: aetna:aetna-patientaccess-api
-  name: Aetna Patientaccess API
-  description: The Patientaccess API from Aetna — 83 operation(s) for patientaccess.
-  humanURL: https://developerportal.aetna.com/
-  baseURL: https://apif1.aetna.com/fhir
-  tags:
-  - Patientaccess
-  properties:
-  - type: OpenAPI
-    url: openapi/aetna-patientaccess-api-openapi.yml
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
-  - type: Documentation
-    url: >-
-      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
-  - type: DeveloperPortal
-    url: https://developerportal.aetna.com/
-  - type: Authentication
-    url: authentication/aetna-authentication.yml
-  - type: CapabilityStatement
-    url: fhir/aetna-patient-access-capability-statement.json
-  - type: Examples
-    url: examples/
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
-  - type: Documentation
-    url: https://developerportal.aetna.com/
-  - type: CapabilityStatement
-    url: fhir/aetna-provider-directory-capability-statement.json
 - aid: aetna:aetna-practitioner-api
   name: Aetna Practitioner API
   description: The Practitioner API from Aetna — 2 operation(s) for practitioner.
@@ -399,64 +312,6 @@ apis:
     url: https://developerportal.aetna.com/
   - type: CapabilityStatement
     url: fhir/aetna-provider-directory-capability-statement.json
-- aid: aetna:aetna-practitionerrole-api
-  name: Aetna Practitioner Role API
-  description: The PractitionerRole API from Aetna — 1 operation(s) for practitionerrole.
-  humanURL: https://developerportal.aetna.com/
-  baseURL: https://apif1.aetna.com/fhir
-  tags:
-  - PractitionerRole
-  properties:
-  - type: OpenAPI
-    url: openapi/aetna-practitionerrole-api-openapi.yml
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
-  - type: Documentation
-    url: >-
-      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
-  - type: DeveloperPortal
-    url: https://developerportal.aetna.com/
-  - type: Authentication
-    url: authentication/aetna-authentication.yml
-  - type: CapabilityStatement
-    url: fhir/aetna-patient-access-capability-statement.json
-  - type: Examples
-    url: examples/
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
-  - type: Documentation
-    url: https://developerportal.aetna.com/
-  - type: CapabilityStatement
-    url: fhir/aetna-provider-directory-capability-statement.json
-- aid: aetna:aetna-providerdirectory-api
-  name: Aetna Providerdirectory API
-  description: The Providerdirectory API from Aetna — 9 operation(s) for providerdirectory.
-  humanURL: https://developerportal.aetna.com/
-  baseURL: https://apif1.aetna.com/fhir
-  tags:
-  - Providerdirectory
-  properties:
-  - type: OpenAPI
-    url: openapi/aetna-providerdirectory-api-openapi.yml
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
-  - type: Documentation
-    url: >-
-      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
-  - type: DeveloperPortal
-    url: https://developerportal.aetna.com/
-  - type: Authentication
-    url: authentication/aetna-authentication.yml
-  - type: CapabilityStatement
-    url: fhir/aetna-patient-access-capability-statement.json
-  - type: Examples
-    url: examples/
-  - type: APIReference
-    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
-  - type: Documentation
-    url: https://developerportal.aetna.com/
-  - type: CapabilityStatement
-    url: fhir/aetna-provider-directory-capability-statement.json
 - aid: aetna:aetna-providerdirectorydata-api
   name: Aetna Providerdirectorydata API
   description: The Providerdirectorydata API from Aetna — 11 operation(s) for providerdirectorydata.
@@ -467,6 +322,151 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/aetna-providerdirectorydata-api-openapi.yml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
+  - type: Documentation
+    url: >-
+      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: Authentication
+    url: authentication/aetna-authentication.yml
+  - type: CapabilityStatement
+    url: fhir/aetna-patient-access-capability-statement.json
+  - type: Examples
+    url: examples/
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
+  - type: Documentation
+    url: https://developerportal.aetna.com/
+  - type: CapabilityStatement
+    url: fhir/aetna-provider-directory-capability-statement.json
+- aid: aetna:aetna-patient-access-api
+  name: Aetna Patient Access API
+  description: The Patient Access API from Aetna — 83 operation(s) for patient access.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apix.cvshealth.com
+  tags:
+  - Patient Access
+  properties:
+  - type: OpenAPI
+    url: openapi/aetna-patient-access-api-openapi.yml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
+  - type: Documentation
+    url: >-
+      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: Authentication
+    url: authentication/aetna-authentication.yml
+  - type: CapabilityStatement
+    url: fhir/aetna-patient-access-capability-statement.json
+  - type: Examples
+    url: examples/
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
+  - type: Documentation
+    url: https://developerportal.aetna.com/
+  - type: CapabilityStatement
+    url: fhir/aetna-provider-directory-capability-statement.json
+- aid: aetna:aetna-provider-directory-api
+  name: Aetna Provider Directory API
+  description: The Provider Directory API from Aetna — 9 operation(s) for provider directory.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apix.cvshealth.com
+  tags:
+  - Provider Directory
+  properties:
+  - type: OpenAPI
+    url: openapi/aetna-provider-directory-api-openapi.yml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
+  - type: Documentation
+    url: >-
+      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: Authentication
+    url: authentication/aetna-authentication.yml
+  - type: CapabilityStatement
+    url: fhir/aetna-patient-access-capability-statement.json
+  - type: Examples
+    url: examples/
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
+  - type: Documentation
+    url: https://developerportal.aetna.com/
+  - type: CapabilityStatement
+    url: fhir/aetna-provider-directory-capability-statement.json
+- aid: aetna:aetna-healthcare-service-api
+  name: Aetna Healthcare Service API
+  description: The Healthcare Service API from Aetna — 2 operation(s) for healthcare service.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apix.cvshealth.com
+  tags:
+  - Healthcare Service
+  properties:
+  - type: OpenAPI
+    url: openapi/aetna-healthcare-service-api-openapi.yml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
+  - type: Documentation
+    url: >-
+      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: Authentication
+    url: authentication/aetna-authentication.yml
+  - type: CapabilityStatement
+    url: fhir/aetna-patient-access-capability-statement.json
+  - type: Examples
+    url: examples/
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
+  - type: Documentation
+    url: https://developerportal.aetna.com/
+  - type: CapabilityStatement
+    url: fhir/aetna-provider-directory-capability-statement.json
+- aid: aetna:aetna-insurance-plan-api
+  name: Aetna Insurance Plan API
+  description: The Insurance Plan API from Aetna — 1 operation(s) for insurance plan.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apix.cvshealth.com
+  tags:
+  - Insurance Plan
+  properties:
+  - type: OpenAPI
+    url: openapi/aetna-insurance-plan-api-openapi.yml
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
+  - type: Documentation
+    url: >-
+      https://www.aetna.com/individuals-families/member-rights-resources/rights/state-specific-information/access-your-health-data.html
+  - type: DeveloperPortal
+    url: https://developerportal.aetna.com/
+  - type: Authentication
+    url: authentication/aetna-authentication.yml
+  - type: CapabilityStatement
+    url: fhir/aetna-patient-access-capability-statement.json
+  - type: Examples
+    url: examples/
+  - type: APIReference
+    url: https://apif1.aetna.com/fhir/v1/providerdirectory/metadata
+  - type: Documentation
+    url: https://developerportal.aetna.com/
+  - type: CapabilityStatement
+    url: fhir/aetna-provider-directory-capability-statement.json
+- aid: aetna:aetna-practitioner-role-api
+  name: Aetna Practitioner Role API
+  description: The Practitioner Role API from Aetna — 1 operation(s) for practitioner role.
+  humanURL: https://developerportal.aetna.com/
+  baseURL: https://apix.cvshealth.com
+  tags:
+  - Practitioner Role
+  properties:
+  - type: OpenAPI
+    url: openapi/aetna-practitioner-role-api-openapi.yml
   - type: APIReference
     url: https://apif1.aetna.com/fhir/v2/patientaccess/metadata
   - type: Documentation
