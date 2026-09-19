@@ -56,6 +56,21 @@ tags:
 - SMART on FHIR
 - CARIN Blue Button
 - Da Vinci
+- Payers
+- Fortune 100
+- CVS Health
+tags_raw:
+- Health Insurance
+- Healthcare
+- FHIR
+- Patient Access
+- Provider Directory
+- Drug Formulary
+- Prior Authorization
+- CMS Interoperability
+- SMART on FHIR
+- CARIN Blue Button
+- Da Vinci
 - Payer
 - Fortune 100
 - CVS Health
@@ -155,6 +170,15 @@ apis:
   - HIPAA
   - Claims
   - Eligibility
+  - Remittances
+  - Availity
+  - Clearinghouse
+  tags_raw:
+  - EDI
+  - X12
+  - HIPAA
+  - Claims
+  - Eligibility
   - Remittance
   - Availity
   - Clearinghouse
@@ -172,7 +196,8 @@ apis:
   description: The Endpoint API from Aetna — 2 operation(s) for endpoint.
   humanURL: https://developerportal.aetna.com/
   baseURL: https://apif1.aetna.com/fhir
-  tags:
+  tags: []
+  tags_raw:
   - Endpoint
   properties:
   - type: OpenAPI
@@ -405,6 +430,8 @@ apis:
   humanURL: https://developerportal.aetna.com/
   baseURL: https://apix.cvshealth.com
   tags:
+  - HealthcareService
+  tags_raw:
   - Healthcare Service
   properties:
   - type: OpenAPI
@@ -434,6 +461,8 @@ apis:
   humanURL: https://developerportal.aetna.com/
   baseURL: https://apix.cvshealth.com
   tags:
+  - InsurancePlan
+  tags_raw:
   - Insurance Plan
   properties:
   - type: OpenAPI
@@ -463,6 +492,8 @@ apis:
   humanURL: https://developerportal.aetna.com/
   baseURL: https://apix.cvshealth.com
   tags:
+  - PractitionerRole
+  tags_raw:
   - Practitioner Role
   properties:
   - type: OpenAPI
