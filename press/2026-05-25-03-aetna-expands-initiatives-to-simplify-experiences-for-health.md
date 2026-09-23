@@ -1,7 +1,9 @@
 ---
 title: Aetna expands initiatives to simplify experiences for health ...
 url: https://www.prnewswire.com/news-releases/aetna-expands-initiatives-to-simplify-experiences-for-health-care-professionals-and-patients-302632202.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Aetna" press release artificial intelligence'
 position: 3
 source: serpapi-google

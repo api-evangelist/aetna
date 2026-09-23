@@ -1,7 +1,9 @@
 ---
 title: Aetna launches leading edge conversational AI navigation
 url: https://www.cvshealth.com/news/innovation/aetna-launches-leading-edge-conversational-ai-navigation.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Aetna" press release artificial intelligence'
 position: 1
 source: serpapi-google

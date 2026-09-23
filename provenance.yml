@@ -244,7 +244,7 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   finops/aetna-finops.yml:
-    method: generated
+    method: searched
     evidence: declared in the artifact
   graphql/aetna-graphql.md:
     method: unknown
@@ -327,70 +327,7 @@ artifacts:
   json-schema/aetna-procedure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-23T094130.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-23T182523.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-26T223651.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-27T083119.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-27T190208.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T115055.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T170848.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T172558.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T192327.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-28T200725.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T133250.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T151044.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T162206.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-07-31T202106.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-01T163141.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-01T163302.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-01T171935.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-03T113057.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-03T161012.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-04T083143.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-05T153418.yml:
+  kin/checks-2026-09-05T072335.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-06T210741.yml:
@@ -480,6 +417,51 @@ artifacts:
   kin/score-2026-08-29T230545.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-30T203505.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-30T220315.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-08-31T223420.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T063623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T210448.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-01T222808.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-02T211804.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-02T224043.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-03T161828.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-03T174231.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T062714.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T212454.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-04T224856.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T055819.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T072335.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/aetna-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -489,6 +471,291 @@ artifacts:
   mcp/aetna-mcp.yml:
     method: derived
     evidence: declared in the artifact
+  openapi/_original/aetna-v1-providerdirectory-InsurancePlan-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-Location-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-Location-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-Organization-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-Organization-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-OrganizationAffiliation-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-Practitioner-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-Practitioner-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectory-PractitionerRole-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectorydata-HealthcareService-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectorydata-InsurancePlan-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectorydata-Location-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectorydata-Organization-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectorydata-OrganizationAffiliation-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectorydata-Practitioner-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v1-providerdirectorydata-PractitionerRole-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-AllergyIntolerance-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-AllergyIntolerance-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-AllergyIntolerance-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-AllergyIntolerance-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Binary-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Binary-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CarePlan-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CarePlan-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CarePlan-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CarePlan-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CareTeam-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CareTeam-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CareTeam-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-CareTeam-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Condition-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Condition-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Condition-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Condition-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Coverage-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Coverage-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Coverage-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Device-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Device-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Device-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Device-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DiagnosticReport-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DiagnosticReport-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DiagnosticReport-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DiagnosticReport-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DocumentReference-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DocumentReference-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DocumentReference-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-DocumentReference-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Encounter-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Encounter-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Encounter-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Encounter-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Endpoint-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Endpoint-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-ExplanationOfBenefit-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-ExplanationOfBenefit-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-ExplanationOfBenefit-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-ExplanationOfBenefit-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Goal-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Goal-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Goal-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Goal-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Immunization-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Immunization-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Immunization-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Immunization-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Location-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Medication-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Medication-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-MedicationDispense-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-MedicationKnowledge-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-MedicationKnowledge-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-MedicationRequest-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-MedicationRequest-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-MedicationRequest-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-MedicationRequest-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Observation-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Observation-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Observation-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Observation-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Organization-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Organization-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Patient-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Patient-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Patient-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Patient-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Practitioner-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Practitioner-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-PractitionerRole-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-PractitionerRole-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Procedure-id-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Procedure-id-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Procedure-sandbox-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
+  openapi/_original/aetna-v2-patientaccess-Procedure-swagger.yml:
+    method: harvested
+    evidence: fetched from the provider as-is; byte-identical to the source
   openapi/aetna-patient-access-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded

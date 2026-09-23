@@ -1,7 +1,9 @@
 ---
 title: Aetna taps into AI with Care Paths tech
 url: https://www.healthcarefinancenews.com/news/aetna-taps-ai-care-paths-tech
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Aetna" press release artificial intelligence'
 position: 4
 source: serpapi-google
