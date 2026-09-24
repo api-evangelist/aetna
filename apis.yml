@@ -770,8 +770,6 @@ x-enrichment:
       status: 404
     - url: https://www.aetna.com/legal-notices/terms-of-use.html
       status: 404
-    - url: graphql/aetna-graphql.md
-      status: removed - fabricated conceptual schema, not a provider contract
     verified_live:
     - url: https://www.aetna.com
       status: 200
