@@ -430,8 +430,6 @@ apis:
   humanURL: https://developerportal.aetna.com/
   baseURL: https://apix.cvshealth.com
   tags:
-  - HealthcareService
-  tags_raw:
   - Healthcare Service
   properties:
   - type: OpenAPI
@@ -461,8 +459,6 @@ apis:
   humanURL: https://developerportal.aetna.com/
   baseURL: https://apix.cvshealth.com
   tags:
-  - InsurancePlan
-  tags_raw:
   - Insurance Plan
   properties:
   - type: OpenAPI
@@ -492,8 +488,6 @@ apis:
   humanURL: https://developerportal.aetna.com/
   baseURL: https://apix.cvshealth.com
   tags:
-  - PractitionerRole
-  tags_raw:
   - Practitioner Role
   properties:
   - type: OpenAPI

@@ -3414,52 +3414,6 @@ paths:
       - Providerdirectorydata
 components:
   schemas:
-    OperationOutcome:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
-      type: object
-    Organization:
-      description: 'See the appropriate Implementation Guide for proper documentation to use.
-
-
-        This is the HL7 FHIR Release 4.0.1 Organization resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/organization.html
-
-
-        US Core 3.1.1 Documentation is available at:
-
-        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-organization.html
-
-
-        For the CARIN-BB 1.0.0 Organization resource full documentation is available at:
-
-        http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Organization.html
-
-
-        For the DaVinci PDEX Plan Net 1.0.0 Organization resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Organization.html
-
-
-        For the DaVinci PDEX Plan Net 1.0.0 Network resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Network.html
-
-
-        For the DaVinci PDEX Plan Net 1.1.0 Organization resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Organization.html
-
-
-        For the DaVinci PDEX Plan Net 1.1.0 Network resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Network.html'
-      type: object
     InsurancePlan:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
@@ -3501,29 +3455,12 @@ components:
 
         http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.2/StructureDefinition-plannet-HealthcareService.html'
       type: object
-    Location:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 Location resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/location.html
-
-
-        US Core 3.1.1 Documentation is available at:
-
-        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-location.html
-
-
-        For the DaVinci PDEX Plan Net 1.0.0 Location resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Location.html
-
-
-        For the DaVinci PDEX Plan Net 1.1.0 Location resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Location.html'
+    Entry:
+      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
       type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/InsurancePlan'
     Practitioner:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
@@ -3552,6 +3489,75 @@ components:
 
         http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Practitioner.html'
       type: object
+    Organization:
+      description: 'See the appropriate Implementation Guide for proper documentation to use.
+
+
+        This is the HL7 FHIR Release 4.0.1 Organization resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/organization.html
+
+
+        US Core 3.1.1 Documentation is available at:
+
+        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-organization.html
+
+
+        For the CARIN-BB 1.0.0 Organization resource full documentation is available at:
+
+        http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Organization.html
+
+
+        For the DaVinci PDEX Plan Net 1.0.0 Organization resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Organization.html
+
+
+        For the DaVinci PDEX Plan Net 1.0.0 Network resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Network.html
+
+
+        For the DaVinci PDEX Plan Net 1.1.0 Organization resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Organization.html
+
+
+        For the DaVinci PDEX Plan Net 1.1.0 Network resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Network.html'
+      type: object
+    OperationOutcome:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
+      type: object
+    Location:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 Location resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/location.html
+
+
+        US Core 3.1.1 Documentation is available at:
+
+        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-location.html
+
+
+        For the DaVinci PDEX Plan Net 1.0.0 Location resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Location.html
+
+
+        For the DaVinci PDEX Plan Net 1.1.0 Location resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Location.html'
+      type: object
     Bundle:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
@@ -3565,12 +3571,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Entry'
-    Entry:
-      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/InsurancePlan'
   securitySchemes:
     FHIR_User_AccessCode_Oauth:
       type: oauth2
