@@ -534,6 +534,33 @@ paths:
       - Location
 components:
   schemas:
+    Bundle:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 Bundle resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/bundle.html'
+      type: object
+      properties:
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+    Entry:
+      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Location'
+    OperationOutcome:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
+      type: object
     Location:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
@@ -562,33 +589,6 @@ components:
 
         http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.2/StructureDefinition-plannet-Location.html'
       type: object
-    OperationOutcome:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
-      type: object
-    Entry:
-      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/Location'
-    Bundle:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 Bundle resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/bundle.html'
-      type: object
-      properties:
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entry'
   securitySchemes:
     FHIR_User_AccessCode_Oauth:
       type: oauth2
