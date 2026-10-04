@@ -2123,99 +2123,6 @@ paths:
       - Provider Directory
 components:
   schemas:
-    Entry:
-      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/InsurancePlan'
-    Organization:
-      description: 'See the appropriate Implementation Guide for proper documentation to use.
-
-
-        This is the HL7 FHIR Release 4.0.1 Organization resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/organization.html
-
-
-        US Core 3.1.1 Documentation is available at:
-
-        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-organization.html
-
-
-        For the CARIN-BB 1.0.0 Organization resource full documentation is available at:
-
-        http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Organization.html
-
-
-        For the DaVinci PDEX Plan Net 1.0.0 Organization resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Organization.html
-
-
-        For the DaVinci PDEX Plan Net 1.0.0 Network resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Network.html
-
-
-        For the DaVinci PDEX Plan Net 1.1.0 Organization resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Organization.html
-
-
-        For the DaVinci PDEX Plan Net 1.1.0 Network resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Network.html'
-      type: object
-    Practitioner:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 Practitioner resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/practitioner.html
-
-
-        US Core 3.1.1 Documentation is available at:
-
-        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-practitioner.html
-
-
-        For the CARIN-BB 1.0.0 Practitioner resource full documentation is available at:
-
-        http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Practitioner.html
-
-
-        For the DaVinci PDEX Plan Net 1.0.0 Practitioner resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Practitioner.html
-
-
-        For the DaVinci PDEX Plan Net 1.1.0 Practitioner resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Practitioner.html'
-      type: object
-    Bundle:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 Bundle resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/bundle.html'
-      type: object
-      properties:
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entry'
-    OperationOutcome:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
-      type: object
     Location:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
@@ -2256,6 +2163,99 @@ components:
         For the DaVinci PDEX Plan Net 1.1.0 InsurancePlan resource documentation is available at:
 
         http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-InsurancePlan.html'
+      type: object
+    Organization:
+      description: 'See the appropriate Implementation Guide for proper documentation to use.
+
+
+        This is the HL7 FHIR Release 4.0.1 Organization resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/organization.html
+
+
+        US Core 3.1.1 Documentation is available at:
+
+        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-organization.html
+
+
+        For the CARIN-BB 1.0.0 Organization resource full documentation is available at:
+
+        http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Organization.html
+
+
+        For the DaVinci PDEX Plan Net 1.0.0 Organization resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Organization.html
+
+
+        For the DaVinci PDEX Plan Net 1.0.0 Network resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Network.html
+
+
+        For the DaVinci PDEX Plan Net 1.1.0 Organization resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Organization.html
+
+
+        For the DaVinci PDEX Plan Net 1.1.0 Network resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Network.html'
+      type: object
+    OperationOutcome:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
+      type: object
+    Entry:
+      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/InsurancePlan'
+    Bundle:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 Bundle resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/bundle.html'
+      type: object
+      properties:
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+    Practitioner:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 Practitioner resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/practitioner.html
+
+
+        US Core 3.1.1 Documentation is available at:
+
+        http://hl7.org/fhir/us/core/STU3.1.1/StructureDefinition-us-core-practitioner.html
+
+
+        For the CARIN-BB 1.0.0 Practitioner resource full documentation is available at:
+
+        http://hl7.org/fhir/us/carin-bb/STU1/StructureDefinition-C4BB-Practitioner.html
+
+
+        For the DaVinci PDEX Plan Net 1.0.0 Practitioner resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-Practitioner.html
+
+
+        For the DaVinci PDEX Plan Net 1.1.0 Practitioner resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Practitioner.html'
       type: object
   securitySchemes:
     FHIR_User_AccessCode_Oauth:

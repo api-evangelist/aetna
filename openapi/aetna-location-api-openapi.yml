@@ -534,6 +534,20 @@ paths:
       - Location
 components:
   schemas:
+    OperationOutcome:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
+      type: object
+    Entry:
+      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Location'
     Bundle:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
@@ -547,20 +561,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Entry'
-    Entry:
-      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/Location'
-    OperationOutcome:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
-      type: object
     Location:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 

@@ -107,43 +107,105 @@ paths:
     - url: https://vteapif1.aetna.com/fhirdemo/v2
 components:
   schemas:
-    Signature:
+    Attachment:
       allOf:
       - $ref: '#/components/schemas/Element'
       - type: object
-        required:
-        - type
-        - when
-        - who
         properties:
           data:
             pattern: (\s*([0-9a-zA-Z\+\=]){4}\s*)+
-            description: The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty.
+            description: The actual data of the attachment - a sequence of bytes, base64 encoded.
             type: string
-          onBehalfOf:
-            description: A reference to an application-usable description of the identity that is represented by the signature.
-            $ref: '#/components/schemas/Reference'
-          sigFormat:
+          size:
+            format: int32
+            description: The number of bytes of data that make up this attachment (before base64 encoding, if that is done).
+            type: integer
+          language:
             pattern: '[^\s]+(\s[^\s]+)*'
-            description: A mime type that indicates the technical format of the signature. Important mime types are application/signature+xml for X ML DigSig, application/jose for JWS, and image/* for a graphical image of a signature, etc.
+            description: The human language of the content. The value can be any valid value according to BCP 47.
             type: string
-          targetFormat:
+          title:
+            pattern: '[ \r\n\t\S]+'
+            description: A label or set of text to display in place of the data.
+            type: string
+          contentType:
             pattern: '[^\s]+(\s[^\s]+)*'
-            description: A mime type that indicates the technical format of the target resources signed by the signature.
+            description: Identifies the type of the data in the attachment and allows a method to be chosen to interpret or render the data. Includes mime type parameters such as charset where appropriate.
             type: string
-          type:
-            minItems: 1
-            description: An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document.
+          url:
+            pattern: \S*
+            description: A location where the data can be accessed.
+            type: string
+          hash:
+            pattern: (\s*([0-9a-zA-Z\+\=]){4}\s*)+
+            description: The calculated hash of the data using SHA-1. Represented using base64.
+            type: string
+          creation:
+            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?
+            description: The date that the attachment was first created.
+            type: string
+    Timing:
+      allOf:
+      - $ref: '#/components/schemas/BackboneElement'
+      - type: object
+        properties:
+          code:
+            description: A code for the timing schedule (or just text in code.text). Some codes such as BID are ubiquitous, but many institutions define their own additional codes. If a code is provided, the code is understood to be a complete statement of whatever is specified in the structured timing data, and either the code or the data may be used to interpret the Timing, with the exception that .repeat.bounds still applies over the code (and is not contained in the code).
+            $ref: '#/components/schemas/CodeableConcept'
+          repeat:
+            description: A set of rules that describe when the event is scheduled.
+            $ref: '#/components/schemas/Timing_Repeat'
+          event:
+            description: Identifies specific times when the event occurs.
             type: array
             items:
-              $ref: '#/components/schemas/Coding'
-          when:
-            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))
-            description: When the digital signature was signed.
+              pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?
+              type: string
+    HumanName:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        properties:
+          given:
+            description: Given name.
+            type: array
+            items:
+              pattern: '[ \r\n\t\S]+'
+              type: string
+          period:
+            description: Indicates the period of time when this name was valid for the named person.
+            $ref: '#/components/schemas/Period'
+          use:
+            description: Identifies the purpose for this name.
             type: string
-          who:
-            description: A reference to an application-usable description of the identity that signed (e.g. the signature used their private key).
-            $ref: '#/components/schemas/Reference'
+            enum:
+            - usual
+            - official
+            - temp
+            - nickname
+            - anonymous
+            - old
+            - maiden
+          prefix:
+            description: Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name.
+            type: array
+            items:
+              pattern: '[ \r\n\t\S]+'
+              type: string
+          text:
+            pattern: '[ \r\n\t\S]+'
+            description: Specifies the entire name as it should be displayed e.g. on an application UI. This may be provided instead of or as well as the specific parts.
+            type: string
+          family:
+            pattern: '[ \r\n\t\S]+'
+            description: The part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father.
+            type: string
+          suffix:
+            description: Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.
+            type: array
+            items:
+              pattern: '[ \r\n\t\S]+'
+              type: string
     ContactDetail:
       allOf:
       - $ref: '#/components/schemas/Element'
@@ -158,6 +220,127 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/ContactPoint'
+    Element:
+      type: object
+      properties:
+        extension:
+          description: May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+        id:
+          pattern: '[A-Za-z0-9\-\.]{1,64}'
+          description: Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
+          type: string
+    Duration:
+      allOf:
+      - $ref: '#/components/schemas/Quantity'
+      - type: object
+    Identifier:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        properties:
+          period:
+            description: Time period during which identifier is/was valid for use.
+            $ref: '#/components/schemas/Period'
+          system:
+            pattern: \S*
+            description: Establishes the namespace for the value - that is, a URL that describes a set values that are unique.
+            type: string
+          use:
+            description: The purpose of this identifier.
+            type: string
+            enum:
+            - usual
+            - official
+            - temp
+            - secondary
+            - old
+          assigner:
+            description: Organization that issued/manages the identifier.
+            $ref: '#/components/schemas/Reference'
+          type:
+            description: A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.
+            $ref: '#/components/schemas/CodeableConcept'
+          value:
+            pattern: '[ \r\n\t\S]+'
+            description: The portion of the identifier typically relevant to the user and which is unique within the context of the system.
+            type: string
+    RelatedArtifact:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        required:
+        - type
+        properties:
+          citation:
+            pattern: '[ \r\n\t\S]+'
+            description: A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format.
+            type: string
+          resource:
+            pattern: \S*
+            description: The related resource, such as a library, value set, profile, or other knowledge resource.
+            type: string
+          display:
+            pattern: '[ \r\n\t\S]+'
+            description: A brief description of the document or knowledge resource being referenced, suitable for display to a consumer.
+            type: string
+          document:
+            description: The document being referenced, represented as an attachment. This is exclusive with the resource element.
+            $ref: '#/components/schemas/Attachment'
+          label:
+            pattern: '[ \r\n\t\S]+'
+            description: A short label that can be used to reference the citation from elsewhere in the containing artifact, such as a footnote index.
+            type: string
+          type:
+            description: The type of relationship to the related artifact.
+            type: string
+            enum:
+            - documentation
+            - justification
+            - citation
+            - predecessor
+            - successor
+            - derived-from
+            - depends-on
+            - composed-of
+          url:
+            pattern: \S*
+            description: A url for the artifact that can be followed to access the actual content.
+            type: string
+    OperationOutcome:
+      allOf:
+      - $ref: '#/components/schemas/DomainResource'
+      - type: object
+        required:
+        - issue
+        properties:
+          issue:
+            minItems: 1
+            description: An error, warning, or information message that results from a system action.
+            type: array
+            items:
+              $ref: '#/components/schemas/OperationOutcome_Issue'
+    Narrative:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        required:
+        - div
+        - status
+        properties:
+          div:
+            description: The actual narrative content, a stripped down version of XHTML.
+            type: string
+          status:
+            description: The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data.
+            type: string
+            enum:
+            - generated
+            - extensions
+            - additional
+            - empty
     OperationOutcome_Issue:
       allOf:
       - $ref: '#/components/schemas/BackboneElement'
@@ -231,42 +414,132 @@ components:
             items:
               pattern: '[ \r\n\t\S]+'
               type: string
-    ContactPoint:
+    Money:
       allOf:
       - $ref: '#/components/schemas/Element'
       - type: object
         properties:
-          period:
-            description: Time period when the contact point was/is in use.
-            $ref: '#/components/schemas/Period'
-          system:
-            description: Telecommunications form for contact point - what communications system is required to make use of the contact.
+          currency:
+            pattern: '[^\s]+(\s[^\s]+)*'
+            description: ISO 4217 Currency Code.
             type: string
-            enum:
-            - phone
-            - fax
-            - email
-            - pager
-            - url
-            - sms
-            - other
-          use:
-            description: Identifies the purpose for the contact point.
-            type: string
-            enum:
-            - home
-            - work
-            - temp
-            - old
-            - mobile
-          rank:
-            format: int32
-            description: Specifies a preferred order in which to use a set of contacts. ContactPoints with lower rank values are more preferred than those with higher rank values.
-            type: integer
           value:
-            pattern: '[ \r\n\t\S]+'
-            description: The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).
+            description: Numerical value (with implicit precision).
+            type: number
+    SimpleQuantity:
+      allOf:
+      - $ref: '#/components/schemas/Quantity'
+      - type: object
+    Distance:
+      allOf:
+      - $ref: '#/components/schemas/Quantity'
+      - type: object
+    UsageContext:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        required:
+        - code
+        properties:
+          valueCodeableConcept:
+            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
+            $ref: '#/components/schemas/CodeableConcept'
+          code:
+            description: A code that identifies the type of context being specified by this usage context.
+            $ref: '#/components/schemas/Coding'
+          valueReference:
+            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
+            $ref: '#/components/schemas/Reference'
+          valueRange:
+            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
+            $ref: '#/components/schemas/Range'
+          valueQuantity:
+            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
+            $ref: '#/components/schemas/Quantity'
+    Timing_Repeat:
+      allOf:
+      - $ref: '#/components/schemas/BackboneElement'
+      - type: object
+        properties:
+          boundsRange:
+            description: Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
+            $ref: '#/components/schemas/Range'
+          period:
+            description: Indicates the duration of time over which repetitions are to occur; e.g. to express "3 times per day", 3 would be the frequency and "1 day" would be the period. If periodMax is present, this element indicates the lower bound of the allowed range of the period length.
+            type: number
+          offset:
+            format: int32
+            description: The number of minutes from the event. If the event code does not indicate whether the minutes is before or after the event, then the offset is assumed to be after the event.
+            type: integer
+          frequencyMax:
+            format: int32
+            description: If present, indicates that the frequency is a range - so to repeat between [frequency] and [frequencyMax] times within the period or period range.
+            type: integer
+          countMax:
+            format: int32
+            description: If present, indicates that the count is a range - so to perform the action between [count] and [countMax] times.
+            type: integer
+          periodMax:
+            description: If present, indicates that the period is a range from [period] to [periodMax], allowing expressing concepts such as "do this once every 3-5 days.
+            type: number
+          count:
+            format: int32
+            description: A total count of the desired number of repetitions across the duration of the entire timing specification. If countMax is present, this element indicates the lower bound of the allowed range of count values.
+            type: integer
+          periodUnit:
+            description: The units of time for the period in UCUM units.
             type: string
+            enum:
+            - s
+            - min
+            - h
+            - d
+            - wk
+            - mo
+            - a
+          when:
+            description: An approximate time period during the day, potentially linked to an event of daily living that indicates when the action should occur.
+            type: array
+            items:
+              type: string
+          frequency:
+            format: int32
+            description: The number of times to repeat the action within the specified period. If frequencyMax is present, this element indicates the lower bound of the allowed range of the frequency.
+            type: integer
+          boundsDuration:
+            description: Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
+            $ref: '#/components/schemas/Duration'
+          duration:
+            description: How long this thing happens for when it happens. If durationMax is present, this element indicates the lower bound of the allowed range of the duration.
+            type: number
+          durationMax:
+            description: If present, indicates that the duration is a range - so to perform the action between [duration] and [durationMax] time length.
+            type: number
+          dayOfWeek:
+            description: If one or more days of week is provided, then the action happens only on the specified day(s).
+            type: array
+            items:
+              type: string
+          boundsPeriod:
+            description: Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
+            $ref: '#/components/schemas/Period'
+          durationUnit:
+            description: The units of time for the duration, in UCUM units.
+            type: string
+            enum:
+            - s
+            - min
+            - h
+            - d
+            - wk
+            - mo
+            - a
+          timeOfDay:
+            description: Specified time of day for action to take place.
+            type: array
+            items:
+              pattern: ([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?
+              type: string
     Period:
       allOf:
       - $ref: '#/components/schemas/Element'
@@ -280,183 +553,93 @@ components:
             pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?
             description: The end of the period. If the end of the period is missing, it means no end was known or planned at the time the instance was created. The start may be in the past, and the end date in the future, which means that period is expected/planned to end at that time.
             type: string
-    DomainResource:
+    Meta:
       allOf:
-      - $ref: '#/components/schemas/Resource'
+      - $ref: '#/components/schemas/Element'
       - type: object
         properties:
-          contained:
-            description: These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
+          lastUpdated:
+            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))
+            description: When the resource last changed - e.g. when the version changed.
+            type: string
+          versionId:
+            pattern: '[A-Za-z0-9\-\.]{1,64}'
+            description: The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.
+            type: string
+          security:
+            description: Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure.
             type: array
             items:
-              $ref: '#/components/schemas/Resource'
-          extension:
-            description: May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
+              $ref: '#/components/schemas/Coding'
+          profile:
+            description: A list of profiles (references to [StructureDefinition](structuredefinition.html#) resources) that this resource claims to conform to. The URL is a reference to [StructureDefinition.url](structuredefinition-definitions.html#StructureDefinition.url).
             type: array
             items:
-              $ref: '#/components/schemas/Extension'
-          modifierExtension:
-            description: 'May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element''s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-
-
-              Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).'
-            type: array
-            items:
-              $ref: '#/components/schemas/Extension'
-          text:
-            description: A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-            $ref: '#/components/schemas/Narrative'
-    SimpleQuantity:
-      allOf:
-      - $ref: '#/components/schemas/Quantity'
-      - type: object
-    Endpoint:
-      allOf:
-      - $ref: '#/components/schemas/DomainResource'
-      - type: object
-        required:
-        - address
-        - connectionType
-        - payloadType
-        - status
-        properties:
-          identifier:
-            description: Identifier for the organization that is used to identify the endpoint across multiple disparate systems.
-            type: array
-            items:
-              $ref: '#/components/schemas/Identifier'
-          period:
-            description: The interval during which the endpoint is expected to be operational.
-            $ref: '#/components/schemas/Period'
-          managingOrganization:
-            description: The organization that manages this endpoint (even if technically another organization is hosting this in the cloud, it is the organization associated with the data).
-            $ref: '#/components/schemas/Reference'
-          address:
+              pattern: \S*
+              type: string
+          source:
             pattern: \S*
-            description: The uri that describes the actual end-point to connect to.
+            description: A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.
             type: string
-          payloadType:
-            minItems: 1
-            description: The payload type describes the acceptable content that can be communicated on the endpoint.
+          tag:
+            description: Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource.
             type: array
             items:
-              $ref: '#/components/schemas/CodeableConcept'
-          contact:
-            description: Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting.
-            type: array
-            items:
-              $ref: '#/components/schemas/ContactPoint'
-          name:
+              $ref: '#/components/schemas/Coding'
+    Address:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        properties:
+          country:
             pattern: '[ \r\n\t\S]+'
-            description: A friendly name that this endpoint can be referred to with.
+            description: Country - a nation as commonly understood or generally accepted.
             type: string
-          header:
-            description: Additional headers / information to send as part of the notification.
+          period:
+            description: Time period when address was/is in use.
+            $ref: '#/components/schemas/Period'
+          city:
+            pattern: '[ \r\n\t\S]+'
+            description: The name of the city, town, suburb, village or other community or delivery center.
+            type: string
+          use:
+            description: The purpose of this address.
+            type: string
+            enum:
+            - home
+            - work
+            - temp
+            - old
+            - billing
+          line:
+            description: This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information.
             type: array
             items:
               pattern: '[ \r\n\t\S]+'
               type: string
-          payloadMimeType:
-            description: The mime type to send the payload in - e.g. application/fhir+xml, application/fhir+json. If the mime type is not specified, then the sender could send any content (including no content depending on the connectionType).
-            type: array
-            items:
-              pattern: '[^\s]+(\s[^\s]+)*'
-              type: string
-          connectionType:
-            description: A coded value that represents the technical details of the usage of this endpoint, such as what WSDLs should be used in what way. (e.g. XDS.b/DICOM/cds-hook).
-            $ref: '#/components/schemas/Coding'
-          status:
-            description: active | suspended | error | off | test.
-            type: string
-            enum:
-            - active
-            - suspended
-            - error
-            - 'off'
-            - entered-in-error
-            - test
-    Range:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        properties:
-          high:
-            description: The high limit. The boundary is inclusive.
-            $ref: '#/components/schemas/SimpleQuantity'
-          low:
-            description: The low limit. The boundary is inclusive.
-            $ref: '#/components/schemas/SimpleQuantity'
-    Money:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        properties:
-          currency:
-            pattern: '[^\s]+(\s[^\s]+)*'
-            description: ISO 4217 Currency Code.
-            type: string
-          value:
-            description: Numerical value (with implicit precision).
-            type: number
-    RelatedArtifact:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        required:
-        - type
-        properties:
-          citation:
+          district:
             pattern: '[ \r\n\t\S]+'
-            description: A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format.
+            description: The name of the administrative area (county).
             type: string
-          resource:
-            pattern: \S*
-            description: The related resource, such as a library, value set, profile, or other knowledge resource.
-            type: string
-          display:
+          postalCode:
             pattern: '[ \r\n\t\S]+'
-            description: A brief description of the document or knowledge resource being referenced, suitable for display to a consumer.
+            description: A postal code designating a region defined by the postal service.
             type: string
-          document:
-            description: The document being referenced, represented as an attachment. This is exclusive with the resource element.
-            $ref: '#/components/schemas/Attachment'
-          label:
+          text:
             pattern: '[ \r\n\t\S]+'
-            description: A short label that can be used to reference the citation from elsewhere in the containing artifact, such as a footnote index.
+            description: Specifies the entire address as it should be displayed e.g. on a postal label. This may be provided instead of or as well as the specific parts.
+            type: string
+          state:
+            pattern: '[ \r\n\t\S]+'
+            description: Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (e.g. US 2 letter state codes).
             type: string
           type:
-            description: The type of relationship to the related artifact.
+            description: Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both.
             type: string
             enum:
-            - documentation
-            - justification
-            - citation
-            - predecessor
-            - successor
-            - derived-from
-            - depends-on
-            - composed-of
-          url:
-            pattern: \S*
-            description: A url for the artifact that can be followed to access the actual content.
-            type: string
-    Timing:
-      allOf:
-      - $ref: '#/components/schemas/BackboneElement'
-      - type: object
-        properties:
-          code:
-            description: A code for the timing schedule (or just text in code.text). Some codes such as BID are ubiquitous, but many institutions define their own additional codes. If a code is provided, the code is understood to be a complete statement of whatever is specified in the structured timing data, and either the code or the data may be used to interpret the Timing, with the exception that .repeat.bounds still applies over the code (and is not contained in the code).
-            $ref: '#/components/schemas/CodeableConcept'
-          repeat:
-            description: A set of rules that describe when the event is scheduled.
-            $ref: '#/components/schemas/Timing_Repeat'
-          event:
-            description: Identifies specific times when the event occurs.
-            type: array
-            items:
-              pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?
-              type: string
+            - postal
+            - physical
+            - both
     Resource:
       type: object
       required:
@@ -629,64 +812,86 @@ components:
           - VerificationResult
           - VisionPrescription
       discriminator: resourceType
-    HumanName:
+    Annotation:
       allOf:
       - $ref: '#/components/schemas/Element'
       - type: object
+        required:
+        - text
         properties:
-          given:
-            description: Given name.
-            type: array
-            items:
-              pattern: '[ \r\n\t\S]+'
-              type: string
-          period:
-            description: Indicates the period of time when this name was valid for the named person.
-            $ref: '#/components/schemas/Period'
-          use:
-            description: Identifies the purpose for this name.
+          authorString:
+            pattern: '[ \r\n\t\S]+'
+            description: The individual responsible for making the annotation.
             type: string
-            enum:
-            - usual
-            - official
-            - temp
-            - nickname
-            - anonymous
-            - old
-            - maiden
-          prefix:
-            description: Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name.
-            type: array
-            items:
-              pattern: '[ \r\n\t\S]+'
-              type: string
+          authorReference:
+            description: The individual responsible for making the annotation.
+            $ref: '#/components/schemas/Reference'
+          time:
+            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?
+            description: Indicates when this particular annotation was made.
+            type: string
           text:
             pattern: '[ \r\n\t\S]+'
-            description: Specifies the entire name as it should be displayed e.g. on an application UI. This may be provided instead of or as well as the specific parts.
+            description: The text of the annotation in markdown format.
             type: string
-          family:
-            pattern: '[ \r\n\t\S]+'
-            description: The part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father.
-            type: string
-          suffix:
-            description: Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.
-            type: array
-            items:
-              pattern: '[ \r\n\t\S]+'
-              type: string
-    BackboneElement:
+    DomainResource:
       allOf:
-      - $ref: '#/components/schemas/Element'
+      - $ref: '#/components/schemas/Resource'
       - type: object
         properties:
+          contained:
+            description: These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+          extension:
+            description: May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
+            type: array
+            items:
+              $ref: '#/components/schemas/Extension'
           modifierExtension:
-            description: 'May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element''s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
+            description: 'May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element''s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
 
 
               Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).'
             type: array
             items:
               $ref: '#/components/schemas/Extension'
+          text:
+            description: A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
+            $ref: '#/components/schemas/Narrative'
+    Age:
+      allOf:
+      - $ref: '#/components/schemas/Quantity'
+      - type: object
+    Quantity:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        properties:
+          comparator:
+            description: How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is "<>
+            type: string
+            enum:
+            - <
+            - <=
+            - '>='
+            - '>'
+          unit:
+            pattern: '[ \r\n\t\S]+'
+            description: A human-readable form of the unit.
+            type: string
+          system:
+            pattern: \S*
+            description: The identification of the system that provides the coded form of the unit.
+            type: string
+          code:
+            pattern: '[^\s]+(\s[^\s]+)*'
+            description: A computer processable form of the unit in some unit representation system.
+            type: string
+          value:
+            description: The value of the measured amount. The value includes an implicit precision in the presentation of the value.
+            type: number
     SampledData:
       allOf:
       - $ref: '#/components/schemas/Element'
@@ -719,90 +924,82 @@ components:
             format: int32
             description: The number of sample points at each time point. If this value is greater than one, then the dimensions will be interlaced - all the sample points for a point in time will be recorded at once.
             type: integer
-    Timing_Repeat:
+    Ratio:
       allOf:
-      - $ref: '#/components/schemas/BackboneElement'
+      - $ref: '#/components/schemas/Element'
       - type: object
         properties:
-          boundsRange:
-            description: Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
-            $ref: '#/components/schemas/Range'
+          numerator:
+            description: The value of the numerator.
+            $ref: '#/components/schemas/Quantity'
+          denominator:
+            description: The value of the denominator.
+            $ref: '#/components/schemas/Quantity'
+    Endpoint:
+      allOf:
+      - $ref: '#/components/schemas/DomainResource'
+      - type: object
+        required:
+        - address
+        - connectionType
+        - payloadType
+        - status
+        properties:
+          identifier:
+            description: Identifier for the organization that is used to identify the endpoint across multiple disparate systems.
+            type: array
+            items:
+              $ref: '#/components/schemas/Identifier'
           period:
-            description: Indicates the duration of time over which repetitions are to occur; e.g. to express "3 times per day", 3 would be the frequency and "1 day" would be the period. If periodMax is present, this element indicates the lower bound of the allowed range of the period length.
-            type: number
-          offset:
-            format: int32
-            description: The number of minutes from the event. If the event code does not indicate whether the minutes is before or after the event, then the offset is assumed to be after the event.
-            type: integer
-          frequencyMax:
-            format: int32
-            description: If present, indicates that the frequency is a range - so to repeat between [frequency] and [frequencyMax] times within the period or period range.
-            type: integer
-          countMax:
-            format: int32
-            description: If present, indicates that the count is a range - so to perform the action between [count] and [countMax] times.
-            type: integer
-          periodMax:
-            description: If present, indicates that the period is a range from [period] to [periodMax], allowing expressing concepts such as "do this once every 3-5 days.
-            type: number
-          count:
-            format: int32
-            description: A total count of the desired number of repetitions across the duration of the entire timing specification. If countMax is present, this element indicates the lower bound of the allowed range of count values.
-            type: integer
-          periodUnit:
-            description: The units of time for the period in UCUM units.
-            type: string
-            enum:
-            - s
-            - min
-            - h
-            - d
-            - wk
-            - mo
-            - a
-          when:
-            description: An approximate time period during the day, potentially linked to an event of daily living that indicates when the action should occur.
-            type: array
-            items:
-              type: string
-          frequency:
-            format: int32
-            description: The number of times to repeat the action within the specified period. If frequencyMax is present, this element indicates the lower bound of the allowed range of the frequency.
-            type: integer
-          boundsDuration:
-            description: Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
-            $ref: '#/components/schemas/Duration'
-          duration:
-            description: How long this thing happens for when it happens. If durationMax is present, this element indicates the lower bound of the allowed range of the duration.
-            type: number
-          durationMax:
-            description: If present, indicates that the duration is a range - so to perform the action between [duration] and [durationMax] time length.
-            type: number
-          dayOfWeek:
-            description: If one or more days of week is provided, then the action happens only on the specified day(s).
-            type: array
-            items:
-              type: string
-          boundsPeriod:
-            description: Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
+            description: The interval during which the endpoint is expected to be operational.
             $ref: '#/components/schemas/Period'
-          durationUnit:
-            description: The units of time for the duration, in UCUM units.
+          managingOrganization:
+            description: The organization that manages this endpoint (even if technically another organization is hosting this in the cloud, it is the organization associated with the data).
+            $ref: '#/components/schemas/Reference'
+          address:
+            pattern: \S*
+            description: The uri that describes the actual end-point to connect to.
             type: string
-            enum:
-            - s
-            - min
-            - h
-            - d
-            - wk
-            - mo
-            - a
-          timeOfDay:
-            description: Specified time of day for action to take place.
+          payloadType:
+            minItems: 1
+            description: The payload type describes the acceptable content that can be communicated on the endpoint.
             type: array
             items:
-              pattern: ([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?
+              $ref: '#/components/schemas/CodeableConcept'
+          contact:
+            description: Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting.
+            type: array
+            items:
+              $ref: '#/components/schemas/ContactPoint'
+          name:
+            pattern: '[ \r\n\t\S]+'
+            description: A friendly name that this endpoint can be referred to with.
+            type: string
+          header:
+            description: Additional headers / information to send as part of the notification.
+            type: array
+            items:
+              pattern: '[ \r\n\t\S]+'
               type: string
+          payloadMimeType:
+            description: The mime type to send the payload in - e.g. application/fhir+xml, application/fhir+json. If the mime type is not specified, then the sender could send any content (including no content depending on the connectionType).
+            type: array
+            items:
+              pattern: '[^\s]+(\s[^\s]+)*'
+              type: string
+          connectionType:
+            description: A coded value that represents the technical details of the usage of this endpoint, such as what WSDLs should be used in what way. (e.g. XDS.b/DICOM/cds-hook).
+            $ref: '#/components/schemas/Coding'
+          status:
+            description: active | suspended | error | off | test.
+            type: string
+            enum:
+            - active
+            - suspended
+            - error
+            - 'off'
+            - entered-in-error
+            - test
     Reference:
       allOf:
       - $ref: '#/components/schemas/Element'
@@ -826,224 +1023,107 @@ components:
 
               The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. "Patient" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).'
             type: string
-    UsageContext:
+    Signature:
       allOf:
       - $ref: '#/components/schemas/Element'
       - type: object
         required:
-        - code
-        properties:
-          valueCodeableConcept:
-            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-            $ref: '#/components/schemas/CodeableConcept'
-          code:
-            description: A code that identifies the type of context being specified by this usage context.
-            $ref: '#/components/schemas/Coding'
-          valueReference:
-            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-            $ref: '#/components/schemas/Reference'
-          valueRange:
-            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-            $ref: '#/components/schemas/Range'
-          valueQuantity:
-            description: A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-            $ref: '#/components/schemas/Quantity'
-    Element:
-      type: object
-      properties:
-        extension:
-          description: May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-        id:
-          pattern: '[A-Za-z0-9\-\.]{1,64}'
-          description: Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-          type: string
-    Duration:
-      allOf:
-      - $ref: '#/components/schemas/Quantity'
-      - type: object
-    Attachment:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
+        - type
+        - when
+        - who
         properties:
           data:
             pattern: (\s*([0-9a-zA-Z\+\=]){4}\s*)+
-            description: The actual data of the attachment - a sequence of bytes, base64 encoded.
+            description: The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty.
             type: string
-          size:
-            format: int32
-            description: The number of bytes of data that make up this attachment (before base64 encoding, if that is done).
-            type: integer
-          language:
+          onBehalfOf:
+            description: A reference to an application-usable description of the identity that is represented by the signature.
+            $ref: '#/components/schemas/Reference'
+          sigFormat:
             pattern: '[^\s]+(\s[^\s]+)*'
-            description: The human language of the content. The value can be any valid value according to BCP 47.
+            description: A mime type that indicates the technical format of the signature. Important mime types are application/signature+xml for X ML DigSig, application/jose for JWS, and image/* for a graphical image of a signature, etc.
             type: string
-          title:
-            pattern: '[ \r\n\t\S]+'
-            description: A label or set of text to display in place of the data.
-            type: string
-          contentType:
+          targetFormat:
             pattern: '[^\s]+(\s[^\s]+)*'
-            description: Identifies the type of the data in the attachment and allows a method to be chosen to interpret or render the data. Includes mime type parameters such as charset where appropriate.
+            description: A mime type that indicates the technical format of the target resources signed by the signature.
             type: string
-          url:
-            pattern: \S*
-            description: A location where the data can be accessed.
+          type:
+            minItems: 1
+            description: An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document.
+            type: array
+            items:
+              $ref: '#/components/schemas/Coding'
+          when:
+            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))
+            description: When the digital signature was signed.
             type: string
-          hash:
-            pattern: (\s*([0-9a-zA-Z\+\=]){4}\s*)+
-            description: The calculated hash of the data using SHA-1. Represented using base64.
-            type: string
-          creation:
-            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?
-            description: The date that the attachment was first created.
-            type: string
-    Meta:
+          who:
+            description: A reference to an application-usable description of the identity that signed (e.g. the signature used their private key).
+            $ref: '#/components/schemas/Reference'
+    Count:
+      allOf:
+      - $ref: '#/components/schemas/Quantity'
+      - type: object
+    BackboneElement:
       allOf:
       - $ref: '#/components/schemas/Element'
       - type: object
         properties:
-          lastUpdated:
-            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))
-            description: When the resource last changed - e.g. when the version changed.
-            type: string
-          versionId:
-            pattern: '[A-Za-z0-9\-\.]{1,64}'
-            description: The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.
-            type: string
-          security:
-            description: Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure.
+          modifierExtension:
+            description: 'May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element''s descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
+
+
+              Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).'
             type: array
             items:
-              $ref: '#/components/schemas/Coding'
-          profile:
-            description: A list of profiles (references to [StructureDefinition](structuredefinition.html#) resources) that this resource claims to conform to. The URL is a reference to [StructureDefinition.url](structuredefinition-definitions.html#StructureDefinition.url).
-            type: array
-            items:
-              pattern: \S*
-              type: string
-          source:
-            pattern: \S*
-            description: A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.
-            type: string
-          tag:
-            description: Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource.
-            type: array
-            items:
-              $ref: '#/components/schemas/Coding'
-    Identifier:
+              $ref: '#/components/schemas/Extension'
+    Range:
+      allOf:
+      - $ref: '#/components/schemas/Element'
+      - type: object
+        properties:
+          high:
+            description: The high limit. The boundary is inclusive.
+            $ref: '#/components/schemas/SimpleQuantity'
+          low:
+            description: The low limit. The boundary is inclusive.
+            $ref: '#/components/schemas/SimpleQuantity'
+    ContactPoint:
       allOf:
       - $ref: '#/components/schemas/Element'
       - type: object
         properties:
           period:
-            description: Time period during which identifier is/was valid for use.
+            description: Time period when the contact point was/is in use.
             $ref: '#/components/schemas/Period'
           system:
-            pattern: \S*
-            description: Establishes the namespace for the value - that is, a URL that describes a set values that are unique.
-            type: string
-          use:
-            description: The purpose of this identifier.
+            description: Telecommunications form for contact point - what communications system is required to make use of the contact.
             type: string
             enum:
-            - usual
-            - official
-            - temp
-            - secondary
-            - old
-          assigner:
-            description: Organization that issued/manages the identifier.
-            $ref: '#/components/schemas/Reference'
-          type:
-            description: A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.
-            $ref: '#/components/schemas/CodeableConcept'
-          value:
-            pattern: '[ \r\n\t\S]+'
-            description: The portion of the identifier typically relevant to the user and which is unique within the context of the system.
-            type: string
-    CodeableConcept:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        properties:
-          coding:
-            description: A reference to a code defined by a terminology system.
-            type: array
-            items:
-              $ref: '#/components/schemas/Coding'
-          text:
-            pattern: '[ \r\n\t\S]+'
-            description: A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.
-            type: string
-    Ratio:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        properties:
-          numerator:
-            description: The value of the numerator.
-            $ref: '#/components/schemas/Quantity'
-          denominator:
-            description: The value of the denominator.
-            $ref: '#/components/schemas/Quantity'
-    Address:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        properties:
-          country:
-            pattern: '[ \r\n\t\S]+'
-            description: Country - a nation as commonly understood or generally accepted.
-            type: string
-          period:
-            description: Time period when address was/is in use.
-            $ref: '#/components/schemas/Period'
-          city:
-            pattern: '[ \r\n\t\S]+'
-            description: The name of the city, town, suburb, village or other community or delivery center.
-            type: string
+            - phone
+            - fax
+            - email
+            - pager
+            - url
+            - sms
+            - other
           use:
-            description: The purpose of this address.
+            description: Identifies the purpose for the contact point.
             type: string
             enum:
             - home
             - work
             - temp
             - old
-            - billing
-          line:
-            description: This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information.
-            type: array
-            items:
-              pattern: '[ \r\n\t\S]+'
-              type: string
-          district:
+            - mobile
+          rank:
+            format: int32
+            description: Specifies a preferred order in which to use a set of contacts. ContactPoints with lower rank values are more preferred than those with higher rank values.
+            type: integer
+          value:
             pattern: '[ \r\n\t\S]+'
-            description: The name of the administrative area (county).
+            description: The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).
             type: string
-          postalCode:
-            pattern: '[ \r\n\t\S]+'
-            description: A postal code designating a region defined by the postal service.
-            type: string
-          text:
-            pattern: '[ \r\n\t\S]+'
-            description: Specifies the entire address as it should be displayed e.g. on a postal label. This may be provided instead of or as well as the specific parts.
-            type: string
-          state:
-            pattern: '[ \r\n\t\S]+'
-            description: Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (e.g. US 2 letter state codes).
-            type: string
-          type:
-            description: Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both.
-            type: string
-            enum:
-            - postal
-            - physical
-            - both
     Coding:
       allOf:
       - $ref: '#/components/schemas/Element'
@@ -1068,47 +1148,6 @@ components:
             pattern: '[ \r\n\t\S]+'
             description: The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.
             type: string
-    Annotation:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        required:
-        - text
-        properties:
-          authorString:
-            pattern: '[ \r\n\t\S]+'
-            description: The individual responsible for making the annotation.
-            type: string
-          authorReference:
-            description: The individual responsible for making the annotation.
-            $ref: '#/components/schemas/Reference'
-          time:
-            pattern: ([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?
-            description: Indicates when this particular annotation was made.
-            type: string
-          text:
-            pattern: '[ \r\n\t\S]+'
-            description: The text of the annotation in markdown format.
-            type: string
-    Narrative:
-      allOf:
-      - $ref: '#/components/schemas/Element'
-      - type: object
-        required:
-        - div
-        - status
-        properties:
-          div:
-            description: The actual narrative content, a stripped down version of XHTML.
-            type: string
-          status:
-            description: The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data.
-            type: string
-            enum:
-            - generated
-            - extensions
-            - additional
-            - empty
     Extension:
       allOf:
       - $ref: '#/components/schemas/Element'
@@ -1269,59 +1308,20 @@ components:
           valueAnnotation:
             description: Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
             $ref: '#/components/schemas/Annotation'
-    OperationOutcome:
-      allOf:
-      - $ref: '#/components/schemas/DomainResource'
-      - type: object
-        required:
-        - issue
-        properties:
-          issue:
-            minItems: 1
-            description: An error, warning, or information message that results from a system action.
-            type: array
-            items:
-              $ref: '#/components/schemas/OperationOutcome_Issue'
-    Age:
-      allOf:
-      - $ref: '#/components/schemas/Quantity'
-      - type: object
-    Distance:
-      allOf:
-      - $ref: '#/components/schemas/Quantity'
-      - type: object
-    Quantity:
+    CodeableConcept:
       allOf:
       - $ref: '#/components/schemas/Element'
       - type: object
         properties:
-          comparator:
-            description: How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is "<>
-            type: string
-            enum:
-            - <
-            - <=
-            - '>='
-            - '>'
-          unit:
+          coding:
+            description: A reference to a code defined by a terminology system.
+            type: array
+            items:
+              $ref: '#/components/schemas/Coding'
+          text:
             pattern: '[ \r\n\t\S]+'
-            description: A human-readable form of the unit.
+            description: A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.
             type: string
-          system:
-            pattern: \S*
-            description: The identification of the system that provides the coded form of the unit.
-            type: string
-          code:
-            pattern: '[^\s]+(\s[^\s]+)*'
-            description: A computer processable form of the unit in some unit representation system.
-            type: string
-          value:
-            description: The value of the measured amount. The value includes an implicit precision in the presentation of the value.
-            type: number
-    Count:
-      allOf:
-      - $ref: '#/components/schemas/Quantity'
-      - type: object
     Resource_2:
       type: object
       required:
