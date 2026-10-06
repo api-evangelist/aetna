@@ -30,7 +30,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aetna.png
 url: https://raw.githubusercontent.com/api-evangelist/aetna/refs/heads/main/apis.yml
-modified: '2026-08-30'
+modified: '2026-10-06'
 name: Aetna
 description: 'Aetna, a CVS Health company, is one of the largest U.S. health insurers, offering medical,
   dental, vision, pharmacy and Medicare/Medicaid plans to individuals, families, employers, health care
@@ -512,6 +512,8 @@ apis:
   - type: CapabilityStatement
     url: fhir/aetna-provider-directory-capability-statement.json
 common:
+- url: https://www.aetna.com/news/
+  type: Blog
 - type: Overlay
   url: overlays/aetna-provider-directory-api-overlay.yaml
 - type: OpenAPI
