@@ -2123,6 +2123,30 @@ paths:
       - Provider Directory
 components:
   schemas:
+    InsurancePlan:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 InsurancePlan resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/insuranceplan.html
+
+
+        For the DaVinci PDEX Plan Net 1.0.0 InsurancePlan resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-InsurancePlan.html
+
+
+        For the DaVinci PDEX Plan Net 1.1.0 InsurancePlan resource documentation is available at:
+
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-InsurancePlan.html'
+      type: object
+    Entry:
+      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/InsurancePlan'
     Location:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
@@ -2146,24 +2170,27 @@ components:
 
         http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Location.html'
       type: object
-    InsurancePlan:
+    OperationOutcome:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
 
-        This is the HL7 FHIR Release 4.0.1 InsurancePlan resource.
+        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
 
-        Full Documentation is available at: http://hl7.org/fhir/insuranceplan.html
-
-
-        For the DaVinci PDEX Plan Net 1.0.0 InsurancePlan resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1/StructureDefinition-plannet-InsurancePlan.html
-
-
-        For the DaVinci PDEX Plan Net 1.1.0 InsurancePlan resource documentation is available at:
-
-        http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-InsurancePlan.html'
+        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
       type: object
+    Bundle:
+      description: 'See the appropriate Implementation Guide for proper documentation to use
+
+
+        This is the HL7 FHIR Release 4.0.1 Bundle resource.
+
+        Full Documentation is available at: http://hl7.org/fhir/bundle.html'
+      type: object
+      properties:
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
     Organization:
       description: 'See the appropriate Implementation Guide for proper documentation to use.
 
@@ -2202,33 +2229,6 @@ components:
 
         http://hl7.org/fhir/us/davinci-pdex-plan-net/STU1.1/StructureDefinition-plannet-Network.html'
       type: object
-    OperationOutcome:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 OperationOutcome resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/operationoutcome.html'
-      type: object
-    Entry:
-      description: An entry in a bundle resource - will contain a resource(s) returned in the bundle
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/InsurancePlan'
-    Bundle:
-      description: 'See the appropriate Implementation Guide for proper documentation to use
-
-
-        This is the HL7 FHIR Release 4.0.1 Bundle resource.
-
-        Full Documentation is available at: http://hl7.org/fhir/bundle.html'
-      type: object
-      properties:
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entry'
     Practitioner:
       description: 'See the appropriate Implementation Guide for proper documentation to use
 
