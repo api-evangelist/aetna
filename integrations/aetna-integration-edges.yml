@@ -1,0 +1,105 @@
+edges:
+- partner_name: CAQH CORE Certification
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.dataspring.com/core/core-certified-organizations-pending-and-current
+  category: HIPAA administrative operating rules (eligibility, claims, ERA/EFT, prior auth)
+  contract_reference:
+    register: CAQH CORE certified organizations (caqh.org/core/core-certification -> dataspring.com)
+    spec_file: null
+    standard: CAQH CORE Operating Rules certification
+    role: certified health plan
+    registered_name: Aetna, Inc
+    matched_domain: aetna.com
+    matched_by: domain
+    market_fit: own apis.yml tags carry a health administration / health IT term
+    detected_by: sweep-payer-interop-caqh-core.py
+    detected: '2026-10-21'
+    identity: wikidata Q26049 'Aetna' P856 https://www.aetna.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    listings:
+    - name: Aetna, Inc
+      tab: health_plans
+      product: null
+      rules:
+      - rule_set: Eligibility & Benefits
+        status: Active
+      - rule_set: Claim Status
+        status: Active
+      - rule_set: Payment & Remittance
+        status: Active
+      - rule_set: Prior Authorization & Referrals (Infrastructure Only)
+        status: Active
+      - rule_set: Health Care Claims
+        status: Active
+    certified_products:
+    - product: CAQH CORE Eligibility & Benefits
+      rule_set: Eligibility & Benefits
+      lapsed: false
+    - product: CAQH CORE Claim Status
+      rule_set: Claim Status
+      lapsed: false
+    - product: CAQH CORE Payment & Remittance
+      rule_set: Payment & Remittance
+      lapsed: false
+    - product: CAQH CORE Prior Authorization & Referrals (Infrastructure Only)
+      rule_set: Prior Authorization & Referrals (Infrastructure Only)
+      lapsed: false
+    - product: CAQH CORE Health Care Claims
+      rule_set: Health Care Claims
+      lapsed: false
+    signal_note: certified_products = one entry per CORE operating-rule SET (product type); lapsed when no listed
+      status is Active; several certified products on one rule set count once
+  detected_by: sweep-payer-interop-caqh-core.py
+  first_seen: '2026-10-21'
+- partner_name: ASC X12
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://x12.org/membership/list-of-members
+  category: EDI standards development (membership)
+  contract_reference:
+    register: X12 members list (x12.org/membership/list-of-members)
+    spec_file: null
+    standard: ASC X12 (HIPAA EDI transactions)
+    role: member
+    registered_name: Aetna, Inc.
+    matched_domain: aetna.com
+    matched_by: domain
+    market_fit: own apis.yml tags carry a health administration / health IT term
+    detected_by: sweep-payer-interop-caqh-core.py
+    detected: '2026-10-21'
+    identity: wikidata Q26049 'Aetna' P856 https://www.aetna.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    signal_note: membership = participation
+  detected_by: sweep-payer-interop-caqh-core.py
+  first_seen: '2026-10-21'
+generated: '2026-10-21'
+method: searched
+source:
+- https://www.caqh.org/core/core-certification
+- https://www.dataspring.com/core/core-certified-organizations-pending-and-current
+- https://www.hl7.org/about/davinci/members.cfm
+- https://confluence.hl7.org/display/DVP/Da+Vinci+Project+Members
+- https://members.wedi.org/website-organization-directory/FindStartsWith?term=%23%21
+- https://x12.org/membership/list-of-members
+- https://data.cms.gov/provider-data/dataset/6jpm-sxkc
+- https://www.caqh.org/core/certified-entities
+- https://www.cms.gov/priorities/key-initiatives/burden-reduction/interoperability
+checked:
+- https://confluence.hl7.org/display/DVP/Da+Vinci+Project+Members
+- https://data.cms.gov/provider-data/dataset/6jpm-sxkc
+- https://members.wedi.org/website-organization-directory/FindStartsWith?term=%23%21
+- https://www.caqh.org/core/certified-entities
+- https://www.caqh.org/core/core-certification
+- https://www.cms.gov/priorities/key-initiatives/burden-reduction/interoperability
+- https://www.dataspring.com/core/core-certified-organizations-pending-and-current
+- https://www.hl7.org/about/davinci/members.cfm
+- https://x12.org/membership/list-of-members
