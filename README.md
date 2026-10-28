@@ -64,71 +64,227 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aetna, a CVS Health company, offers health insurance, dental, vision, and other plans for individuals, families, employers, health care providers, and insurance agents and brokers. As a major U.S. health insurer, Aetna provides federally mandated FHIR R4 APIs for patient access, provider directory, and drug formulary data under CMS Interoperability and Patient Access Final Rule (CMS-9115-F). Provider connectivity is supported through the Availity portal for EDI transactions.
+Aetna, a CVS Health company, is one of the largest U.S. health insurers, offering medical, dental, vision, pharmacy and Medicare/Medicaid plans to individuals, families, employers, health care providers and brokers. Its public API surface is entirely regulatory: Aetna operates an Interoperability API Developer Portal at developerportal.aetna.com that publishes HL7 FHIR R4 interfaces mandated by the CMS Interoperability and Patient Access Final Rule (CMS-9115-F) and the Advancing Interoperability and Improving Prior Authorization Final Rule (CMS-0057-F) - Patient Access, Payer to Payer, Provider Directory, Provider Access, Prior Authorization (Da Vinci CRD, PAS and CDex) and Realtime Pharmacy Benefit Check. Aetna publishes a machine-readable catalog of 139 operations and serves a Swagger 2.0 document for each one, plus live FHIR CapabilityStatements and SMART App Launch discovery documents on its production and sandbox FHIR gateways. Everything is read-only, everything requires OAuth 2.0 under SMART App Launch, and everything is free - there is no pricing, no plan and no metered product. Provider EDI connectivity is handled separately through the Availity portal.
 
-## APIs
+**Areas:** Health Insurance · Healthcare · FHIR · Patient Access · Provider Directory · Drug Formulary · Prior Authorization · CMS Interoperability · SMART on FHIR · CARIN Blue Button · Da Vinci · Payers
 
-### Aetna Patient Access FHIR API
+## Aetna on APIs.io
 
-FHIR R4 compliant Patient Access API providing members secure access to their health data including claims, clinical data, and coverage information. Required under CMS Interoperability and Patient Access Final Rule (CMS-9115-F). Supports SMART on FHIR authorization.
+Everything profiled for Aetna is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aetna/](https://apis.io/providers/aetna/)** — or go straight to one of the APIs or properties below.
 
-- [Documentation](https://www.aetna.com/individuals-families/member-rights-resources/member-data-access.html)
+### APIs (15)
 
-### Aetna Provider Directory FHIR API
+- [Aetna Prior Authorization FHIR API](https://apis.io/apis/aetna/aetna-prior-authorization-fhir-api/) — Da Vinci prior-authorization surface built for CMS-0057-F: Coverage Requirements Discovery (STU 2.1) at /coveragerequirementsdiscovery/v1/cds-services/{id}…
+- [Aetna Provider Access FHIR API](https://apis.io/apis/aetna/aetna-provider-access-fhir-api/) — Launched in Production on 2026-03-27 under the public-provider-group-fhir product, the Provider Access API lets provider organizations and EHR vendors…
+- [Aetna Realtime Pharmacy Benefit Check API](https://apis.io/apis/aetna/aetna-realtime-pharmacy-benefit-check-api/) — Consumer Real-Time Pharmacy Benefit Check 1.0.0, launched 2024-12-05, letting members and EHR systems retrieve prescription drug cost and coverage…
+- [Aetna Provider EDI Connectivity](https://apis.io/apis/aetna/aetna-provider-edi-api/) — HIPAA X12 electronic data interchange for health care professionals - EDI 837 claims, 270/271 eligibility and benefits, 276/277 claim status and 835…
+- [Aetna Endpoint API](https://apis.io/apis/aetna/aetna-endpoint-api/) — The Endpoint API from Aetna — 2 operation(s) for endpoint.
+- [Aetna Location API](https://apis.io/apis/aetna/aetna-location-api/) — The Location API from Aetna — 2 operation(s) for location.
+- [Aetna Organization API](https://apis.io/apis/aetna/aetna-organization-api/) — The Organization API from Aetna — 2 operation(s) for organization.
+- [Aetna Organization Affiliation API](https://apis.io/apis/aetna/aetna-organizationaffiliation-api/) — The OrganizationAffiliation API from Aetna — 1 operation(s) for organizationaffiliation.
+- [Aetna Practitioner API](https://apis.io/apis/aetna/aetna-practitioner-api/) — The Practitioner API from Aetna — 2 operation(s) for practitioner.
+- [Aetna Providerdirectorydata API](https://apis.io/apis/aetna/aetna-providerdirectorydata-api/) — The Providerdirectorydata API from Aetna — 11 operation(s) for providerdirectorydata.
+- [Aetna Patient Access API](https://apis.io/apis/aetna/aetna-patient-access-api/) — The Patient Access API from Aetna — 83 operation(s) for patient access.
+- [Aetna Provider Directory API](https://apis.io/apis/aetna/aetna-provider-directory-api/) — The Provider Directory API from Aetna — 9 operation(s) for provider directory.
+- [Aetna Healthcare Service API](https://apis.io/apis/aetna/aetna-healthcare-service-api/) — The Healthcare Service API from Aetna — 2 operation(s) for healthcare service.
+- [Aetna Insurance Plan API](https://apis.io/apis/aetna/aetna-insurance-plan-api/) — The Insurance Plan API from Aetna — 1 operation(s) for insurance plan.
+- [Aetna Practitioner Role API](https://apis.io/apis/aetna/aetna-practitioner-role-api/) — The Practitioner Role API from Aetna — 1 operation(s) for practitioner role.
 
-FHIR R4 compliant Provider Directory API providing standardized access to in-network provider and facility information. Enables third-party applications to search for providers, verify network participation, and access provider details.
+### Published properties
 
-- [Documentation](https://www.aetna.com/health-care-professionals/working-with-aetna/provider-directory.html)
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Aetna Drug Formulary FHIR API
+#### GraphQL (1)
 
-FHIR R4 compliant Drug Formulary API providing standardized access to plan formulary data including covered drugs, tiers, cost-sharing requirements, and prior authorization requirements. Implements the DaVinci PDEX Formulary Implementation Guide.
+GraphQL schemas.
 
-- [Documentation](https://www.aetna.com/individuals-families/member-rights-resources/member-data-access.html)
+- [Moved to /providers/aetna/](https://apis.io/graphqls/aetna/aetna-graphql/)
 
-### Aetna Provider EDI API
+#### MCP servers (1)
 
-Electronic Data Interchange connectivity for healthcare providers enabling electronic submission of claims, eligibility verification, claim status inquiries, and remittance advice. Accessible through the Availity provider portal supporting EDI 837, 270/271, 276/277, and 835 HIPAA transactions.
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://www.aetna.com/health-care-professionals/claims-payment/claims-submission.html)
-- [Portal](https://www.availity.com)
+- [aetna](https://apis.io/servers/aetna/aetna/)
 
-## Properties
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Aetna Agentic Access](https://apis.io/agentic-access/aetna/aetna-agentic-access/)
+
+#### JSON Schema (25)
+
+The data models the API reads and writes.
+
+- [Aetna FHIR R4 AllergyIntolerance](https://apis.io/schemas/aetna/aetna-allergyintolerance/)
+- [Aetna FHIR R4 Bundle](https://apis.io/schemas/aetna/aetna-bundle/)
+- [Aetna FHIR R4 CarePlan](https://apis.io/schemas/aetna/aetna-careplan/)
+- [Aetna FHIR R4 CareTeam](https://apis.io/schemas/aetna/aetna-careteam/)
+- [Aetna FHIR R4 Condition](https://apis.io/schemas/aetna/aetna-condition/)
+- [Aetna FHIR R4 Device](https://apis.io/schemas/aetna/aetna-device/)
+- [Aetna FHIR R4 DiagnosticReport](https://apis.io/schemas/aetna/aetna-diagnosticreport/)
+- [Aetna FHIR R4 DocumentReference](https://apis.io/schemas/aetna/aetna-documentreference/)
+- [Aetna FHIR R4 Encounter](https://apis.io/schemas/aetna/aetna-encounter/)
+- [Aetna FHIR R4 ExplanationOfBenefit](https://apis.io/schemas/aetna/aetna-explanationofbenefit/)
+- [Aetna FHIR R4 Goal](https://apis.io/schemas/aetna/aetna-goal/)
+- [Aetna FHIR R4 HealthcareService](https://apis.io/schemas/aetna/aetna-healthcareservice/)
+- [Aetna FHIR R4 Immunization](https://apis.io/schemas/aetna/aetna-immunization/)
+- [Aetna FHIR R4 InsurancePlan](https://apis.io/schemas/aetna/aetna-insuranceplan/)
+- [Aetna FHIR R4 Location](https://apis.io/schemas/aetna/aetna-location/)
+- [Aetna FHIR R4 MedicationKnowledge](https://apis.io/schemas/aetna/aetna-medicationknowledge/)
+- [Aetna FHIR R4 MedicationRequest](https://apis.io/schemas/aetna/aetna-medicationrequest/)
+- [Aetna FHIR R4 Observation](https://apis.io/schemas/aetna/aetna-observation/)
+- [Aetna FHIR R4 OperationOutcome](https://apis.io/schemas/aetna/aetna-operationoutcome/)
+- [Aetna FHIR R4 Organization](https://apis.io/schemas/aetna/aetna-organization/)
+- [Aetna FHIR R4 OrganizationAffiliation](https://apis.io/schemas/aetna/aetna-organizationaffiliation/)
+- [Aetna FHIR R4 Patient](https://apis.io/schemas/aetna/aetna-patient/)
+- [Aetna FHIR R4 Practitioner](https://apis.io/schemas/aetna/aetna-practitioner/)
+- [Aetna FHIR R4 PractitionerRole](https://apis.io/schemas/aetna/aetna-practitionerrole/)
+- [Aetna FHIR R4 Procedure](https://apis.io/schemas/aetna/aetna-procedure/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Aetna Vocabulary](https://apis.io/vocabularies/aetna/aetna-vocabulary/)
+
+#### Examples (70)
+
+Example requests and responses.
+
+- [Aetna V1 Providerdirectory Insuranceplan 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-insuranceplan-200-example/)
+- [Aetna V1 Providerdirectory Insuranceplan 400 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-insuranceplan-400-example/)
+- [Aetna V1 Providerdirectory Insuranceplan 500 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-insuranceplan-500-example/)
+- [Aetna V1 Providerdirectory Location 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-location-200-example/)
+- [Aetna V1 Providerdirectory Location 400 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-location-400-example/)
+- [Aetna V1 Providerdirectory Location 500 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-location-500-example/)
+- [Aetna V1 Providerdirectory Location Id 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-location-id-200-example/)
+- [Aetna V1 Providerdirectory Location Id 400 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-location-id-400-example/)
+- [Aetna V1 Providerdirectory Location Id 404 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-location-id-404-example/)
+- [Aetna V1 Providerdirectory Location Id 500 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-location-id-500-example/)
+- [Aetna V1 Providerdirectory Organization 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-200-example/)
+- [Aetna V1 Providerdirectory Organization 400 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-400-example/)
+- [Aetna V1 Providerdirectory Organization 500 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-500-example/)
+- [Aetna V1 Providerdirectory Organization Id 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-id-200-example/)
+- [Aetna V1 Providerdirectory Organization Id 203 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-id-203-example/)
+- [Aetna V1 Providerdirectory Organization Id 400 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-id-400-example/)
+- [Aetna V1 Providerdirectory Organization Id 404 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-id-404-example/)
+- [Aetna V1 Providerdirectory Organization Id 500 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organization-id-500-example/)
+- [Aetna V1 Providerdirectory Organizationaffiliation 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organizationaffiliation-200-example/)
+- [Aetna V1 Providerdirectory Organizationaffiliation 400 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organizationaffiliation-400-example/)
+- [Aetna V1 Providerdirectory Organizationaffiliation 500 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-organizationaffiliation-500-example/)
+- [Aetna V1 Providerdirectory Practitioner 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-practitioner-200-example/)
+- [Aetna V1 Providerdirectory Practitioner 400 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-practitioner-400-example/)
+- [Aetna V1 Providerdirectory Practitioner 500 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-practitioner-500-example/)
+- [Aetna V1 Providerdirectory Practitioner Id 200 Example](https://apis.io/examples/aetna/aetna-v1-providerdirectory-practitioner-id-200-example/)
+- …and 45 more published on APIs.io
+
+#### Overlays (3)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Aetna Patient Access Api Overlay](https://apis.io/overlays/aetna/aetna-patient-access-api-overlay/)
+- [Aetna Patient Access Api Sandbox Overlay](https://apis.io/overlays/aetna/aetna-patient-access-api-sandbox-overlay/)
+- [Aetna Provider Directory Api Overlay](https://apis.io/overlays/aetna/aetna-provider-directory-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Aetna Authentication](https://apis.io/security/aetna/aetna-authentication/)
+- [Aetna Domain Security](https://apis.io/security/aetna/aetna-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Aetna Scopes](https://apis.io/scopes/aetna/aetna-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Aetna Plans Pricing](https://apis.io/plans/aetna/aetna-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Aetna Rate Limits](https://apis.io/rate-limits/aetna/aetna-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Aetna Finops](https://apis.io/finops/aetna/aetna-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.aetna.com)
-- [Provider Portal](https://www.aetna.com/health-care-professionals.html)
-- [Member Login](https://member.aetna.com)
+- [Documentation](https://developerportal.aetna.com/)
+- [Getting started](https://developerportal.aetna.com/gettingstarted/1000)
+- [API reference](https://developerportal.aetna.com/assets/Data/Fhir.json)
+- [Sign up](https://developerportal.aetna.com/)
 - [Support](https://www.aetna.com/individuals-families/contact-aetna.html)
-- [Privacy Policy](https://www.aetna.com/legal-notices/privacy.html)
-- [Terms of Service](https://www.aetna.com/legal-notices/terms-of-use.html)
+- [Changelog](https://developerportal.aetna.com/managedcontent/pdfs/Previous_Releases.pdf)
+- [Blog](https://www.aetna.com/news/)
+- [Terms of service](https://developerportal.aetna.com/termsofuse)
+- [Privacy policy](https://www.aetna.com/legal-notices/privacy.html)
+- [GitHub](https://github.com/aetnahealth)
 
-## Features
+## API Evangelist rating
 
-- **FHIR R4 Compliance** — All patient-facing APIs implement HL7 FHIR Release 4 standard for interoperability.
-- **SMART on FHIR Authorization** — Secure OAuth 2.0 authorization framework for patient-authorized third-party app access.
-- **CMS Interoperability Compliance** — Full compliance with CMS-9115-F Interoperability and Patient Access Final Rule.
-- **EDI Transaction Support** — Complete HIPAA-compliant EDI transaction set for provider administrative workflows.
-- **Payer-to-Payer Data Exchange** — Supports member-directed payer-to-payer data exchange for continuity of care.
-- **DaVinci Implementation Guides** — Implements HL7 DaVinci Project PDEX, PDex Drug Formulary, and Plan Net guides.
+**Kin Score 45.1** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 52.7 |
+| Contract governance | 31.8 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 35.1 |
+| Access clarity | 25.0 |
 
-- **Member Health Record Access** — Members use SMART on FHIR apps to access their complete health records across providers.
-- **Provider Network Verification** — Developers build directory search tools to help patients find in-network providers.
-- **Drug Cost Comparison** — Applications use formulary API to compare medication costs across Aetna plans.
-- **Electronic Claims Submission** — Healthcare providers submit claims electronically via EDI 837 transactions through Availity.
-- **Eligibility Verification** — Providers verify member eligibility and benefits in real time using 270/271 EDI transactions.
-- **Remittance Processing** — Providers receive and process electronic remittance advice via EDI 835 transactions.
+**Agent readiness 41.3** — agent-native
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
 
-- **CVS Caremark** — Integrated pharmacy benefit management for prescription drug coverage and mail-order pharmacy.
-- **Availity** — Primary provider portal for EDI transactions, eligibility, claims, and authorization requests.
-- **Epic Payer Platform** — EHR integration enabling clinical workflows including prior authorization and care management.
-- **Apple Health** — FHIR-based integration enabling Aetna members to view health data in Apple Health app.
-- **CommonWell Health Alliance** — Interoperability network participation for cross-organization health data exchange.
-- **CMS Blue Button 2.0** — Alignment with CMS Blue Button 2.0 FHIR API patterns for Medicare data access.
+**Regulatory alignment 44.5** — Health
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aetna/](https://apis.io/providers/aetna/).
 
-- [Vocabulary](vocabulary/aetna-vocabulary.yaml)
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Aetna: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aetna/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
